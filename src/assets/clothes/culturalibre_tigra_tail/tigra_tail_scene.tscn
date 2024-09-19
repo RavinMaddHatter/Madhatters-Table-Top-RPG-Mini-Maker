@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://mpop5ktvxj14"]
+
+[ext_resource type="ArrayMesh" uid="uid://c1gpnsi85an47" path="res://assets/clothes/culturalibre_tigra_tail/tigra_tail_mesh.res" id="1_11jb7"]
+[ext_resource type="Material" uid="uid://b7h0uh73yu15c" path="res://assets/clothes/culturalibre_tigra_tail/culturalibre_tigra_tail_material.res" id="2_itpym"]
+
+[node name="tigra_tail" type="MeshInstance3D"]
+mesh = ExtResource("1_11jb7")
+surface_material_override/0 = ExtResource("2_itpym")

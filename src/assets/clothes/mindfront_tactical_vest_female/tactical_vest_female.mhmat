@@ -1,0 +1,26 @@
+# MakeHuman Material definition
+
+name tactical_vest
+
+// Color shading attributes
+diffuseColor  1 1 1
+specularColor  0 0 0
+shininess 0.1961
+opacity 0
+
+// Textures and properties
+diffuseTexture Tactical_Vest.png
+normalmapTexture Tactical_Vest_NRM.png
+specularTexture Tactical_Vest_SPEC.png
+
+// Shader programme
+shader data/shaders/glsl/normalmap
+backfaceCull False
+
+// Configure built-in shader defines
+shaderConfig diffuse true
+shaderConfig bump false
+shaderConfig normal  true
+shaderConfig displacement  false
+shaderConfig spec  true
+shaderConfig vertexColors false

@@ -1,0 +1,39 @@
+# Material definition for Headset
+
+name Headset
+description Headset material
+ambientColor 0.525490196078 0.525490196078 0.525490196078
+diffuseColor 1.0 1.0 1.0
+specularColor 0.498039215686 0.498039215686 0.498039215686
+shininess 0.3
+emissiveColor 0.0 0.0 0.0
+opacity 1.0
+translucency 0.0
+
+shadeless False
+wireframe False
+transparent False
+alphaToCoverage True
+backfaceCull True
+depthless False
+
+castShadows True
+
+receiveShadows True
+
+diffuseTexture headset.png
+normalmapTexture headset_norm.png
+normalmapIntensity 1.0
+
+shader shaders/glsl/litsphere
+
+shaderParam litsphereTexture litspheres/lit_refl_sharp_aniso_hard.png
+
+shaderConfig ambientOcclusion True
+shaderConfig normal True
+shaderConfig bump True
+shaderConfig displacement True
+shaderConfig vertexColors True
+shaderConfig spec True
+shaderConfig transparency True
+shaderConfig diffuse True

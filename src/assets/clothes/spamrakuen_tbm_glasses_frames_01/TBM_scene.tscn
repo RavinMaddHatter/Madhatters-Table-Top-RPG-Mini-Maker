@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4vl5xhiuhsjh"]
+
+[ext_resource type="ArrayMesh" uid="uid://mwhi6vqsiqqy" path="res://assets/clothes/spamrakuen_tbm_glasses_frames_01/TBM_mesh.res" id="1_5nex5"]
+[ext_resource type="Material" uid="uid://djlnspeqwpm38" path="res://assets/clothes/spamrakuen_tbm_glasses_frames_01/spamrakuen_tbm_glasses_frames_01_material.res" id="2_1qc1e"]
+
+[node name="TBM" type="MeshInstance3D"]
+mesh = ExtResource("1_5nex5")
+surface_material_override/0 = ExtResource("2_1qc1e")

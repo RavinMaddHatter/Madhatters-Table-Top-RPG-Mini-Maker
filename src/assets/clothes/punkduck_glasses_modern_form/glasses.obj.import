@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bu621wgflmf2o"
+path="res://.godot/imported/glasses.obj-e73f6b1c626290d1d755c30d73894d03.mesh"
+
+[deps]
+
+files=["res://.godot/imported/glasses.obj-e73f6b1c626290d1d755c30d73894d03.mesh"]
+
+source_file="res://assets/clothes/punkduck_glasses_modern_form/glasses.obj"
+dest_files=["res://.godot/imported/glasses.obj-e73f6b1c626290d1d755c30d73894d03.mesh", "res://.godot/imported/glasses.obj-e73f6b1c626290d1d755c30d73894d03.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

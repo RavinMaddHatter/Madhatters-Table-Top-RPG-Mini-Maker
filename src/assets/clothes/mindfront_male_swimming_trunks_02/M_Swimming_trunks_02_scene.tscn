@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfiilirol1032"]
+
+[ext_resource type="ArrayMesh" uid="uid://4swubdtcv4ke" path="res://assets/clothes/mindfront_male_swimming_trunks_02/M_Swimming_trunks_02_mesh.res" id="1_q5l3b"]
+[ext_resource type="Material" uid="uid://degg56c0cjgb" path="res://assets/clothes/mindfront_male_swimming_trunks_02/mindfront_male_swimming_trunks_02_material.res" id="2_6a8wh"]
+
+[node name="M_Swimming_trunks_02" type="MeshInstance3D"]
+mesh = ExtResource("1_q5l3b")
+surface_material_override/0 = ExtResource("2_6a8wh")

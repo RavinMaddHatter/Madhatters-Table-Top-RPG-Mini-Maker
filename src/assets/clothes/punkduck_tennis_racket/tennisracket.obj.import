@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://do7fwu1rcdu5x"
+path="res://.godot/imported/tennisracket.obj-8e3e12ec9b2c3ce5c04e0a97c2291f46.mesh"
+
+[deps]
+
+files=["res://.godot/imported/tennisracket.obj-8e3e12ec9b2c3ce5c04e0a97c2291f46.mesh"]
+
+source_file="res://assets/clothes/punkduck_tennis_racket/tennisracket.obj"
+dest_files=["res://.godot/imported/tennisracket.obj-8e3e12ec9b2c3ce5c04e0a97c2291f46.mesh", "res://.godot/imported/tennisracket.obj-8e3e12ec9b2c3ce5c04e0a97c2291f46.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

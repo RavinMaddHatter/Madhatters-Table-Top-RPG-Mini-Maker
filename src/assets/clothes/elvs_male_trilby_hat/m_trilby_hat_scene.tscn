@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bg01u8cwht7k8"]
+
+[ext_resource type="ArrayMesh" uid="uid://by0d8g6db4hru" path="res://assets/clothes/elvs_male_trilby_hat/m_trilby_hat_mesh.res" id="1_6sy3v"]
+[ext_resource type="Material" uid="uid://whpfibk7g1m7" path="res://assets/clothes/elvs_male_trilby_hat/elvs_male_trilby_hat_material.res" id="2_qeeuo"]
+
+[node name="m_trilby_hat" type="MeshInstance3D"]
+mesh = ExtResource("1_6sy3v")
+surface_material_override/0 = ExtResource("2_qeeuo")

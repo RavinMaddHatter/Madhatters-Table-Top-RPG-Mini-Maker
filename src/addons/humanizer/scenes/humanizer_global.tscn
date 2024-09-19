@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://dsrnmyw7n7drw"]
+
+[ext_resource type="Resource" uid="uid://dqouv11c3mh1n" path="res://humanizer_global_config.tres" id="2_3r2n1"]
+[ext_resource type="Script" path="res://addons/humanizer/scripts/core/humanizer_global_config.gd" id="2_vm4hu"]
+[ext_resource type="Script" path="res://addons/humanizer/scripts/core/job_queue.gd" id="3_56c55"]
+[ext_resource type="Script" path="res://addons/humanizer/scripts/core/humanizer_registry.gd" id="57_651fh"]
+
+[sub_resource type="GDScript" id="GDScript_yaxf4"]
+script/source = "@tool
+extends Node
+"
+
+[node name="HumanizerGlobal" type="Node"]
+script = SubResource("GDScript_yaxf4")
+
+[node name="HumanizerConfig" type="Node" parent="."]
+script = ExtResource("2_vm4hu")
+_config = ExtResource("2_3r2n1")
+
+[node name="HumanizerRegistry" type="Node" parent="."]
+script = ExtResource("57_651fh")
+
+[node name="HumanizerJobQueue" type="Node" parent="."]
+script = ExtResource("3_56c55")

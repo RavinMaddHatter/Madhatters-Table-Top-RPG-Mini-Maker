@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://btjup7lw0dgho"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_4mbmv"]
+
+[resource]
+resource_name = "Handbag"
+script = ExtResource("1_4mbmv")
+slots = Array[String](["Arms"])
+textures = {
+"handbag": "res://assets/clothes/punkduck_handbag01/handbag.png",
+"handbag_normals": "res://assets/clothes/punkduck_handbag01/handbag_normals.png"
+}
+path = "res://assets/clothes/punkduck_handbag01"
+rigged = false

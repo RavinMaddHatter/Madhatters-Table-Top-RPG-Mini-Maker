@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjd07vnbi6aqs"]
+
+[ext_resource type="ArrayMesh" uid="uid://o3nuexmqmler" path="res://assets/clothes/culturalibre_cl_gun/CL_gun_mesh.res" id="1_bs33v"]
+[ext_resource type="Material" uid="uid://b2jwx5q3rkv2a" path="res://assets/clothes/culturalibre_cl_gun/culturalibre_cl_gun_material.res" id="2_8vsp8"]
+
+[node name="CL_gun" type="MeshInstance3D"]
+mesh = ExtResource("1_bs33v")
+surface_material_override/0 = ExtResource("2_8vsp8")

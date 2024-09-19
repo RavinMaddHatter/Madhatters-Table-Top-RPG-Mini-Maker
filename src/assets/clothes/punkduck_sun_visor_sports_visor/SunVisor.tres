@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://fsyhdn7nqvqj"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_pnwdy"]
+
+[resource]
+resource_name = "SunVisor"
+script = ExtResource("1_pnwdy")
+slots = Array[String](["Head"])
+textures = {
+"sunvisor": "res://assets/clothes/punkduck_sun_visor_sports_visor/sunvisor.png",
+"sunvisor_normals": "res://assets/clothes/punkduck_sun_visor_sports_visor/sunvisor_normals.png"
+}
+path = "res://assets/clothes/punkduck_sun_visor_sports_visor"
+rigged = false

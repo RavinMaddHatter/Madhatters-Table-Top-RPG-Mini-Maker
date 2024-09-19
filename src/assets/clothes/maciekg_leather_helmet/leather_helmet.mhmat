@@ -1,0 +1,37 @@
+# Material definition for Leather_Helmet
+
+name Leather_Helmet
+description Leather_Helmet material
+ambientColor 1.0 1.0 1.0
+diffuseColor 0.64 0.64 0.64
+specularColor 0.5 0.5 0.5
+shininess 0.1961
+emissiveColor 0.0 0.0 0.0
+opacity 1.0
+translucency 0.0
+
+shadeless False
+wireframe False
+transparent False
+alphaToCoverage True
+backfaceCull True
+depthless False
+
+castShadows True
+
+receiveShadows True
+
+diffuseTexture leather_helmet_diffuse.png
+normalmapTexture leather_helmet_normal.png
+normalmapIntensity 1.0
+
+shader shaders/glsl/normalmap
+
+shaderConfig ambientOcclusion True
+shaderConfig normal True
+shaderConfig bump False
+shaderConfig displacement False
+shaderConfig vertexColors False
+shaderConfig spec False
+shaderConfig transparency True
+shaderConfig diffuse True

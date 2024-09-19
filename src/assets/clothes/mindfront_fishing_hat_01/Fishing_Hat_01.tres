@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://c08h131qo24e6"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_14agy"]
+
+[resource]
+resource_name = "Fishing_Hat_01"
+script = ExtResource("1_14agy")
+slots = Array[String](["Head"])
+textures = {
+"Fishing_Hat_01": "res://assets/clothes/mindfront_fishing_hat_01/Fishing_Hat_01.png",
+"Fishing_Hat_01_NRM": "res://assets/clothes/mindfront_fishing_hat_01/Fishing_Hat_01_NRM.png",
+"Fishing_Hat_01_SPEC": "res://assets/clothes/mindfront_fishing_hat_01/Fishing_Hat_01_SPEC.png"
+}
+path = "res://assets/clothes/mindfront_fishing_hat_01"
+rigged = false

@@ -1,0 +1,28 @@
+# MakeHuman Material definition
+
+name f_dress_11
+
+// Color shading attributes
+diffuseColor  1 1 1
+specularColor  0 0 0
+shininess 0.1961
+opacity 0
+
+// Textures and properties
+diffuseTexture F_Dress_11_COL.png
+normalmapTexture F_Dress_11_NRM.png
+specularTexture F_Dress_11_SPEC.png
+displacementTexture F_Dress_DISP.png
+
+// Shader programme
+shader shaders/glsl/litsphere
+shaderParam litsphereTexture litspheres/lit_matte.png
+backfaceCull False
+
+// Configure built-in shader defines
+shaderConfig diffuse true
+shaderConfig bump false
+shaderConfig normal  true
+shaderConfig displacement  true
+shaderConfig spec  true
+shaderConfig vertexColors false

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://c23xnlxxt3fu8"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_3i2qm"]
+
+[resource]
+resource_name = "Corinthian_helmet"
+script = ExtResource("1_3i2qm")
+slots = Array[String](["Head"])
+textures = {
+"Corinthian_helmet_DIF": "res://assets/clothes/grinsegold_corinthian_helmet/Corinthian_helmet_DIF.png",
+"Corinthian_helmet_ROUGH": "res://assets/clothes/grinsegold_corinthian_helmet/Corinthian_helmet_ROUGH.png",
+"corinthian_helmet_NOR": "res://assets/clothes/grinsegold_corinthian_helmet/corinthian_helmet_NOR.png"
+}
+path = "res://assets/clothes/grinsegold_corinthian_helmet"
+rigged = false

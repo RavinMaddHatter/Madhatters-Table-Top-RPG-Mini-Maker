@@ -1,0 +1,41 @@
+# Material definition for headmirror
+
+name headmirror
+description headmirror material
+ambientColor 1.0 1.0 1.0
+diffuseColor 0.5 0.5 0.5
+specularColor 0.5 0.5 0.5
+shininess 0.5
+emissiveColor 0.0 0.0 0.0
+opacity 1.0
+translucency 0.0
+
+shadeless False
+wireframe False
+transparent False
+alphaToCoverage True
+backfaceCull False
+depthless False
+
+castShadows True
+
+receiveShadows True
+
+diffuseTexture headmirror.png
+normalmapTexture headmirror_norm.png
+normalmapIntensity 1.0
+aomapTexture headmirror_spec.png
+aomapIntensity 1.0
+
+shader shaders/glsl/litsphere
+
+shaderParam litsphereTexture litspheres/lit_refl_sharp_aniso_hard_blonde.png
+
+shaderConfig ambientOcclusion True
+shaderConfig normal True
+shaderConfig bump True
+shaderConfig displacement True
+shaderConfig vertexColors True
+shaderConfig spec True
+shaderConfig transparency True
+shaderConfig diffuse True

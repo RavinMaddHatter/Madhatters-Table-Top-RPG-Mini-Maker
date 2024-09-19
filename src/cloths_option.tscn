@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://bn285jd882hrb"]
+
+[ext_resource type="Script" path="res://cloths_option.gd" id="1_tvxqw"]
+
+[node name="Pose_slider" type="VBoxContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 51.0
+grow_horizontal = 2
+script = ExtResource("1_tvxqw")
+
+[node name="Label_Container" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Label_Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="value" type="OptionButton" parent="Label_Container"]
+layout_mode = 2
+
+[connection signal="item_selected" from="Label_Container/value" to="." method="option_change"]

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cfpp8ff46f413"
+path="res://.godot/imported/babyTest.obj-46529dbfd6943612a9d3d996dc9fe016.mesh"
+
+[deps]
+
+files=["res://.godot/imported/babyTest.obj-46529dbfd6943612a9d3d996dc9fe016.mesh"]
+
+source_file="res://assets/clothes/test/babyTest.obj"
+dest_files=["res://.godot/imported/babyTest.obj-46529dbfd6943612a9d3d996dc9fe016.mesh", "res://.godot/imported/babyTest.obj-46529dbfd6943612a9d3d996dc9fe016.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

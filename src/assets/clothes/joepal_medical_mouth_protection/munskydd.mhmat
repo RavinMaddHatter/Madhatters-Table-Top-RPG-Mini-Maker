@@ -1,0 +1,37 @@
+# MakeHuman Material definition
+
+name munskyddMaterial
+
+// Color shading attributes
+diffuseColor  0.8 0.8 0.8
+specularColor  0.5 0.5 0.5
+shininess 0.1
+opacity 1
+translucency 0.0
+
+shadeless False
+wireframe False
+transparent False
+alphaToCoverage True
+backfaceCull False
+depthless False
+
+
+// Textures and properties
+diffuseTexture munskydd.png
+normalmapTexture munskydd-normal.png
+
+normalmapIntensity 1.0
+aomapIntensity 1.0
+
+shader data/shaders/glsl/litsphere
+shaderParam litsphereTexture data/litspheres/lit_matte.png
+
+shaderConfig ambientOcclusion True
+shaderConfig normal True
+shaderConfig bump False
+shaderConfig displacement False
+shaderConfig vertexColors True
+shaderConfig spec False
+shaderConfig transparency True
+shaderConfig diffuse True

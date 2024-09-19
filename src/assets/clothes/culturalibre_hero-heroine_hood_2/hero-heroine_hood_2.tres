@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://b062y2xvo0iv0"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_ljxb4"]
+
+[resource]
+resource_name = "hero-heroine_hood_2"
+script = ExtResource("1_ljxb4")
+slots = Array[String](["Head"])
+textures = {
+"hero-heroine_hood_2": "res://assets/clothes/culturalibre_hero-heroine_hood_2/hero-heroine_hood_2.png"
+}
+path = "res://assets/clothes/culturalibre_hero-heroine_hood_2"
+rigged = false

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://c8r66ovhnwfi0"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_g17uk"]
+
+[resource]
+resource_name = "3dglasses"
+script = ExtResource("1_g17uk")
+slots = Array[String](["Eyes"])
+textures = {
+"3dglasses": "res://assets/clothes/ews_3d_glasses/3dglasses.png"
+}
+path = "res://assets/clothes/ews_3d_glasses"
+rigged = false

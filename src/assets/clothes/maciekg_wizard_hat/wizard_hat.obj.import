@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cgw2e7u3blhr3"
+path="res://.godot/imported/wizard_hat.obj-a91ac90c63656b459c009a69811fb05b.mesh"
+
+[deps]
+
+files=["res://.godot/imported/wizard_hat.obj-a91ac90c63656b459c009a69811fb05b.mesh"]
+
+source_file="res://assets/clothes/maciekg_wizard_hat/wizard_hat.obj"
+dest_files=["res://.godot/imported/wizard_hat.obj-a91ac90c63656b459c009a69811fb05b.mesh", "res://.godot/imported/wizard_hat.obj-a91ac90c63656b459c009a69811fb05b.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

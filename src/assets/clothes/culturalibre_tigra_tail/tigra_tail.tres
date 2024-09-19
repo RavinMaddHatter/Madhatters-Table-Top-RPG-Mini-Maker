@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://dqufs802q3soi"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_2xo4o"]
+
+[resource]
+resource_name = "tigra_tail"
+script = ExtResource("1_2xo4o")
+slots = Array[String](["Torso"])
+textures = {
+"tigra_tail": "res://assets/clothes/culturalibre_tigra_tail/tigra_tail.png"
+}
+path = "res://assets/clothes/culturalibre_tigra_tail"
+rigged = false

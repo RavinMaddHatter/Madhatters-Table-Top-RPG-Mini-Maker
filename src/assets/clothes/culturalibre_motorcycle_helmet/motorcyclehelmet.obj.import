@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://wl2ohqvsqu47"
+path="res://.godot/imported/motorcyclehelmet.obj-4a89957f4bd6c9c9fd5a43a432b7779f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/motorcyclehelmet.obj-4a89957f4bd6c9c9fd5a43a432b7779f.mesh"]
+
+source_file="res://assets/clothes/culturalibre_motorcycle_helmet/motorcyclehelmet.obj"
+dest_files=["res://.godot/imported/motorcyclehelmet.obj-4a89957f4bd6c9c9fd5a43a432b7779f.mesh", "res://.godot/imported/motorcyclehelmet.obj-4a89957f4bd6c9c9fd5a43a432b7779f.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

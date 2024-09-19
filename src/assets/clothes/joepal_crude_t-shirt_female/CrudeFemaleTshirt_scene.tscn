@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://djsfn23kb01vf"]
+
+[ext_resource type="ArrayMesh" uid="uid://cc5otoweptsyx" path="res://assets/clothes/joepal_crude_t-shirt_female/CrudeFemaleTshirt_mesh.res" id="1_l0rth"]
+[ext_resource type="Material" uid="uid://c1groejyby8i0" path="res://assets/clothes/joepal_crude_t-shirt_female/joepal_crude_t-shirt_female_material.res" id="2_ts22y"]
+
+[node name="CrudeFemaleTshirt" type="MeshInstance3D"]
+mesh = ExtResource("1_l0rth")
+surface_material_override/0 = ExtResource("2_ts22y")

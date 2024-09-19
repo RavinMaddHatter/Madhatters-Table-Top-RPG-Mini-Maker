@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://d2bj707ro0d04"
+path="res://.godot/imported/turtleneck_halter.obj-82c3919daf76b01176ed9e4543367f92.mesh"
+
+[deps]
+
+files=["res://.godot/imported/turtleneck_halter.obj-82c3919daf76b01176ed9e4543367f92.mesh"]
+
+source_file="res://assets/clothes/toigo_turtleneck_halter_top/turtleneck_halter.obj"
+dest_files=["res://.godot/imported/turtleneck_halter.obj-82c3919daf76b01176ed9e4543367f92.mesh", "res://.godot/imported/turtleneck_halter.obj-82c3919daf76b01176ed9e4543367f92.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

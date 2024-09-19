@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bwpv176twcv23"
+path="res://.godot/imported/crude_male_shirt.obj-9cc438a07c24aece4d2bddd306a5b0e5.mesh"
+
+[deps]
+
+files=["res://.godot/imported/crude_male_shirt.obj-9cc438a07c24aece4d2bddd306a5b0e5.mesh"]
+
+source_file="res://assets/clothes/elvs_crude_t-shirt_male/crude_male_shirt.obj"
+dest_files=["res://.godot/imported/crude_male_shirt.obj-9cc438a07c24aece4d2bddd306a5b0e5.mesh", "res://.godot/imported/crude_male_shirt.obj-9cc438a07c24aece4d2bddd306a5b0e5.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

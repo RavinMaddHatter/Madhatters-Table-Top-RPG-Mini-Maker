@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cmt5gjpbsyh0u"
+path="res://.godot/imported/cocktaildress.obj-aa67b08b6d5f6f4b6cc08b297b59373f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/cocktaildress.obj-aa67b08b6d5f6f4b6cc08b297b59373f.mesh"]
+
+source_file="res://assets/clothes/punkduck_black_cocktail_dress/cocktaildress.obj"
+dest_files=["res://.godot/imported/cocktaildress.obj-aa67b08b6d5f6f4b6cc08b297b59373f.mesh", "res://.godot/imported/cocktaildress.obj-aa67b08b6d5f6f4b6cc08b297b59373f.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

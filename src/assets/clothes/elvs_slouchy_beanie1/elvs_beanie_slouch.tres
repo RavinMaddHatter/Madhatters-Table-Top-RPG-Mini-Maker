@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://qy8viq57taal"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_8jbgk"]
+
+[resource]
+resource_name = "elvs_beanie_slouch"
+script = ExtResource("1_8jbgk")
+slots = Array[String](["Head"])
+textures = {
+"herrinbonemens1": "res://assets/clothes/elvs_slouchy_beanie1/herrinbonemens1.png",
+"herringnormals": "res://assets/clothes/elvs_slouchy_beanie1/herringnormals.png"
+}
+path = "res://assets/clothes/elvs_slouchy_beanie1"
+rigged = false

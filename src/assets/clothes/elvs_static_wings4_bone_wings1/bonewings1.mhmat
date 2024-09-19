@@ -1,0 +1,38 @@
+# Material definition for material.001Material
+
+name material.001Material
+description Bonewings1 material
+ambientColor 0.38431372549 0.352941176471 0.235294117647
+diffuseColor 0.78431372549 0.521568627451 0.388235294118
+specularColor 0.321568627451 0.349019607843 0.282352941176
+shininess 0.0
+emissiveColor 0.0 0.0 0.0
+opacity 1.0
+translucency 0.0
+
+shadeless False
+wireframe False
+transparent False
+alphaToCoverage True
+backfaceCull True
+depthless False
+
+castShadows True
+
+receiveShadows True
+
+diffuseTexture bone2.png
+
+shader shaders/glsl/litsphere
+
+shaderParam AdditiveShading 0.2
+shaderParam litsphereTexture litspheres/lit_matte.png
+
+shaderConfig ambientOcclusion True
+shaderConfig normal False
+shaderConfig bump False
+shaderConfig displacement False
+shaderConfig vertexColors False
+shaderConfig spec False
+shaderConfig transparency True
+shaderConfig diffuse True

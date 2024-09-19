@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://d3qrew3ug1b2"
+path="res://.godot/imported/hero-heroine_gloves_2.obj-b42faa1712a84cc927470ab7214d8a4b.mesh"
+
+[deps]
+
+files=["res://.godot/imported/hero-heroine_gloves_2.obj-b42faa1712a84cc927470ab7214d8a4b.mesh"]
+
+source_file="res://assets/clothes/culturalibre_hero-heroine_gloves_2/hero-heroine_gloves_2.obj"
+dest_files=["res://.godot/imported/hero-heroine_gloves_2.obj-b42faa1712a84cc927470ab7214d8a4b.mesh", "res://.godot/imported/hero-heroine_gloves_2.obj-b42faa1712a84cc927470ab7214d8a4b.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

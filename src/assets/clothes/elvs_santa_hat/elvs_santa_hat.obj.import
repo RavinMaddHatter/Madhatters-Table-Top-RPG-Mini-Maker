@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cbduddgixwkc8"
+path="res://.godot/imported/elvs_santa_hat.obj-4e28664167e275db2bd38f12ded15b47.mesh"
+
+[deps]
+
+files=["res://.godot/imported/elvs_santa_hat.obj-4e28664167e275db2bd38f12ded15b47.mesh"]
+
+source_file="res://assets/clothes/elvs_santa_hat/elvs_santa_hat.obj"
+dest_files=["res://.godot/imported/elvs_santa_hat.obj-4e28664167e275db2bd38f12ded15b47.mesh", "res://.godot/imported/elvs_santa_hat.obj-4e28664167e275db2bd38f12ded15b47.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

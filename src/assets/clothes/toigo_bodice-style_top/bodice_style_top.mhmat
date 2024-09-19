@@ -1,0 +1,25 @@
+# MakeHuman Material definition
+
+name bodiceMaterial
+
+// Color shading attributes
+diffuseColor  0 0 0
+specularColor  0.2 0.2 0.2
+shininess 0.2
+opacity 1
+
+// Textures and properties
+diffuseTexture Bodice.png
+normalmapTexture Bodice-NORM.png
+specularmapTexture Bodice-spec.png
+
+// Shader programme
+shader data/shaders/glsl/phong
+
+// Configure built-in shader defines
+shaderConfig diffuse true
+shaderConfig bump false
+shaderConfig normal true
+shaderConfig displacement  false
+shaderConfig spec true
+shaderConfig vertexColors false

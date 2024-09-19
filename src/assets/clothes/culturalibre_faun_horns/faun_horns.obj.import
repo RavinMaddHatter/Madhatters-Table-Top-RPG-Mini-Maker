@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://x3dq0j0ft0mi"
+path="res://.godot/imported/faun_horns.obj-7606062c586ac7e71ff853f6e3c4b735.mesh"
+
+[deps]
+
+files=["res://.godot/imported/faun_horns.obj-7606062c586ac7e71ff853f6e3c4b735.mesh"]
+
+source_file="res://assets/clothes/culturalibre_faun_horns/faun_horns.obj"
+dest_files=["res://.godot/imported/faun_horns.obj-7606062c586ac7e71ff853f6e3c4b735.mesh", "res://.godot/imported/faun_horns.obj-7606062c586ac7e71ff853f6e3c4b735.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

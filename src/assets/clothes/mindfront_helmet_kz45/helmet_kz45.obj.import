@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://n54ydqnxrneg"
+path="res://.godot/imported/helmet_kz45.obj-eb2ab09fba230e48d662f8505688bad8.mesh"
+
+[deps]
+
+files=["res://.godot/imported/helmet_kz45.obj-eb2ab09fba230e48d662f8505688bad8.mesh"]
+
+source_file="res://assets/clothes/mindfront_helmet_kz45/helmet_kz45.obj"
+dest_files=["res://.godot/imported/helmet_kz45.obj-eb2ab09fba230e48d662f8505688bad8.mesh", "res://.godot/imported/helmet_kz45.obj-eb2ab09fba230e48d662f8505688bad8.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

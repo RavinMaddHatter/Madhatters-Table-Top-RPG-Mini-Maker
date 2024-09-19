@@ -1,0 +1,26 @@
+# MakeHuman Material definition
+
+name materialMaterial
+
+// Color shading attributes
+diffuseColor  0.8 0.3555 0.1928
+specularColor  1 0.8704 0.1112
+shininess 0.9804
+opacity 1
+
+// Textures and properties
+diffuseTexture Corinthian_helmet_DIF.png
+bumpTexture corinthian_helmet_NOR.png
+specularTexture Corinthian_helmet_ROUGH.png
+bumpTexture Corinthian_helmet_ROUGH.png
+
+// Shader programme
+shader data/shaders/glsl/phong
+
+// Configure built-in shader defines
+shaderConfig diffuse true
+shaderConfig bump true
+shaderConfig normal  false
+shaderConfig displacement  false
+shaderConfig spec  true
+shaderConfig vertexColors false

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccw0u6foevyx5"]
+
+[ext_resource type="ArrayMesh" uid="uid://b5te7xhnedu6l" path="res://assets/clothes/frankyaye_glasses_library_male/Glasses_Library_Male_mesh.res" id="1_j1675"]
+[ext_resource type="Material" uid="uid://b7xws8qdylnmo" path="res://assets/clothes/frankyaye_glasses_library_male/frankyaye_glasses_library_male_material.res" id="2_fawx3"]
+
+[node name="Glasses_Library_Male" type="MeshInstance3D"]
+mesh = ExtResource("1_j1675")
+surface_material_override/0 = ExtResource("2_fawx3")

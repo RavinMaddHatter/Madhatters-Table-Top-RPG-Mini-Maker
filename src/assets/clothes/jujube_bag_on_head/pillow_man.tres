@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://c5mljbc0owua0"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_12tud"]
+
+[resource]
+resource_name = "pillow_man"
+script = ExtResource("1_12tud")
+slots = Array[String](["Head"])
+textures = {
+"pillow_man": "res://assets/clothes/jujube_bag_on_head/pillow_man.png"
+}
+path = "res://assets/clothes/jujube_bag_on_head"
+rigged = false

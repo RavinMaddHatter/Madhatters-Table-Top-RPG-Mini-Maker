@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://gr0xjvu60sxk"]
+
+[ext_resource type="ArrayMesh" uid="uid://05yiuhfj3ica" path="res://assets/clothes/punkduck_retro_top/VintageTop_mesh.res" id="1_781jm"]
+[ext_resource type="Material" uid="uid://c182o51dq1uj2" path="res://assets/clothes/punkduck_retro_top/punkduck_retro_top_material.res" id="2_wkcd6"]
+
+[node name="VintageTop" type="MeshInstance3D"]
+mesh = ExtResource("1_781jm")
+surface_material_override/0 = ExtResource("2_wkcd6")

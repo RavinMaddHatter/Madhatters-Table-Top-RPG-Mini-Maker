@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://d1kv7wndu8prl"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_18s7o"]
+
+[resource]
+resource_name = "MedievalDress"
+script = ExtResource("1_18s7o")
+slots = Array[String](["Torso"])
+textures = {
+"clothsim": "res://assets/clothes/punkduck_medieval_dress/clothsim.png",
+"medievaldress": "res://assets/clothes/punkduck_medieval_dress/medievaldress.png",
+"medievaldress_norm": "res://assets/clothes/punkduck_medieval_dress/medievaldress_norm.png"
+}
+path = "res://assets/clothes/punkduck_medieval_dress"
+rigged = false

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cogphfgk241d4"]
+
+[ext_resource type="ArrayMesh" uid="uid://vikav357yf8p" path="res://assets/clothes/elvs_unicorn_horn_1/elvs_unicorn_horn3_mesh.res" id="1_bufrt"]
+[ext_resource type="Material" uid="uid://bfk3ww04bvm3r" path="res://assets/clothes/elvs_unicorn_horn_1/elvs_unicorn_horn_1_material.res" id="2_7800a"]
+
+[node name="elvs_unicorn_horn3" type="MeshInstance3D"]
+mesh = ExtResource("1_bufrt")
+surface_material_override/0 = ExtResource("2_7800a")

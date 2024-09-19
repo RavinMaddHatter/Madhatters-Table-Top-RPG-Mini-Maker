@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bisiejqs5svp7"]
+
+[ext_resource type="ArrayMesh" uid="uid://dxffj0y2anr1a" path="res://assets/clothes/joepal_xmas_cap/xmascap_mesh.res" id="1_bus3r"]
+[ext_resource type="Material" uid="uid://8pv4osatxqci" path="res://assets/clothes/joepal_xmas_cap/joepal_xmas_cap_material.res" id="2_h4772"]
+
+[node name="xmascap" type="MeshInstance3D"]
+mesh = ExtResource("1_bus3r")
+surface_material_override/0 = ExtResource("2_h4772")

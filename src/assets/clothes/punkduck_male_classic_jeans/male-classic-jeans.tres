@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://68gsysx38uaf"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_ko1k0"]
+
+[resource]
+resource_name = "male-classic-jeans"
+script = ExtResource("1_ko1k0")
+slots = Array[String](["Legs"])
+textures = {
+"male-classic-jeans": "res://assets/clothes/punkduck_male_classic_jeans/male-classic-jeans.png",
+"male-classic-jeans-norm": "res://assets/clothes/punkduck_male_classic_jeans/male-classic-jeans-norm.png"
+}
+path = "res://assets/clothes/punkduck_male_classic_jeans"
+rigged = false

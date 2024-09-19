@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cs4omwog2l8y3"]
+
+[ext_resource type="ArrayMesh" uid="uid://bbei673omjh21" path="res://assets/clothes/punkduck_p-ivy_weapon/Ivyweapon_mesh.res" id="1_4nh5d"]
+[ext_resource type="Material" uid="uid://d1e55d1x1ggip" path="res://assets/clothes/punkduck_p-ivy_weapon/punkduck_p-ivy_weapon_material.res" id="2_gw0d5"]
+
+[node name="Ivyweapon" type="MeshInstance3D"]
+mesh = ExtResource("1_4nh5d")
+surface_material_override/0 = ExtResource("2_gw0d5")

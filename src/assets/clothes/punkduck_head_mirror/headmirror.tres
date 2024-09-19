@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://brt8s1uf11uot"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_xytrl"]
+
+[resource]
+resource_name = "headmirror"
+script = ExtResource("1_xytrl")
+slots = Array[String](["Head"])
+textures = {
+"headmirror": "res://assets/clothes/punkduck_head_mirror/headmirror.png",
+"headmirror_norm": "res://assets/clothes/punkduck_head_mirror/headmirror_norm.png",
+"headmirror_spec": "res://assets/clothes/punkduck_head_mirror/headmirror_spec.png"
+}
+path = "res://assets/clothes/punkduck_head_mirror"
+rigged = false

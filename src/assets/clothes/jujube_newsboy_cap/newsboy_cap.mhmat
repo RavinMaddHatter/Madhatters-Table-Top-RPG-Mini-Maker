@@ -1,0 +1,37 @@
+# Material definition for newsboy_cap
+
+name newsboy_cap
+description newsboy_cap material
+ambientColor 1.0 1.0 1.0
+diffuseColor 1.0 1.0 1.0
+specularColor 1.0 1.0 1.0
+shininess 0.2
+emissiveColor 0.0 0.0 0.0
+opacity 1.0
+translucency 0.0
+
+shadeless False
+wireframe False
+transparent False
+alphaToCoverage True
+backfaceCull True
+depthless False
+
+castShadows True
+
+receiveShadows True
+
+diffuseTexture newsboy_cap.png
+normalmapTexture newsboy_cap_normals.png
+normalmapIntensity 1.0
+
+shader shaders/glsl/normalmap
+
+shaderConfig ambientOcclusion True
+shaderConfig normal True
+shaderConfig bump True
+shaderConfig displacement True
+shaderConfig vertexColors True
+shaderConfig spec True
+shaderConfig transparency True
+shaderConfig diffuse True

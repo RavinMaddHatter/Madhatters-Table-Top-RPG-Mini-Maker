@@ -1,0 +1,24 @@
+# MakeHuman Material definition
+
+name mat_fingernailsMaterial
+
+// Color shading attributes
+diffuseColor  1 1 1
+specularColor  0.9211 0.9211 0.9211
+shininess 0.9961
+opacity 1
+
+// Textures and properties
+diffuseTexture female_fingernails_diffuse.png
+normalmapTexture female_fingernails_normal.png
+
+// Shader programme
+shader data/shaders/glsl/phong
+
+// Configure built-in shader defines
+shaderConfig diffuse true
+shaderConfig bump false
+shaderConfig normal true
+shaderConfig displacement  false
+shaderConfig spec  false
+shaderConfig vertexColors false

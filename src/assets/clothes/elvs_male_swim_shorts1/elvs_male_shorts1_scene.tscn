@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cv0xdesiqr6dh"]
+
+[ext_resource type="ArrayMesh" uid="uid://8e8hloeiinwv" path="res://assets/clothes/elvs_male_swim_shorts1/elvs_male_shorts1_mesh.res" id="1_72x38"]
+[ext_resource type="Material" uid="uid://bpdxmhf3buj6t" path="res://assets/clothes/elvs_male_swim_shorts1/elvs_male_swim_shorts1_material.res" id="2_mf0ig"]
+
+[node name="elvs_male_shorts1" type="MeshInstance3D"]
+mesh = ExtResource("1_72x38")
+surface_material_override/0 = ExtResource("2_mf0ig")

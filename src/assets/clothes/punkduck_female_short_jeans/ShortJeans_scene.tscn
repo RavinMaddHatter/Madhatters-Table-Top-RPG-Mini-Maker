@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnonb4qdxa5l3"]
+
+[ext_resource type="ArrayMesh" uid="uid://bcwgdnn1w0563" path="res://assets/clothes/punkduck_female_short_jeans/ShortJeans_mesh.res" id="1_1lkvg"]
+[ext_resource type="Material" uid="uid://dcgm8fyjibhjc" path="res://assets/clothes/punkduck_female_short_jeans/punkduck_female_short_jeans_material.res" id="2_vc3fa"]
+
+[node name="ShortJeans" type="MeshInstance3D"]
+mesh = ExtResource("1_1lkvg")
+surface_material_override/0 = ExtResource("2_vc3fa")

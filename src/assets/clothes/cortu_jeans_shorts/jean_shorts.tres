@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://2dm5txarh1a2"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_xfdy2"]
+
+[resource]
+resource_name = "jean_shorts"
+script = ExtResource("1_xfdy2")
+slots = Array[String](["Legs"])
+textures = {
+"jean_shorts_diff": "res://assets/clothes/cortu_jeans_shorts/jean_shorts_diff.png",
+"jean_shorts_norm": "res://assets/clothes/cortu_jeans_shorts/jean_shorts_norm.png"
+}
+path = "res://assets/clothes/cortu_jeans_shorts"
+rigged = false

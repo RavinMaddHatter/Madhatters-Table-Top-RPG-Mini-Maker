@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bu87lttfxcsjr"
+path="res://.godot/imported/mind_nails_01_short.obj-39d80e763c6802b85e72ac163ecb538e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/mind_nails_01_short.obj-39d80e763c6802b85e72ac163ecb538e.mesh"]
+
+source_file="res://assets/clothes/mindfront_nails_01_short/mind_nails_01_short.obj"
+dest_files=["res://.godot/imported/mind_nails_01_short.obj-39d80e763c6802b85e72ac163ecb538e.mesh", "res://.godot/imported/mind_nails_01_short.obj-39d80e763c6802b85e72ac163ecb538e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

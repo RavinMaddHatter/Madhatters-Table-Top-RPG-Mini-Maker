@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dphs0l7p0qyq2"
+path="res://.godot/imported/medievaldress.obj-85cc213db0cbac6a9bad0e6704a7beda.mesh"
+
+[deps]
+
+files=["res://.godot/imported/medievaldress.obj-85cc213db0cbac6a9bad0e6704a7beda.mesh"]
+
+source_file="res://assets/clothes/punkduck_medieval_dress/medievaldress.obj"
+dest_files=["res://.godot/imported/medievaldress.obj-85cc213db0cbac6a9bad0e6704a7beda.mesh", "res://.godot/imported/medievaldress.obj-85cc213db0cbac6a9bad0e6704a7beda.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

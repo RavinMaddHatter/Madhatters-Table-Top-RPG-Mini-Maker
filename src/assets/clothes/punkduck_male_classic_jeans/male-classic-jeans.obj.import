@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bf1g1yyhoxggd"
+path="res://.godot/imported/male-classic-jeans.obj-0b0936e957a989f000ef2b59abee0e94.mesh"
+
+[deps]
+
+files=["res://.godot/imported/male-classic-jeans.obj-0b0936e957a989f000ef2b59abee0e94.mesh"]
+
+source_file="res://assets/clothes/punkduck_male_classic_jeans/male-classic-jeans.obj"
+dest_files=["res://.godot/imported/male-classic-jeans.obj-0b0936e957a989f000ef2b59abee0e94.mesh", "res://.godot/imported/male-classic-jeans.obj-0b0936e957a989f000ef2b59abee0e94.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://7i5hfb8ok7da"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_phhvn"]
+
+[resource]
+resource_name = "Tightjeans"
+script = ExtResource("1_phhvn")
+slots = Array[String](["Legs"])
+textures = {
+"tightjeans": "res://assets/clothes/punkduck_female_tight_jeans/tightjeans.png",
+"tightjeans_normals": "res://assets/clothes/punkduck_female_tight_jeans/tightjeans_normals.png"
+}
+path = "res://assets/clothes/punkduck_female_tight_jeans"
+rigged = false

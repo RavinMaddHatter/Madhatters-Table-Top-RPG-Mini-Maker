@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://csvx31fo402un"
+path="res://.godot/imported/Sagerfrog's_Glasses_04.obj-0f2af64e44d18033931639f48cffcfdc.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Sagerfrog's_Glasses_04.obj-0f2af64e44d18033931639f48cffcfdc.mesh"]
+
+source_file="res://assets/clothes/spamrakuen_sagerfrogs_glasses_04/Sagerfrog's_Glasses_04.obj"
+dest_files=["res://.godot/imported/Sagerfrog's_Glasses_04.obj-0f2af64e44d18033931639f48cffcfdc.mesh", "res://.godot/imported/Sagerfrog's_Glasses_04.obj-0f2af64e44d18033931639f48cffcfdc.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

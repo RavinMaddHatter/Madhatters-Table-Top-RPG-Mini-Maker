@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfpp2kghjgpkn"]
+
+[ext_resource type="ArrayMesh" uid="uid://ow0r0dak2lmh" path="res://assets/clothes/culturalibre_faun_horns/faun_horns_mesh.res" id="1_hn5a0"]
+[ext_resource type="Material" uid="uid://du3nwlvc8scta" path="res://assets/clothes/culturalibre_faun_horns/culturalibre_faun_horns_material.res" id="2_eqllx"]
+
+[node name="faun_horns" type="MeshInstance3D"]
+mesh = ExtResource("1_hn5a0")
+surface_material_override/0 = ExtResource("2_eqllx")

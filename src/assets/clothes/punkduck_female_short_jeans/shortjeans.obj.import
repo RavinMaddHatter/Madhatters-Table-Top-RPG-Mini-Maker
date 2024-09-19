@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://e62kc8myyvky"
+path="res://.godot/imported/shortjeans.obj-db4249ef3cf53f60c63b9268d8f76768.mesh"
+
+[deps]
+
+files=["res://.godot/imported/shortjeans.obj-db4249ef3cf53f60c63b9268d8f76768.mesh"]
+
+source_file="res://assets/clothes/punkduck_female_short_jeans/shortjeans.obj"
+dest_files=["res://.godot/imported/shortjeans.obj-db4249ef3cf53f60c63b9268d8f76768.mesh", "res://.godot/imported/shortjeans.obj-db4249ef3cf53f60c63b9268d8f76768.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

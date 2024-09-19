@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://bsm37s0vnsyov"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_xq2ni"]
+
+[resource]
+resource_name = "Ballet_dress_The_Swan"
+script = ExtResource("1_xq2ni")
+slots = Array[String](["Torso"])
+textures = {
+"Ballet_dress_The_Swan": "res://assets/clothes/mindfront_ballet_dress_the_swan/Ballet_dress_The_Swan.png",
+"Ballet_dress_The_Swan_NRM": "res://assets/clothes/mindfront_ballet_dress_the_swan/Ballet_dress_The_Swan_NRM.png",
+"Ballet_dress_The_Swan_SPEC": "res://assets/clothes/mindfront_ballet_dress_the_swan/Ballet_dress_The_Swan_SPEC.png"
+}
+path = "res://assets/clothes/mindfront_ballet_dress_the_swan"
+rigged = false

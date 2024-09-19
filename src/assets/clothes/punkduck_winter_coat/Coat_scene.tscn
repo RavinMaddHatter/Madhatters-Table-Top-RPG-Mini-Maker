@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://2s5tl5yrotfo"]
+
+[ext_resource type="ArrayMesh" uid="uid://dxoe0upnjychr" path="res://assets/clothes/punkduck_winter_coat/Coat_mesh.res" id="1_0afft"]
+[ext_resource type="Material" uid="uid://decha652ysx41" path="res://assets/clothes/punkduck_winter_coat/punkduck_winter_coat_material.res" id="2_rr30v"]
+
+[node name="Coat" type="MeshInstance3D"]
+mesh = ExtResource("1_0afft")
+surface_material_override/0 = ExtResource("2_rr30v")

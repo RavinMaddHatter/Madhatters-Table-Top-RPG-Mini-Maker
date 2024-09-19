@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b7owhjaqpq3y8"
+path="res://.godot/imported/m_trilby_hat.obj-e28b8e5a3c50acfd964dd1404e7debef.mesh"
+
+[deps]
+
+files=["res://.godot/imported/m_trilby_hat.obj-e28b8e5a3c50acfd964dd1404e7debef.mesh"]
+
+source_file="res://assets/clothes/elvs_male_trilby_hat/m_trilby_hat.obj"
+dest_files=["res://.godot/imported/m_trilby_hat.obj-e28b8e5a3c50acfd964dd1404e7debef.mesh", "res://.godot/imported/m_trilby_hat.obj-e28b8e5a3c50acfd964dd1404e7debef.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

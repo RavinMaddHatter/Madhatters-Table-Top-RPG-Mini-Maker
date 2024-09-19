@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://wrhyfwk7ffx2"]
+
+[ext_resource type="ArrayMesh" uid="uid://ddeocr102jivn" path="res://assets/clothes/elvs_ladies_sunglass1/ladies_sunglass1_mesh.res" id="1_lb1k4"]
+[ext_resource type="Material" uid="uid://evjb4ru2xqg4" path="res://assets/clothes/elvs_ladies_sunglass1/elvs_ladies_sunglass1_material.res" id="2_bo472"]
+
+[node name="ladies_sunglass1" type="MeshInstance3D"]
+mesh = ExtResource("1_lb1k4")
+surface_material_override/0 = ExtResource("2_bo472")

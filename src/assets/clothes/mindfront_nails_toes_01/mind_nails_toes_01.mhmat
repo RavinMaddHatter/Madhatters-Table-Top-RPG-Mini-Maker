@@ -1,0 +1,27 @@
+# MakeHuman Material definition
+
+name mind_nails_toes_01
+
+// Color shading attributes
+diffuseColor  1 1 1
+specularColor  0 0 0
+shininess 0.1961
+opacity 1
+
+// Textures and properties
+diffuseTexture Nails_Toes_01.png
+normalmapTexture Nails_Toes_01_NRM.png
+specularTexture Nails_Toes_01_SPEC.png
+
+// Shader programme
+shader shaders/glsl/litsphere
+shaderParam litsphereTexture litspheres/lit_matte.png
+backfaceCull False
+
+// Configure built-in shader defines
+shaderConfig diffuse true
+shaderConfig bump false
+shaderConfig normal  true
+shaderConfig displacement  false
+shaderConfig spec  true
+shaderConfig vertexColors false

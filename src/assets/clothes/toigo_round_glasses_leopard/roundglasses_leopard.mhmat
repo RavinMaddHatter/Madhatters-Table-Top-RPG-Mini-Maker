@@ -1,0 +1,23 @@
+# MakeHuman Material definition
+
+name roundglasses_leopardMaterial
+
+// Color shading attributes
+diffuseColor  0.64 0.64 0.64
+specularColor  0.4 0.4 0.4
+shininess 1
+opacity 0
+
+// Textures and properties
+diffuseTexture Glasses-leopard.png
+
+// Shader programme
+shader data/shaders/glsl/phong
+
+// Configure built-in shader defines
+shaderConfig diffuse true
+shaderConfig bump false
+shaderConfig normal  false
+shaderConfig displacement  false
+shaderConfig spec  false
+shaderConfig vertexColors false

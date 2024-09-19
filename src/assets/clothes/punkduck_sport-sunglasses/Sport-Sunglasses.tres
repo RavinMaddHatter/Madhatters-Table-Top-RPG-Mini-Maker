@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://sugemqb7iucx"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_7ca2v"]
+
+[resource]
+resource_name = "Sport-Sunglasses"
+script = ExtResource("1_7ca2v")
+slots = Array[String](["Eyes"])
+textures = {
+"sport_sunglasses": "res://assets/clothes/punkduck_sport-sunglasses/sport_sunglasses.png"
+}
+path = "res://assets/clothes/punkduck_sport-sunglasses"
+rigged = false

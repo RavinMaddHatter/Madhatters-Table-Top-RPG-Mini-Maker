@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://djpx10dq5fqee"]
+
+[ext_resource type="ArrayMesh" uid="uid://dm5xy6g0d2fd3" path="res://assets/clothes/punkduck_microphone/Microphone_mesh.res" id="1_1eba3"]
+[ext_resource type="Material" uid="uid://d1i7gdcfhdjm5" path="res://assets/clothes/punkduck_microphone/punkduck_microphone_material.res" id="2_wcc2l"]
+
+[node name="Microphone" type="MeshInstance3D"]
+mesh = ExtResource("1_1eba3")
+surface_material_override/0 = ExtResource("2_wcc2l")

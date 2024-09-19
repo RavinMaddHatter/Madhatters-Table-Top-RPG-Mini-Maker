@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://d33k4misrhgsw"]
+
+[ext_resource type="ArrayMesh" uid="uid://cmhogq83rixl" path="res://assets/clothes/toigo_keyhole_tank_top/Tank_Keyhole_Neck_mesh.res" id="1_6hdhv"]
+[ext_resource type="Material" uid="uid://dh45hbdr1usg1" path="res://assets/clothes/toigo_keyhole_tank_top/toigo_keyhole_tank_top_material.res" id="2_6snub"]
+
+[node name="Tank_Keyhole_Neck" type="MeshInstance3D"]
+mesh = ExtResource("1_6hdhv")
+surface_material_override/0 = ExtResource("2_6snub")

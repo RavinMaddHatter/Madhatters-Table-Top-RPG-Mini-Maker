@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cbtvy2p7xohqw"
+path="res://.godot/imported/vnecktop.obj-3d05d0084ea64150813b7c7e7e6aabb2.mesh"
+
+[deps]
+
+files=["res://.godot/imported/vnecktop.obj-3d05d0084ea64150813b7c7e7e6aabb2.mesh"]
+
+source_file="res://assets/clothes/punkduck_v_neck_top/vnecktop.obj"
+dest_files=["res://.godot/imported/vnecktop.obj-3d05d0084ea64150813b7c7e7e6aabb2.mesh", "res://.godot/imported/vnecktop.obj-3d05d0084ea64150813b7c7e7e6aabb2.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://t8qai74k5olb"
+path="res://.godot/imported/pillow_man.obj-1690fe5f9bb954b2d1d8e87da4b2d358.mesh"
+
+[deps]
+
+files=["res://.godot/imported/pillow_man.obj-1690fe5f9bb954b2d1d8e87da4b2d358.mesh"]
+
+source_file="res://assets/clothes/jujube_bag_on_head/pillow_man.obj"
+dest_files=["res://.godot/imported/pillow_man.obj-1690fe5f9bb954b2d1d8e87da4b2d358.mesh", "res://.godot/imported/pillow_man.obj-1690fe5f9bb954b2d1d8e87da4b2d358.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

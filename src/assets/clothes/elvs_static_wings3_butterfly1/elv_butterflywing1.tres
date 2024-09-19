@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://d4lo2rf7r6cuj"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_ag66w"]
+
+[resource]
+resource_name = "elv_butterflywing1"
+script = ExtResource("1_ag66w")
+slots = Array[String](["Torso"])
+textures = {
+"testwings4": "res://assets/clothes/elvs_static_wings3_butterfly1/testwings4.png"
+}
+path = "res://assets/clothes/elvs_static_wings3_butterfly1"
+rigged = false

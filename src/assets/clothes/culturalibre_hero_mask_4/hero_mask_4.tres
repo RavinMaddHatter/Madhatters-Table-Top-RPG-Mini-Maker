@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://bp2lrbld7i62u"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_le7fw"]
+
+[resource]
+resource_name = "hero_mask_4"
+script = ExtResource("1_le7fw")
+slots = Array[String](["Head"])
+textures = {
+"black": "res://assets/clothes/culturalibre_hero_mask_4/black.png"
+}
+path = "res://assets/clothes/culturalibre_hero_mask_4"
+rigged = false

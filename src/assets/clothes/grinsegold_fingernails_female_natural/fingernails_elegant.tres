@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://42prcy6mi5ak"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_xhlto"]
+
+[resource]
+resource_name = "fingernails_elegant"
+script = ExtResource("1_xhlto")
+slots = Array[String](["Hands"])
+textures = {
+"toenail_natural_Normal": "res://assets/clothes/grinsegold_fingernails_female_natural/toenail_natural_Normal.png",
+"toenail_natural_diff": "res://assets/clothes/grinsegold_fingernails_female_natural/toenail_natural_diff.png"
+}
+path = "res://assets/clothes/grinsegold_fingernails_female_natural"
+rigged = false

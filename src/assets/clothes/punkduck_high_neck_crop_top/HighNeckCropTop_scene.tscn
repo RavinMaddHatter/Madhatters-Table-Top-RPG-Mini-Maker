@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfbsrcc68xre1"]
+
+[ext_resource type="ArrayMesh" uid="uid://b63paqrqpw7tp" path="res://assets/clothes/punkduck_high_neck_crop_top/HighNeckCropTop_mesh.res" id="1_jjlg4"]
+[ext_resource type="Material" uid="uid://tghypviyj3su" path="res://assets/clothes/punkduck_high_neck_crop_top/punkduck_high_neck_crop_top_material.res" id="2_mmkev"]
+
+[node name="HighNeckCropTop" type="MeshInstance3D"]
+mesh = ExtResource("1_jjlg4")
+surface_material_override/0 = ExtResource("2_mmkev")

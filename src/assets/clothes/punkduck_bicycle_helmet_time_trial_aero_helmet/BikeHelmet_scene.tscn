@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://5j6y8e8r8iu6"]
+
+[ext_resource type="ArrayMesh" uid="uid://gdrj8ewqedd2" path="res://assets/clothes/punkduck_bicycle_helmet_time_trial_aero_helmet/BikeHelmet_mesh.res" id="1_h7svg"]
+[ext_resource type="Material" uid="uid://b6jp7yra4styv" path="res://assets/clothes/punkduck_bicycle_helmet_time_trial_aero_helmet/punkduck_bicycle_helmet_time_trial_aero_helmet_material.res" id="2_ofhv4"]
+
+[node name="BikeHelmet" type="MeshInstance3D"]
+mesh = ExtResource("1_h7svg")
+surface_material_override/0 = ExtResource("2_ofhv4")

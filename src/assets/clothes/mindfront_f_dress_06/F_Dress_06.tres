@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://cwpbjdr45w8ri"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_4fr6f"]
+
+[resource]
+resource_name = "F_Dress_06"
+script = ExtResource("1_4fr6f")
+slots = Array[String](["Torso"])
+textures = {
+"F_Dress_06": "res://assets/clothes/mindfront_f_dress_06/F_Dress_06.png",
+"F_Dress_06_METAL": "res://assets/clothes/mindfront_f_dress_06/F_Dress_06_METAL.png",
+"F_Dress_06_NRM": "res://assets/clothes/mindfront_f_dress_06/F_Dress_06_NRM.png",
+"F_Dress_06_SPEC": "res://assets/clothes/mindfront_f_dress_06/F_Dress_06_SPEC.png"
+}
+path = "res://assets/clothes/mindfront_f_dress_06"
+rigged = false

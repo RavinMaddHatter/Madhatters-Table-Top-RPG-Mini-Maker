@@ -1,0 +1,38 @@
+# Material definition for material.001Material
+
+name material.001Material
+description Crude_male_shirt material
+ambientColor 1.0 1.0 1.0
+diffuseColor 0.64 0.64 0.64
+specularColor 0.5 0.5 0.5
+shininess 0.1961
+emissiveColor 0.0 0.0 0.0
+opacity 1.0
+translucency 0.0
+
+shadeless False
+wireframe False
+transparent False
+alphaToCoverage True
+backfaceCull False
+depthless False
+
+castShadows True
+
+receiveShadows True
+
+diffuseTexture crude_male_tex.png
+
+shader shaders/glsl/litsphere
+
+shaderParam AdditiveShading 0.25
+shaderParam litsphereTexture litspheres/lit_matte.png
+
+shaderConfig ambientOcclusion True
+shaderConfig normal False
+shaderConfig bump False
+shaderConfig displacement False
+shaderConfig vertexColors False
+shaderConfig spec False
+shaderConfig transparency True
+shaderConfig diffuse True

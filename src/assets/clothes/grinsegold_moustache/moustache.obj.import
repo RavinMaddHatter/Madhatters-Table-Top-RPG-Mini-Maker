@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dwa2p8wgtodbi"
+path="res://.godot/imported/moustache.obj-42a3a7f648727761ccfd10c4b6c4097f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/moustache.obj-42a3a7f648727761ccfd10c4b6c4097f.mesh"]
+
+source_file="res://assets/clothes/grinsegold_moustache/moustache.obj"
+dest_files=["res://.godot/imported/moustache.obj-42a3a7f648727761ccfd10c4b6c4097f.mesh", "res://.godot/imported/moustache.obj-42a3a7f648727761ccfd10c4b6c4097f.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

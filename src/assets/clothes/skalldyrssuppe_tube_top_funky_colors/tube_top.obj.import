@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cfh0bk7lrn32l"
+path="res://.godot/imported/tube_top.obj-a598b319ba7b9835735b09fd6c8bf0b2.mesh"
+
+[deps]
+
+files=["res://.godot/imported/tube_top.obj-a598b319ba7b9835735b09fd6c8bf0b2.mesh"]
+
+source_file="res://assets/clothes/skalldyrssuppe_tube_top_funky_colors/tube_top.obj"
+dest_files=["res://.godot/imported/tube_top.obj-a598b319ba7b9835735b09fd6c8bf0b2.mesh", "res://.godot/imported/tube_top.obj-a598b319ba7b9835735b09fd6c8bf0b2.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

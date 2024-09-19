@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://blkgjwls37k6v"
+path="res://.godot/imported/qipao.obj-1c316f2d71265f8e9a86227468b7f192.mesh"
+
+[deps]
+
+files=["res://.godot/imported/qipao.obj-1c316f2d71265f8e9a86227468b7f192.mesh"]
+
+source_file="res://assets/clothes/punkduck_middle_length_qipao/qipao.obj"
+dest_files=["res://.godot/imported/qipao.obj-1c316f2d71265f8e9a86227468b7f192.mesh", "res://.godot/imported/qipao.obj-1c316f2d71265f8e9a86227468b7f192.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

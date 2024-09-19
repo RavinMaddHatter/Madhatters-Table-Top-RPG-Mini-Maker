@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://brcka2wti2mmh"]
+
+[ext_resource type="ArrayMesh" uid="uid://dar803moi3tb1" path="res://assets/clothes/punkduck_sleeveless_shirt/Sleeveless_mesh.res" id="1_ojsrr"]
+[ext_resource type="Material" uid="uid://clp0lmvygga8x" path="res://assets/clothes/punkduck_sleeveless_shirt/punkduck_sleeveless_shirt_material.res" id="2_nbi5q"]
+
+[node name="Sleeveless" type="MeshInstance3D"]
+mesh = ExtResource("1_ojsrr")
+surface_material_override/0 = ExtResource("2_nbi5q")

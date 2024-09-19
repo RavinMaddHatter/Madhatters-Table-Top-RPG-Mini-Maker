@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dvjnkhbgfdubq"
+path="res://.godot/imported/tst.obj-abccf7bd465cae4f0c000e2938cb9c63.mesh"
+
+[deps]
+
+files=["res://.godot/imported/tst.obj-abccf7bd465cae4f0c000e2938cb9c63.mesh"]
+
+source_file="res://assets/clothes/test/tst.obj"
+dest_files=["res://.godot/imported/tst.obj-abccf7bd465cae4f0c000e2938cb9c63.mesh", "res://.godot/imported/tst.obj-abccf7bd465cae4f0c000e2938cb9c63.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

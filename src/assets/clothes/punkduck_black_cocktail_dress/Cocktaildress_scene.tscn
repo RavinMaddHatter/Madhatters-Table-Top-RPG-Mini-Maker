@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bw02trdwnb1jo"]
+
+[ext_resource type="ArrayMesh" uid="uid://dhhlnr58v3eg8" path="res://assets/clothes/punkduck_black_cocktail_dress/Cocktaildress_mesh.res" id="1_co7lx"]
+[ext_resource type="Material" uid="uid://dvcg28h3ooe51" path="res://assets/clothes/punkduck_black_cocktail_dress/punkduck_black_cocktail_dress_material.res" id="2_vb748"]
+
+[node name="Cocktaildress" type="MeshInstance3D"]
+mesh = ExtResource("1_co7lx")
+surface_material_override/0 = ExtResource("2_vb748")

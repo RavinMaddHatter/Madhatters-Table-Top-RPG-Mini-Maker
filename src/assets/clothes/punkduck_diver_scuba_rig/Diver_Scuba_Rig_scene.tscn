@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdijqhjcrhig"]
+
+[ext_resource type="ArrayMesh" uid="uid://bnj155346esnt" path="res://assets/clothes/punkduck_diver_scuba_rig/Diver_Scuba_Rig_mesh.res" id="1_823x5"]
+[ext_resource type="Material" uid="uid://b1i6nf850msxy" path="res://assets/clothes/punkduck_diver_scuba_rig/punkduck_diver_scuba_rig_material.res" id="2_vdoof"]
+
+[node name="Diver_Scuba_Rig" type="MeshInstance3D"]
+mesh = ExtResource("1_823x5")
+surface_material_override/0 = ExtResource("2_vdoof")

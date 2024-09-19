@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkymxuf7284h1"]
+
+[ext_resource type="ArrayMesh" uid="uid://byou4ljju5jvx" path="res://assets/clothes/skalldyrssuppe_tube_top_funky_colors/tube_top_mesh.res" id="1_rcecm"]
+[ext_resource type="Material" uid="uid://fuqglmciljj2" path="res://assets/clothes/skalldyrssuppe_tube_top_funky_colors/skalldyrssuppe_tube_top_funky_colors_material.res" id="2_mki02"]
+
+[node name="tube_top" type="MeshInstance3D"]
+mesh = ExtResource("1_rcecm")
+surface_material_override/0 = ExtResource("2_mki02")

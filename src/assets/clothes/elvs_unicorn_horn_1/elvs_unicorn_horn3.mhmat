@@ -1,0 +1,38 @@
+# Material definition for elvs_unicorn_horn3
+
+name elvs_unicorn_horn3
+description Elvs_unicorn_horn3 material
+ambientColor 1.0 1.0 1.0
+diffuseColor 0.5 0.5 0.5
+specularColor 0.5 0.5 0.5
+shininess 0.5
+emissiveColor 0.0 0.0 0.0
+opacity 1.0
+translucency 0.0
+
+shadeless False
+wireframe False
+transparent True
+alphaToCoverage True
+backfaceCull True
+depthless False
+
+castShadows True
+
+receiveShadows True
+
+diffuseTexture horntex1f.png
+
+shader shaders/glsl/litsphere
+
+shaderParam litsphereTexture litspheres/lit_refl_sharp_aniso_hard_blonde.png
+shaderParam AdditiveShading 0.1
+
+shaderConfig diffuse True
+shaderConfig bump True
+shaderConfig normal True
+shaderConfig displacement True
+shaderConfig spec True
+shaderConfig vertexColors True
+shaderConfig transparency True
+shaderConfig ambientOcclusion True

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://hc20lwi817si"
+path="res://.godot/imported/eveninggown.obj-fc96eb25b603035bf54e7ecf70c1f880.mesh"
+
+[deps]
+
+files=["res://.godot/imported/eveninggown.obj-fc96eb25b603035bf54e7ecf70c1f880.mesh"]
+
+source_file="res://assets/clothes/punkduck_evening_gown/eveninggown.obj"
+dest_files=["res://.godot/imported/eveninggown.obj-fc96eb25b603035bf54e7ecf70c1f880.mesh", "res://.godot/imported/eveninggown.obj-fc96eb25b603035bf54e7ecf70c1f880.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

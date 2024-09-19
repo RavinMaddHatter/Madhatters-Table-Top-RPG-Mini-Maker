@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8puy3c43avpq"]
+
+[ext_resource type="ArrayMesh" uid="uid://x6ku3w7pykn7" path="res://assets/clothes/toigo_wool_pants/Pants_Wool_mesh.res" id="1_iu5j3"]
+[ext_resource type="Material" uid="uid://br7xktaknql65" path="res://assets/clothes/toigo_wool_pants/toigo_wool_pants_material.res" id="2_wxps8"]
+
+[node name="Pants_Wool" type="MeshInstance3D"]
+mesh = ExtResource("1_iu5j3")
+surface_material_override/0 = ExtResource("2_wxps8")

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bvi78yp7o573l"
+path="res://.godot/imported/leather_helmet.obj-dfa7d3f2b86293dc7c97e7f0457f0f81.mesh"
+
+[deps]
+
+files=["res://.godot/imported/leather_helmet.obj-dfa7d3f2b86293dc7c97e7f0457f0f81.mesh"]
+
+source_file="res://assets/clothes/maciekg_leather_helmet/leather_helmet.obj"
+dest_files=["res://.godot/imported/leather_helmet.obj-dfa7d3f2b86293dc7c97e7f0457f0f81.mesh", "res://.godot/imported/leather_helmet.obj-dfa7d3f2b86293dc7c97e7f0457f0f81.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

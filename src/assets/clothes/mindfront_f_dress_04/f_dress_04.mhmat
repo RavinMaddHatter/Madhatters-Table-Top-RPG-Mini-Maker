@@ -1,0 +1,26 @@
+# MakeHuman Material definition
+
+name f_dress_04
+
+// Color shading attributes
+diffuseColor  1 1 1
+specularColor  0 0 0
+shininess 0.1961
+opacity 1
+
+// Textures and properties
+diffuseTexture F_Dress_04.png
+normalmapTexture F_Dress_04_NRM.png
+specularTexture F_Dress_04_SPEC.png
+
+// Shader programme
+shader data/shaders/glsl/normalmap
+backfaceCull False
+
+// Configure built-in shader defines
+shaderConfig diffuse true
+shaderConfig bump false
+shaderConfig normal  true
+shaderConfig displacement  false
+shaderConfig spec  true
+shaderConfig vertexColors false

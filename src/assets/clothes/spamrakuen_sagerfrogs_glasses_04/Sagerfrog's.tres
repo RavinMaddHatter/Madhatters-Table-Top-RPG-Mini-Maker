@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://brtd163m2dfaw"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_iylex"]
+
+[resource]
+resource_name = "Sagerfrog's"
+script = ExtResource("1_iylex")
+slots = Array[String](["Eyes"])
+textures = {
+"Sagerfrog's_Glasses_04": "res://assets/clothes/spamrakuen_sagerfrogs_glasses_04/Sagerfrog's_Glasses_04.png"
+}
+path = "res://assets/clothes/spamrakuen_sagerfrogs_glasses_04"
+rigged = false

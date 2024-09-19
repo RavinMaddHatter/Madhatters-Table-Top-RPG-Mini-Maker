@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://rjbdnhw16nn1"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_c842i"]
+
+[resource]
+resource_name = "cargo_pants"
+script = ExtResource("1_c842i")
+slots = Array[String](["Legs"])
+textures = {
+"cargo_pants_diff": "res://assets/clothes/cortu_cargo_pants/cargo_pants_diff.png",
+"cargo_pants_norm": "res://assets/clothes/cortu_cargo_pants/cargo_pants_norm.png"
+}
+path = "res://assets/clothes/cortu_cargo_pants"
+rigged = false

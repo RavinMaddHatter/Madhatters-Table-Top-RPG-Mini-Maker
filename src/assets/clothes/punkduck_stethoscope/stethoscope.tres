@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://hftcln7p0710"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_8sv6q"]
+
+[resource]
+resource_name = "stethoscope"
+script = ExtResource("1_8sv6q")
+slots = Array[String](["Head"])
+textures = {
+"stethoscope": "res://assets/clothes/punkduck_stethoscope/stethoscope.png"
+}
+path = "res://assets/clothes/punkduck_stethoscope"
+rigged = false

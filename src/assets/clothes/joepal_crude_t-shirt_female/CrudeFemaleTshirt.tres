@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://6m5c3agkyiqw"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_yb0ku"]
+
+[resource]
+resource_name = "CrudeFemaleTshirt"
+script = ExtResource("1_yb0ku")
+slots = Array[String](["Torso"])
+textures = {
+"CrudeFemaleTshirtDiffuse": "res://assets/clothes/joepal_crude_t-shirt_female/CrudeFemaleTshirtDiffuse.png"
+}
+path = "res://assets/clothes/joepal_crude_t-shirt_female"
+rigged = false

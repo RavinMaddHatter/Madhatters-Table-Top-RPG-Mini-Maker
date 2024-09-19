@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://poiexdejilac"
+path="res://.godot/imported/hero-heroine_hood_2.obj-bb39ce3b757331b43212cde5ad7ee9ab.mesh"
+
+[deps]
+
+files=["res://.godot/imported/hero-heroine_hood_2.obj-bb39ce3b757331b43212cde5ad7ee9ab.mesh"]
+
+source_file="res://assets/clothes/culturalibre_hero-heroine_hood_2/hero-heroine_hood_2.obj"
+dest_files=["res://.godot/imported/hero-heroine_hood_2.obj-bb39ce3b757331b43212cde5ad7ee9ab.mesh", "res://.godot/imported/hero-heroine_hood_2.obj-bb39ce3b757331b43212cde5ad7ee9ab.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

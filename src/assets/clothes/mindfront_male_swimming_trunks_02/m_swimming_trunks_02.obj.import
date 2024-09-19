@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dlwtxmj3jmb2a"
+path="res://.godot/imported/m_swimming_trunks_02.obj-f9deb7c26c10cfa73a5221f08a5a5131.mesh"
+
+[deps]
+
+files=["res://.godot/imported/m_swimming_trunks_02.obj-f9deb7c26c10cfa73a5221f08a5a5131.mesh"]
+
+source_file="res://assets/clothes/mindfront_male_swimming_trunks_02/m_swimming_trunks_02.obj"
+dest_files=["res://.godot/imported/m_swimming_trunks_02.obj-f9deb7c26c10cfa73a5221f08a5a5131.mesh", "res://.godot/imported/m_swimming_trunks_02.obj-f9deb7c26c10cfa73a5221f08a5a5131.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

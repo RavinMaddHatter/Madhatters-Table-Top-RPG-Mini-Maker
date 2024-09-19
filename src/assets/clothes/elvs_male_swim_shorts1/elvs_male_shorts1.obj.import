@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bjbbu8ipltl14"
+path="res://.godot/imported/elvs_male_shorts1.obj-3aa36c0672399b95d99976a10239152a.mesh"
+
+[deps]
+
+files=["res://.godot/imported/elvs_male_shorts1.obj-3aa36c0672399b95d99976a10239152a.mesh"]
+
+source_file="res://assets/clothes/elvs_male_swim_shorts1/elvs_male_shorts1.obj"
+dest_files=["res://.godot/imported/elvs_male_shorts1.obj-3aa36c0672399b95d99976a10239152a.mesh", "res://.godot/imported/elvs_male_shorts1.obj-3aa36c0672399b95d99976a10239152a.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

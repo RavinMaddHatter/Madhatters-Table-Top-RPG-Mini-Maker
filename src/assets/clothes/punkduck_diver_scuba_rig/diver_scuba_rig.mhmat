@@ -1,0 +1,39 @@
+# Material definition for diver_scuba_rig
+
+name diver_scuba_rig
+description Diver_Scuba_Rig material
+ambientColor 0.509803921569 0.509803921569 0.509803921569
+diffuseColor 1.0 1.0 1.0
+specularColor 0.5 0.5 0.5
+shininess 0.1961
+emissiveColor 0.0 0.0 0.0
+opacity 1.0
+translucency 0.0
+
+shadeless False
+wireframe False
+transparent True
+alphaToCoverage True
+backfaceCull False
+depthless False
+
+castShadows True
+
+receiveShadows True
+
+diffuseTexture diver_scuba_rig.png
+normalmapTexture diver_scuba_rig_norm.png
+normalmapIntensity 1.0
+
+shader shaders/glsl/litsphere
+
+shaderParam litsphereTexture litspheres/lit_refl_sharp_aniso_hard.png
+
+shaderConfig ambientOcclusion True
+shaderConfig normal True
+shaderConfig bump False
+shaderConfig displacement False
+shaderConfig vertexColors False
+shaderConfig spec False
+shaderConfig transparency True
+shaderConfig diffuse True

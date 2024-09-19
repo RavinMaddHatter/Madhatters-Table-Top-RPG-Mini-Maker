@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://dg2wn1rk8xhbp"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_g6w2b"]
+
+[resource]
+resource_name = "Lucoa_Horns"
+script = ExtResource("1_g6w2b")
+slots = Array[String](["Head"])
+textures = {
+"HornsDiff": "res://assets/clothes/freezychan_lucoa_quetzalcoatl_horns/HornsDiff.png"
+}
+path = "res://assets/clothes/freezychan_lucoa_quetzalcoatl_horns"
+rigged = false

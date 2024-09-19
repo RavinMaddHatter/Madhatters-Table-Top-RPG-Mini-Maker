@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://b816gub8qy8hw"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_fhssy"]
+
+[resource]
+resource_name = "TBM"
+script = ExtResource("1_fhssy")
+slots = Array[String](["Eyes"])
+textures = {
+"TBM_Glasses_Frames_01": "res://assets/clothes/spamrakuen_tbm_glasses_frames_01/TBM_Glasses_Frames_01.png"
+}
+path = "res://assets/clothes/spamrakuen_tbm_glasses_frames_01"
+rigged = false

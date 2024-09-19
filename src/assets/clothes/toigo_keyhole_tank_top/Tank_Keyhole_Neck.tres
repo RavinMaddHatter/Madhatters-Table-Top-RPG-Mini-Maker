@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://c4jr2s3f31dcs"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_wtw1w"]
+
+[resource]
+resource_name = "Tank_Keyhole_Neck"
+script = ExtResource("1_wtw1w")
+slots = Array[String](["Torso"])
+textures = {
+"Giraffe": "res://assets/clothes/toigo_keyhole_tank_top/Giraffe.png"
+}
+path = "res://assets/clothes/toigo_keyhole_tank_top"
+rigged = false

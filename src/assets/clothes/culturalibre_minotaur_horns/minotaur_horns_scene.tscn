@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://4g5ktcd707wv"]
+
+[ext_resource type="ArrayMesh" uid="uid://bvhfar1uuxym2" path="res://assets/clothes/culturalibre_minotaur_horns/minotaur_horns_mesh.res" id="1_skl7x"]
+[ext_resource type="Material" uid="uid://dipejak1rm1oc" path="res://assets/clothes/culturalibre_minotaur_horns/culturalibre_minotaur_horns_material.res" id="2_tu0q6"]
+
+[node name="minotaur_horns" type="MeshInstance3D"]
+mesh = ExtResource("1_skl7x")
+surface_material_override/0 = ExtResource("2_tu0q6")

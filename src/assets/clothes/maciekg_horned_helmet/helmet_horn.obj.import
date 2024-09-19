@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://g4w2ee4n7cb"
+path="res://.godot/imported/helmet_horn.obj-c5276d29318fe7a25c7539e95ddc46ef.mesh"
+
+[deps]
+
+files=["res://.godot/imported/helmet_horn.obj-c5276d29318fe7a25c7539e95ddc46ef.mesh"]
+
+source_file="res://assets/clothes/maciekg_horned_helmet/helmet_horn.obj"
+dest_files=["res://.godot/imported/helmet_horn.obj-c5276d29318fe7a25c7539e95ddc46ef.mesh", "res://.godot/imported/helmet_horn.obj-c5276d29318fe7a25c7539e95ddc46ef.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

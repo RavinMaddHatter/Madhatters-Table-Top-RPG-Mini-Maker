@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bgfuo7pw7j6ky"
+path="res://.godot/imported/patrol_cap.obj-f8e33b8e2c8ce6c779337b61dd030528.mesh"
+
+[deps]
+
+files=["res://.godot/imported/patrol_cap.obj-f8e33b8e2c8ce6c779337b61dd030528.mesh"]
+
+source_file="res://assets/clothes/mindfront_patrol_cap/patrol_cap.obj"
+dest_files=["res://.godot/imported/patrol_cap.obj-f8e33b8e2c8ce6c779337b61dd030528.mesh", "res://.godot/imported/patrol_cap.obj-f8e33b8e2c8ce6c779337b61dd030528.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

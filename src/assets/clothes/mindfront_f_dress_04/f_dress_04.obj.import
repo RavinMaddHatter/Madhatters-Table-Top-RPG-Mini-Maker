@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ckcnvancmeyi7"
+path="res://.godot/imported/f_dress_04.obj-692e2a6df76aabee724707f9371fada1.mesh"
+
+[deps]
+
+files=["res://.godot/imported/f_dress_04.obj-692e2a6df76aabee724707f9371fada1.mesh"]
+
+source_file="res://assets/clothes/mindfront_f_dress_04/f_dress_04.obj"
+dest_files=["res://.godot/imported/f_dress_04.obj-692e2a6df76aabee724707f9371fada1.mesh", "res://.godot/imported/f_dress_04.obj-692e2a6df76aabee724707f9371fada1.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

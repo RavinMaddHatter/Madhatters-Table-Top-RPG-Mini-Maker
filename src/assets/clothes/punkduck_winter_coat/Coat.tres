@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://dks7b31w5n4wr"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_0s3il"]
+
+[resource]
+resource_name = "Coat"
+script = ExtResource("1_0s3il")
+slots = Array[String](["Torso"])
+textures = {
+"coat": "res://assets/clothes/punkduck_winter_coat/coat.png"
+}
+path = "res://assets/clothes/punkduck_winter_coat"
+rigged = false

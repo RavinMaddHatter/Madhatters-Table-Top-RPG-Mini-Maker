@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://b53m8mkwce62e"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_vrf20"]
+
+[resource]
+resource_name = "cat_tail_1b"
+script = ExtResource("1_vrf20")
+slots = Array[String](["Torso"])
+textures = {
+"white_fur_bump": "res://assets/clothes/elvs_cat_tail_as_clothes_1/white_fur_bump.png",
+"white_fur_displacement": "res://assets/clothes/elvs_cat_tail_as_clothes_1/white_fur_displacement.png",
+"white_fur_normals": "res://assets/clothes/elvs_cat_tail_as_clothes_1/white_fur_normals.png",
+"white_fur_specs": "res://assets/clothes/elvs_cat_tail_as_clothes_1/white_fur_specs.png",
+"white_fur_texture2": "res://assets/clothes/elvs_cat_tail_as_clothes_1/white_fur_texture2.png"
+}
+path = "res://assets/clothes/elvs_cat_tail_as_clothes_1"
+rigged = false

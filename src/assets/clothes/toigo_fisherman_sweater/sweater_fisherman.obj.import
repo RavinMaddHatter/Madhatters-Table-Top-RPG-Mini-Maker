@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://p262rtc5mjm6"
+path="res://.godot/imported/sweater_fisherman.obj-d72d14f1b50e8c771c601585e27b9191.mesh"
+
+[deps]
+
+files=["res://.godot/imported/sweater_fisherman.obj-d72d14f1b50e8c771c601585e27b9191.mesh"]
+
+source_file="res://assets/clothes/toigo_fisherman_sweater/sweater_fisherman.obj"
+dest_files=["res://.godot/imported/sweater_fisherman.obj-d72d14f1b50e8c771c601585e27b9191.mesh", "res://.godot/imported/sweater_fisherman.obj-d72d14f1b50e8c771c601585e27b9191.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

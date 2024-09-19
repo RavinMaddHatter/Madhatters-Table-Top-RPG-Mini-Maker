@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bwwhrh6pog8nq"
+path="res://.godot/imported/tubetop.obj-15c19b4943a276b8dd2f2884708f594e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/tubetop.obj-15c19b4943a276b8dd2f2884708f594e.mesh"]
+
+source_file="res://assets/clothes/punkduck_tube_top/tubetop.obj"
+dest_files=["res://.godot/imported/tubetop.obj-15c19b4943a276b8dd2f2884708f594e.mesh", "res://.godot/imported/tubetop.obj-15c19b4943a276b8dd2f2884708f594e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

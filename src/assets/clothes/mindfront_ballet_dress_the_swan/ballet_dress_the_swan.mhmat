@@ -1,0 +1,26 @@
+# MakeHuman Material definition
+
+name ballet_dress_the_swan
+
+// Color shading attributes
+diffuseColor  1 1 1
+specularColor  0 0 0
+shininess 0.1961
+opacity 0
+
+// Textures and properties
+diffuseTexture Ballet_dress_The_Swan.png
+normalmapTexture Ballet_dress_The_Swan_NRM.png
+specularTexture Ballet_dress_The_Swan_SPEC.png
+
+// Shader programme
+shader data/shaders/glsl/normalmap
+backfaceCull False
+
+// Configure built-in shader defines
+shaderConfig diffuse true
+shaderConfig bump false
+shaderConfig normal  true
+shaderConfig displacement  false
+shaderConfig spec  true
+shaderConfig vertexColors false

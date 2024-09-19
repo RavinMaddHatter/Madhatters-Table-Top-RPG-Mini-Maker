@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bwe1owntg1ijf"]
+
+[ext_resource type="FontFile" uid="uid://bo4amvjvj1bkm" path="res://assets/Fonts/Avara.ttf" id="1_a1bcu"]
+
+[resource]
+default_font = ExtResource("1_a1bcu")

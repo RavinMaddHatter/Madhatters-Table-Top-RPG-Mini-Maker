@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cg5hd6oo3cyck"]
+
+[ext_resource type="ArrayMesh" uid="uid://d1g2f7dutw2my" path="res://assets/clothes/culturalibre_cl_devil_tail/cl_devil_tail_mesh.res" id="1_v2aww"]
+[ext_resource type="Material" uid="uid://c2f210nncwgc2" path="res://assets/clothes/culturalibre_cl_devil_tail/culturalibre_cl_devil_tail_material.res" id="2_5amye"]
+
+[node name="cl_devil_tail" type="MeshInstance3D"]
+mesh = ExtResource("1_v2aww")
+surface_material_override/0 = ExtResource("2_5amye")

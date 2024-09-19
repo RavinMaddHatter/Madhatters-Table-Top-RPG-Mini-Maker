@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://xvhtotroftpq"]
+
+[ext_resource type="ArrayMesh" uid="uid://cr7h3bx7flagw" path="res://assets/clothes/toigo_harem_pants/Pants_Harem_mesh.res" id="1_pn6ns"]
+[ext_resource type="Material" uid="uid://biybilnjsni46" path="res://assets/clothes/toigo_harem_pants/toigo_harem_pants_material.res" id="2_yscs2"]
+
+[node name="Pants_Harem" type="MeshInstance3D"]
+mesh = ExtResource("1_pn6ns")
+surface_material_override/0 = ExtResource("2_yscs2")

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://coxpagqp0o6i1"]
+
+[ext_resource type="ArrayMesh" uid="uid://bog5qf4cs4h00" path="res://assets/clothes/grinsegold_fingernails_female_natural/fingernails_elegant_mesh.res" id="1_hem28"]
+[ext_resource type="Material" uid="uid://33lhioyijmse" path="res://assets/clothes/grinsegold_fingernails_female_natural/grinsegold_fingernails_female_natural_material.res" id="2_mmvjj"]
+
+[node name="fingernails_elegant" type="MeshInstance3D"]
+mesh = ExtResource("1_hem28")
+surface_material_override/0 = ExtResource("2_mmvjj")

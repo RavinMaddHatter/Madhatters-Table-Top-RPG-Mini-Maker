@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbcesksd8eicv"]
+
+[ext_resource type="ArrayMesh" uid="uid://damys6t0vvpn" path="res://assets/clothes/mindfront_male_trousers_1/M_Trousers_01_mesh.res" id="1_5hpif"]
+[ext_resource type="Material" uid="uid://qto47y0ub4xs" path="res://assets/clothes/mindfront_male_trousers_1/mindfront_male_trousers_1_material.res" id="2_tgfdg"]
+
+[node name="M_Trousers_01" type="MeshInstance3D"]
+mesh = ExtResource("1_5hpif")
+surface_material_override/0 = ExtResource("2_tgfdg")

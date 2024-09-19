@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://beclxuivke8h3"]
+
+[ext_resource type="ArrayMesh" uid="uid://bxun5fxusegry" path="res://assets/clothes/jaldmic_m1911a1/Colt_M1911A1_mesh.res" id="1_mi75a"]
+[ext_resource type="Material" uid="uid://3e1ykgbkb2wo" path="res://assets/clothes/jaldmic_m1911a1/jaldmic_m1911a1_material.res" id="2_j8v01"]
+
+[node name="Colt_M1911A1" type="MeshInstance3D"]
+mesh = ExtResource("1_mi75a")
+surface_material_override/0 = ExtResource("2_j8v01")

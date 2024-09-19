@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://dw5kotie7pdpp"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_cosbu"]
+
+[resource]
+resource_name = "Gloves_Long"
+script = ExtResource("1_cosbu")
+slots = Array[String](["Hands"])
+textures = {
+"Gloves01UV": "res://assets/clothes/toigo_gloves_long/Gloves01UV.png"
+}
+path = "res://assets/clothes/toigo_gloves_long"
+rigged = false

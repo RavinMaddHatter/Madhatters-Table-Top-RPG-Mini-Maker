@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://cqr5y6voxqw28"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_0yvn8"]
+
+[resource]
+resource_name = "Tactical_Vest_male"
+script = ExtResource("1_0yvn8")
+slots = Array[String](["Torso"])
+textures = {
+"Tactical_Vest": "res://assets/clothes/mindfront_tactical_vest_male/Tactical_Vest.png",
+"Tactical_Vest_NRM": "res://assets/clothes/mindfront_tactical_vest_male/Tactical_Vest_NRM.png",
+"Tactical_Vest_SPEC": "res://assets/clothes/mindfront_tactical_vest_male/Tactical_Vest_SPEC.png"
+}
+path = "res://assets/clothes/mindfront_tactical_vest_male"
+rigged = false

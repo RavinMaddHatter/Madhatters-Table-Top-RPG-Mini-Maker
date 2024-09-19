@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://brf3olvl2bxdi"
+path="res://.godot/imported/l1a1.obj-8df6d573df7ee0d98fd4ec31a7fade77.mesh"
+
+[deps]
+
+files=["res://.godot/imported/l1a1.obj-8df6d573df7ee0d98fd4ec31a7fade77.mesh"]
+
+source_file="res://assets/clothes/jaldmic_l1a1/l1a1.obj"
+dest_files=["res://.godot/imported/l1a1.obj-8df6d573df7ee0d98fd4ec31a7fade77.mesh", "res://.godot/imported/l1a1.obj-8df6d573df7ee0d98fd4ec31a7fade77.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

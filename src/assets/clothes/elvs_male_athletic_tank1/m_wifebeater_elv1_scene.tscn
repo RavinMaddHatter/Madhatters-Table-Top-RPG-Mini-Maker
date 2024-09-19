@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://488qgy8kpnh"]
+
+[ext_resource type="ArrayMesh" uid="uid://dqutu3hny7x6v" path="res://assets/clothes/elvs_male_athletic_tank1/m_wifebeater_elv1_mesh.res" id="1_vqnkx"]
+[ext_resource type="Material" uid="uid://bxrwrige61kqt" path="res://assets/clothes/elvs_male_athletic_tank1/elvs_male_athletic_tank1_material.res" id="2_klcc0"]
+
+[node name="m_wifebeater_elv1" type="MeshInstance3D"]
+mesh = ExtResource("1_vqnkx")
+surface_material_override/0 = ExtResource("2_klcc0")

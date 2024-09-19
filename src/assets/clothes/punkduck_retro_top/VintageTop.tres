@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://b8udyt0b1ctv2"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_5rbj1"]
+
+[resource]
+resource_name = "VintageTop"
+script = ExtResource("1_5rbj1")
+slots = Array[String](["Torso"])
+textures = {
+"vintagetop": "res://assets/clothes/punkduck_retro_top/vintagetop.png",
+"vintagetop_normals": "res://assets/clothes/punkduck_retro_top/vintagetop_normals.png"
+}
+path = "res://assets/clothes/punkduck_retro_top"
+rigged = false

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://78lxbwtqg4qi"]
+
+[ext_resource type="ArrayMesh" uid="uid://bj0gyncmkelxh" path="res://assets/clothes/mindfront_fishing_hat_01/Fishing_Hat_01_mesh.res" id="1_uxia3"]
+[ext_resource type="Material" uid="uid://v81m1veto5ax" path="res://assets/clothes/mindfront_fishing_hat_01/mindfront_fishing_hat_01_material.res" id="2_jkca0"]
+
+[node name="Fishing_Hat_01" type="MeshInstance3D"]
+mesh = ExtResource("1_uxia3")
+surface_material_override/0 = ExtResource("2_jkca0")

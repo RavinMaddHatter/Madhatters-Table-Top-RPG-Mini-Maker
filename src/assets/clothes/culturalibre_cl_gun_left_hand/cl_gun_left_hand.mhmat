@@ -1,0 +1,12 @@
+# MakeHuman Material definition
+
+name Material
+
+// Color shading attributes
+diffuseColor  0.8829 0.8829 0.8829
+specularColor  0.8 0.8 0.8
+shininess 1
+opacity 1
+
+// Textures and properties
+diffuseTexture black.png

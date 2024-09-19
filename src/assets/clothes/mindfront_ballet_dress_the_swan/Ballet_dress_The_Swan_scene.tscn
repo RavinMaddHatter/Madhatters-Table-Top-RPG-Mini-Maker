@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6103um5p1wve"]
+
+[ext_resource type="ArrayMesh" uid="uid://hypb6dyrav77" path="res://assets/clothes/mindfront_ballet_dress_the_swan/Ballet_dress_The_Swan_mesh.res" id="1_q27y8"]
+[ext_resource type="Material" uid="uid://cvx8x6m7vh71w" path="res://assets/clothes/mindfront_ballet_dress_the_swan/mindfront_ballet_dress_the_swan_material.res" id="2_cjips"]
+
+[node name="Ballet_dress_The_Swan" type="MeshInstance3D"]
+mesh = ExtResource("1_q27y8")
+surface_material_override/0 = ExtResource("2_cjips")

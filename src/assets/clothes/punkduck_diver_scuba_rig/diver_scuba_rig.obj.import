@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://chf0ywse1pn1v"
+path="res://.godot/imported/diver_scuba_rig.obj-8d928e1a74f8ebdca73cadd472920e99.mesh"
+
+[deps]
+
+files=["res://.godot/imported/diver_scuba_rig.obj-8d928e1a74f8ebdca73cadd472920e99.mesh"]
+
+source_file="res://assets/clothes/punkduck_diver_scuba_rig/diver_scuba_rig.obj"
+dest_files=["res://.godot/imported/diver_scuba_rig.obj-8d928e1a74f8ebdca73cadd472920e99.mesh", "res://.godot/imported/diver_scuba_rig.obj-8d928e1a74f8ebdca73cadd472920e99.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

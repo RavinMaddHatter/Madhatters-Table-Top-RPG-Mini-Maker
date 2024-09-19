@@ -1,0 +1,33 @@
+# Material definition for shoppingbag
+
+name shoppingbag
+description Shoppingbag material
+ambientColor 0.505882352941 0.505882352941 0.505882352941
+diffuseColor 1.0 1.0 1.0
+specularColor 0.745098039216 0.745098039216 0.745098039216
+shininess 0.5
+emissiveColor 0.0 0.0 0.0
+opacity 1.0
+translucency 0.0
+
+shadeless False
+wireframe False
+transparent False
+alphaToCoverage True
+backfaceCull True
+depthless False
+
+castShadows True
+
+receiveShadows True
+
+diffuseTexture shoppingbag.png
+
+shaderConfig ambientOcclusion True
+shaderConfig normal False
+shaderConfig bump False
+shaderConfig displacement False
+shaderConfig vertexColors False
+shaderConfig spec False
+shaderConfig transparency True
+shaderConfig diffuse True

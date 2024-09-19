@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://c8cbjju68u1iu"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_dyfw0"]
+
+[resource]
+resource_name = "xmascap"
+script = ExtResource("1_dyfw0")
+slots = Array[String](["Head"])
+textures = {
+"xmascap": "res://assets/clothes/joepal_xmas_cap/xmascap.png"
+}
+path = "res://assets/clothes/joepal_xmas_cap"
+rigged = false

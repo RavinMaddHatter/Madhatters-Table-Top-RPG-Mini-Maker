@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dtgqoxh6e0xjc"
+path="res://.godot/imported/lucoa_horns.obj-49b6abd71958226115a290f83a567f65.mesh"
+
+[deps]
+
+files=["res://.godot/imported/lucoa_horns.obj-49b6abd71958226115a290f83a567f65.mesh"]
+
+source_file="res://assets/clothes/freezychan_lucoa_quetzalcoatl_horns/lucoa_horns.obj"
+dest_files=["res://.godot/imported/lucoa_horns.obj-49b6abd71958226115a290f83a567f65.mesh", "res://.godot/imported/lucoa_horns.obj-49b6abd71958226115a290f83a567f65.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

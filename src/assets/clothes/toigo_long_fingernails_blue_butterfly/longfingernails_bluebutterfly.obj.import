@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dybsl3i26w58l"
+path="res://.godot/imported/longfingernails_bluebutterfly.obj-1aa154e3c3701d12af22a7756920e410.mesh"
+
+[deps]
+
+files=["res://.godot/imported/longfingernails_bluebutterfly.obj-1aa154e3c3701d12af22a7756920e410.mesh"]
+
+source_file="res://assets/clothes/toigo_long_fingernails_blue_butterfly/longfingernails_bluebutterfly.obj"
+dest_files=["res://.godot/imported/longfingernails_bluebutterfly.obj-1aa154e3c3701d12af22a7756920e410.mesh", "res://.godot/imported/longfingernails_bluebutterfly.obj-1aa154e3c3701d12af22a7756920e410.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

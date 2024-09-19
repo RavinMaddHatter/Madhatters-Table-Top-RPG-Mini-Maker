@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://8toeivru074"]
+
+[ext_resource type="ArrayMesh" uid="uid://dwp7p3t3feqh1" path="res://assets/clothes/punkduck_electric_guitar/ElectricGuitar_mesh.res" id="1_xhaeg"]
+[ext_resource type="Material" uid="uid://cb58uyfxvxd81" path="res://assets/clothes/punkduck_electric_guitar/punkduck_electric_guitar_material.res" id="2_k6gwf"]
+
+[node name="ElectricGuitar" type="MeshInstance3D"]
+mesh = ExtResource("1_xhaeg")
+surface_material_override/0 = ExtResource("2_k6gwf")

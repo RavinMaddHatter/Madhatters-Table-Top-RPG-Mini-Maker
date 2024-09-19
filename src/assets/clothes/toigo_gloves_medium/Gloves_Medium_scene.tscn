@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://djktx5r4rw6x8"]
+
+[ext_resource type="ArrayMesh" uid="uid://bgakrgpr6ec85" path="res://assets/clothes/toigo_gloves_medium/Gloves_Medium_mesh.res" id="1_wc2w8"]
+[ext_resource type="Material" uid="uid://c1g7oj7h606yt" path="res://assets/clothes/toigo_gloves_medium/toigo_gloves_medium_material.res" id="2_hbmk1"]
+
+[node name="Gloves_Medium" type="MeshInstance3D"]
+mesh = ExtResource("1_wc2w8")
+surface_material_override/0 = ExtResource("2_hbmk1")

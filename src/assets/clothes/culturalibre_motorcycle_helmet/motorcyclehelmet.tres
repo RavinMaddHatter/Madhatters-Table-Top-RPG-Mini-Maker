@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://djphex1iw3i5i"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_h5h04"]
+
+[resource]
+resource_name = "motorcyclehelmet"
+script = ExtResource("1_h5h04")
+slots = Array[String](["Head"])
+textures = {
+"motorcyclehelmet": "res://assets/clothes/culturalibre_motorcycle_helmet/motorcyclehelmet.png"
+}
+path = "res://assets/clothes/culturalibre_motorcycle_helmet"
+rigged = false

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://c7hkra4nrausy"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_c8dpo"]
+
+[resource]
+resource_name = "T-shirt_basic_tucked"
+script = ExtResource("1_c8dpo")
+slots = Array[String](["Torso"])
+textures = {
+"T-shirt_basic": "res://assets/clothes/toigo_basic_tucked_t-shirt/T-shirt_basic.png",
+"T-shirt_basic-bump": "res://assets/clothes/toigo_basic_tucked_t-shirt/T-shirt_basic-bump.png"
+}
+path = "res://assets/clothes/toigo_basic_tucked_t-shirt"
+rigged = false

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmvdrim65q3hj"]
+
+[ext_resource type="ArrayMesh" uid="uid://imdj7xejhkuv" path="res://assets/clothes/maciekg_hammer/hammer_mesh.res" id="1_0suff"]
+[ext_resource type="Material" uid="uid://1hkpei65btkf" path="res://assets/clothes/maciekg_hammer/maciekg_hammer_material.res" id="2_f3qnq"]
+
+[node name="hammer" type="MeshInstance3D"]
+mesh = ExtResource("1_0suff")
+surface_material_override/0 = ExtResource("2_f3qnq")

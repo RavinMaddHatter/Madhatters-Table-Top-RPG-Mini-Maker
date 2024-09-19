@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bvvplg2fef4ry"
+path="res://.godot/imported/cat_tail_1b.obj-98b542fc4db5acb211d5efac120681af.mesh"
+
+[deps]
+
+files=["res://.godot/imported/cat_tail_1b.obj-98b542fc4db5acb211d5efac120681af.mesh"]
+
+source_file="res://assets/clothes/elvs_cat_tail_as_clothes_1/cat_tail_1b.obj"
+dest_files=["res://.godot/imported/cat_tail_1b.obj-98b542fc4db5acb211d5efac120681af.mesh", "res://.godot/imported/cat_tail_1b.obj-98b542fc4db5acb211d5efac120681af.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

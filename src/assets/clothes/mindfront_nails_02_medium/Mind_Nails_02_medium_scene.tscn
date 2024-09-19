@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bilxr4y4lxwbl"]
+
+[ext_resource type="ArrayMesh" uid="uid://8uchlw78ypmf" path="res://assets/clothes/mindfront_nails_02_medium/Mind_Nails_02_medium_mesh.res" id="1_887u4"]
+[ext_resource type="Material" uid="uid://dyotvkmwfa6e3" path="res://assets/clothes/mindfront_nails_02_medium/mindfront_nails_02_medium_material.res" id="2_7unka"]
+
+[node name="Mind_Nails_02_medium" type="MeshInstance3D"]
+mesh = ExtResource("1_887u4")
+surface_material_override/0 = ExtResource("2_7unka")

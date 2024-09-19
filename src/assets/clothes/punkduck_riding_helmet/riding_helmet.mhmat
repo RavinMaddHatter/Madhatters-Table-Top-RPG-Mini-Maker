@@ -1,0 +1,39 @@
+# Material definition for riding_helmet
+
+name riding_helmet
+description Riding_helmet material
+ambientColor 0.529411764706 0.529411764706 0.529411764706
+diffuseColor 0.64 0.64 0.64
+specularColor 0.345098039216 0.345098039216 0.345098039216
+shininess 0.1961
+emissiveColor 0.0 0.0 0.0
+opacity 1.0
+translucency 0.0
+
+shadeless False
+wireframe False
+transparent False
+alphaToCoverage True
+backfaceCull True
+depthless False
+
+castShadows True
+
+receiveShadows True
+
+diffuseTexture riding_helmet.png
+normalmapTexture riding_helmet_norm.png
+normalmapIntensity 1.0
+
+shader shaders/glsl/litsphere
+
+shaderParam litsphereTexture litspheres/lit_leather.png
+
+shaderConfig ambientOcclusion True
+shaderConfig normal True
+shaderConfig bump False
+shaderConfig displacement False
+shaderConfig vertexColors False
+shaderConfig spec False
+shaderConfig transparency True
+shaderConfig diffuse True

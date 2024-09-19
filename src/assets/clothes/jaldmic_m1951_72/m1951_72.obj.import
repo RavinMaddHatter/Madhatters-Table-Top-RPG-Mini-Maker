@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dndpb1n7woknd"
+path="res://.godot/imported/m1951_72.obj-09e1b9b37ded170c4661b1cafd30e3e3.mesh"
+
+[deps]
+
+files=["res://.godot/imported/m1951_72.obj-09e1b9b37ded170c4661b1cafd30e3e3.mesh"]
+
+source_file="res://assets/clothes/jaldmic_m1951_72/m1951_72.obj"
+dest_files=["res://.godot/imported/m1951_72.obj-09e1b9b37ded170c4661b1cafd30e3e3.mesh", "res://.godot/imported/m1951_72.obj-09e1b9b37ded170c4661b1cafd30e3e3.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

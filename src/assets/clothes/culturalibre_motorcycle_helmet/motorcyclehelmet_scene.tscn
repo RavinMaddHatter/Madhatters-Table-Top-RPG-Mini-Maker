@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqupkp66ifpng"]
+
+[ext_resource type="ArrayMesh" uid="uid://mvyq2b68os1y" path="res://assets/clothes/culturalibre_motorcycle_helmet/motorcyclehelmet_mesh.res" id="1_hfs26"]
+[ext_resource type="Material" uid="uid://dboam0425j7ea" path="res://assets/clothes/culturalibre_motorcycle_helmet/culturalibre_motorcycle_helmet_material.res" id="2_m5b66"]
+
+[node name="motorcyclehelmet" type="MeshInstance3D"]
+mesh = ExtResource("1_hfs26")
+surface_material_override/0 = ExtResource("2_m5b66")

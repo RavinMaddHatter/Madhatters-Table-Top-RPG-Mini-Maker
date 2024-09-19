@@ -1,0 +1,11 @@
+# MakeHuman Material definition
+
+name material.001Material
+
+// Color shading attributes
+diffuseColor  0.5 0.5 0.5
+specularColor  0.1 0.1 0.1
+opacity 1
+
+// Textures and properties
+diffuseTexture hero_mask_2.png

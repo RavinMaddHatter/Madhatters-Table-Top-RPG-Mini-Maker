@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://duur3mrwmiv5s"]
+
+[ext_resource type="ArrayMesh" uid="uid://c2a3jtut414lk" path="res://assets/clothes/punkduck_glasses_modern_form/glasses_mesh.res" id="1_5ukx8"]
+[ext_resource type="Material" uid="uid://cmoo8grvm35qc" path="res://assets/clothes/punkduck_glasses_modern_form/punkduck_glasses_modern_form_material.res" id="2_mua2g"]
+
+[node name="glasses" type="MeshInstance3D"]
+mesh = ExtResource("1_5ukx8")
+surface_material_override/0 = ExtResource("2_mua2g")

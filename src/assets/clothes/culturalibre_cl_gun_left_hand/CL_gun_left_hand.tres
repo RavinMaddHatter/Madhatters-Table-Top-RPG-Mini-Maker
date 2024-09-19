@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://blkkpshkb2kkw"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_b7e06"]
+
+[resource]
+resource_name = "CL_gun_left_hand"
+script = ExtResource("1_b7e06")
+slots = Array[String](["Hands"])
+textures = {
+"black": "res://assets/clothes/culturalibre_cl_gun_left_hand/black.png"
+}
+path = "res://assets/clothes/culturalibre_cl_gun_left_hand"
+rigged = false

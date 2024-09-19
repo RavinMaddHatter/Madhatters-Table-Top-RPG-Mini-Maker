@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://cix7cwsiubkou"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_qnqsh"]
+
+[resource]
+resource_name = "ShortJeans"
+script = ExtResource("1_qnqsh")
+slots = Array[String](["Legs"])
+textures = {
+"shortjeans": "res://assets/clothes/punkduck_female_short_jeans/shortjeans.png",
+"shortjeans_normals": "res://assets/clothes/punkduck_female_short_jeans/shortjeans_normals.png"
+}
+path = "res://assets/clothes/punkduck_female_short_jeans"
+rigged = false

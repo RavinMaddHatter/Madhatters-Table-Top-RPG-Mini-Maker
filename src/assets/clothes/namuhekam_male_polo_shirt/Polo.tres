@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://b0qxnbacieiqp"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_061bj"]
+
+[resource]
+resource_name = "Polo"
+script = ExtResource("1_061bj")
+slots = Array[String](["Torso"])
+textures = {
+"Polo_Base_Color": "res://assets/clothes/namuhekam_male_polo_shirt/Polo_Base_Color.png",
+"Polo_Height": "res://assets/clothes/namuhekam_male_polo_shirt/Polo_Height.png",
+"Polo_Normal_OpenGL": "res://assets/clothes/namuhekam_male_polo_shirt/Polo_Normal_OpenGL.png",
+"Polo_Roughness": "res://assets/clothes/namuhekam_male_polo_shirt/Polo_Roughness.png"
+}
+path = "res://assets/clothes/namuhekam_male_polo_shirt"
+rigged = false

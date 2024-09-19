@@ -1,0 +1,33 @@
+# Material definition for Tennisracket
+
+name Tennisracket
+description Tennisracket material
+ambientColor 0.549019607843 0.549019607843 0.549019607843
+diffuseColor 1.0 1.0 1.0
+specularColor 0.61568627451 0.61568627451 0.61568627451
+shininess 0.2
+emissiveColor 0.0 0.0 0.0
+opacity 1.0
+translucency 0.0
+
+shadeless False
+wireframe False
+transparent False
+alphaToCoverage True
+backfaceCull True
+depthless False
+
+castShadows True
+
+receiveShadows True
+
+diffuseTexture tennisracket.png
+
+shaderConfig ambientOcclusion True
+shaderConfig normal True
+shaderConfig bump True
+shaderConfig displacement True
+shaderConfig vertexColors True
+shaderConfig spec True
+shaderConfig transparency True
+shaderConfig diffuse True

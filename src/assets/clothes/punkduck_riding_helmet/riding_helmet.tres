@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://b2yaiu6gcoaci"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_l1m0k"]
+
+[resource]
+resource_name = "riding_helmet"
+script = ExtResource("1_l1m0k")
+slots = Array[String](["Head"])
+textures = {
+"riding_helmet": "res://assets/clothes/punkduck_riding_helmet/riding_helmet.png",
+"riding_helmet_norm": "res://assets/clothes/punkduck_riding_helmet/riding_helmet_norm.png"
+}
+path = "res://assets/clothes/punkduck_riding_helmet"
+rigged = false

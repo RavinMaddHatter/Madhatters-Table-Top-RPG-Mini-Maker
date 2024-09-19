@@ -1,0 +1,23 @@
+# MakeHuman Material definition
+
+name material.003Material
+
+// Color shading attributes
+diffuseColor  0.64 0.64 0.64
+specularColor  0.5 0.5 0.5
+shininess 0.1961
+opacity 1
+
+// Textures and properties
+diffuseTexture pillow_man.png
+
+// Shader programme
+shader data/shaders/glsl/phong
+
+// Configure built-in shader defines
+shaderConfig diffuse true
+shaderConfig bump false
+shaderConfig normal  false
+shaderConfig displacement  false
+shaderConfig spec  false
+shaderConfig vertexColors false

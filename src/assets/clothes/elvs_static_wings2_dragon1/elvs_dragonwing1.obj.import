@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cnywcb4t1th7d"
+path="res://.godot/imported/elvs_dragonwing1.obj-bb52226cc0c477fc86bc8885bdc25c2d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/elvs_dragonwing1.obj-bb52226cc0c477fc86bc8885bdc25c2d.mesh"]
+
+source_file="res://assets/clothes/elvs_static_wings2_dragon1/elvs_dragonwing1.obj"
+dest_files=["res://.godot/imported/elvs_dragonwing1.obj-bb52226cc0c477fc86bc8885bdc25c2d.mesh", "res://.godot/imported/elvs_dragonwing1.obj-bb52226cc0c477fc86bc8885bdc25c2d.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

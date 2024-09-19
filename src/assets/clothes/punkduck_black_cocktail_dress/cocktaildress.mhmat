@@ -1,0 +1,37 @@
+# Material definition for cocktaildress
+
+name cocktaildress
+description Cocktaildress material
+ambientColor 0.498039215686 0.498039215686 0.498039215686
+diffuseColor 1.0 1.0 1.0
+specularColor 0.0627450980392 0.0627450980392 0.0627450980392
+shininess 0.9
+emissiveColor 0.0 0.0 0.0
+opacity 1.0
+translucency 0.0
+
+shadeless False
+wireframe False
+transparent False
+alphaToCoverage True
+backfaceCull False
+depthless False
+
+castShadows True
+
+receiveShadows True
+
+diffuseTexture cocktaildress.png
+specularmapTexture cocktaildress_spec.png
+specularmapIntensity 1.0
+
+shaderParam litsphereTexture litspheres/lit_leather.png
+
+shaderConfig ambientOcclusion True
+shaderConfig normal False
+shaderConfig bump False
+shaderConfig displacement False
+shaderConfig vertexColors False
+shaderConfig spec False
+shaderConfig transparency True
+shaderConfig diffuse True

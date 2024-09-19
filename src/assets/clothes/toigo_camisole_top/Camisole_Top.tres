@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://c6c2cjcyexo77"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_ag05c"]
+
+[resource]
+resource_name = "Camisole_Top"
+script = ExtResource("1_ag05c")
+slots = Array[String](["Torso"])
+textures = {
+"CamisoleTop": "res://assets/clothes/toigo_camisole_top/CamisoleTop.png"
+}
+path = "res://assets/clothes/toigo_camisole_top"
+rigged = false

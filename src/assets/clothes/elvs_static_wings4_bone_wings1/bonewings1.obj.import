@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://fxgdrvvxu2br"
+path="res://.godot/imported/bonewings1.obj-10c6549d6af8c395d6a2a45d3cf72b98.mesh"
+
+[deps]
+
+files=["res://.godot/imported/bonewings1.obj-10c6549d6af8c395d6a2a45d3cf72b98.mesh"]
+
+source_file="res://assets/clothes/elvs_static_wings4_bone_wings1/bonewings1.obj"
+dest_files=["res://.godot/imported/bonewings1.obj-10c6549d6af8c395d6a2a45d3cf72b98.mesh", "res://.godot/imported/bonewings1.obj-10c6549d6af8c395d6a2a45d3cf72b98.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

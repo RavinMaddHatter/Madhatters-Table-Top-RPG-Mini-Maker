@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgc8y1dkkkbpq"]
+
+[ext_resource type="ArrayMesh" uid="uid://ccjmsl3tcq6ft" path="res://assets/clothes/culturalibre_warrior_helmet/warrior_helmet_mesh.res" id="1_rincq"]
+[ext_resource type="Material" uid="uid://deccm6c8sugos" path="res://assets/clothes/culturalibre_warrior_helmet/culturalibre_warrior_helmet_material.res" id="2_r4p3g"]
+
+[node name="warrior_helmet" type="MeshInstance3D"]
+mesh = ExtResource("1_rincq")
+surface_material_override/0 = ExtResource("2_r4p3g")

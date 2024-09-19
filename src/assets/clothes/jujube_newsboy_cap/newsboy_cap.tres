@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://dv5buyv5u6leg"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_ye5oc"]
+
+[resource]
+resource_name = "newsboy_cap"
+script = ExtResource("1_ye5oc")
+slots = Array[String](["Head"])
+textures = {
+"newsboy_cap": "res://assets/clothes/jujube_newsboy_cap/newsboy_cap.png",
+"newsboy_cap_normals": "res://assets/clothes/jujube_newsboy_cap/newsboy_cap_normals.png"
+}
+path = "res://assets/clothes/jujube_newsboy_cap"
+rigged = false

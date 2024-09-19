@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://llgjf4bisir8"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_gwtjk"]
+
+[resource]
+resource_name = "Mind_Nails_01_short"
+script = ExtResource("1_gwtjk")
+slots = Array[String](["Hands"])
+textures = {
+"Nails_01": "res://assets/clothes/mindfront_nails_01_short/Nails_01.png",
+"Nails_01_NRM": "res://assets/clothes/mindfront_nails_01_short/Nails_01_NRM.png",
+"Nails_01_SPEC": "res://assets/clothes/mindfront_nails_01_short/Nails_01_SPEC.png"
+}
+path = "res://assets/clothes/mindfront_nails_01_short"
+rigged = false

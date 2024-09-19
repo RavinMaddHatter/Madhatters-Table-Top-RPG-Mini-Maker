@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://b1nqo88f704ko"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_k235q"]
+
+[resource]
+resource_name = "LongFingernails-BlueButterfly"
+script = ExtResource("1_k235q")
+slots = Array[String](["Hands"])
+textures = {
+"B-flyBlue": "res://assets/clothes/toigo_long_fingernails_blue_butterfly/B-flyBlue.png",
+"LongFingernailsSpec": "res://assets/clothes/toigo_long_fingernails_blue_butterfly/LongFingernailsSpec.png"
+}
+path = "res://assets/clothes/toigo_long_fingernails_blue_butterfly"
+rigged = false

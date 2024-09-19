@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bnamghqfop7ws"
+path="res://.godot/imported/stethoscope.obj-2c3b04e50c61254e025a40a4f77febfe.mesh"
+
+[deps]
+
+files=["res://.godot/imported/stethoscope.obj-2c3b04e50c61254e025a40a4f77febfe.mesh"]
+
+source_file="res://assets/clothes/punkduck_stethoscope/stethoscope.obj"
+dest_files=["res://.godot/imported/stethoscope.obj-2c3b04e50c61254e025a40a4f77febfe.mesh", "res://.godot/imported/stethoscope.obj-2c3b04e50c61254e025a40a4f77febfe.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

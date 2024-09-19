@@ -1,0 +1,25 @@
+# MakeHuman Material definition
+
+name tank_top_01
+
+// Color shading attributes
+diffuseColor  1 1 1
+specularColor  0 0 0
+shininess 0.3922
+opacity 0
+
+// Textures and properties
+diffuseTexture Tank_Top_01.png
+normalmapTexture Tank_Top_01_NRM.png
+specularTexture Tank_Top_01_SPEC.png
+
+// Shader programme
+shader data/shaders/glsl/phong
+
+// Configure built-in shader defines
+shaderConfig diffuse true
+shaderConfig bump false
+shaderConfig normal  true
+shaderConfig displacement  false
+shaderConfig spec  true
+shaderConfig vertexColors false

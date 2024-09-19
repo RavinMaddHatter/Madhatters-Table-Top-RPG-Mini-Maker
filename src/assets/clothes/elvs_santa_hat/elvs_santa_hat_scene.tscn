@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cq2svjh8iwysm"]
+
+[ext_resource type="ArrayMesh" uid="uid://54gd25ec7hv1" path="res://assets/clothes/elvs_santa_hat/elvs_santa_hat_mesh.res" id="1_bjbjj"]
+[ext_resource type="Material" uid="uid://djiexlupkfkiw" path="res://assets/clothes/elvs_santa_hat/elvs_santa_hat_material.res" id="2_g33wn"]
+
+[node name="elvs_santa_hat" type="MeshInstance3D"]
+mesh = ExtResource("1_bjbjj")
+surface_material_override/0 = ExtResource("2_g33wn")

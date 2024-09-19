@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bpwxdc0485qkl"
+path="res://.godot/imported/headset.obj-aa0f17f225da917dcf021eddc9840d10.mesh"
+
+[deps]
+
+files=["res://.godot/imported/headset.obj-aa0f17f225da917dcf021eddc9840d10.mesh"]
+
+source_file="res://assets/clothes/punkduck_wireless_headset/headset.obj"
+dest_files=["res://.godot/imported/headset.obj-aa0f17f225da917dcf021eddc9840d10.mesh", "res://.godot/imported/headset.obj-aa0f17f225da917dcf021eddc9840d10.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

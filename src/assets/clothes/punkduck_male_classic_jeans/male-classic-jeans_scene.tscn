@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://ee4iuqb5411r"]
+
+[ext_resource type="ArrayMesh" uid="uid://bdq4t0u3yq2np" path="res://assets/clothes/punkduck_male_classic_jeans/male-classic-jeans_mesh.res" id="1_tfcy7"]
+[ext_resource type="Material" uid="uid://b61xw8r42vfn4" path="res://assets/clothes/punkduck_male_classic_jeans/punkduck_male_classic_jeans_material.res" id="2_fcfsm"]
+
+[node name="male-classic-jeans" type="MeshInstance3D"]
+mesh = ExtResource("1_tfcy7")
+surface_material_override/0 = ExtResource("2_fcfsm")

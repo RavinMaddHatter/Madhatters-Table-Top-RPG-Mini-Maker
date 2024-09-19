@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://0iolme0wrxs1"
+path="res://.godot/imported/glasses_library_male.obj-a29c88fa23a1b2b65ea55fdc3449b191.mesh"
+
+[deps]
+
+files=["res://.godot/imported/glasses_library_male.obj-a29c88fa23a1b2b65ea55fdc3449b191.mesh"]
+
+source_file="res://assets/clothes/frankyaye_glasses_library_male/glasses_library_male.obj"
+dest_files=["res://.godot/imported/glasses_library_male.obj-a29c88fa23a1b2b65ea55fdc3449b191.mesh", "res://.godot/imported/glasses_library_male.obj-a29c88fa23a1b2b65ea55fdc3449b191.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

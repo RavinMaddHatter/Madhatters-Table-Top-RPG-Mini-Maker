@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cni1jiegviuki"]
+
+[ext_resource type="ArrayMesh" uid="uid://cyuhju4irpq2d" path="res://assets/clothes/punkduck_middle_length_qipao/Qipao_mesh.res" id="1_ox2c8"]
+[ext_resource type="Material" uid="uid://cp1vqc34bo3eg" path="res://assets/clothes/punkduck_middle_length_qipao/punkduck_middle_length_qipao_material.res" id="2_q6bhv"]
+
+[node name="Qipao" type="MeshInstance3D"]
+mesh = ExtResource("1_ox2c8")
+surface_material_override/0 = ExtResource("2_q6bhv")

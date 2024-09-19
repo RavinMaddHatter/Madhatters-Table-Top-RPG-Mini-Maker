@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://cyv6l6ln4k2np"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_lyq2f"]
+
+[resource]
+resource_name = "elvs_unisex_chef_hat1"
+script = ExtResource("1_lyq2f")
+slots = Array[String](["Head"])
+textures = {
+"chefhattex1": "res://assets/clothes/elvs_unisex_chef_hat_1/chefhattex1.png"
+}
+path = "res://assets/clothes/elvs_unisex_chef_hat_1"
+rigged = false

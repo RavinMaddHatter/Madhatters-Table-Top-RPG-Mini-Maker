@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://co4lrpi05nfua"]
+
+[ext_resource type="ArrayMesh" uid="uid://dkvau2a53rey7" path="res://assets/clothes/punkduck_swim_cap/swim-cap_mesh.res" id="1_2qg2l"]
+[ext_resource type="Material" uid="uid://cgi64br3kk1gx" path="res://assets/clothes/punkduck_swim_cap/punkduck_swim_cap_material.res" id="2_jy05k"]
+
+[node name="swim-cap" type="MeshInstance3D"]
+mesh = ExtResource("1_2qg2l")
+surface_material_override/0 = ExtResource("2_jy05k")

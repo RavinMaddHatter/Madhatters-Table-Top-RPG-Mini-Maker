@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://il2d5vbc4fbv"
+path="res://.godot/imported/tactical_vest_male.obj-3ca79a15df4d53937b62637f7ffeaec4.mesh"
+
+[deps]
+
+files=["res://.godot/imported/tactical_vest_male.obj-3ca79a15df4d53937b62637f7ffeaec4.mesh"]
+
+source_file="res://assets/clothes/mindfront_tactical_vest_male/tactical_vest_male.obj"
+dest_files=["res://.godot/imported/tactical_vest_male.obj-3ca79a15df4d53937b62637f7ffeaec4.mesh", "res://.godot/imported/tactical_vest_male.obj-3ca79a15df4d53937b62637f7ffeaec4.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://svv8m1pae2ae"
+path="res://.godot/imported/elvs_beanie_slouch.obj-eb047ef94eb30fd915586c376eed8e8a.mesh"
+
+[deps]
+
+files=["res://.godot/imported/elvs_beanie_slouch.obj-eb047ef94eb30fd915586c376eed8e8a.mesh"]
+
+source_file="res://assets/clothes/elvs_slouchy_beanie1/elvs_beanie_slouch.obj"
+dest_files=["res://.godot/imported/elvs_beanie_slouch.obj-eb047ef94eb30fd915586c376eed8e8a.mesh", "res://.godot/imported/elvs_beanie_slouch.obj-eb047ef94eb30fd915586c376eed8e8a.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

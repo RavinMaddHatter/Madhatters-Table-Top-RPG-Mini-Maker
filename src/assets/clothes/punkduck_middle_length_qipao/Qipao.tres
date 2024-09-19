@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://8uvfbs0fowr0"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_spn3b"]
+
+[resource]
+resource_name = "Qipao"
+script = ExtResource("1_spn3b")
+slots = Array[String](["Torso"])
+textures = {
+"qipao_normals": "res://assets/clothes/punkduck_middle_length_qipao/qipao_normals.png"
+}
+path = "res://assets/clothes/punkduck_middle_length_qipao"
+rigged = false

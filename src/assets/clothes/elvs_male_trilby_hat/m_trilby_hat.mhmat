@@ -1,0 +1,40 @@
+# Material definition for hat_felt1
+
+name hat_felt1
+description M_trilby_hat material
+ambientColor 1.0 1.0 1.0
+diffuseColor 1.0 1.0 1.0
+specularColor 1.0 1.0 1.0
+shininess 0.003922
+emissiveColor 0.0 0.0 0.0
+opacity 1.0
+translucency 0.0
+
+shadeless False
+wireframe False
+transparent False
+alphaToCoverage True
+backfaceCull False
+depthless False
+
+castShadows True
+
+receiveShadows True
+
+diffuseTexture trilby_tex8.png
+normalmapTexture trilby_normals.png
+normalmapIntensity 2.0
+
+shader shaders/glsl/litsphere
+
+shaderParam AdditiveShading 0.02
+shaderParam litsphereTexture litspheres/lit_matte.png
+
+shaderConfig ambientOcclusion True
+shaderConfig normal True
+shaderConfig bump False
+shaderConfig displacement False
+shaderConfig vertexColors False
+shaderConfig spec False
+shaderConfig transparency True
+shaderConfig diffuse True

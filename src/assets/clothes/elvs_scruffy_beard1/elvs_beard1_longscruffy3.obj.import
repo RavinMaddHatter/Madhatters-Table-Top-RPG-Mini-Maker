@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cwqeqabisken3"
+path="res://.godot/imported/elvs_beard1_longscruffy3.obj-e1a2e086ca8b0522df0b1a4ccf40abac.mesh"
+
+[deps]
+
+files=["res://.godot/imported/elvs_beard1_longscruffy3.obj-e1a2e086ca8b0522df0b1a4ccf40abac.mesh"]
+
+source_file="res://assets/clothes/elvs_scruffy_beard1/elvs_beard1_longscruffy3.obj"
+dest_files=["res://.godot/imported/elvs_beard1_longscruffy3.obj-e1a2e086ca8b0522df0b1a4ccf40abac.mesh", "res://.godot/imported/elvs_beard1_longscruffy3.obj-e1a2e086ca8b0522df0b1a4ccf40abac.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

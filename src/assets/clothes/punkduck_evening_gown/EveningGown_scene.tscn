@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://u8dayqyejiia"]
+
+[ext_resource type="ArrayMesh" uid="uid://wq4u11xptcpl" path="res://assets/clothes/punkduck_evening_gown/EveningGown_mesh.res" id="1_pmfbj"]
+[ext_resource type="Material" uid="uid://b4jqe1j0lvss2" path="res://assets/clothes/punkduck_evening_gown/punkduck_evening_gown_material.res" id="2_v8wqw"]
+
+[node name="EveningGown" type="MeshInstance3D"]
+mesh = ExtResource("1_pmfbj")
+surface_material_override/0 = ExtResource("2_v8wqw")

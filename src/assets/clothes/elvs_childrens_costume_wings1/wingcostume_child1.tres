@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://ca8raiyiks1el"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_eba2r"]
+
+[resource]
+resource_name = "wingcostume_child1"
+script = ExtResource("1_eba2r")
+slots = Array[String](["Torso"])
+textures = {
+"wingstex1": "res://assets/clothes/elvs_childrens_costume_wings1/wingstex1.png"
+}
+path = "res://assets/clothes/elvs_childrens_costume_wings1"
+rigged = false

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bjkuf14nwew0y"
+path="res://.godot/imported/elvs_unisex_chef_hat1.obj-103ee1695250db5906e34594ec6ebbff.mesh"
+
+[deps]
+
+files=["res://.godot/imported/elvs_unisex_chef_hat1.obj-103ee1695250db5906e34594ec6ebbff.mesh"]
+
+source_file="res://assets/clothes/elvs_unisex_chef_hat_1/elvs_unisex_chef_hat1.obj"
+dest_files=["res://.godot/imported/elvs_unisex_chef_hat1.obj-103ee1695250db5906e34594ec6ebbff.mesh", "res://.godot/imported/elvs_unisex_chef_hat1.obj-103ee1695250db5906e34594ec6ebbff.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

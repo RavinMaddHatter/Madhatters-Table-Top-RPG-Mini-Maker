@@ -1,0 +1,41 @@
+# Material definition for furMaterial
+
+name furMaterial
+description Cat_tail_1b material
+ambientColor 1.0 1.0 1.0
+diffuseColor 0.64 0.64 0.64
+specularColor 0.5 0.5 0.5
+shininess 0.0
+emissiveColor 0.0 0.0 0.0
+opacity 1.0
+translucency 0.0
+
+shadeless True
+wireframe False
+transparent False
+alphaToCoverage True
+backfaceCull False
+depthless False
+
+castShadows True
+
+receiveShadows True
+
+diffuseTexture white_fur_texture2.png
+bumpmapTexture white_fur_bump.png
+bumpmapIntensity 1.0
+normalmapTexture white_fur_normals.png
+normalmapIntensity 1.0
+displacementmapTexture white_fur_displacement.png
+displacementmapIntensity 1.0
+specularmapTexture white_fur_specs.png
+specularmapIntensity 1.0
+
+shaderConfig ambientOcclusion True
+shaderConfig normal False
+shaderConfig bump False
+shaderConfig displacement False
+shaderConfig vertexColors False
+shaderConfig spec False
+shaderConfig transparency True
+shaderConfig diffuse True

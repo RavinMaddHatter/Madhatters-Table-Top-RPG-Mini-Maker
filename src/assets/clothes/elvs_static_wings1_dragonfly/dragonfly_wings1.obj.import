@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://x3o32ad223l2"
+path="res://.godot/imported/dragonfly_wings1.obj-ec04941eb6d6421191b37d2e7cba0df6.mesh"
+
+[deps]
+
+files=["res://.godot/imported/dragonfly_wings1.obj-ec04941eb6d6421191b37d2e7cba0df6.mesh"]
+
+source_file="res://assets/clothes/elvs_static_wings1_dragonfly/dragonfly_wings1.obj"
+dest_files=["res://.godot/imported/dragonfly_wings1.obj-ec04941eb6d6421191b37d2e7cba0df6.mesh", "res://.godot/imported/dragonfly_wings1.obj-ec04941eb6d6421191b37d2e7cba0df6.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

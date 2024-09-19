@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://idh2u6o631g3"
+path="res://.godot/imported/female_fingernails.obj-f873656f3b9f7f1451207c4120b09571.mesh"
+
+[deps]
+
+files=["res://.godot/imported/female_fingernails.obj-f873656f3b9f7f1451207c4120b09571.mesh"]
+
+source_file="res://assets/clothes/wolgade_female_fingernails/female_fingernails.obj"
+dest_files=["res://.godot/imported/female_fingernails.obj-f873656f3b9f7f1451207c4120b09571.mesh", "res://.godot/imported/female_fingernails.obj-f873656f3b9f7f1451207c4120b09571.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

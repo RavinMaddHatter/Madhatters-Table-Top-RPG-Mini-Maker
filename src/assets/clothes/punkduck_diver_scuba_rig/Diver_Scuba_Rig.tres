@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://c3mlsmojkrl8x"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_odt7i"]
+
+[resource]
+resource_name = "Diver_Scuba_Rig"
+script = ExtResource("1_odt7i")
+slots = Array[String](["Eyes"])
+textures = {
+"diver_scuba_rig": "res://assets/clothes/punkduck_diver_scuba_rig/diver_scuba_rig.png",
+"diver_scuba_rig_norm": "res://assets/clothes/punkduck_diver_scuba_rig/diver_scuba_rig_norm.png"
+}
+path = "res://assets/clothes/punkduck_diver_scuba_rig"
+rigged = false

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cflbbnvm0mbvf"]
+
+[ext_resource type="ArrayMesh" uid="uid://ddobkhtddmjv8" path="res://assets/clothes/mindfront_sherpa_hat/Sherpa_Hat_mesh.res" id="1_lyi83"]
+[ext_resource type="Material" uid="uid://dxpyf4vodke3p" path="res://assets/clothes/mindfront_sherpa_hat/mindfront_sherpa_hat_material.res" id="2_y0ds6"]
+
+[node name="Sherpa_Hat" type="MeshInstance3D"]
+mesh = ExtResource("1_lyi83")
+surface_material_override/0 = ExtResource("2_y0ds6")

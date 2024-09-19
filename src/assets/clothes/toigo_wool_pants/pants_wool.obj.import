@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://4ccc0um1ywdv"
+path="res://.godot/imported/pants_wool.obj-b12f5422d602491c1a68fb7a53b6fbe1.mesh"
+
+[deps]
+
+files=["res://.godot/imported/pants_wool.obj-b12f5422d602491c1a68fb7a53b6fbe1.mesh"]
+
+source_file="res://assets/clothes/toigo_wool_pants/pants_wool.obj"
+dest_files=["res://.godot/imported/pants_wool.obj-b12f5422d602491c1a68fb7a53b6fbe1.mesh", "res://.godot/imported/pants_wool.obj-b12f5422d602491c1a68fb7a53b6fbe1.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

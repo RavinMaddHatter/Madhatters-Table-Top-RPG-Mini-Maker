@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="HumanClothes" load_steps=2 format=3 uid="uid://cuyx6dy2wny1q"]
+
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_clothes.gd" id="1_71yed"]
+
+[resource]
+resource_name = "Ivyweapon"
+script = ExtResource("1_71yed")
+slots = Array[String](["Hands"])
+textures = {
+"ivyweapon": "res://assets/clothes/punkduck_p-ivy_weapon/ivyweapon.png",
+"ivyweapon_norm": "res://assets/clothes/punkduck_p-ivy_weapon/ivyweapon_norm.png"
+}
+path = "res://assets/clothes/punkduck_p-ivy_weapon"
+rigged = false

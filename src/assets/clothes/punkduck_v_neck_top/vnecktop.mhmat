@@ -1,0 +1,39 @@
+# Material definition for vnecktop_normal
+
+name vnecktop_normal
+description Vnecktop material
+ambientColor 0.494117647059 0.494117647059 0.494117647059
+diffuseColor 1.0 1.0 1.0
+specularColor 0.290196078431 0.290196078431 0.290196078431
+shininess 0.1961
+emissiveColor 0.0 0.0 0.0
+opacity 1.0
+translucency 0.0
+
+shadeless False
+wireframe False
+transparent False
+alphaToCoverage True
+backfaceCull False
+depthless False
+
+castShadows True
+
+receiveShadows True
+
+diffuseTexture vnecktop.png
+normalmapTexture vnecktop_normals.png
+normalmapIntensity 1.0
+
+shader shaders/glsl/litsphere
+
+shaderParam litsphereTexture litspheres/lit_leather.png
+
+shaderConfig ambientOcclusion True
+shaderConfig normal True
+shaderConfig bump False
+shaderConfig displacement False
+shaderConfig vertexColors False
+shaderConfig spec False
+shaderConfig transparency True
+shaderConfig diffuse True
