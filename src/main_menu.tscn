@@ -225,9 +225,145 @@ layout_mode = 2
 text = "Asset Repository"
 uri = "https://github.com/fbcosentino/godot-objexporter"
 
-[node name="Make Human" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+[node name="Autors" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
 layout_mode = 2
-text = "Author 1"
+text = "culturalibre"
+
+[node name="Autors2" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "Elvaerwyn"
+
+[node name="Autors3" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "JALdMIC"
+
+[node name="Autors4" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "titleknown"
+
+[node name="Autors5" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "FreezyChan"
+
+[node name="Autors6" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "grinsegold"
+
+[node name="Autors7" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "Mindfront"
+
+[node name="Autors8" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "MargaretToigo"
+
+[node name="Autors9" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "grinsegold"
+
+[node name="Autors10" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "RehmanPolanski"
+
+[node name="Autors11" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "RehmanPolanski"
+
+[node name="Autors12" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "WDG"
+
+[node name="Autors13" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "Mindfront"
+
+[node name="Autors14" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "MargaretToigo"
+
+[node name="Autors15" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "EWS"
+
+[node name="Autors16" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "frankyaye"
+
+[node name="Autors17" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "kwnet_at"
+
+[node name="Autors18" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "spamrakuen"
+
+[node name="Autors19" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "Aethelraed_Unraed"
+
+[node name="Autors20" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "spamrakuen"
+
+[node name="Autors21" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "learning"
+
+[node name="Autors22" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "Aethelraed_Unraed"
+
+[node name="Autors23" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "grinsegold"
+
+[node name="Autors24" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "Joel Palmius"
+
+[node name="Autors25" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "jujube"
+
+[node name="Autors26" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "Cortu"
+
+[node name="Autors27" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "Elvaerwyn"
+
+[node name="Autors28" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "namuhekam"
+
+[node name="Autors29" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "skalldyrssuppe"
+
+[node name="Autors30" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "punkduck"
+
+[node name="Autors31" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "MaciekG"
+
+[node name="Autors33" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "culturalibre"
+
+[node name="Autors34" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "culturalibre"
+
+[node name="Autors35" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "culturalibre"
+
+[node name="Autors36" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
+layout_mode = 2
+text = "culturalibre"
 
 [node name="Sound" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
