@@ -30,8 +30,6 @@ var gender = \"male\"
 var skin_color_ratio = 0.0
 var clothes_dict={}
 
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	camera.position.y = 0
@@ -49,7 +47,8 @@ func _ready():
 	OBJExporter.export_started.connect(_on_export_started)
 	OBJExporter.export_completed.connect(_on_export_completed)
 	OBJExporter.export_progress_updated.connect(_on_export_progress)
-	
+	HelperFunctions.import_bvh(\"res://assets/poses/Snek_01.bvh\")
+
 func _on_export_started():
 	print(\"Export started\")
 func _on_export_completed(obj_file):
@@ -221,11 +220,17 @@ func build_menu():
 		spacer.name=\" \"
 		spacer.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 		details_vbox.add_child(spacer)
-	pose_container()
-func pose_container():
+	pose_simple_container()
+	pose_detailed_container()
+func pose_simple_container():
 	var pose_panel = ScrollContainer.new()
 	$Split_Screen/Menu_Options.add_child(pose_panel)
 	pose_panel.name = \"Pose\"
+	pass
+func pose_detailed_container():
+	var pose_panel = ScrollContainer.new()
+	$Split_Screen/Menu_Options.add_child(pose_panel)
+	pose_panel.name = \"Pose Details\"
 	var pose_vbox = VBoxContainer.new()
 	pose_vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	pose_panel.add_child(pose_vbox)

@@ -19,8 +19,9 @@ func _ready() -> void:
 		newConfig.save(SETTINGS_FILE_PATH)
 	configFile = newConfig.load(SETTINGS_FILE_PATH)
 	volumeSlider.value = newConfig.get_value("VOLUME","SLIDER_VALUE")
+	if volumeSlider.value>-30:
+		mainVolume.play()
 	_on_volume_value_changed(volumeSlider.value)
-	mainVolume.play()
 	$New_Character/Split_Screen/Right_Side/verticalScrolls/Right_Side/Home.connect("pressed",_main_menu_show)
 func _hide_all():
 	mainMenu.hide()

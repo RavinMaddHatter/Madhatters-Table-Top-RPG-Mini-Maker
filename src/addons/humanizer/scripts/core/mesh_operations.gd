@@ -347,4 +347,3 @@ static func prepare_shapekeys_for_baking(human_config: HumanConfig, _new_shapeke
 				shape = new_sks[sk_name].duplicate(true)
 				shape['age'] = HumanizerMorphs.AGE_KEYS[age]
 				_new_shapekeys[sk_name + '-' + age] = shape
-
