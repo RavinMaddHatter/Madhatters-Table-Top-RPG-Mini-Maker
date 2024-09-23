@@ -417,8 +417,8 @@ func _on_zoom_slider_value_changed(value):
 	
 	
 func _on_next_pressed():
-	$FileDialog.show()
-	var file_path = $FileDialog.current_file
+	#$FileDialog.show()
+	var file_path =\"user://\"+nameBox.text+\".obj\"# $FileDialog.current_file
 	if len(file_path)>2:
 		_on_save_pressed()
 		var save_material = StandardMaterial3D.new()
@@ -443,21 +443,21 @@ func _on_next_pressed():
 		#known weirdness when saving to path that already exists, delete it early when over-writing
 		delete_directory(humanizer.save_path)
 		humanizer.standard_bake()
-		#humanizer.human_config.rig=rigName
 		
-		var mesh = humanizer.find_child(\"Baked-Opaque\").mesh
+		var mesh = humanizer.find_child(\"Baked-Opaque\").bake_mesh_from_current_blend_shape_mix()
+		#mesh=mesh.mesh
 		var surface_tool= SurfaceTool.new()
 		surface_tool.append_from(mesh, 0,humanizer.transform)
 		surface_tool.append_from(baseMesh.mesh, 0, baseMesh.transform)
 		var combinedMesh:ArrayMesh=surface_tool.commit()
 		OBJExporter.save_mesh_to_files(combinedMesh, file_path)
-		_warning(\"Poses not currently supported. The default pose was exported.\")
-		var parent= humanizer.get_parent()
-		humanizer.queue_free()
-		humanizer=AutoUpdatingHumanizer.new()
-		parent.add_child(humanizer)
-		load_character_file(nameBox.text)  
-		humanizer.get_node(\"AnimationTree\").active=false      
+		#_warning(\"Poses not currently supported. The default pose was exported.\")
+		#var parent= humanizer.get_parent()
+		#humanizer.queue_free()
+		#humanizer=AutoUpdatingHumanizer.new()
+		#parent.add_child(humanizer)
+		#load_character_file(nameBox.text)  
+		#humanizer.get_node(\"AnimationTree\").active=false      
 func _warning(text):
 	$Warning.dialog_text=text#
 	$Warning.title=\"WARNING\"

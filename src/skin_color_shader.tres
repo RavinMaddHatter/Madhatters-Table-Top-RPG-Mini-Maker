@@ -73,8 +73,10 @@ void fragment() {
 resource_local_to_scene = true
 render_priority = 0
 shader = SubResource("Shader_e78ch")
+shader_parameter/skin_textures = Array[Texture2D]([ExtResource("1_eq8dr"), ExtResource("2_hmdur"), ExtResource("3_46h6f"), ExtResource("4_w70dp"), ExtResource("5_xjpgu"), ExtResource("6_sxie2"), ExtResource("7_bocbe"), ExtResource("8_xa3kd"), ExtResource("9_djnuh"), ExtResource("10_fj7qw"), ExtResource("11_gwgey"), ExtResource("12_f7u0p")])
 shader_parameter/skin_ratios = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0)
 shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("5_xjpgu")
 shader_parameter/point_size = 1.0
 shader_parameter/roughness = 1.0
 shader_parameter/metallic_texture_channel = null
@@ -85,5 +87,3 @@ shader_parameter/uv1_scale = Vector3(1, 1, 1)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
-shader_parameter/skin_textures = Array[Texture2D]([ExtResource("1_eq8dr"), ExtResource("2_hmdur"), ExtResource("3_46h6f"), ExtResource("4_w70dp"), ExtResource("5_xjpgu"), ExtResource("6_sxie2"), ExtResource("7_bocbe"), ExtResource("8_xa3kd"), ExtResource("9_djnuh"), ExtResource("10_fj7qw"), ExtResource("11_gwgey"), ExtResource("12_f7u0p")])
-shader_parameter/texture_albedo = ExtResource("5_xjpgu")
