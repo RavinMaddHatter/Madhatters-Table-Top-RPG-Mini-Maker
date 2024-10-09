@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://drnmjprkch5dy"]
-
-[ext_resource type="ArrayMesh" uid="uid://ctlprbge4v5vl" path="res://assets/clothes/culturalibre_skull_helmet/skull_helmet_mesh.res" id="1_m7og1"]
-[ext_resource type="Material" uid="uid://tm6cfvjcs7kb" path="res://assets/clothes/culturalibre_skull_helmet/culturalibre_skull_helmet_material.res" id="2_hhx62"]
-
-[node name="skull_helmet" type="MeshInstance3D"]
-mesh = ExtResource("1_m7og1")
-surface_material_override/0 = ExtResource("2_hhx62")

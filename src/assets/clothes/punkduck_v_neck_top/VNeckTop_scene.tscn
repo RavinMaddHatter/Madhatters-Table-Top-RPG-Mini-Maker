@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://cvrudxusbdyb6"]
-
-[ext_resource type="ArrayMesh" uid="uid://dg05mpcy6f3cl" path="res://assets/clothes/punkduck_v_neck_top/VNeckTop_mesh.res" id="1_ft772"]
-[ext_resource type="Material" uid="uid://bw4whpetusjcw" path="res://assets/clothes/punkduck_v_neck_top/punkduck_v_neck_top_material.res" id="2_stq0m"]
-
-[node name="VNeckTop" type="MeshInstance3D"]
-mesh = ExtResource("1_ft772")
-surface_material_override/0 = ExtResource("2_stq0m")

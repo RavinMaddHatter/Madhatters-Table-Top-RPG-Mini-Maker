@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://dig6ijgrcpfdi"]
-
-[ext_resource type="ArrayMesh" uid="uid://dfr26fafceq1k" path="res://assets/clothes/jujube_bag_on_head/pillow_man_mesh.res" id="1_vfcrd"]
-[ext_resource type="Material" uid="uid://d081r0m8o2tyb" path="res://assets/clothes/jujube_bag_on_head/jujube_bag_on_head_material.res" id="2_sxkra"]
-
-[node name="pillow_man" type="MeshInstance3D"]
-mesh = ExtResource("1_vfcrd")
-surface_material_override/0 = ExtResource("2_sxkra")

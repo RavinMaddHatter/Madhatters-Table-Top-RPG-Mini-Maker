@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://ckvjbarods6nj"]
-
-[ext_resource type="ArrayMesh" uid="uid://diobd4etfcm45" path="res://assets/clothes/maciekg_short_bow/bow_mesh.res" id="1_5qm7k"]
-[ext_resource type="Material" uid="uid://dhpuyeyw2wbsp" path="res://assets/clothes/maciekg_short_bow/maciekg_short_bow_material.res" id="2_8533a"]
-
-[node name="bow" type="MeshInstance3D"]
-mesh = ExtResource("1_5qm7k")
-surface_material_override/0 = ExtResource("2_8533a")

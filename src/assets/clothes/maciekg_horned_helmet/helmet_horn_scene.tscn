@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://cxrsso3o6kuto"]
-
-[ext_resource type="ArrayMesh" uid="uid://q3elcl1j4qda" path="res://assets/clothes/maciekg_horned_helmet/helmet_horn_mesh.res" id="1_vechd"]
-[ext_resource type="Material" uid="uid://dkdiadjd2xbff" path="res://assets/clothes/maciekg_horned_helmet/maciekg_horned_helmet_material.res" id="2_efnfk"]
-
-[node name="helmet_horn" type="MeshInstance3D"]
-mesh = ExtResource("1_vechd")
-surface_material_override/0 = ExtResource("2_efnfk")

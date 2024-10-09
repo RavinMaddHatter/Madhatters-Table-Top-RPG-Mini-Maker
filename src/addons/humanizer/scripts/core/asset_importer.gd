@@ -7,11 +7,16 @@ extends Node
 var slot: String
 var clothing_slots := []
 var busy: bool = false
-var asset_type: HumanizerRegistry.AssetType
+var asset_type = "" #clothing or body part
 var basis: Array
 
+enum AssetType {
+	BodyPart,
+	Clothes
+}
+
 func run(clean_only: bool = false) -> void:
-	basis = HumanizerUtils.shapekey_data.basis.duplicate(true)
+	basis = HumanizerTargetService.data.basis
 	if _asset_path != '':  # User operating from scene
 		for fl in OSPath.get_files(_asset_path):
 			if fl.get_extension() in ['res', 'tscn', 'tres']:
@@ -47,9 +52,9 @@ func _scan_recursive(path: String) -> void:
 	
 func _scan_path_for_assets(path: String) -> void:
 	if 'body_parts' in path:
-		asset_type = HumanizerRegistry.AssetType.BodyPart
+		asset_type = AssetType.BodyPart
 	elif 'clothes' in path:
-		asset_type = HumanizerRegistry.AssetType.Clothes
+		asset_type = AssetType.Clothes
 	else:
 		printerr("Couldn't infer asset type from path.")
 		return
@@ -101,7 +106,7 @@ func _generate_material(path: String, textures: Dictionary) -> void:
 	print('Generating material for ' + path.get_file())
 	var mat = StandardMaterial3D.new()
 	mat.cull_mode = BaseMaterial3D.CULL_BACK
-	if asset_type == HumanizerRegistry.AssetType.BodyPart:
+	if asset_type == AssetType.BodyPart:
 		if 'eyelash' in path.to_lower() or 'eyebrow' in path.to_lower() or 'hair' in path.to_lower():
 			mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_DEPTH_PRE_PASS
 			mat.cull_mode = BaseMaterial3D.CULL_DISABLED
@@ -152,124 +157,91 @@ func _generate_material(path: String, textures: Dictionary) -> void:
 
 func _import_asset(path: String, data: Dictionary, softbody: bool = false):
 	# Build resource object
-	var resource: HumanAsset
-	if asset_type == HumanizerRegistry.AssetType.BodyPart:
-		resource = HumanBodyPart.new()
-	elif asset_type == HumanizerRegistry.AssetType.Clothes:
-		resource = HumanClothes.new()
-
+	var resource := HumanizerEquipmentType.new()
 	# Mesh operations
 	data.mesh = _build_import_mesh(path, data.mhclo)
 	
 	if data.has('rigged'):
-		_build_bone_arrays(data)
+		_build_rigged_bone_arrays(data)
 	
 	resource.path = path
 	resource.resource_name = data.mhclo.resource_name
 	print('Importing asset ' + resource.resource_name)
-	
+	#
 	resource.textures = data.textures.duplicate()
-	if data.has('overlay'):
-		HumanizerRegistry.overlays[resource.resource_name] = HumanizerOverlay.from_dict(data.overlay)
-	if resource.scene_path in EditorInterface.get_open_scenes():
-		printerr('Cannot process ' + resource.resource_name + ' because its scene is open in the editor')
-		return
-	
-	
+	if data.textures.has('overlay'):
+		resource.default_overlay = HumanizerOverlay.from_dict(data.textures.overlay)
+		resource.textures.erase('overlay')
+		HumanizerRegistry.overlays[resource.resource_name] = resource.default_overlay
+	#
 	# Set slot(s)
-	if asset_type == HumanizerRegistry.AssetType.BodyPart:
+	if asset_type == AssetType.BodyPart:
 		for tag in data.mhclo.tags:
 			if tag in HumanizerGlobalConfig.config.body_part_slots:
-				resource.slot = tag
-		if resource.slot in ['', null]:
+				resource.slots.append(tag)
+		if resource.slots[0] in ['', null]:
 			printerr('Slot not recognized.  Check your mhclo tags.')
 			return
-		if HumanizerRegistry.body_parts.has(slot):
-			if HumanizerRegistry.body_parts[slot].has(resource.resource_name):
-				HumanizerRegistry.body_parts[slot].erase(resource.resource_name)
-	elif asset_type == HumanizerRegistry.AssetType.Clothes:
-		if HumanizerRegistry.clothes.has(resource.resource_name):
-			HumanizerRegistry.clothes.erase(resource.resource_name)
+	elif asset_type == AssetType.Clothes:
 		for tag in data.mhclo.tags:
 			if tag in HumanizerGlobalConfig.config.clothing_slots:
-				resource.slots.append(tag)
+				resource.slots.append(tag+"Clothes")
 		if resource.slots.size() == 0:
 			printerr('No slots found for clothes.  Check your mhclo tags.')
 			return
-
+	
+	_calculate_bone_weights(data,resource)
+	
 	# Save resources
 	data.mhclo.mh2gd_index = HumanizerUtils.get_mh2gd_index_from_mesh(data.mesh)
-	resource.take_over_path(path.path_join(resource.resource_name + '.tres'))
-	ResourceSaver.save(data.mhclo, resource.mhclo_path)
-
-	# Put main resource in registry for easy access later
-	if asset_type == HumanizerRegistry.AssetType.BodyPart:
-		HumanizerRegistry.add_body_part_asset(resource)
-	elif asset_type == HumanizerRegistry.AssetType.Clothes:
-		HumanizerRegistry.add_clothes_asset(resource)
-
-	# Create packed scene
-	var mi: MeshInstance3D
-	if softbody:
-		mi = SoftBody3D.new()
-	else:
-		mi = MeshInstance3D.new()
-	var scene = PackedScene.new()
-	var mat = load(resource.material_path)
-	mi.mesh = data.mesh
-	mi.name = resource.resource_name
-	mi.set_surface_override_material(0, mat)
-	add_child(mi)
-	mi.owner = self
-	
-	if resource.textures.has('overlay'):
-		resource.default_overlay = HumanizerOverlay.from_dict(data.textures.overlay)
-		resource.textures.erase('overlay')
-
-	data.mesh.take_over_path(resource.mesh_path)
-	scene.pack(mi)
-	ResourceSaver.save(data.mesh, resource.mesh_path)
-	if softbody:
-		ResourceSaver.save(resource, resource.resource_path + '_SoftBody')
-		ResourceSaver.save(scene, resource.softbody_scene_path)
-	else:
-		ResourceSaver.save(resource, resource.resource_path)
-		ResourceSaver.save(scene, resource.scene_path)
-
+	resource.take_over_path(path.path_join(resource.resource_name + '.res'))
 	ResourceSaver.save(resource, resource.resource_path)
+	#build rigged equipment
 	if data.has('rigged'):
 		var rigged_resource = resource.duplicate()
 		rigged_resource.rigged = true
 		rigged_resource.resource_name = resource.resource_name + "_Rigged"
-		ResourceSaver.save(rigged_resource, resource.resource_path.get_basename() + "_Rigged.tres")
-		if asset_type == HumanizerRegistry.AssetType.BodyPart:
-			HumanizerRegistry.add_body_part_asset(rigged_resource)
-		elif asset_type == HumanizerRegistry.AssetType.Clothes:
-			HumanizerRegistry.add_clothes_asset(rigged_resource)
+		ResourceSaver.save(rigged_resource, resource.resource_path.get_basename() + "_Rigged.res")
+		HumanizerRegistry.add_equipment_type(rigged_resource)
+		_calculate_bone_weights(data,rigged_resource)
+		
+	#save after adding bone/weights to mhclo
+	ResourceSaver.save(data.mhclo, resource.mhclo_path)
+	#add main resource to registry
+	HumanizerRegistry.add_equipment_type(resource)
 	
-	mi.queue_free()
 
+func _calculate_bone_weights(data,equip_type:HumanizerEquipmentType):
+	var sf_arrays = data.mesh.surface_get_arrays(0)
+	for rig_name in HumanizerRegistry.rigs:
+		var rig : HumanizerRig = HumanizerRegistry.rigs[rig_name]
+		var skeleton_data = HumanizerRigService.init_skeleton_data(rig,false)
+		if equip_type.rigged:
+			for bone in data.mhclo.rigged_config:
+				if bone.name != "neutral_bone":
+					skeleton_data[bone.name] = {}
+			HumanizerEquipmentService.interpolate_rigged_weights(data.mhclo,data.rigged_bone_weights,skeleton_data,sf_arrays,rig_name)
+			#HumanizerEquipmentService.interpolate_weights(equip_type,data.mhclo,rig,skeleton_data,sf_arrays)
+			data.mhclo.rigged_bones[rig_name] = sf_arrays[Mesh.ARRAY_BONES]
+			data.mhclo.rigged_weights[rig_name] = sf_arrays[Mesh.ARRAY_WEIGHTS]
+		else:
+			#HumanizerRigService.set_equipment_weights_array(equip_type,sf_arrays,rig,skeleton_data,data.mhclo)
+			HumanizerEquipmentService.interpolate_weights(equip_type,data.mhclo,rig,skeleton_data,sf_arrays)
+			data.mhclo.bones[rig_name] = sf_arrays[Mesh.ARRAY_BONES]
+			data.mhclo.weights[rig_name] = sf_arrays[Mesh.ARRAY_WEIGHTS]
+		
 func _build_import_mesh(path: String, mhclo: MHCLO) -> ArrayMesh: 
 	# build basis from obj file
 	var obj_path = path.path_join(mhclo.obj_file_name)
 	var obj_mesh := ObjToMesh.new(obj_path).run()
 	var mesh = obj_mesh.mesh
 	mhclo.mh2gd_index = obj_mesh.mh2gd_index
-	
-	#= obj_data.mh2gd_index
-	var vertex = mhclo.vertex_data
-	var delete_vertex = mhclo.delete_vertices
-	var scale_config = mhclo.scale_config
-	
-	var new_mesh = ArrayMesh.new()
-	var new_sf_arrays = MeshOperations.build_fitted_arrays(mesh, basis, mhclo)
-	var flags = mesh.surface_get_format(0)
-	new_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,new_sf_arrays,[],{},flags)
-	var shaded_mesh: ArrayMesh = MeshOperations.generate_normals_and_tangents(new_mesh)
-	mhclo.mh2gd_index = HumanizerUtils.get_mh2gd_index_from_mesh(shaded_mesh)
-	return shaded_mesh
+	mhclo.uv_array = obj_mesh.sf_arrays[Mesh.ARRAY_TEX_UV]
+	mhclo.index_array = obj_mesh.sf_arrays[Mesh.ARRAY_INDEX]
+	mhclo.custom0_array = obj_mesh.sf_arrays[Mesh.ARRAY_CUSTOM0]
+	return mesh
 
-func _build_bone_arrays(data: Dictionary) -> void:
+func _build_rigged_bone_arrays(data: Dictionary) -> void:
 	var obj_arrays = (data.mesh as ArrayMesh).surface_get_arrays(0)
 	var glb = data.rigged
 	var gltf := GLTFDocument.new()
@@ -370,6 +342,7 @@ func _build_bone_arrays(data: Dictionary) -> void:
 		weights_override[mh_id] = glb_arrays[Mesh.ARRAY_WEIGHTS].slice(glb_id*bones_per_vtx,(glb_id+1) * bones_per_vtx)
 	
 	data.mhclo.rigged_config = bone_config
-	data.mhclo.rigged_bones = bones_override
-	data.mhclo.rigged_weights = weights_override
+	data.rigged_bone_weights = {}
+	data.rigged_bone_weights.bones = bones_override
+	data.rigged_bone_weights.weights = weights_override
 		

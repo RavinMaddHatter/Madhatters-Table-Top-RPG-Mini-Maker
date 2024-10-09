@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://5m6gk6r18d1j"]
-
-[ext_resource type="ArrayMesh" uid="uid://b47kvf6i46fjj" path="res://assets/clothes/cortu_cargo_pants/cargo_pants_mesh.res" id="1_wwss4"]
-[ext_resource type="Material" uid="uid://dhjt8ireygrkb" path="res://assets/clothes/cortu_cargo_pants/cortu_cargo_pants_material.res" id="2_oyvvj"]
-
-[node name="cargo_pants" type="MeshInstance3D"]
-mesh = ExtResource("1_wwss4")
-surface_material_override/0 = ExtResource("2_oyvvj")

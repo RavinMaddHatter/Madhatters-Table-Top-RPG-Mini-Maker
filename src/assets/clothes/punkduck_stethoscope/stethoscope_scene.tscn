@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://b0688uf4iebuq"]
-
-[ext_resource type="ArrayMesh" uid="uid://blfqsqbsvyeht" path="res://assets/clothes/punkduck_stethoscope/stethoscope_mesh.res" id="1_34mt2"]
-[ext_resource type="Material" uid="uid://b7xk6v52w1ips" path="res://assets/clothes/punkduck_stethoscope/punkduck_stethoscope_material.res" id="2_3wubf"]
-
-[node name="stethoscope" type="MeshInstance3D"]
-mesh = ExtResource("1_34mt2")
-surface_material_override/0 = ExtResource("2_3wubf")

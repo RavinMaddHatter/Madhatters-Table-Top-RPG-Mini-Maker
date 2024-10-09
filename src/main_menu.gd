@@ -8,7 +8,6 @@ extends Control
 @export var settings: MarginContainer
 @export var mainVolume : AudioStreamPlayer
 @export var volumeSlider:Slider
-@onready var collection = $New_Character/Split_Screen/Right_Side/CharacterView/Viewport/SubViewport/collection
 const SETTINGS_FILE_PATH="user://settings.conf"
 var configFile
 func _ready() -> void:
@@ -22,7 +21,7 @@ func _ready() -> void:
 	if volumeSlider.value>-30:
 		mainVolume.play()
 	_on_volume_value_changed(volumeSlider.value)
-	$New_Character/Split_Screen/Right_Side/verticalScrolls/Right_Side/Home.connect("pressed",_main_menu_show)
+	characterCreator.home_button.connect("pressed",_main_menu_show)
 func _hide_all():
 	mainMenu.hide()
 	characterCreator.hide()
@@ -41,11 +40,8 @@ func _on_settings_pressed() -> void:
 func _on_new_character_pressed() -> void:
 	_hide_all()
 	characterCreator.show()
-	$New_Character.new_name()
-	var path="res://saves/default.save"
-	var file = FileAccess.open(path, FileAccess.READ)
-	var shapekeys = file.get_var()
-	$New_Character.setup_character(shapekeys)
+	characterCreator.new_name()
+	characterCreator.make_character()
 
 func _on_show_load_menu():
 	saveSelect.clear()
@@ -66,7 +62,7 @@ func _on_load_character_save():
 	_hide_all()
 	characterCreator.show()
 	var characterName=saveSelect.get_item_text(saveSelect.get_selected_id())
-	$New_Character.load_character_file(characterName)
+	characterCreator.load_character_file(characterName)
 
 	
 func _on_quit_pressed() -> void:

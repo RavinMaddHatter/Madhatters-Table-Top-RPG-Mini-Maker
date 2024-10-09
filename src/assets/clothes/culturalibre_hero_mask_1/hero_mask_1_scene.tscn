@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkhl73funtn8u"]
-
-[ext_resource type="ArrayMesh" uid="uid://bx5ipf8x3ulpx" path="res://assets/clothes/culturalibre_hero_mask_1/hero_mask_1_mesh.res" id="1_m6yff"]
-[ext_resource type="Material" uid="uid://dkckdcu48rocj" path="res://assets/clothes/culturalibre_hero_mask_1/culturalibre_hero_mask_1_material.res" id="2_2jwu7"]
-
-[node name="hero_mask_1" type="MeshInstance3D"]
-mesh = ExtResource("1_m6yff")
-surface_material_override/0 = ExtResource("2_2jwu7")

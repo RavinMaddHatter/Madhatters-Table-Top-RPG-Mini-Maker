@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://dqlccd1omi0u2"]
-
-[ext_resource type="ArrayMesh" uid="uid://bmeufqqns4ixg" path="res://assets/clothes/punkduck_tennis_racket/tennisracket_mesh.res" id="1_jtk1b"]
-[ext_resource type="Material" uid="uid://2qy0pdcgjjoo" path="res://assets/clothes/punkduck_tennis_racket/punkduck_tennis_racket_material.res" id="2_pxynk"]
-
-[node name="tennisracket" type="MeshInstance3D"]
-mesh = ExtResource("1_jtk1b")
-surface_material_override/0 = ExtResource("2_pxynk")

@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://bvnmno8j3dww0"]
-
-[ext_resource type="ArrayMesh" uid="uid://bcmx1ms5xik5s" path="res://assets/clothes/toigo_bodice-style_top/Bodice_style_top_mesh.res" id="1_mpgt1"]
-[ext_resource type="Material" uid="uid://dycmu1oaydfv0" path="res://assets/clothes/toigo_bodice-style_top/toigo_bodice-style_top_material.res" id="2_n76p2"]
-
-[node name="Bodice_style_top" type="MeshInstance3D"]
-mesh = ExtResource("1_mpgt1")
-surface_material_override/0 = ExtResource("2_n76p2")

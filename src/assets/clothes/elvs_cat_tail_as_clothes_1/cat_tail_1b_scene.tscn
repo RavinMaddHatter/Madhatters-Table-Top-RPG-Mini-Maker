@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://rnw5orpoe5fj"]
-
-[ext_resource type="ArrayMesh" uid="uid://crcjrr171oohj" path="res://assets/clothes/elvs_cat_tail_as_clothes_1/cat_tail_1b_mesh.res" id="1_hs7yi"]
-[ext_resource type="Material" uid="uid://crecndk1xsymw" path="res://assets/clothes/elvs_cat_tail_as_clothes_1/elvs_cat_tail_as_clothes_1_material.res" id="2_bl5en"]
-
-[node name="cat_tail_1b" type="MeshInstance3D"]
-mesh = ExtResource("1_hs7yi")
-surface_material_override/0 = ExtResource("2_bl5en")

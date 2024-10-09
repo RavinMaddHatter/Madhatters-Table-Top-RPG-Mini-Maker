@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://c31ryl4fxa67p"]
-
-[ext_resource type="ArrayMesh" uid="uid://b284g0n8y365s" path="res://assets/clothes/culturalibre_cl_bowler_hat/cl_bowler_hat_mesh.res" id="1_vwwyt"]
-[ext_resource type="Material" uid="uid://dkiuxi7kfi4p3" path="res://assets/clothes/culturalibre_cl_bowler_hat/culturalibre_cl_bowler_hat_material.res" id="2_jb2b6"]
-
-[node name="cl_bowler_hat" type="MeshInstance3D"]
-mesh = ExtResource("1_vwwyt")
-surface_material_override/0 = ExtResource("2_jb2b6")

@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://d0goobm4xq1yl"]
-
-[ext_resource type="ArrayMesh" uid="uid://dp5cicm71aeuc" path="res://assets/clothes/elvs_static_wings4_bone_wings1/bonewings1_mesh.res" id="1_1tnq1"]
-[ext_resource type="Material" uid="uid://cdu2v2lcrdo4w" path="res://assets/clothes/elvs_static_wings4_bone_wings1/elvs_static_wings4_bone_wings1_material.res" id="2_1f4ex"]
-
-[node name="bonewings1" type="MeshInstance3D"]
-mesh = ExtResource("1_1tnq1")
-surface_material_override/0 = ExtResource("2_1f4ex")

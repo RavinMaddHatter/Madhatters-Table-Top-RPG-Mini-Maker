@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2o72qas86f5s"]
-
-[ext_resource type="ArrayMesh" uid="uid://8dua6wacg2p1" path="res://assets/clothes/toigo_camisole_top/Camisole_Top_mesh.res" id="1_h3i2f"]
-[ext_resource type="Material" uid="uid://dbt0ea6dwb2t5" path="res://assets/clothes/toigo_camisole_top/toigo_camisole_top_material.res" id="2_iegae"]
-
-[node name="Camisole_Top" type="MeshInstance3D"]
-mesh = ExtResource("1_h3i2f")
-surface_material_override/0 = ExtResource("2_iegae")

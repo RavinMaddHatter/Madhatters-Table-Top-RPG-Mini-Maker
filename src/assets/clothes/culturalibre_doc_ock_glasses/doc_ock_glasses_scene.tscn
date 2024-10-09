@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxy22jn8ysm6r"]
-
-[ext_resource type="ArrayMesh" uid="uid://bvgr423ymicr1" path="res://assets/clothes/culturalibre_doc_ock_glasses/doc_ock_glasses_mesh.res" id="1_m5qwr"]
-[ext_resource type="Material" uid="uid://jhbplfq1jdhc" path="res://assets/clothes/culturalibre_doc_ock_glasses/culturalibre_doc_ock_glasses_material.res" id="2_ev5fx"]
-
-[node name="doc_ock_glasses" type="MeshInstance3D"]
-mesh = ExtResource("1_m5qwr")
-surface_material_override/0 = ExtResource("2_ev5fx")

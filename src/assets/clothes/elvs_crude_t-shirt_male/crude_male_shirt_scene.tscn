@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://cw43j06bnw0s6"]
-
-[ext_resource type="ArrayMesh" uid="uid://c5rq2ygxxshe7" path="res://assets/clothes/elvs_crude_t-shirt_male/crude_male_shirt_mesh.res" id="1_so4qb"]
-[ext_resource type="Material" uid="uid://c2c3behy1fwdu" path="res://assets/clothes/elvs_crude_t-shirt_male/elvs_crude_t-shirt_male_material.res" id="2_g1y8l"]
-
-[node name="crude_male_shirt" type="MeshInstance3D"]
-mesh = ExtResource("1_so4qb")
-surface_material_override/0 = ExtResource("2_g1y8l")

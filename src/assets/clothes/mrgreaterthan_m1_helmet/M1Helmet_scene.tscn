@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://bu2h5q4naxnca"]
-
-[ext_resource type="ArrayMesh" uid="uid://cgio3le3yco6v" path="res://assets/clothes/mrgreaterthan_m1_helmet/M1Helmet_mesh.res" id="1_7lkiq"]
-[ext_resource type="Material" uid="uid://p76gko8g62nh" path="res://assets/clothes/mrgreaterthan_m1_helmet/mrgreaterthan_m1_helmet_material.res" id="2_14x4o"]
-
-[node name="M1Helmet" type="MeshInstance3D"]
-mesh = ExtResource("1_7lkiq")
-surface_material_override/0 = ExtResource("2_14x4o")

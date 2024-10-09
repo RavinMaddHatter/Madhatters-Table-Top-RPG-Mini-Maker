@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkju2wwk7tn8l"]
-
-[ext_resource type="ArrayMesh" uid="uid://cn26wxsm5pw7c" path="res://assets/clothes/toigo_basic_tucked_t-shirt/T-shirt_basic_tucked_mesh.res" id="1_6fwvy"]
-[ext_resource type="Material" uid="uid://n3wuit7pogv7" path="res://assets/clothes/toigo_basic_tucked_t-shirt/toigo_basic_tucked_t-shirt_material.res" id="2_a0xkw"]
-
-[node name="T-shirt_basic_tucked" type="MeshInstance3D"]
-mesh = ExtResource("1_6fwvy")
-surface_material_override/0 = ExtResource("2_a0xkw")

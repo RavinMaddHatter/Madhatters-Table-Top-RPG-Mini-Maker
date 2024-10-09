@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://di3uk0foo1eup"]
-
-[ext_resource type="ArrayMesh" uid="uid://b7eh5au8ovxqw" path="res://assets/clothes/elvs_static_wings1_dragonfly/dragonfly_wings1_mesh.res" id="1_vchna"]
-[ext_resource type="Material" uid="uid://47rkfel8q60s" path="res://assets/clothes/elvs_static_wings1_dragonfly/elvs_static_wings1_dragonfly_material.res" id="2_b6mfb"]
-
-[node name="dragonfly_wings1" type="MeshInstance3D"]
-mesh = ExtResource("1_vchna")
-surface_material_override/0 = ExtResource("2_b6mfb")

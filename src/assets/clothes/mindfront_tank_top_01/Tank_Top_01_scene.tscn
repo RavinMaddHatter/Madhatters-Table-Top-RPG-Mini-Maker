@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://b42indqwpmexk"]
-
-[ext_resource type="ArrayMesh" uid="uid://doxnvn44gt1ai" path="res://assets/clothes/mindfront_tank_top_01/Tank_Top_01_mesh.res" id="1_1wxi4"]
-[ext_resource type="Material" uid="uid://jeuigha5yp57" path="res://assets/clothes/mindfront_tank_top_01/mindfront_tank_top_01_material.res" id="2_1a2x5"]
-
-[node name="Tank_Top_01" type="MeshInstance3D"]
-mesh = ExtResource("1_1wxi4")
-surface_material_override/0 = ExtResource("2_1a2x5")

@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://blpdmvo0khl0n"]
-
-[ext_resource type="ArrayMesh" uid="uid://7vm33yxlccia" path="res://assets/clothes/punkduck_medieval_dress/MedievalDress_mesh.res" id="1_bv0g0"]
-[ext_resource type="Material" uid="uid://bi5qhemwbo8re" path="res://assets/clothes/punkduck_medieval_dress/punkduck_medieval_dress_material.res" id="2_f1kha"]
-
-[node name="MedievalDress" type="MeshInstance3D"]
-mesh = ExtResource("1_bv0g0")
-surface_material_override/0 = ExtResource("2_f1kha")

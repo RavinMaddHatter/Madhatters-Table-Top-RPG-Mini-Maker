@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://buckshj1vscj5"]
-
-[ext_resource type="ArrayMesh" uid="uid://bogc60myq8hlh" path="res://assets/clothes/mindfront_tactical_vest_female/Tactical_Vest_female_mesh.res" id="1_4jpnl"]
-[ext_resource type="Material" uid="uid://bkieuk18amc2x" path="res://assets/clothes/mindfront_tactical_vest_female/mindfront_tactical_vest_female_material.res" id="2_hhvjc"]
-
-[node name="Tactical_Vest_female" type="MeshInstance3D"]
-mesh = ExtResource("1_4jpnl")
-surface_material_override/0 = ExtResource("2_hhvjc")

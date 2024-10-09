@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://pthcvodyicdc"]
-
-[ext_resource type="ArrayMesh" uid="uid://dot7u76x1dgry" path="res://assets/clothes/grinsegold_corinthian_helmet/Corinthian_helmet_mesh.res" id="1_q7ifm"]
-[ext_resource type="Material" uid="uid://bdtgnjb87sy8q" path="res://assets/clothes/grinsegold_corinthian_helmet/grinsegold_corinthian_helmet_material.res" id="2_2wvxb"]
-
-[node name="Corinthian_helmet" type="MeshInstance3D"]
-mesh = ExtResource("1_q7ifm")
-surface_material_override/0 = ExtResource("2_2wvxb")

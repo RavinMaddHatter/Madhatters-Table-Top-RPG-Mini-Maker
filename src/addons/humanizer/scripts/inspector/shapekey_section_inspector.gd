@@ -2,7 +2,7 @@
 extends MarginContainer
 
 var shapekeys
-var human: Humanizer
+var human: HumanizerEditorTool
 
 func _ready() -> void:
 	if shapekeys == null:
@@ -26,10 +26,12 @@ func _ready() -> void:
 			slider.min_value = 0
 
 		slider.step = 0.01
-		if human.human_config != null and human.human_config.shapekeys.has(key):
-			slider.value = human.human_config.shapekeys[key]
-		else:
-			slider.value = 0
+		slider.value = 0
+		if human.human_config != null :
+			if name.begins_with('Macro') or name.begins_with('Race') or key in ['cupsize', 'firmness']:
+				slider.value = human.human_config.targets[key]
+			elif human.human_config.targets.has(key):
+				slider.value = human.human_config.targets[key]
 
 		slider.custom_minimum_size = Vector2i(150, 10)
 		slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -37,11 +39,6 @@ func _ready() -> void:
 		slider.drag_ended.connect(_on_value_changed.bind(slider))
 		slider.owner = self
 		slider.unique_name_in_owner = true
-
-		#var line_edit = LineEdit.new()
-		#line_edit.text = str(0)
-		#line_edit.text_changed.connect(_on_value_changed.bind(key))
-		#line_edit.text_changed.connect(set_shapekey.bind(key))
 
 func _on_value_changed(changed: bool, slider: HSlider) -> void:
 	var key = slider.name
@@ -68,7 +65,7 @@ func _on_value_changed(changed: bool, slider: HSlider) -> void:
 	else:
 		human.set_shapekeys({key: float(value)})
 	
-func _on_reset_sliders(human: Humanizer) -> void:
+func _on_reset_sliders(human: HumanizerEditorTool) -> void:
 	var values := {}
 	for sk in shapekeys:
 		var slider: HSlider = get_node('%' + sk)
@@ -78,7 +75,7 @@ func _on_reset_sliders(human: Humanizer) -> void:
 	human.set_shapekeys(values)
 	print('Reset ' + name + ' sliders')
 	
-func _on_randomize_sliders(human: Humanizer, randomization: HSlider, asymmetry: HSlider) -> void:
+func _on_randomize_sliders(human: HumanizerEditorTool, randomization: HSlider, asymmetry: HSlider) -> void:
 	var rng = RandomNumberGenerator.new()
 	var values := {}
 	for sk in shapekeys:

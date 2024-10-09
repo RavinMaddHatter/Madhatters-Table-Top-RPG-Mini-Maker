@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://bf1ehsa68y3mc"]
-
-[ext_resource type="ArrayMesh" uid="uid://gxfwwvuhdd8a" path="res://assets/clothes/mindfront_patrol_cap/Patrol_Cap_mesh.res" id="1_u60af"]
-[ext_resource type="Material" uid="uid://d13moylya653c" path="res://assets/clothes/mindfront_patrol_cap/mindfront_patrol_cap_material.res" id="2_307rv"]
-
-[node name="Patrol_Cap" type="MeshInstance3D"]
-mesh = ExtResource("1_u60af")
-surface_material_override/0 = ExtResource("2_307rv")

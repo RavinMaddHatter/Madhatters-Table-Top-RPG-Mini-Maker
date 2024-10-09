@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://d2iy0q0pm5mpd"]
-
-[ext_resource type="ArrayMesh" uid="uid://3csn70x75uss" path="res://assets/clothes/elvs_slouchy_beanie1/elvs_beanie_slouch_mesh.res" id="1_lb5w7"]
-[ext_resource type="Material" uid="uid://cn64f4ds1y042" path="res://assets/clothes/elvs_slouchy_beanie1/elvs_slouchy_beanie1_material.res" id="2_a1v05"]
-
-[node name="elvs_beanie_slouch" type="MeshInstance3D"]
-mesh = ExtResource("1_lb5w7")
-surface_material_override/0 = ExtResource("2_a1v05")

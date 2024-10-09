@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://vxuegauis6xf"]
-
-[ext_resource type="ArrayMesh" uid="uid://dqcx0b46e7sje" path="res://assets/clothes/punkduck_spaghetti_strap_tank_top/spaghetti-top_mesh.res" id="1_2qm3l"]
-[ext_resource type="Material" uid="uid://cesyccmeomj6o" path="res://assets/clothes/punkduck_spaghetti_strap_tank_top/punkduck_spaghetti_strap_tank_top_material.res" id="2_8hq8r"]
-
-[node name="spaghetti-top" type="MeshInstance3D"]
-mesh = ExtResource("1_2qm3l")
-surface_material_override/0 = ExtResource("2_8hq8r")

@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbwbgs04614t1"]
-
-[ext_resource type="ArrayMesh" uid="uid://dhurv0suc057i" path="res://assets/clothes/elvs_unisex_chef_hat_1/elvs_unisex_chef_hat1_mesh.res" id="1_1k07q"]
-[ext_resource type="Material" uid="uid://dl0qtfwowa8gs" path="res://assets/clothes/elvs_unisex_chef_hat_1/elvs_unisex_chef_hat_1_material.res" id="2_coe70"]
-
-[node name="elvs_unisex_chef_hat1" type="MeshInstance3D"]
-mesh = ExtResource("1_1k07q")
-surface_material_override/0 = ExtResource("2_coe70")

@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://bif3i455oumla"]
-
-[ext_resource type="ArrayMesh" uid="uid://bj3ns6nxp0ssd" path="res://assets/clothes/freezychan_lucoa_quetzalcoatl_horns/Lucoa_Horns_mesh.res" id="1_3yqb2"]
-[ext_resource type="Material" uid="uid://vxkipayu4dlo" path="res://assets/clothes/freezychan_lucoa_quetzalcoatl_horns/freezychan_lucoa_quetzalcoatl_horns_material.res" id="2_wdhmf"]
-
-[node name="Lucoa_Horns" type="MeshInstance3D"]
-mesh = ExtResource("1_3yqb2")
-surface_material_override/0 = ExtResource("2_wdhmf")

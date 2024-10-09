@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://dthel8j2gphl6"]
+
+[sub_resource type="GDScript" id="GDScript_1i7gn"]
+script/source = "extends Node3D
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var config = HumanConfig.new()
+	config.init_macros()
+	config.targets['gender'] = 0
+	config.targets['age'] = 25
+	config.eye_color = Color.YELLOW
+	config.hair_color = Color.PURPLE
+	config.eyebrow_color = Color(\"550055\")
+	config.rig = HumanizerGlobalConfig.config.default_skeleton
+	config.add_equipment(HumanizerEquipment.new(\"DefaultBody\",\"young_caucasian_female2_diffuse\"))
+	config.add_equipment(HumanizerEquipment.new(\"SkinnyJeans\"))
+	config.add_equipment(HumanizerEquipment.new(\"MakeHumanTShirt\"))
+	config.add_equipment(HumanizerEquipment.new(\"Shoes02\"))
+	config.add_equipment(HumanizerEquipment.new(\"RightEyeball-LowPoly\"))
+	config.add_equipment(HumanizerEquipment.new(\"LeftEyeBall-LowPoly\"))
+	config.add_equipment(HumanizerEquipment.new(\"Bob02\"))
+	config.add_equipment(HumanizerEquipment.new(\"RightEyebrow-002\"))
+	config.add_equipment(HumanizerEquipment.new(\"LeftEyebrow-002\"))
+	config.add_equipment(HumanizerEquipment.new(\"RightEyelash\"))
+	config.add_equipment(HumanizerEquipment.new(\"LeftEyelash\"))
+	var humanizer = Humanizer.new(config)
+	var char = humanizer.get_CharacterBody3D(false) ## can bake character here by setting argument to true
+	add_child(char)
+	HumanizerUtils.set_node_owner(char,self)
+"
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u0hgw"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_k8ifg"]
+sky_material = SubResource("ProceduralSkyMaterial_u0hgw")
+
+[sub_resource type="Environment" id="Environment_7jm4v"]
+background_mode = 2
+sky = SubResource("Sky_k8ifg")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="CharacterBody3d" type="Node3D"]
+script = SubResource("GDScript_1i7gn")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7jm4v")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.868595, 0.429135, -0.24776, -0.241783, 0.803476, 0.544028, 0.432531, -0.412636, 0.801654, 0, 2.06594, 1.75368)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.933, 1.235)

@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://r3yy1h6r6un"]
-
-[ext_resource type="ArrayMesh" uid="uid://k3wdhsev2uhn" path="res://assets/clothes/punkduck_handbag01/Handbag_mesh.res" id="1_uehvu"]
-[ext_resource type="Material" uid="uid://dylxiwbsrx455" path="res://assets/clothes/punkduck_handbag01/punkduck_handbag01_material.res" id="2_nhbtp"]
-
-[node name="Handbag" type="MeshInstance3D"]
-mesh = ExtResource("1_uehvu")
-surface_material_override/0 = ExtResource("2_nhbtp")

@@ -25,6 +25,7 @@ func run() -> Dictionary:
 	new_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,sf_arrays,[],{},flags)
 	
 	var data = {}
+	data.sf_arrays = sf_arrays
 	data.mesh = new_mesh
 	data.mh2gd_index = mh2gd_index
 	return data
@@ -72,6 +73,8 @@ func expand_vertices():
 		#vertex faces in quads, convert to triangles
 		var face_array = convert_face_array(face)
 		sf_arrays[Mesh.ARRAY_INDEX].append_array([face_array[2],face_array[1],face_array[0]])
+		if face_array.size() < 4:
+			continue
 		sf_arrays[Mesh.ARRAY_INDEX].append_array([face_array[0],face_array[3],face_array[2]])
 	
 func convert_face_array(face_array):

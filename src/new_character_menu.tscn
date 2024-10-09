@@ -1,14 +1,19 @@
-[gd_scene load_steps=10 format=3 uid="uid://b6apa4vss8dou"]
+[gd_scene load_steps=35 format=3 uid="uid://b6apa4vss8dou"]
 
-[ext_resource type="Script" path="res://addons/humanizer/scripts/auto_updating_humanizer.gd" id="1_7ijj3"]
-[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_config.gd" id="2_xmw2h"]
+[ext_resource type="Script" path="res://addons/humanizer/scripts/utils/humanizer_editor_tool.gd" id="2_5dotk"]
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/humanizer_overlay.gd" id="3_enu8t"]
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/humanizer_material.gd" id="4_1e5ii"]
 [ext_resource type="ArrayMesh" uid="uid://fudl6b84hhf5" path="res://assets/simple Base.obj" id="4_8gh7d"]
-[ext_resource type="PackedScene" uid="uid://csan8bknfmodc" path="res://addons/humanizer/data/animations/animation_tree.tscn" id="4_xf4yp"]
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/equipment.gd" id="5_fnub2"]
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_config.gd" id="6_4floc"]
+[ext_resource type="PackedScene" uid="uid://csan8bknfmodc" path="res://addons/humanizer/data/animations/animation_tree.tscn" id="7_6sika"]
+[ext_resource type="PackedScene" uid="uid://da831ngvg838b" path="res://addons/humanizer/scenes/authoring.tscn" id="8_t6agc"]
 
 [sub_resource type="GDScript" id="GDScript_yutiq"]
 script/source = "extends Control
 
-@export var humanizer :AutoUpdatingHumanizer
+var humanizer : Humanizer
+@export var collection : Node3D
 @export var nameBox:TextEdit 
 @export var baseMesh:MeshInstance3D
 var shapekey_opposites = [[\"decr\",\"incr\"], [\"down\",\"up\"],   [\"in\",\"out\"],   [\"backward\",\"forward\"],  [\"concave\",\"convex\"],  [\"compress\",\"uncompress\"], [\"square\",\"round\"], [\"pointed\",\"triangle\"]]
@@ -37,8 +42,8 @@ func _ready():
 	camera.position.z = 1
 	camera.v_offset = zoom_out_offset
 	camera.size = zoom_out_size
+	new_human()
 	build_menu()
-	eyebrow_selected(11)
 	get_camera_min_max()
 	humanizer.get_node(\"AnimationTree\").active=false
 	$FileDialog.current_dir = \"/\"
@@ -73,12 +78,8 @@ func delete_directory(path):
 	DirAccess.remove_absolute(path)
 	
 func build_menu():
-	humanizer.set_body_part(registry.body_parts.LeftEye[\"LeftEyeBall-LowPoly\"])
-	humanizer.set_body_part(registry.body_parts.RightEye[\"RightEyeball-LowPoly\"])
-	humanizer.set_body_part(registry.body_parts.LeftEyelash[\"LeftEyelash\"])
-	humanizer.set_body_part(registry.body_parts.RightEyelash[\"RightEyelash\"])
+	var shapekey_categories = humanizer.human_config.targets.duplicate(true)
 	
-	var shapekey_categories = HumanizerUtils.get_shapekey_categories()
 	for category_name in shapekey_categories:
 		var category_keys = {}
 		for shapekey_name in shapekey_categories[category_name]:
@@ -290,7 +291,7 @@ func _make_cloths_menu():
 	cloths_vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	cloths_panel.add_child(cloths_vbox)
 	var slots = {}
-	for asset in HumanizerRegistry.clothes.values():
+	for asset in humanizer.HumanizerRegistry.clothes.values():
 		for slot in asset.slots:
 			if slot in slots.keys():
 				slots[slot].add_item(asset.resource_name,asset)
@@ -414,7 +415,23 @@ func _on_zoom_slider_value_changed(value):
 		camera.v_offset = ((zoom_mid_offset-zoom_in_offset) * (invr_value/zoom_mid_ratio)) + zoom_in_offset
 	else:
 		camera.v_offset = ((zoom_out_offset-zoom_mid_offset) * ((invr_value-zoom_mid_ratio)/(1-zoom_mid_ratio))) + zoom_mid_offset
+func new_human():
+	var config = HumanConfig.new()
+	config.init_macros()
+	config.targets['gender'] = 0
+	config.targets['age'] = 25
+	config.eye_color = Color.YELLOW
+	config.hair_color = Color.PURPLE
+	config.eyebrow_color = Color(\"550055\")
+	config.rig = HumanizerGlobalConfig.config.default_skeleton
+	config.add_equipment(HumanizerEquipment.new(\"DefaultBody\",\"none_diffuse\"))
+	config.add_equipment(HumanizerEquipment.new(\"RightEyeball-LowPoly\"))
+	config.add_equipment(HumanizerEquipment.new(\"LeftEyeBall-LowPoly\"))
+	humanizer = Humanizer.new(config)
+	var char = humanizer.get_CharacterBody3D(false)
+	collection.add_child(char) 
 	
+	char.get_node(\"AnimationTree\").active=false
 	
 func _on_next_pressed():
 	$FileDialog.show()
@@ -454,8 +471,7 @@ func _on_next_pressed():
 		_warning(\"Poses not currently supported. The default pose was exported.\")
 		var parent= humanizer.get_parent()
 		humanizer.queue_free()
-		humanizer=AutoUpdatingHumanizer.new()
-		parent.add_child(humanizer)
+		new_human()
 		load_character_file(nameBox.text)  
 		humanizer.get_node(\"AnimationTree\").active=false      
 func _warning(text):
@@ -568,616 +584,250 @@ func _on_position_slider_value_changed(value: float) -> void:
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 
-[sub_resource type="Sky" id="Sky_sm1kj"]
+[sub_resource type="Sky" id="Sky_iscjs"]
 sky_material = SubResource("ProceduralSkyMaterial_f0duq")
 
 [sub_resource type="Environment" id="Environment_yvgqs"]
 background_mode = 2
-sky = SubResource("Sky_sm1kj")
+sky = SubResource("Sky_iscjs")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="Resource" id="Resource_iovq0"]
-script = ExtResource("2_xmw2h")
+[sub_resource type="Resource" id="Resource_omx1s"]
+resource_name = "middleage_african_female"
+script = ExtResource("3_enu8t")
+albedo_texture_path = "res://addons/humanizer/data/assets/body_parts/Body/Default/middleage_asian_male/middleage_asian_male_diffuse2.png"
+normal_texture_path = ""
+ao_texture_path = ""
+color = Color(1, 1, 1, 1)
+offset = Vector2i(0, 0)
+normal_strength = 1.0
+
+[sub_resource type="Resource" id="Resource_6fw3s"]
+resource_local_to_scene = true
+script = ExtResource("4_1e5ii")
+overlays = Array[ExtResource("3_enu8t")]([SubResource("Resource_omx1s")])
+
+[sub_resource type="Resource" id="Resource_5vhe4"]
+script = ExtResource("5_fnub2")
+type = "DefaultBody"
+texture_name = "middleage_asian_male_diffuse2"
+material_config = SubResource("Resource_6fw3s")
+
+[sub_resource type="Resource" id="Resource_ut0dy"]
+resource_name = "eyeball"
+script = ExtResource("3_enu8t")
+albedo_texture_path = "res://addons/humanizer/data/assets/body_parts/Eyes/Eyeballs/eyeball_albedo.png"
+normal_texture_path = ""
+ao_texture_path = ""
+color = Color(1, 1, 1, 1)
+offset = Vector2i(0, 0)
+normal_strength = 1.0
+
+[sub_resource type="Resource" id="Resource_7fltc"]
+resource_name = "overlay_iris"
+script = ExtResource("3_enu8t")
+albedo_texture_path = "res://addons/humanizer/data/assets/body_parts/Eyes/Eyeballs/overlay_iris_albedo.png"
+normal_texture_path = ""
+ao_texture_path = ""
+color = Color(0.529412, 0.807843, 0.921569, 1)
+offset = Vector2i(0, 0)
+normal_strength = 1.0
+
+[sub_resource type="Resource" id="Resource_0gj2a"]
+resource_local_to_scene = true
+script = ExtResource("4_1e5ii")
+overlays = Array[ExtResource("3_enu8t")]([SubResource("Resource_ut0dy"), SubResource("Resource_7fltc")])
+
+[sub_resource type="Resource" id="Resource_sy6n8"]
+script = ExtResource("5_fnub2")
+type = "RightEyeball-LowPoly"
+texture_name = "eyeball_albedo"
+material_config = SubResource("Resource_0gj2a")
+
+[sub_resource type="Resource" id="Resource_eicbk"]
+resource_name = "eyeball"
+script = ExtResource("3_enu8t")
+albedo_texture_path = "res://addons/humanizer/data/assets/body_parts/Eyes/Eyeballs/eyeball_albedo.png"
+normal_texture_path = ""
+ao_texture_path = ""
+color = Color(1, 1, 1, 1)
+offset = Vector2i(0, 0)
+normal_strength = 1.0
+
+[sub_resource type="Resource" id="Resource_gfvi2"]
+resource_name = "overlay_iris"
+script = ExtResource("3_enu8t")
+albedo_texture_path = "res://addons/humanizer/data/assets/body_parts/Eyes/Eyeballs/overlay_iris_albedo.png"
+normal_texture_path = ""
+ao_texture_path = ""
+color = Color(0.529412, 0.807843, 0.921569, 1)
+offset = Vector2i(0, 0)
+normal_strength = 1.0
+
+[sub_resource type="Resource" id="Resource_8lbqq"]
+resource_local_to_scene = true
+script = ExtResource("4_1e5ii")
+overlays = Array[ExtResource("3_enu8t")]([SubResource("Resource_eicbk"), SubResource("Resource_gfvi2")])
+
+[sub_resource type="Resource" id="Resource_bb3fp"]
+script = ExtResource("5_fnub2")
+type = "LeftEyeBall-LowPoly"
+texture_name = "eyeball_albedo"
+material_config = SubResource("Resource_8lbqq")
+
+[sub_resource type="Resource" id="Resource_iam8b"]
+script = ExtResource("6_4floc")
 rig = "game_engine-RETARGETED"
-shapekeys = {
-"african": 0.333,
-"african-female-baby": 0,
-"african-female-child": 0,
+targets = {
+"african": 0.333333,
 "african-female-old": 0.0555556,
 "african-female-young": 0.111111,
-"african-male-baby": 0,
-"african-male-child": 0,
 "african-male-old": 0.0555556,
 "african-male-young": 0.111111,
 "age": 0.5,
-"asian": 0.333,
-"asian-female-baby": 0,
-"asian-female-child": 0,
+"asian": 0.333333,
 "asian-female-old": 0.0555556,
 "asian-female-young": 0.111111,
-"asian-male-baby": 0,
-"asian-male-child": 0,
 "asian-male-old": 0.0555556,
 "asian-male-young": 0.111111,
-"caucasian": 0.333,
-"caucasian-female-baby": 0,
-"caucasian-female-child": 0,
+"caucasian": 0.333333,
 "caucasian-female-old": 0.0555556,
 "caucasian-female-young": 0.111111,
-"caucasian-male-baby": 0,
-"caucasian-male-child": 0,
 "caucasian-male-old": 0.0555556,
 "caucasian-male-young": 0.111111,
 "cupsize": 0.5,
-"female-baby-averagemuscle-averageweight-averagecup-averagefirmness": 0.5,
-"female-baby-averagemuscle-averageweight-maxheight": 0,
-"female-baby-averagemuscle-averageweight-minheight": 0,
-"female-baby-averagemuscle-maxweight-maxheight": 0,
-"female-baby-averagemuscle-maxweight-minheight": 0,
-"female-baby-averagemuscle-minweight-maxheight": 0,
-"female-baby-averagemuscle-minweight-minheight": 0,
-"female-baby-maxmuscle-averageweight-maxheight": 0,
-"female-baby-maxmuscle-averageweight-minheight": 0,
-"female-baby-maxmuscle-maxweight-maxheight": 0,
-"female-baby-maxmuscle-maxweight-minheight": 0,
-"female-baby-maxmuscle-minweight-maxheight": 0,
-"female-baby-maxmuscle-minweight-minheight": 0,
-"female-baby-minmuscle-averageweight-maxheight": 0,
-"female-baby-minmuscle-averageweight-minheight": 0,
-"female-baby-minmuscle-maxweight-maxheight": 0,
-"female-baby-minmuscle-maxweight-minheight": 0,
-"female-baby-minmuscle-minweight-maxheight": 0,
-"female-baby-minmuscle-minweight-minheight": 0,
-"female-child-averagemuscle-averageweight-averagecup-maxfirmness": 0,
-"female-child-averagemuscle-averageweight-averagecup-minfirmness": 0,
-"female-child-averagemuscle-averageweight-idealproportions": 0,
-"female-child-averagemuscle-averageweight-maxcup-averagefirmness": 0,
-"female-child-averagemuscle-averageweight-maxcup-maxfirmness": 0,
-"female-child-averagemuscle-averageweight-maxcup-minfirmness": 0,
-"female-child-averagemuscle-averageweight-maxheight": 0,
-"female-child-averagemuscle-averageweight-mincup-averagefirmness": 0,
-"female-child-averagemuscle-averageweight-mincup-maxfirmness": 0,
-"female-child-averagemuscle-averageweight-mincup-minfirmness": 0,
-"female-child-averagemuscle-averageweight-minheight": 0,
-"female-child-averagemuscle-averageweight-uncommonproportions": 0,
-"female-child-averagemuscle-maxweight-averagecup-maxfirmness": 0,
-"female-child-averagemuscle-maxweight-averagecup-minfirmness": 0,
-"female-child-averagemuscle-maxweight-idealproportions": 0,
-"female-child-averagemuscle-maxweight-maxcup-averagefirmness": 0,
-"female-child-averagemuscle-maxweight-maxcup-maxfirmness": 0,
-"female-child-averagemuscle-maxweight-maxcup-minfirmness": 0,
-"female-child-averagemuscle-maxweight-maxheight": 0,
-"female-child-averagemuscle-maxweight-mincup-averagefirmness": 0,
-"female-child-averagemuscle-maxweight-mincup-maxfirmness": 0,
-"female-child-averagemuscle-maxweight-mincup-minfirmness": 0,
-"female-child-averagemuscle-maxweight-minheight": 0,
-"female-child-averagemuscle-maxweight-uncommonproportions": 0,
-"female-child-averagemuscle-minweight-averagecup-maxfirmness": 0,
-"female-child-averagemuscle-minweight-averagecup-minfirmness": 0,
-"female-child-averagemuscle-minweight-idealproportions": 0,
-"female-child-averagemuscle-minweight-maxcup-averagefirmness": 0,
-"female-child-averagemuscle-minweight-maxcup-maxfirmness": 0,
-"female-child-averagemuscle-minweight-maxcup-minfirmness": 0,
-"female-child-averagemuscle-minweight-maxheight": 0,
-"female-child-averagemuscle-minweight-mincup-averagefirmness": 0,
-"female-child-averagemuscle-minweight-mincup-maxfirmness": 0,
-"female-child-averagemuscle-minweight-mincup-minfirmness": 0,
-"female-child-averagemuscle-minweight-minheight": 0,
-"female-child-averagemuscle-minweight-uncommonproportions": 0,
-"female-child-maxmuscle-averageweight-averagecup-maxfirmness": 0,
-"female-child-maxmuscle-averageweight-averagecup-minfirmness": 0,
-"female-child-maxmuscle-averageweight-idealproportions": 0,
-"female-child-maxmuscle-averageweight-maxcup-averagefirmness": 0,
-"female-child-maxmuscle-averageweight-maxcup-maxfirmness": 0,
-"female-child-maxmuscle-averageweight-maxcup-minfirmness": 0,
-"female-child-maxmuscle-averageweight-maxheight": 0,
-"female-child-maxmuscle-averageweight-mincup-averagefirmness": 0,
-"female-child-maxmuscle-averageweight-mincup-maxfirmness": 0,
-"female-child-maxmuscle-averageweight-mincup-minfirmness": 0,
-"female-child-maxmuscle-averageweight-minheight": 0,
-"female-child-maxmuscle-averageweight-uncommonproportions": 0,
-"female-child-maxmuscle-maxweight-averagecup-maxfirmness": 0,
-"female-child-maxmuscle-maxweight-averagecup-minfirmness": 0,
-"female-child-maxmuscle-maxweight-idealproportions": 0,
-"female-child-maxmuscle-maxweight-maxcup-averagefirmness": 0,
-"female-child-maxmuscle-maxweight-maxcup-maxfirmness": 0,
-"female-child-maxmuscle-maxweight-maxcup-minfirmness": 0,
-"female-child-maxmuscle-maxweight-maxheight": 0,
-"female-child-maxmuscle-maxweight-mincup-averagefirmness": 0,
-"female-child-maxmuscle-maxweight-mincup-maxfirmness": 0,
-"female-child-maxmuscle-maxweight-mincup-minfirmness": 0,
-"female-child-maxmuscle-maxweight-minheight": 0,
-"female-child-maxmuscle-maxweight-uncommonproportions": 0,
-"female-child-maxmuscle-minweight-averagecup-maxfirmness": 0,
-"female-child-maxmuscle-minweight-averagecup-minfirmness": 0,
-"female-child-maxmuscle-minweight-idealproportions": 0,
-"female-child-maxmuscle-minweight-maxcup-averagefirmness": 0,
-"female-child-maxmuscle-minweight-maxcup-maxfirmness": 0,
-"female-child-maxmuscle-minweight-maxcup-minfirmness": 0,
-"female-child-maxmuscle-minweight-maxheight": 0,
-"female-child-maxmuscle-minweight-mincup-averagefirmness": 0,
-"female-child-maxmuscle-minweight-mincup-maxfirmness": 0,
-"female-child-maxmuscle-minweight-mincup-minfirmness": 0,
-"female-child-maxmuscle-minweight-minheight": 0,
-"female-child-maxmuscle-minweight-uncommonproportions": 0,
-"female-child-minmuscle-averageweight-averagecup-maxfirmness": 0,
-"female-child-minmuscle-averageweight-averagecup-minfirmness": 0,
-"female-child-minmuscle-averageweight-idealproportions": 0,
-"female-child-minmuscle-averageweight-maxcup-averagefirmness": 0,
-"female-child-minmuscle-averageweight-maxcup-maxfirmness": 0,
-"female-child-minmuscle-averageweight-maxcup-minfirmness": 0,
-"female-child-minmuscle-averageweight-maxheight": 0,
-"female-child-minmuscle-averageweight-mincup-averagefirmness": 0,
-"female-child-minmuscle-averageweight-mincup-maxfirmness": 0,
-"female-child-minmuscle-averageweight-mincup-minfirmness": 0,
-"female-child-minmuscle-averageweight-minheight": 0,
-"female-child-minmuscle-averageweight-uncommonproportions": 0,
-"female-child-minmuscle-maxweight-averagecup-maxfirmness": 0,
-"female-child-minmuscle-maxweight-averagecup-minfirmness": 0,
-"female-child-minmuscle-maxweight-idealproportions": 0,
-"female-child-minmuscle-maxweight-maxcup-averagefirmness": 0,
-"female-child-minmuscle-maxweight-maxcup-maxfirmness": 0,
-"female-child-minmuscle-maxweight-maxcup-minfirmness": 0,
-"female-child-minmuscle-maxweight-maxheight": 0,
-"female-child-minmuscle-maxweight-mincup-averagefirmness": 0,
-"female-child-minmuscle-maxweight-mincup-maxfirmness": 0,
-"female-child-minmuscle-maxweight-mincup-minfirmness": 0,
-"female-child-minmuscle-maxweight-minheight": 0,
-"female-child-minmuscle-maxweight-uncommonproportions": 0,
-"female-child-minmuscle-minweight-averagecup-maxfirmness": 0,
-"female-child-minmuscle-minweight-averagecup-minfirmness": 0,
-"female-child-minmuscle-minweight-idealproportions": 0,
-"female-child-minmuscle-minweight-maxcup-averagefirmness": 0,
-"female-child-minmuscle-minweight-maxcup-maxfirmness": 0,
-"female-child-minmuscle-minweight-maxcup-minfirmness": 0,
-"female-child-minmuscle-minweight-maxheight": 0,
-"female-child-minmuscle-minweight-mincup-averagefirmness": 0,
-"female-child-minmuscle-minweight-mincup-maxfirmness": 0,
-"female-child-minmuscle-minweight-mincup-minfirmness": 0,
-"female-child-minmuscle-minweight-minheight": 0,
-"female-child-minmuscle-minweight-uncommonproportions": 0,
-"female-old-averagemuscle-averageweight-averagecup-averagefirmness": 0.166667,
-"female-old-averagemuscle-averageweight-averagecup-maxfirmness": 0,
-"female-old-averagemuscle-averageweight-averagecup-minfirmness": 0,
-"female-old-averagemuscle-averageweight-idealproportions": 0,
-"female-old-averagemuscle-averageweight-maxcup-averagefirmness": 0,
-"female-old-averagemuscle-averageweight-maxcup-maxfirmness": 0,
-"female-old-averagemuscle-averageweight-maxcup-minfirmness": 0,
-"female-old-averagemuscle-averageweight-maxheight": 0,
-"female-old-averagemuscle-averageweight-mincup-averagefirmness": 0,
-"female-old-averagemuscle-averageweight-mincup-maxfirmness": 0,
-"female-old-averagemuscle-averageweight-mincup-minfirmness": 0,
-"female-old-averagemuscle-averageweight-minheight": 0,
-"female-old-averagemuscle-averageweight-uncommonproportions": 0,
-"female-old-averagemuscle-maxweight-averagecup-maxfirmness": 0,
-"female-old-averagemuscle-maxweight-averagecup-minfirmness": 0,
-"female-old-averagemuscle-maxweight-idealproportions": 0,
-"female-old-averagemuscle-maxweight-maxcup-averagefirmness": 0,
-"female-old-averagemuscle-maxweight-maxcup-maxfirmness": 0,
-"female-old-averagemuscle-maxweight-maxcup-minfirmness": 0,
-"female-old-averagemuscle-maxweight-maxheight": 0,
-"female-old-averagemuscle-maxweight-mincup-averagefirmness": 0,
-"female-old-averagemuscle-maxweight-mincup-maxfirmness": 0,
-"female-old-averagemuscle-maxweight-mincup-minfirmness": 0,
-"female-old-averagemuscle-maxweight-minheight": 0,
-"female-old-averagemuscle-maxweight-uncommonproportions": 0,
-"female-old-averagemuscle-minweight-averagecup-maxfirmness": 0,
-"female-old-averagemuscle-minweight-averagecup-minfirmness": 0,
-"female-old-averagemuscle-minweight-idealproportions": 0,
-"female-old-averagemuscle-minweight-maxcup-averagefirmness": 0,
-"female-old-averagemuscle-minweight-maxcup-maxfirmness": 0,
-"female-old-averagemuscle-minweight-maxcup-minfirmness": 0,
-"female-old-averagemuscle-minweight-maxheight": 0,
-"female-old-averagemuscle-minweight-mincup-averagefirmness": 0,
-"female-old-averagemuscle-minweight-mincup-maxfirmness": 0,
-"female-old-averagemuscle-minweight-mincup-minfirmness": 0,
-"female-old-averagemuscle-minweight-minheight": 0,
-"female-old-averagemuscle-minweight-uncommonproportions": 0,
-"female-old-maxmuscle-averageweight-averagecup-maxfirmness": 0,
-"female-old-maxmuscle-averageweight-averagecup-minfirmness": 0,
-"female-old-maxmuscle-averageweight-idealproportions": 0,
-"female-old-maxmuscle-averageweight-maxcup-averagefirmness": 0,
-"female-old-maxmuscle-averageweight-maxcup-maxfirmness": 0,
-"female-old-maxmuscle-averageweight-maxcup-minfirmness": 0,
-"female-old-maxmuscle-averageweight-maxheight": 0,
-"female-old-maxmuscle-averageweight-mincup-averagefirmness": 0,
-"female-old-maxmuscle-averageweight-mincup-maxfirmness": 0,
-"female-old-maxmuscle-averageweight-mincup-minfirmness": 0,
-"female-old-maxmuscle-averageweight-minheight": 0,
-"female-old-maxmuscle-averageweight-uncommonproportions": 0,
-"female-old-maxmuscle-maxweight-averagecup-maxfirmness": 0,
-"female-old-maxmuscle-maxweight-averagecup-minfirmness": 0,
-"female-old-maxmuscle-maxweight-idealproportions": 0,
-"female-old-maxmuscle-maxweight-maxcup-averagefirmness": 0,
-"female-old-maxmuscle-maxweight-maxcup-maxfirmness": 0,
-"female-old-maxmuscle-maxweight-maxcup-minfirmness": 0,
-"female-old-maxmuscle-maxweight-maxheight": 0,
-"female-old-maxmuscle-maxweight-mincup-averagefirmness": 0,
-"female-old-maxmuscle-maxweight-mincup-maxfirmness": 0,
-"female-old-maxmuscle-maxweight-mincup-minfirmness": 0,
-"female-old-maxmuscle-maxweight-minheight": 0,
-"female-old-maxmuscle-maxweight-uncommonproportions": 0,
-"female-old-maxmuscle-minweight-averagecup-maxfirmness": 0,
-"female-old-maxmuscle-minweight-averagecup-minfirmness": 0,
-"female-old-maxmuscle-minweight-idealproportions": 0,
-"female-old-maxmuscle-minweight-maxcup-averagefirmness": 0,
-"female-old-maxmuscle-minweight-maxcup-maxfirmness": 0,
-"female-old-maxmuscle-minweight-maxcup-minfirmness": 0,
-"female-old-maxmuscle-minweight-maxheight": 0,
-"female-old-maxmuscle-minweight-mincup-averagefirmness": 0,
-"female-old-maxmuscle-minweight-mincup-maxfirmness": 0,
-"female-old-maxmuscle-minweight-mincup-minfirmness": 0,
-"female-old-maxmuscle-minweight-minheight": 0,
-"female-old-maxmuscle-minweight-uncommonproportions": 0,
-"female-old-minmuscle-averageweight-averagecup-maxfirmness": 0,
-"female-old-minmuscle-averageweight-averagecup-minfirmness": 0,
-"female-old-minmuscle-averageweight-idealproportions": 0,
-"female-old-minmuscle-averageweight-maxcup-averagefirmness": 0,
-"female-old-minmuscle-averageweight-maxcup-maxfirmness": 0,
-"female-old-minmuscle-averageweight-maxcup-minfirmness": 0,
-"female-old-minmuscle-averageweight-maxheight": 0,
-"female-old-minmuscle-averageweight-mincup-averagefirmness": 0,
-"female-old-minmuscle-averageweight-mincup-maxfirmness": 0,
-"female-old-minmuscle-averageweight-mincup-minfirmness": 0,
-"female-old-minmuscle-averageweight-minheight": 0,
-"female-old-minmuscle-averageweight-uncommonproportions": 0,
-"female-old-minmuscle-maxweight-averagecup-maxfirmness": 0,
-"female-old-minmuscle-maxweight-averagecup-minfirmness": 0,
-"female-old-minmuscle-maxweight-idealproportions": 0,
-"female-old-minmuscle-maxweight-maxcup-averagefirmness": 0,
-"female-old-minmuscle-maxweight-maxcup-maxfirmness": 0,
-"female-old-minmuscle-maxweight-maxcup-minfirmness": 0,
-"female-old-minmuscle-maxweight-maxheight": 0,
-"female-old-minmuscle-maxweight-mincup-averagefirmness": 0,
-"female-old-minmuscle-maxweight-mincup-maxfirmness": 0,
-"female-old-minmuscle-maxweight-mincup-minfirmness": 0,
-"female-old-minmuscle-maxweight-minheight": 0,
-"female-old-minmuscle-maxweight-uncommonproportions": 0,
-"female-old-minmuscle-minweight-averagecup-maxfirmness": 0,
-"female-old-minmuscle-minweight-averagecup-minfirmness": 0,
-"female-old-minmuscle-minweight-idealproportions": 0,
-"female-old-minmuscle-minweight-maxcup-averagefirmness": 0,
-"female-old-minmuscle-minweight-maxcup-maxfirmness": 0,
-"female-old-minmuscle-minweight-maxcup-minfirmness": 0,
-"female-old-minmuscle-minweight-maxheight": 0,
-"female-old-minmuscle-minweight-mincup-averagefirmness": 0,
-"female-old-minmuscle-minweight-mincup-maxfirmness": 0,
-"female-old-minmuscle-minweight-mincup-minfirmness": 0,
-"female-old-minmuscle-minweight-minheight": 0,
-"female-old-minmuscle-minweight-uncommonproportions": 0,
-"female-young-averagemuscle-averageweight-averagecup-averagefirmness": 0.333333,
-"female-young-averagemuscle-averageweight-averagecup-maxfirmness": 0,
-"female-young-averagemuscle-averageweight-averagecup-minfirmness": 0,
-"female-young-averagemuscle-averageweight-idealproportions": 0,
-"female-young-averagemuscle-averageweight-maxcup-averagefirmness": 0,
-"female-young-averagemuscle-averageweight-maxcup-maxfirmness": 0,
-"female-young-averagemuscle-averageweight-maxcup-minfirmness": 0,
-"female-young-averagemuscle-averageweight-maxheight": 0,
-"female-young-averagemuscle-averageweight-mincup-averagefirmness": 0,
-"female-young-averagemuscle-averageweight-mincup-maxfirmness": 0,
-"female-young-averagemuscle-averageweight-mincup-minfirmness": 0,
-"female-young-averagemuscle-averageweight-minheight": 0,
-"female-young-averagemuscle-averageweight-uncommonproportions": 0,
-"female-young-averagemuscle-maxweight-averagecup-maxfirmness": 0,
-"female-young-averagemuscle-maxweight-averagecup-minfirmness": 0,
-"female-young-averagemuscle-maxweight-idealproportions": 0,
-"female-young-averagemuscle-maxweight-maxcup-averagefirmness": 0,
-"female-young-averagemuscle-maxweight-maxcup-maxfirmness": 0,
-"female-young-averagemuscle-maxweight-maxcup-minfirmness": 0,
-"female-young-averagemuscle-maxweight-maxheight": 0,
-"female-young-averagemuscle-maxweight-mincup-averagefirmness": 0,
-"female-young-averagemuscle-maxweight-mincup-maxfirmness": 0,
-"female-young-averagemuscle-maxweight-mincup-minfirmness": 0,
-"female-young-averagemuscle-maxweight-minheight": 0,
-"female-young-averagemuscle-maxweight-uncommonproportions": 0,
-"female-young-averagemuscle-minweight-averagecup-maxfirmness": 0,
-"female-young-averagemuscle-minweight-averagecup-minfirmness": 0,
-"female-young-averagemuscle-minweight-idealproportions": 0,
-"female-young-averagemuscle-minweight-maxcup-averagefirmness": 0,
-"female-young-averagemuscle-minweight-maxcup-maxfirmness": 0,
-"female-young-averagemuscle-minweight-maxcup-minfirmness": 0,
-"female-young-averagemuscle-minweight-maxheight": 0,
-"female-young-averagemuscle-minweight-mincup-averagefirmness": 0,
-"female-young-averagemuscle-minweight-mincup-maxfirmness": 0,
-"female-young-averagemuscle-minweight-mincup-minfirmness": 0,
-"female-young-averagemuscle-minweight-minheight": 0,
-"female-young-averagemuscle-minweight-uncommonproportions": 0,
-"female-young-maxmuscle-averageweight-averagecup-maxfirmness": 0,
-"female-young-maxmuscle-averageweight-averagecup-minfirmness": 0,
-"female-young-maxmuscle-averageweight-idealproportions": 0,
-"female-young-maxmuscle-averageweight-maxcup-averagefirmness": 0,
-"female-young-maxmuscle-averageweight-maxcup-maxfirmness": 0,
-"female-young-maxmuscle-averageweight-maxcup-minfirmness": 0,
-"female-young-maxmuscle-averageweight-maxheight": 0,
-"female-young-maxmuscle-averageweight-mincup-averagefirmness": 0,
-"female-young-maxmuscle-averageweight-mincup-maxfirmness": 0,
-"female-young-maxmuscle-averageweight-mincup-minfirmness": 0,
-"female-young-maxmuscle-averageweight-minheight": 0,
-"female-young-maxmuscle-averageweight-uncommonproportions": 0,
-"female-young-maxmuscle-maxweight-averagecup-maxfirmness": 0,
-"female-young-maxmuscle-maxweight-averagecup-minfirmness": 0,
-"female-young-maxmuscle-maxweight-idealproportions": 0,
-"female-young-maxmuscle-maxweight-maxcup-averagefirmness": 0,
-"female-young-maxmuscle-maxweight-maxcup-maxfirmness": 0,
-"female-young-maxmuscle-maxweight-maxcup-minfirmness": 0,
-"female-young-maxmuscle-maxweight-maxheight": 0,
-"female-young-maxmuscle-maxweight-mincup-averagefirmness": 0,
-"female-young-maxmuscle-maxweight-mincup-maxfirmness": 0,
-"female-young-maxmuscle-maxweight-mincup-minfirmness": 0,
-"female-young-maxmuscle-maxweight-minheight": 0,
-"female-young-maxmuscle-maxweight-uncommonproportions": 0,
-"female-young-maxmuscle-minweight-averagecup-maxfirmness": 0,
-"female-young-maxmuscle-minweight-averagecup-minfirmness": 0,
-"female-young-maxmuscle-minweight-idealproportions": 0,
-"female-young-maxmuscle-minweight-maxcup-averagefirmness": 0,
-"female-young-maxmuscle-minweight-maxcup-maxfirmness": 0,
-"female-young-maxmuscle-minweight-maxcup-minfirmness": 0,
-"female-young-maxmuscle-minweight-maxheight": 0,
-"female-young-maxmuscle-minweight-mincup-averagefirmness": 0,
-"female-young-maxmuscle-minweight-mincup-maxfirmness": 0,
-"female-young-maxmuscle-minweight-mincup-minfirmness": 0,
-"female-young-maxmuscle-minweight-minheight": 0,
-"female-young-maxmuscle-minweight-uncommonproportions": 0,
-"female-young-minmuscle-averageweight-averagecup-maxfirmness": 0,
-"female-young-minmuscle-averageweight-averagecup-minfirmness": 0,
-"female-young-minmuscle-averageweight-idealproportions": 0,
-"female-young-minmuscle-averageweight-maxcup-averagefirmness": 0,
-"female-young-minmuscle-averageweight-maxcup-maxfirmness": 0,
-"female-young-minmuscle-averageweight-maxcup-minfirmness": 0,
-"female-young-minmuscle-averageweight-maxheight": 0,
-"female-young-minmuscle-averageweight-mincup-averagefirmness": 0,
-"female-young-minmuscle-averageweight-mincup-maxfirmness": 0,
-"female-young-minmuscle-averageweight-mincup-minfirmness": 0,
-"female-young-minmuscle-averageweight-minheight": 0,
-"female-young-minmuscle-averageweight-uncommonproportions": 0,
-"female-young-minmuscle-maxweight-averagecup-maxfirmness": 0,
-"female-young-minmuscle-maxweight-averagecup-minfirmness": 0,
-"female-young-minmuscle-maxweight-idealproportions": 0,
-"female-young-minmuscle-maxweight-maxcup-averagefirmness": 0,
-"female-young-minmuscle-maxweight-maxcup-maxfirmness": 0,
-"female-young-minmuscle-maxweight-maxcup-minfirmness": 0,
-"female-young-minmuscle-maxweight-maxheight": 0,
-"female-young-minmuscle-maxweight-mincup-averagefirmness": 0,
-"female-young-minmuscle-maxweight-mincup-maxfirmness": 0,
-"female-young-minmuscle-maxweight-mincup-minfirmness": 0,
-"female-young-minmuscle-maxweight-minheight": 0,
-"female-young-minmuscle-maxweight-uncommonproportions": 0,
-"female-young-minmuscle-minweight-averagecup-maxfirmness": 0,
-"female-young-minmuscle-minweight-averagecup-minfirmness": 0,
-"female-young-minmuscle-minweight-idealproportions": 0,
-"female-young-minmuscle-minweight-maxcup-averagefirmness": 0,
-"female-young-minmuscle-minweight-maxcup-maxfirmness": 0,
-"female-young-minmuscle-minweight-maxcup-minfirmness": 0,
-"female-young-minmuscle-minweight-maxheight": 0,
-"female-young-minmuscle-minweight-mincup-averagefirmness": 0,
-"female-young-minmuscle-minweight-mincup-maxfirmness": 0,
-"female-young-minmuscle-minweight-mincup-minfirmness": 0,
-"female-young-minmuscle-minweight-minheight": 0,
-"female-young-minmuscle-minweight-uncommonproportions": 0,
 "firmness": 0.5,
 "gender": 0.5,
 "height": 0.5,
-"jaldmic_perro_dog": 0.0,
-"jaldmic_vaca_cow": 0.0,
-"male-baby-averagemuscle-averageweight-averagecup-averagefirmness": 0.5,
-"male-baby-averagemuscle-averageweight-maxheight": 0,
-"male-baby-averagemuscle-averageweight-minheight": 0,
-"male-baby-averagemuscle-maxweight-maxheight": 0,
-"male-baby-averagemuscle-maxweight-minheight": 0,
-"male-baby-averagemuscle-minweight-maxheight": 0,
-"male-baby-averagemuscle-minweight-minheight": 0,
-"male-baby-maxmuscle-averageweight-maxheight": 0,
-"male-baby-maxmuscle-averageweight-minheight": 0,
-"male-baby-maxmuscle-maxweight-maxheight": 0,
-"male-baby-maxmuscle-maxweight-minheight": 0,
-"male-baby-maxmuscle-minweight-maxheight": 0,
-"male-baby-maxmuscle-minweight-minheight": 0,
-"male-baby-minmuscle-averageweight-maxheight": 0,
-"male-baby-minmuscle-averageweight-minheight": 0,
-"male-baby-minmuscle-maxweight-maxheight": 0,
-"male-baby-minmuscle-maxweight-minheight": 0,
-"male-baby-minmuscle-minweight-maxheight": 0,
-"male-baby-minmuscle-minweight-minheight": 0,
-"male-child-averagemuscle-averageweight-idealproportions": 0,
-"male-child-averagemuscle-averageweight-maxheight": 0,
-"male-child-averagemuscle-averageweight-minheight": 0,
-"male-child-averagemuscle-averageweight-uncommonproportions": 0,
-"male-child-averagemuscle-maxweight-idealproportions": 0,
-"male-child-averagemuscle-maxweight-maxheight": 0,
-"male-child-averagemuscle-maxweight-minheight": 0,
-"male-child-averagemuscle-maxweight-uncommonproportions": 0,
-"male-child-averagemuscle-minweight-idealproportions": 0,
-"male-child-averagemuscle-minweight-maxheight": 0,
-"male-child-averagemuscle-minweight-minheight": 0,
-"male-child-averagemuscle-minweight-uncommonproportions": 0,
-"male-child-maxmuscle-averageweight-idealproportions": 0,
-"male-child-maxmuscle-averageweight-maxheight": 0,
-"male-child-maxmuscle-averageweight-minheight": 0,
-"male-child-maxmuscle-averageweight-uncommonproportions": 0,
-"male-child-maxmuscle-maxweight-idealproportions": 0,
-"male-child-maxmuscle-maxweight-maxheight": 0,
-"male-child-maxmuscle-maxweight-minheight": 0,
-"male-child-maxmuscle-maxweight-uncommonproportions": 0,
-"male-child-maxmuscle-minweight-idealproportions": 0,
-"male-child-maxmuscle-minweight-maxheight": 0,
-"male-child-maxmuscle-minweight-minheight": 0,
-"male-child-maxmuscle-minweight-uncommonproportions": 0,
-"male-child-minmuscle-averageweight-idealproportions": 0,
-"male-child-minmuscle-averageweight-maxheight": 0,
-"male-child-minmuscle-averageweight-minheight": 0,
-"male-child-minmuscle-averageweight-uncommonproportions": 0,
-"male-child-minmuscle-maxweight-idealproportions": 0,
-"male-child-minmuscle-maxweight-maxheight": 0,
-"male-child-minmuscle-maxweight-minheight": 0,
-"male-child-minmuscle-maxweight-uncommonproportions": 0,
-"male-child-minmuscle-minweight-idealproportions": 0,
-"male-child-minmuscle-minweight-maxheight": 0,
-"male-child-minmuscle-minweight-minheight": 0,
-"male-child-minmuscle-minweight-uncommonproportions": 0,
-"male-old-averagemuscle-averageweight-averagecup-averagefirmness": 0.166667,
-"male-old-averagemuscle-averageweight-idealproportions": 0,
-"male-old-averagemuscle-averageweight-maxheight": 0,
-"male-old-averagemuscle-averageweight-minheight": 0,
-"male-old-averagemuscle-averageweight-uncommonproportions": 0,
-"male-old-averagemuscle-maxweight-idealproportions": 0,
-"male-old-averagemuscle-maxweight-maxheight": 0,
-"male-old-averagemuscle-maxweight-minheight": 0,
-"male-old-averagemuscle-maxweight-uncommonproportions": 0,
-"male-old-averagemuscle-minweight-idealproportions": 0,
-"male-old-averagemuscle-minweight-maxheight": 0,
-"male-old-averagemuscle-minweight-minheight": 0,
-"male-old-averagemuscle-minweight-uncommonproportions": 0,
-"male-old-maxmuscle-averageweight-idealproportions": 0,
-"male-old-maxmuscle-averageweight-maxheight": 0,
-"male-old-maxmuscle-averageweight-minheight": 0,
-"male-old-maxmuscle-averageweight-uncommonproportions": 0,
-"male-old-maxmuscle-maxweight-idealproportions": 0,
-"male-old-maxmuscle-maxweight-maxheight": 0,
-"male-old-maxmuscle-maxweight-minheight": 0,
-"male-old-maxmuscle-maxweight-uncommonproportions": 0,
-"male-old-maxmuscle-minweight-idealproportions": 0,
-"male-old-maxmuscle-minweight-maxheight": 0,
-"male-old-maxmuscle-minweight-minheight": 0,
-"male-old-maxmuscle-minweight-uncommonproportions": 0,
-"male-old-minmuscle-averageweight-idealproportions": 0,
-"male-old-minmuscle-averageweight-maxheight": 0,
-"male-old-minmuscle-averageweight-minheight": 0,
-"male-old-minmuscle-averageweight-uncommonproportions": 0,
-"male-old-minmuscle-maxweight-idealproportions": 0,
-"male-old-minmuscle-maxweight-maxheight": 0,
-"male-old-minmuscle-maxweight-minheight": 0,
-"male-old-minmuscle-maxweight-uncommonproportions": 0,
-"male-old-minmuscle-minweight-idealproportions": 0,
-"male-old-minmuscle-minweight-maxheight": 0,
-"male-old-minmuscle-minweight-minheight": 0,
-"male-old-minmuscle-minweight-uncommonproportions": 0,
-"male-young-averagemuscle-averageweight-averagecup-averagefirmness": 0.333333,
-"male-young-averagemuscle-averageweight-idealproportions": 0,
-"male-young-averagemuscle-averageweight-maxheight": 0,
-"male-young-averagemuscle-averageweight-minheight": 0,
-"male-young-averagemuscle-averageweight-uncommonproportions": 0,
-"male-young-averagemuscle-maxweight-idealproportions": 0,
-"male-young-averagemuscle-maxweight-maxheight": 0,
-"male-young-averagemuscle-maxweight-minheight": 0,
-"male-young-averagemuscle-maxweight-uncommonproportions": 0,
-"male-young-averagemuscle-minweight-idealproportions": 0,
-"male-young-averagemuscle-minweight-maxheight": 0,
-"male-young-averagemuscle-minweight-minheight": 0,
-"male-young-averagemuscle-minweight-uncommonproportions": 0,
-"male-young-maxmuscle-averageweight-idealproportions": 0,
-"male-young-maxmuscle-averageweight-maxheight": 0,
-"male-young-maxmuscle-averageweight-minheight": 0,
-"male-young-maxmuscle-averageweight-uncommonproportions": 0,
-"male-young-maxmuscle-maxweight-idealproportions": 0,
-"male-young-maxmuscle-maxweight-maxheight": 0,
-"male-young-maxmuscle-maxweight-minheight": 0,
-"male-young-maxmuscle-maxweight-uncommonproportions": 0,
-"male-young-maxmuscle-minweight-idealproportions": 0,
-"male-young-maxmuscle-minweight-maxheight": 0,
-"male-young-maxmuscle-minweight-minheight": 0,
-"male-young-maxmuscle-minweight-uncommonproportions": 0,
-"male-young-minmuscle-averageweight-idealproportions": 0,
-"male-young-minmuscle-averageweight-maxheight": 0,
-"male-young-minmuscle-averageweight-minheight": 0,
-"male-young-minmuscle-averageweight-uncommonproportions": 0,
-"male-young-minmuscle-maxweight-idealproportions": 0,
-"male-young-minmuscle-maxweight-maxheight": 0,
-"male-young-minmuscle-maxweight-minheight": 0,
-"male-young-minmuscle-maxweight-uncommonproportions": 0,
-"male-young-minmuscle-minweight-idealproportions": 0,
-"male-young-minmuscle-minweight-maxheight": 0,
-"male-young-minmuscle-minweight-minheight": 0,
-"male-young-minmuscle-minweight-uncommonproportions": 0,
 "muscle": 0.5,
 "proportions": 0.5,
-"universal-female-baby-averagemuscle-averageweight": 0,
-"universal-female-baby-averagemuscle-maxweight": 0,
-"universal-female-baby-averagemuscle-minweight": 0,
-"universal-female-baby-maxmuscle-averageweight": 0,
-"universal-female-baby-maxmuscle-maxweight": 0,
-"universal-female-baby-maxmuscle-minweight": 0,
-"universal-female-baby-minmuscle-averageweight": 0,
-"universal-female-baby-minmuscle-maxweight": 0,
-"universal-female-baby-minmuscle-minweight": 0,
-"universal-female-child-averagemuscle-averageweight": 0,
-"universal-female-child-averagemuscle-maxweight": 0,
-"universal-female-child-averagemuscle-minweight": 0,
-"universal-female-child-maxmuscle-averageweight": 0,
-"universal-female-child-maxmuscle-maxweight": 0,
-"universal-female-child-maxmuscle-minweight": 0,
-"universal-female-child-minmuscle-averageweight": 0,
-"universal-female-child-minmuscle-maxweight": 0,
-"universal-female-child-minmuscle-minweight": 0,
 "universal-female-old-averagemuscle-averageweight": 0.166667,
-"universal-female-old-averagemuscle-maxweight": 0,
-"universal-female-old-averagemuscle-minweight": 0,
-"universal-female-old-maxmuscle-averageweight": 0,
-"universal-female-old-maxmuscle-maxweight": 0,
-"universal-female-old-maxmuscle-minweight": 0,
-"universal-female-old-minmuscle-averageweight": 0,
-"universal-female-old-minmuscle-maxweight": 0,
-"universal-female-old-minmuscle-minweight": 0,
 "universal-female-young-averagemuscle-averageweight": 0.333333,
-"universal-female-young-averagemuscle-maxweight": 0,
-"universal-female-young-averagemuscle-minweight": 0,
-"universal-female-young-maxmuscle-averageweight": 0,
-"universal-female-young-maxmuscle-maxweight": 0,
-"universal-female-young-maxmuscle-minweight": 0,
-"universal-female-young-minmuscle-averageweight": 0,
-"universal-female-young-minmuscle-maxweight": 0,
-"universal-female-young-minmuscle-minweight": 0,
-"universal-male-baby-averagemuscle-averageweight": 0,
-"universal-male-baby-averagemuscle-maxweight": 0,
-"universal-male-baby-averagemuscle-minweight": 0,
-"universal-male-baby-maxmuscle-averageweight": 0,
-"universal-male-baby-maxmuscle-maxweight": 0,
-"universal-male-baby-maxmuscle-minweight": 0,
-"universal-male-baby-minmuscle-averageweight": 0,
-"universal-male-baby-minmuscle-maxweight": 0,
-"universal-male-baby-minmuscle-minweight": 0,
-"universal-male-child-averagemuscle-averageweight": 0,
-"universal-male-child-averagemuscle-maxweight": 0,
-"universal-male-child-averagemuscle-minweight": 0,
-"universal-male-child-maxmuscle-averageweight": 0,
-"universal-male-child-maxmuscle-maxweight": 0,
-"universal-male-child-maxmuscle-minweight": 0,
-"universal-male-child-minmuscle-averageweight": 0,
-"universal-male-child-minmuscle-maxweight": 0,
-"universal-male-child-minmuscle-minweight": 0,
 "universal-male-old-averagemuscle-averageweight": 0.166667,
-"universal-male-old-averagemuscle-maxweight": 0,
-"universal-male-old-averagemuscle-minweight": 0,
-"universal-male-old-maxmuscle-averageweight": 0,
-"universal-male-old-maxmuscle-maxweight": 0,
-"universal-male-old-maxmuscle-minweight": 0,
-"universal-male-old-minmuscle-averageweight": 0,
-"universal-male-old-minmuscle-maxweight": 0,
-"universal-male-old-minmuscle-minweight": 0,
 "universal-male-young-averagemuscle-averageweight": 0.333333,
-"universal-male-young-averagemuscle-maxweight": 0,
-"universal-male-young-averagemuscle-minweight": 0,
-"universal-male-young-maxmuscle-averageweight": 0,
-"universal-male-young-maxmuscle-maxweight": 0,
-"universal-male-young-maxmuscle-minweight": 0,
-"universal-male-young-minmuscle-averageweight": 0,
-"universal-male-young-minmuscle-maxweight": 0,
-"universal-male-young-minmuscle-minweight": 0,
 "weight": 0.5
 }
 components = [&"main_collider", &"lod"]
-body_parts = {}
-body_part_materials = {}
-clothes = []
-clothes_materials = {}
+equipment = {
+"DefaultBody": SubResource("Resource_5vhe4"),
+"LeftEyeBall-LowPoly": SubResource("Resource_bb3fp"),
+"RightEyeball-LowPoly": SubResource("Resource_sy6n8")
+}
 transforms = {}
 skin_color = Color(1, 1, 1, 1)
 eye_color = Color(0.529412, 0.807843, 0.921569, 1)
-eyebrow_color = Color(0.200784, 0, 0, 1)
+eyebrow_color = Color(0.2, 0, 0, 1)
 hair_color = Color(0.501961, 0, 0, 1)
-material_configs = {}
 
-[node name="New_Character" type="MarginContainer" node_paths=PackedStringArray("humanizer", "nameBox", "baseMesh", "camera")]
+[sub_resource type="Resource" id="Resource_ff83j"]
+resource_name = "middleage_african_female"
+script = ExtResource("3_enu8t")
+albedo_texture_path = "res://addons/humanizer/data/assets/body_parts/Body/Default/young_asian_female/young_asian_female_diffuse3.png"
+normal_texture_path = ""
+ao_texture_path = ""
+color = Color(1, 1, 1, 1)
+offset = Vector2i(0, 0)
+normal_strength = 1.0
+
+[sub_resource type="Resource" id="Resource_v7lcl"]
+resource_local_to_scene = true
+script = ExtResource("4_1e5ii")
+overlays = Array[ExtResource("3_enu8t")]([SubResource("Resource_ff83j")])
+
+[sub_resource type="Resource" id="Resource_b4ky0"]
+script = ExtResource("5_fnub2")
+type = "DefaultBody"
+texture_name = "young_asian_female_diffuse3"
+material_config = SubResource("Resource_v7lcl")
+
+[sub_resource type="Resource" id="Resource_rtp7v"]
+resource_name = "eyeball"
+script = ExtResource("3_enu8t")
+albedo_texture_path = "res://addons/humanizer/data/assets/body_parts/Eyes/Eyeballs/eyeball_albedo.png"
+normal_texture_path = ""
+ao_texture_path = ""
+color = Color(1, 1, 1, 1)
+offset = Vector2i(0, 0)
+normal_strength = 1.0
+
+[sub_resource type="Resource" id="Resource_a55q4"]
+resource_local_to_scene = true
+script = ExtResource("4_1e5ii")
+overlays = Array[ExtResource("3_enu8t")]([SubResource("Resource_rtp7v"), SubResource("Resource_7fltc")])
+
+[sub_resource type="Resource" id="Resource_yt7w5"]
+script = ExtResource("5_fnub2")
+type = "RightEyeball-LowPoly"
+texture_name = "eyeball_albedo"
+material_config = SubResource("Resource_a55q4")
+
+[sub_resource type="Resource" id="Resource_yltsw"]
+resource_name = "eyeball"
+script = ExtResource("3_enu8t")
+albedo_texture_path = "res://addons/humanizer/data/assets/body_parts/Eyes/Eyeballs/eyeball_albedo.png"
+normal_texture_path = ""
+ao_texture_path = ""
+color = Color(1, 1, 1, 1)
+offset = Vector2i(0, 0)
+normal_strength = 1.0
+
+[sub_resource type="Resource" id="Resource_oyw8l"]
+resource_local_to_scene = true
+script = ExtResource("4_1e5ii")
+overlays = Array[ExtResource("3_enu8t")]([SubResource("Resource_yltsw"), SubResource("Resource_gfvi2")])
+
+[sub_resource type="Resource" id="Resource_esmrl"]
+script = ExtResource("5_fnub2")
+type = "LeftEyeBall-LowPoly"
+texture_name = "eyeball_albedo"
+material_config = SubResource("Resource_oyw8l")
+
+[sub_resource type="Resource" id="Resource_k0oev"]
+script = ExtResource("6_4floc")
+rig = "game_engine-RETARGETED"
+targets = {
+"african": 0.333333,
+"african-female-old": 0.0555556,
+"african-female-young": 0.111111,
+"african-male-old": 0.0555556,
+"african-male-young": 0.111111,
+"age": 0.5,
+"asian": 0.333333,
+"asian-female-old": 0.0555556,
+"asian-female-young": 0.111111,
+"asian-male-old": 0.0555556,
+"asian-male-young": 0.111111,
+"caucasian": 0.333333,
+"caucasian-female-old": 0.0555556,
+"caucasian-female-young": 0.111111,
+"caucasian-male-old": 0.0555556,
+"caucasian-male-young": 0.111111,
+"cupsize": 0.5,
+"firmness": 0.5,
+"gender": 0.5,
+"height": 0.5,
+"muscle": 0.5,
+"proportions": 0.5,
+"universal-female-old-averagemuscle-averageweight": 0.166667,
+"universal-female-young-averagemuscle-averageweight": 0.333333,
+"universal-male-old-averagemuscle-averageweight": 0.166667,
+"universal-male-young-averagemuscle-averageweight": 0.333333,
+"weight": 0.5
+}
+components = [&"main_collider", &"lod"]
+equipment = {
+"DefaultBody": SubResource("Resource_b4ky0"),
+"LeftEyeBall-LowPoly": SubResource("Resource_esmrl"),
+"RightEyeball-LowPoly": SubResource("Resource_yt7w5")
+}
+transforms = {}
+skin_color = Color(1, 1, 1, 1)
+eye_color = Color(0.529412, 0.807843, 0.921569, 1)
+eyebrow_color = Color(0.2, 0, 0, 1)
+hair_color = Color(0.501961, 0, 0, 1)
+
+[node name="New_Character" type="MarginContainer" node_paths=PackedStringArray("collection", "nameBox", "baseMesh", "camera")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1188,7 +838,7 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 script = SubResource("GDScript_yutiq")
-humanizer = NodePath("Split_Screen/Right_Side/CharacterView/Viewport/SubViewport/collection/AutoUpdatingHumanizer")
+collection = NodePath("Split_Screen/Right_Side/CharacterView/Viewport/SubViewport/collection")
 nameBox = NodePath("Split_Screen/Right_Side/CharacterView/HBoxContainer/Center/Name")
 baseMesh = NodePath("Split_Screen/Right_Side/CharacterView/Viewport/SubViewport/collection/BaseMesh")
 camera = NodePath("Split_Screen/Right_Side/CharacterView/Viewport/SubViewport/Camera3D")
@@ -1279,12 +929,12 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.021825, 0)
 mesh = ExtResource("4_8gh7d")
 skeleton = NodePath("../..")
 
-[node name="AutoUpdatingHumanizer" type="Node3D" parent="Split_Screen/Right_Side/CharacterView/Viewport/SubViewport/collection"]
-script = ExtResource("1_7ijj3")
-human_config = SubResource("Resource_iovq0")
+[node name="HumanizerEditorTool" type="Node3D" parent="Split_Screen/Right_Side/CharacterView/Viewport/SubViewport/collection"]
+script = ExtResource("2_5dotk")
+human_config = SubResource("Resource_iam8b")
 _baked_root_node = "CharacterBody3D"
 atlas_resolution = 2048
-_animator_scene = ExtResource("4_xf4yp")
+_animator_scene = ExtResource("7_6sika")
 _render_layers = 1
 _character_layers = 2
 _staticbody_layers = 1
@@ -1366,6 +1016,162 @@ text = " Home "
 [node name="padding" type="Label" parent="Split_Screen/Right_Side/verticalScrolls/Right_Side"]
 layout_mode = 2
 
+[node name="Right_Side" type="PanelContainer" parent="Split_Screen/Right_Side"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CharacterView" type="VBoxContainer" parent="Split_Screen/Right_Side/Right_Side"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Split_Screen/Right_Side/Right_Side/CharacterView"]
+layout_mode = 2
+
+[node name="Padding2" type="VBoxContainer" parent="Split_Screen/Right_Side/Right_Side/CharacterView/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Center" type="VBoxContainer" parent="Split_Screen/Right_Side/Right_Side/CharacterView/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Split_Screen/Right_Side/Right_Side/CharacterView/HBoxContainer/Center"]
+layout_mode = 2
+
+[node name="Padding" type="Label" parent="Split_Screen/Right_Side/Right_Side/CharacterView/HBoxContainer/Center/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Split_Screen/Right_Side/Right_Side/CharacterView/HBoxContainer/Center/HBoxContainer"]
+layout_mode = 2
+text = "Name"
+
+[node name="Padding2" type="Label" parent="Split_Screen/Right_Side/Right_Side/CharacterView/HBoxContainer/Center/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Random" type="Button" parent="Split_Screen/Right_Side/Right_Side/CharacterView/HBoxContainer/Center/HBoxContainer"]
+layout_mode = 2
+text = "Randomize"
+
+[node name="Name" type="TextEdit" parent="Split_Screen/Right_Side/Right_Side/CharacterView/HBoxContainer/Center"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+placeholder_text = "Name"
+
+[node name="Padding" type="VBoxContainer" parent="Split_Screen/Right_Side/Right_Side/CharacterView/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Viewport" type="SubViewportContainer" parent="Split_Screen/Right_Side/Right_Side/CharacterView"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="Split_Screen/Right_Side/Right_Side/CharacterView/Viewport"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(750, 485)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="Split_Screen/Right_Side/Right_Side/CharacterView/Viewport/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.16017, 1)
+projection = 1
+current = true
+size = 2.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Split_Screen/Right_Side/Right_Side/CharacterView/Viewport/SubViewport"]
+transform = Transform3D(0.989127, -0.127363, 0.0735333, -9.83845e-09, 0.5, 0.866026, -0.147067, -0.856609, 0.494563, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Split_Screen/Right_Side/Right_Side/CharacterView/Viewport/SubViewport"]
+environment = SubResource("Environment_yvgqs")
+
+[node name="collection" type="Node3D" parent="Split_Screen/Right_Side/Right_Side/CharacterView/Viewport/SubViewport"]
+
+[node name="BaseMesh" type="MeshInstance3D" parent="Split_Screen/Right_Side/Right_Side/CharacterView/Viewport/SubViewport/collection"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.021825, 0)
+mesh = ExtResource("4_8gh7d")
+skeleton = NodePath("../..")
+
+[node name="Authoring_Scene" parent="Split_Screen/Right_Side/Right_Side/CharacterView/Viewport/SubViewport/collection" instance=ExtResource("8_t6agc")]
+human_config = SubResource("Resource_k0oev")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Split_Screen/Right_Side/Right_Side/CharacterView"]
+layout_mode = 2
+
+[node name="rotation" type="HSlider" parent="Split_Screen/Right_Side/Right_Side/CharacterView/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="padding" type="Label" parent="Split_Screen/Right_Side/Right_Side/CharacterView/HBoxContainer2"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Padding" type="Label" parent="Split_Screen/Right_Side/Right_Side/CharacterView"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+
+[node name="verticalScrolls" type="HBoxContainer" parent="Split_Screen/Right_Side/Right_Side"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Split_Screen/Right_Side/Right_Side/verticalScrolls"]
+layout_mode = 2
+
+[node name="posLable" type="Label" parent="Split_Screen/Right_Side/Right_Side/verticalScrolls/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Position"
+horizontal_alignment = 1
+
+[node name="PositionSlider" type="VSlider" parent="Split_Screen/Right_Side/Right_Side/verticalScrolls/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="padding" type="Label" parent="Split_Screen/Right_Side/Right_Side/verticalScrolls/VBoxContainer"]
+layout_mode = 2
+
+[node name="padding2" type="Label" parent="Split_Screen/Right_Side/Right_Side/verticalScrolls/VBoxContainer"]
+layout_mode = 2
+
+[node name="Right_Side" type="VBoxContainer" parent="Split_Screen/Right_Side/Right_Side/verticalScrolls"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="zoom_label" type="Label" parent="Split_Screen/Right_Side/Right_Side/verticalScrolls/Right_Side"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "zoom"
+horizontal_alignment = 1
+
+[node name="zoom_slider" type="VSlider" parent="Split_Screen/Right_Side/Right_Side/verticalScrolls/Right_Side"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+max_value = 1.0
+step = 0.01
+allow_greater = true
+
+[node name="Save" type="Button" parent="Split_Screen/Right_Side/Right_Side/verticalScrolls/Right_Side"]
+layout_mode = 2
+text = " Save "
+
+[node name="Export" type="Button" parent="Split_Screen/Right_Side/Right_Side/verticalScrolls/Right_Side"]
+layout_mode = 2
+text = " Export "
+
+[node name="Home" type="Button" parent="Split_Screen/Right_Side/Right_Side/verticalScrolls/Right_Side"]
+layout_mode = 2
+text = " Home "
+
+[node name="padding" type="Label" parent="Split_Screen/Right_Side/Right_Side/verticalScrolls/Right_Side"]
+layout_mode = 2
+
 [node name="Warning" type="AcceptDialog" parent="."]
 initial_position = 1
 size = Vector2i(500, 100)
@@ -1380,3 +1186,9 @@ dialog_autowrap = true
 [connection signal="value_changed" from="Split_Screen/Right_Side/verticalScrolls/Right_Side/zoom_slider" to="." method="_on_zoom_slider_value_changed"]
 [connection signal="pressed" from="Split_Screen/Right_Side/verticalScrolls/Right_Side/Save" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="Split_Screen/Right_Side/verticalScrolls/Right_Side/Export" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="Split_Screen/Right_Side/Right_Side/CharacterView/HBoxContainer/Center/HBoxContainer/Random" to="." method="new_name"]
+[connection signal="value_changed" from="Split_Screen/Right_Side/Right_Side/CharacterView/HBoxContainer2/rotation" to="." method="_on_rotation_value_changed"]
+[connection signal="value_changed" from="Split_Screen/Right_Side/Right_Side/verticalScrolls/VBoxContainer/PositionSlider" to="." method="_on_position_slider_value_changed"]
+[connection signal="value_changed" from="Split_Screen/Right_Side/Right_Side/verticalScrolls/Right_Side/zoom_slider" to="." method="_on_zoom_slider_value_changed"]
+[connection signal="pressed" from="Split_Screen/Right_Side/Right_Side/verticalScrolls/Right_Side/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="Split_Screen/Right_Side/Right_Side/verticalScrolls/Right_Side/Export" to="." method="_on_next_pressed"]

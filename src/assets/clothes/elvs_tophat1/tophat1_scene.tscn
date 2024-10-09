@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://b0fs3ooj48iu2"]
-
-[ext_resource type="ArrayMesh" uid="uid://jcc8u3slyv16" path="res://assets/clothes/elvs_tophat1/tophat1_mesh.res" id="1_8xrb5"]
-[ext_resource type="Material" uid="uid://ce10fxl8mvw5p" path="res://assets/clothes/elvs_tophat1/elvs_tophat1_material.res" id="2_ewjfb"]
-
-[node name="tophat1" type="MeshInstance3D"]
-mesh = ExtResource("1_8xrb5")
-surface_material_override/0 = ExtResource("2_ewjfb")

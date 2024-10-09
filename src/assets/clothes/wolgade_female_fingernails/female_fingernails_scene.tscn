@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://cdb6e7bouluka"]
-
-[ext_resource type="ArrayMesh" uid="uid://6srcpdvyy436" path="res://assets/clothes/wolgade_female_fingernails/female_fingernails_mesh.res" id="1_ytahv"]
-[ext_resource type="Material" uid="uid://dn7j3ucck11dv" path="res://assets/clothes/wolgade_female_fingernails/wolgade_female_fingernails_material.res" id="2_04lrl"]
-
-[node name="female_fingernails" type="MeshInstance3D"]
-mesh = ExtResource("1_ytahv")
-surface_material_override/0 = ExtResource("2_04lrl")

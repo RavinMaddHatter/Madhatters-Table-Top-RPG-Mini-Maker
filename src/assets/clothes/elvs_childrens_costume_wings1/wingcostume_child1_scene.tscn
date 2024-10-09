@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://b0kk8ek6hca24"]
-
-[ext_resource type="ArrayMesh" uid="uid://dofyjee6iwbgi" path="res://assets/clothes/elvs_childrens_costume_wings1/wingcostume_child1_mesh.res" id="1_ba8h1"]
-[ext_resource type="Material" uid="uid://crw6oj0c88b2y" path="res://assets/clothes/elvs_childrens_costume_wings1/elvs_childrens_costume_wings1_material.res" id="2_s7jsh"]
-
-[node name="wingcostume_child1" type="MeshInstance3D"]
-mesh = ExtResource("1_ba8h1")
-surface_material_override/0 = ExtResource("2_s7jsh")

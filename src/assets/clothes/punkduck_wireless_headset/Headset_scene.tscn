@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://va0h4y5vnse8"]
-
-[ext_resource type="ArrayMesh" uid="uid://gqdijlasigy0" path="res://assets/clothes/punkduck_wireless_headset/Headset_mesh.res" id="1_ptb8j"]
-[ext_resource type="Material" uid="uid://dm8u5vq14ndot" path="res://assets/clothes/punkduck_wireless_headset/punkduck_wireless_headset_material.res" id="2_dlhck"]
-
-[node name="Headset" type="MeshInstance3D"]
-mesh = ExtResource("1_ptb8j")
-surface_material_override/0 = ExtResource("2_dlhck")

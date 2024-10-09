@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://fki3xygfvcmv"]
-
-[ext_resource type="ArrayMesh" uid="uid://bxnrgnk5dya2e" path="res://assets/clothes/culturalibre_cl_gun_left_hand/CL_gun_left_hand_mesh.res" id="1_ue04e"]
-[ext_resource type="Material" uid="uid://dnqd4ybravlxv" path="res://assets/clothes/culturalibre_cl_gun_left_hand/culturalibre_cl_gun_left_hand_material.res" id="2_2f24u"]
-
-[node name="CL_gun_left_hand" type="MeshInstance3D"]
-mesh = ExtResource("1_ue04e")
-surface_material_override/0 = ExtResource("2_2f24u")

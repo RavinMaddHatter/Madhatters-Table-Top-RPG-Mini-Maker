@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://byhw443o1stcr"]
-
-[ext_resource type="ArrayMesh" uid="uid://cjduqyoji2dvf" path="res://assets/clothes/toigo_long_fingernails_blue_butterfly/LongFingernails-BlueButterfly_mesh.res" id="1_mc43t"]
-[ext_resource type="Material" uid="uid://cxx3lww53hd73" path="res://assets/clothes/toigo_long_fingernails_blue_butterfly/toigo_long_fingernails_blue_butterfly_material.res" id="2_wmipa"]
-
-[node name="LongFingernails-BlueButterfly" type="MeshInstance3D"]
-mesh = ExtResource("1_mc43t")
-surface_material_override/0 = ExtResource("2_wmipa")

@@ -2,29 +2,30 @@ class_name HumanizerEditorInspectorPlugin
 extends EditorInspectorPlugin
 
 func _can_handle(human):
-	return human is AutoUpdatingHumanizer
+	return human is HumanizerEditorTool
 	
 func _parse_category(human, category):
 	if not Engine.is_editor_hint():
 		return
-	if category != 'humanizer.gd':
+	if category != 'humanizer_editor_tool.gd':
 		return
 	var scene = load("res://addons/humanizer/scenes/inspector/humanizer_inspector.tscn").instantiate()
 	add_custom_control(scene)
 	
 	# Header Section
-	scene.get_node('%ResetButton').pressed.connect(human.set_human_config.bind(HumanConfig.new()))
+	scene.get_node('%ResetButton').pressed.connect(human.reset)
 	scene.get_node('%PresetsOptionButton').human = human
 
 	## Color pickers
-	scene.get_node('%SkinColorPicker').color = human.skin_color
-	scene.get_node('%HairColorPicker').color = human.hair_color
-	scene.get_node('%EyeColorPicker').color = human.eye_color
-	scene.get_node('%EyebrowColorPicker').color = human.eyebrow_color
+	scene.get_node('%SkinColorPicker').color = human.human_config.skin_color
+	scene.get_node('%HairColorPicker').color = human.human_config.hair_color
+	scene.get_node('%EyeColorPicker').color = human.human_config.eye_color
+	scene.get_node('%EyebrowColorPicker').color = human.human_config.eyebrow_color
 	scene.get_node('%SkinColorPicker').color_changed.connect(human.set_skin_color)
-	scene.get_node('%HairColorPicker').color_changed.connect(human.set_hair_color)
 	scene.get_node('%EyeColorPicker').color_changed.connect(human.set_eye_color)
-	scene.get_node('%EyebrowColorPicker').color_changed.connect(human.set_eyebrow_color)
+	var eyebrow_color_picker = scene.get_node('%EyebrowColorPicker')
+	eyebrow_color_picker.color_changed.connect(human.set_eyebrow_color)
+	scene.get_node('%HairColorPicker').color_changed.connect(hair_color_changed.bind(human,eyebrow_color_picker))
 	
 	# Components Inspector
 	scene.get_node('%MainColliderCheckBox').button_pressed = &'main_collider' in human.human_config.components
@@ -59,8 +60,6 @@ func _parse_category(human, category):
 
 	## Assets
 	scene.get_node('%RigOptionButton').human = human
-	scene.get_node('%HideBodyVerticesButton').pressed.connect(human.hide_body_vertices)
-	scene.get_node('%UnHideBodyVerticesButton').pressed.connect(human.unhide_body_vertices)
 	scene.get_node('%HideClothesVerticesButton').pressed.connect(human.hide_clothes_vertices)
 	scene.get_node('%UnHideClothesVerticesButton').pressed.connect(human.unhide_clothes_vertices)
 	
@@ -68,30 +67,27 @@ func _parse_category(human, category):
 	var bp_container = scene.get_node('%BodyPartsContainer') as BodyPartsInspector
 	scene.get_node('%BodyPartsButton').pressed.connect(func(): bp_container.visible = not bp_container.visible)
 	bp_container.visible = bp_container.visible_setting
-	bp_container.body_part_changed.connect(func(bp): human.set_body_part(bp))
-	bp_container.body_slot_cleared.connect(func(slot): human.clear_body_part(slot))
-	bp_container.material_set.connect(func(slot, idx): human.set_body_part_material(slot, idx))
+	bp_container.body_part_changed.connect(func(bp): human.add_equipment_type(bp))
+	bp_container.body_slot_cleared.connect(func(slot): human.remove_equipment_in_slot(slot))
+	bp_container.material_set.connect(func(slot, idx): human.set_equipment_texture_by_slot(slot, idx))
 	bp_container.config = human.human_config
 
 	# Clothes inspector
 	var cl_container = scene.get_node('%ClothesContainer') as ClothesInspector
 	scene.get_node('%ClothesButton').pressed.connect(func(): cl_container.visible = not cl_container.visible)
 	cl_container.visible = cl_container.visible_setting
-	cl_container.clothes_changed.connect(func(cl): human.apply_clothes(cl))
-	cl_container.clothes_cleared.connect(func(sl): human.clear_clothes_in_slot(sl))
-	cl_container.material_set.connect(func(cl, idx): human.set_clothes_material(cl, idx))
+	cl_container.clothes_changed.connect(func(cl): human.add_equipment_type(cl))
+	cl_container.clothes_cleared.connect(func(sl): human.remove_equipment_in_slot(sl+"Clothes"))
+	cl_container.material_set.connect(func(cl, idx): human.set_equipment_texture_by_name(cl, idx))
 	cl_container.config = human.human_config
 
 	# Skin controls
-	var skin_options = scene.get_node('%SkinOptionsButton')
-	skin_options.skin_selected.connect(human.set_skin_texture)
-	skin_options.config = human.human_config
 	var skin_normal_options = scene.get_node('%SkinNormalOptionsButton')
 	skin_normal_options.skin_selected.connect(human.set_skin_normal_texture)
 	skin_normal_options.config = human.human_config
 	
 	# Add shapekey categories and sliders
-	var sliders = HumanizerUtils.get_shapekey_categories()
+	var sliders = HumanizerTargetService.get_shapekey_categories()
 	var cat_scene = load("res://addons/humanizer/scenes/inspector/slider_category_inspector.tscn")
 	for cat in sliders:
 		if sliders[cat].size() == 0:
@@ -109,3 +105,6 @@ func _parse_category(human, category):
 		scene.get_node('%ShapekeysVBoxContainer').add_child(cat_container)
 		button.pressed.connect(func(): cat_container.visible = not cat_container.visible)
 
+func hair_color_changed(color:Color, human, eyebrow_color_picker):
+	human.humanizer.set_hair_color(color)
+	eyebrow_color_picker.color = human.human_config.eyebrow_color

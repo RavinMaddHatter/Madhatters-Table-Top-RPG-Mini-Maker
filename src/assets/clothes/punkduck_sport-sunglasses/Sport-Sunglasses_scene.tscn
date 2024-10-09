@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://c52j2ybujapib"]
-
-[ext_resource type="ArrayMesh" uid="uid://bh5duvxwtbhqf" path="res://assets/clothes/punkduck_sport-sunglasses/Sport-Sunglasses_mesh.res" id="1_eu32j"]
-[ext_resource type="Material" uid="uid://dt13fm01r5tag" path="res://assets/clothes/punkduck_sport-sunglasses/punkduck_sport-sunglasses_material.res" id="2_k1a7d"]
-
-[node name="Sport-Sunglasses" type="MeshInstance3D"]
-mesh = ExtResource("1_eu32j")
-surface_material_override/0 = ExtResource("2_k1a7d")

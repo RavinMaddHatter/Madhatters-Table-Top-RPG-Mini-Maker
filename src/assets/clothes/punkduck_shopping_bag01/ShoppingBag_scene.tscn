@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbd5nyyx4bf8d"]
-
-[ext_resource type="ArrayMesh" uid="uid://bay0pko5q5hop" path="res://assets/clothes/punkduck_shopping_bag01/ShoppingBag_mesh.res" id="1_nayes"]
-[ext_resource type="Material" uid="uid://cmt4sm4w74u1" path="res://assets/clothes/punkduck_shopping_bag01/punkduck_shopping_bag01_material.res" id="2_afwg6"]
-
-[node name="ShoppingBag" type="MeshInstance3D"]
-mesh = ExtResource("1_nayes")
-surface_material_override/0 = ExtResource("2_afwg6")

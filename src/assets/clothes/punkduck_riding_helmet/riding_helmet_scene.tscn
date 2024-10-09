@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbelga76ru6so"]
-
-[ext_resource type="ArrayMesh" uid="uid://by1ypahjnlfxv" path="res://assets/clothes/punkduck_riding_helmet/riding_helmet_mesh.res" id="1_uxnyh"]
-[ext_resource type="Material" uid="uid://ps5kyuqrjobr" path="res://assets/clothes/punkduck_riding_helmet/punkduck_riding_helmet_material.res" id="2_ti18y"]
-
-[node name="riding_helmet" type="MeshInstance3D"]
-mesh = ExtResource("1_uxnyh")
-surface_material_override/0 = ExtResource("2_ti18y")

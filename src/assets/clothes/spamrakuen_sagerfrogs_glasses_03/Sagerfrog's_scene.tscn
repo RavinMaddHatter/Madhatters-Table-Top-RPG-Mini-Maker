@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://cel6yffdwcmdn"]
-
-[ext_resource type="ArrayMesh" uid="uid://cfssup3xjoruj" path="res://assets/clothes/spamrakuen_sagerfrogs_glasses_03/Sagerfrog's_mesh.res" id="1_l8daa"]
-[ext_resource type="Material" uid="uid://cuojfgggretyl" path="res://assets/clothes/spamrakuen_sagerfrogs_glasses_03/spamrakuen_sagerfrogs_glasses_03_material.res" id="2_25g45"]
-
-[node name="Sagerfrog\'s" type="MeshInstance3D"]
-mesh = ExtResource("1_l8daa")
-surface_material_override/0 = ExtResource("2_25g45")

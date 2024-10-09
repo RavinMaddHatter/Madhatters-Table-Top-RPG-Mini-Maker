@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://cxgeflanbaaw5"]
-
-[ext_resource type="ArrayMesh" uid="uid://d32k3ifqyysyy" path="res://assets/clothes/punkduck_figure_skating_dress/figure_skating_dress_mesh.res" id="1_rgc8k"]
-[ext_resource type="Material" uid="uid://noxoet8ec41y" path="res://assets/clothes/punkduck_figure_skating_dress/punkduck_figure_skating_dress_material.res" id="2_t1bbx"]
-
-[node name="figure_skating_dress" type="MeshInstance3D"]
-mesh = ExtResource("1_rgc8k")
-surface_material_override/0 = ExtResource("2_t1bbx")

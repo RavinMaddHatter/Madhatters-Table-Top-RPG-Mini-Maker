@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://cxjppikqrulur"]
-
-[ext_resource type="ArrayMesh" uid="uid://bryaa2osesv1m" path="res://assets/clothes/jaldmic_m1951_72/M1951-72_mesh.res" id="1_7g8n4"]
-[ext_resource type="Material" uid="uid://c0sn22grkn7w5" path="res://assets/clothes/jaldmic_m1951_72/jaldmic_m1951_72_material.res" id="2_m81os"]
-
-[node name="M1951-72" type="MeshInstance3D"]
-mesh = ExtResource("1_7g8n4")
-surface_material_override/0 = ExtResource("2_m81os")

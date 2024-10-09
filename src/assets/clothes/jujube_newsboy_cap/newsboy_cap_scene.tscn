@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://dubjqaogx4mkg"]
-
-[ext_resource type="ArrayMesh" uid="uid://d18c4o2w8o17r" path="res://assets/clothes/jujube_newsboy_cap/newsboy_cap_mesh.res" id="1_dmcjm"]
-[ext_resource type="Material" uid="uid://bdoxm2r1ymgh7" path="res://assets/clothes/jujube_newsboy_cap/jujube_newsboy_cap_material.res" id="2_1eix6"]
-
-[node name="newsboy_cap" type="MeshInstance3D"]
-mesh = ExtResource("1_dmcjm")
-surface_material_override/0 = ExtResource("2_1eix6")

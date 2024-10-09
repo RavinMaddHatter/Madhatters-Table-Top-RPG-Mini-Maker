@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://vtin5go6mvuu"]
-
-[ext_resource type="ArrayMesh" uid="uid://c1vcjm3xymt7f" path="res://assets/clothes/punkduck_head_mirror/headmirror_mesh.res" id="1_uggaa"]
-[ext_resource type="Material" uid="uid://ryci06yq6s44" path="res://assets/clothes/punkduck_head_mirror/punkduck_head_mirror_material.res" id="2_alkir"]
-
-[node name="headmirror" type="MeshInstance3D"]
-mesh = ExtResource("1_uggaa")
-surface_material_override/0 = ExtResource("2_alkir")

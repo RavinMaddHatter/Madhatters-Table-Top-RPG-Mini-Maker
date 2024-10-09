@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://cuv6pnhwcc4dc"]
-
-[ext_resource type="ArrayMesh" uid="uid://dpnilcsudtntc" path="res://assets/clothes/punkduck_tube_top/TubeTop_mesh.res" id="1_5vkh0"]
-[ext_resource type="Material" uid="uid://ruosbgov3yuh" path="res://assets/clothes/punkduck_tube_top/punkduck_tube_top_material.res" id="2_cfyr5"]
-
-[node name="TubeTop" type="MeshInstance3D"]
-mesh = ExtResource("1_5vkh0")
-surface_material_override/0 = ExtResource("2_cfyr5")

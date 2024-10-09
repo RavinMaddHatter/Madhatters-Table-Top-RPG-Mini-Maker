@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://b038uaixfvedp"]
-
-[ext_resource type="ArrayMesh" uid="uid://b2lx8sduw3kjh" path="res://assets/clothes/culturalibre_hero-heroine_gloves_2/hero-heroine_gloves_2_mesh.res" id="1_thyu7"]
-[ext_resource type="Material" uid="uid://cbf5f1bhpymbb" path="res://assets/clothes/culturalibre_hero-heroine_gloves_2/culturalibre_hero-heroine_gloves_2_material.res" id="2_48ygq"]
-
-[node name="hero-heroine_gloves_2" type="MeshInstance3D"]
-mesh = ExtResource("1_thyu7")
-surface_material_override/0 = ExtResource("2_48ygq")

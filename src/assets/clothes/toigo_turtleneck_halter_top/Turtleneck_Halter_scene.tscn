@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://djpleimfrvg7g"]
-
-[ext_resource type="ArrayMesh" uid="uid://bxmhnhpqs1ta2" path="res://assets/clothes/toigo_turtleneck_halter_top/Turtleneck_Halter_mesh.res" id="1_tvof2"]
-[ext_resource type="Material" uid="uid://gdr65yttkw52" path="res://assets/clothes/toigo_turtleneck_halter_top/toigo_turtleneck_halter_top_material.res" id="2_ki3qj"]
-
-[node name="Turtleneck_Halter" type="MeshInstance3D"]
-mesh = ExtResource("1_tvof2")
-surface_material_override/0 = ExtResource("2_ki3qj")

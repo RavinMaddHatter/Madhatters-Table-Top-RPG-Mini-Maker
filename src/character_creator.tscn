@@ -1,0 +1,352 @@
+[gd_scene load_steps=23 format=3 uid="uid://boivg2moacq1"]
+
+[ext_resource type="Script" path="res://CharacterCreator.gd" id="1_xl482"]
+[ext_resource type="ArrayMesh" uid="uid://fudl6b84hhf5" path="res://assets/simple Base.obj" id="2_uc0kg"]
+[ext_resource type="PackedScene" uid="uid://da831ngvg838b" path="res://addons/humanizer/scenes/authoring.tscn" id="3_ck1e0"]
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/humanizer_overlay.gd" id="4_o5awn"]
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/humanizer_material.gd" id="5_7w1b8"]
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/equipment.gd" id="6_0m0dy"]
+[ext_resource type="Script" path="res://addons/humanizer/scripts/resources/human_config.gd" id="7_m607d"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bbutc"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_sm1kj"]
+sky_material = SubResource("ProceduralSkyMaterial_bbutc")
+
+[sub_resource type="Environment" id="Environment_5otv1"]
+background_mode = 2
+sky = SubResource("Sky_sm1kj")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="Resource" id="Resource_soiqj"]
+resource_name = "middleage_african_female"
+script = ExtResource("4_o5awn")
+albedo_texture_path = "res://addons/humanizer/data/assets/body_parts/Body/Default/old_african_female/old_african_female_diffuse.png"
+normal_texture_path = ""
+ao_texture_path = ""
+color = Color(1, 1, 1, 1)
+offset = Vector2i(0, 0)
+normal_strength = 1.0
+
+[sub_resource type="Resource" id="Resource_enb6c"]
+resource_local_to_scene = true
+script = ExtResource("5_7w1b8")
+overlays = Array[ExtResource("4_o5awn")]([SubResource("Resource_soiqj")])
+
+[sub_resource type="Resource" id="Resource_4kgxs"]
+script = ExtResource("6_0m0dy")
+type = "DefaultBody"
+texture_name = "old_african_female_diffuse"
+material_config = SubResource("Resource_enb6c")
+
+[sub_resource type="Resource" id="Resource_i4xqc"]
+resource_name = "eyeball"
+script = ExtResource("4_o5awn")
+albedo_texture_path = "res://addons/humanizer/data/assets/body_parts/Eyes/Eyeballs/eyeball_albedo.png"
+normal_texture_path = ""
+ao_texture_path = ""
+color = Color(1, 1, 1, 1)
+offset = Vector2i(0, 0)
+normal_strength = 1.0
+
+[sub_resource type="Resource" id="Resource_7fltc"]
+resource_name = "overlay_iris"
+script = ExtResource("4_o5awn")
+albedo_texture_path = "res://addons/humanizer/data/assets/body_parts/Eyes/Eyeballs/overlay_iris_albedo.png"
+normal_texture_path = ""
+ao_texture_path = ""
+color = Color(0.529412, 0.807843, 0.921569, 1)
+offset = Vector2i(0, 0)
+normal_strength = 1.0
+
+[sub_resource type="Resource" id="Resource_uvxwh"]
+resource_local_to_scene = true
+script = ExtResource("5_7w1b8")
+overlays = Array[ExtResource("4_o5awn")]([SubResource("Resource_i4xqc"), SubResource("Resource_7fltc")])
+
+[sub_resource type="Resource" id="Resource_16cns"]
+script = ExtResource("6_0m0dy")
+type = "RightEyeball-LowPoly"
+texture_name = "eyeball_albedo"
+material_config = SubResource("Resource_uvxwh")
+
+[sub_resource type="Resource" id="Resource_pa0yy"]
+resource_name = "eyeball"
+script = ExtResource("4_o5awn")
+albedo_texture_path = "res://addons/humanizer/data/assets/body_parts/Eyes/Eyeballs/eyeball_albedo.png"
+normal_texture_path = ""
+ao_texture_path = ""
+color = Color(1, 1, 1, 1)
+offset = Vector2i(0, 0)
+normal_strength = 1.0
+
+[sub_resource type="Resource" id="Resource_gfvi2"]
+resource_name = "overlay_iris"
+script = ExtResource("4_o5awn")
+albedo_texture_path = "res://addons/humanizer/data/assets/body_parts/Eyes/Eyeballs/overlay_iris_albedo.png"
+normal_texture_path = ""
+ao_texture_path = ""
+color = Color(0.529412, 0.807843, 0.921569, 1)
+offset = Vector2i(0, 0)
+normal_strength = 1.0
+
+[sub_resource type="Resource" id="Resource_o0gdq"]
+resource_local_to_scene = true
+script = ExtResource("5_7w1b8")
+overlays = Array[ExtResource("4_o5awn")]([SubResource("Resource_pa0yy"), SubResource("Resource_gfvi2")])
+
+[sub_resource type="Resource" id="Resource_7dxeu"]
+script = ExtResource("6_0m0dy")
+type = "LeftEyeBall-LowPoly"
+texture_name = "eyeball_albedo"
+material_config = SubResource("Resource_o0gdq")
+
+[sub_resource type="Resource" id="Resource_hx1h5"]
+script = ExtResource("7_m607d")
+rig = "game_engine-RETARGETED"
+targets = {
+"african": 0.333333,
+"african-female-old": 0.0555556,
+"african-female-young": 0.111111,
+"african-male-old": 0.0555556,
+"african-male-young": 0.111111,
+"age": 0.5,
+"asian": 0.333333,
+"asian-female-old": 0.0555556,
+"asian-female-young": 0.111111,
+"asian-male-old": 0.0555556,
+"asian-male-young": 0.111111,
+"caucasian": 0.333333,
+"caucasian-female-old": 0.0555556,
+"caucasian-female-young": 0.111111,
+"caucasian-male-old": 0.0555556,
+"caucasian-male-young": 0.111111,
+"cupsize": 0.5,
+"firmness": 0.5,
+"gender": 0.5,
+"height": 0.5,
+"muscle": 0.5,
+"proportions": 0.5,
+"universal-female-old-averagemuscle-averageweight": 0.166667,
+"universal-female-young-averagemuscle-averageweight": 0.333333,
+"universal-male-old-averagemuscle-averageweight": 0.166667,
+"universal-male-young-averagemuscle-averageweight": 0.333333,
+"weight": 0.5
+}
+components = [&"main_collider", &"lod"]
+equipment = {
+"DefaultBody": SubResource("Resource_4kgxs"),
+"LeftEyeBall-LowPoly": SubResource("Resource_7dxeu"),
+"RightEyeball-LowPoly": SubResource("Resource_16cns")
+}
+transforms = {}
+skin_color = Color(1, 1, 1, 1)
+eye_color = Color(0.529412, 0.807843, 0.921569, 1)
+eyebrow_color = Color(0.2, 0, 0, 1)
+hair_color = Color(0.501961, 0, 0, 1)
+
+[node name="CharacterCreator" type="MarginContainer" node_paths=PackedStringArray("humanizer", "collection", "menu_root", "camera", "home_button", "nameBox", "baseMesh")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+script = ExtResource("1_xl482")
+humanizer = NodePath("splits/Right_Side/CharacterView/Viewport/SubViewport/collection/Authoring_Scene")
+collection = NodePath("splits/Right_Side/CharacterView/Viewport/SubViewport/collection")
+menu_root = NodePath("splits/options")
+camera = NodePath("splits/Right_Side/CharacterView/Viewport/SubViewport/Camera3D")
+home_button = NodePath("splits/Right_Side/verticalScrolls/Right_Side/Home")
+nameBox = NodePath("splits/Right_Side/CharacterView/HBoxContainer/Center/Name")
+baseMesh = NodePath("splits/Right_Side/CharacterView/Viewport/SubViewport/collection/BaseMesh")
+
+[node name="splits" type="HSplitContainer" parent="."]
+layout_mode = 2
+
+[node name="options" type="TabContainer" parent="splits"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+
+[node name="Right_Side" type="PanelContainer" parent="splits"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CharacterView" type="VBoxContainer" parent="splits/Right_Side"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="splits/Right_Side/CharacterView"]
+layout_mode = 2
+
+[node name="Padding2" type="VBoxContainer" parent="splits/Right_Side/CharacterView/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Center" type="VBoxContainer" parent="splits/Right_Side/CharacterView/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="splits/Right_Side/CharacterView/HBoxContainer/Center"]
+layout_mode = 2
+
+[node name="Padding" type="Label" parent="splits/Right_Side/CharacterView/HBoxContainer/Center/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="splits/Right_Side/CharacterView/HBoxContainer/Center/HBoxContainer"]
+layout_mode = 2
+text = "Name"
+
+[node name="Padding2" type="Label" parent="splits/Right_Side/CharacterView/HBoxContainer/Center/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Random" type="Button" parent="splits/Right_Side/CharacterView/HBoxContainer/Center/HBoxContainer"]
+layout_mode = 2
+text = "Randomize"
+
+[node name="Name" type="TextEdit" parent="splits/Right_Side/CharacterView/HBoxContainer/Center"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+placeholder_text = "Name"
+
+[node name="Padding" type="VBoxContainer" parent="splits/Right_Side/CharacterView/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Viewport" type="SubViewportContainer" parent="splits/Right_Side/CharacterView"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="splits/Right_Side/CharacterView/Viewport"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(690, 425)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="splits/Right_Side/CharacterView/Viewport/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.16017, 1)
+projection = 1
+current = true
+size = 2.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="splits/Right_Side/CharacterView/Viewport/SubViewport"]
+transform = Transform3D(0.989127, -0.127363, 0.0735333, -9.83845e-09, 0.5, 0.866026, -0.147067, -0.856609, 0.494563, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="splits/Right_Side/CharacterView/Viewport/SubViewport"]
+environment = SubResource("Environment_5otv1")
+
+[node name="collection" type="Node3D" parent="splits/Right_Side/CharacterView/Viewport/SubViewport"]
+
+[node name="BaseMesh" type="MeshInstance3D" parent="splits/Right_Side/CharacterView/Viewport/SubViewport/collection"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.021825, 0)
+mesh = ExtResource("2_uc0kg")
+skeleton = NodePath("../..")
+
+[node name="Authoring_Scene" parent="splits/Right_Side/CharacterView/Viewport/SubViewport/collection" instance=ExtResource("3_ck1e0")]
+human_config = SubResource("Resource_hx1h5")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="splits/Right_Side/CharacterView"]
+layout_mode = 2
+
+[node name="rotation" type="HSlider" parent="splits/Right_Side/CharacterView/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="padding" type="Label" parent="splits/Right_Side/CharacterView/HBoxContainer2"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Padding" type="Label" parent="splits/Right_Side/CharacterView"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+
+[node name="verticalScrolls" type="HBoxContainer" parent="splits/Right_Side"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="splits/Right_Side/verticalScrolls"]
+layout_mode = 2
+
+[node name="posLable" type="Label" parent="splits/Right_Side/verticalScrolls/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Position"
+horizontal_alignment = 1
+
+[node name="PositionSlider" type="VSlider" parent="splits/Right_Side/verticalScrolls/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+min_value = -50.0
+max_value = 50.0
+
+[node name="padding" type="Label" parent="splits/Right_Side/verticalScrolls/VBoxContainer"]
+layout_mode = 2
+
+[node name="padding2" type="Label" parent="splits/Right_Side/verticalScrolls/VBoxContainer"]
+layout_mode = 2
+
+[node name="Right_Side" type="VBoxContainer" parent="splits/Right_Side/verticalScrolls"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="zoom_label" type="Label" parent="splits/Right_Side/verticalScrolls/Right_Side"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "zoom"
+horizontal_alignment = 1
+
+[node name="zoom_slider" type="VSlider" parent="splits/Right_Side/verticalScrolls/Right_Side"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+max_value = 1.0
+step = 0.01
+allow_greater = true
+
+[node name="Save" type="Button" parent="splits/Right_Side/verticalScrolls/Right_Side"]
+layout_mode = 2
+text = " Save "
+
+[node name="Export" type="Button" parent="splits/Right_Side/verticalScrolls/Right_Side"]
+layout_mode = 2
+text = " Export "
+
+[node name="Home" type="Button" parent="splits/Right_Side/verticalScrolls/Right_Side"]
+layout_mode = 2
+text = " Home "
+
+[node name="padding" type="Label" parent="splits/Right_Side/verticalScrolls/Right_Side"]
+layout_mode = 2
+
+[node name="Warning" type="AcceptDialog" parent="."]
+auto_translate_mode = 1
+initial_position = 1
+size = Vector2i(500, 100)
+max_size = Vector2i(500, 500)
+dialog_autowrap = true
+
+[node name="FileDialog" type="FileDialog" parent="."]
+auto_translate_mode = 1
+size = Vector2i(207, 175)
+
+[connection signal="value_changed" from="splits/Right_Side/CharacterView/HBoxContainer2/rotation" to="." method="_on_rotation_value_changed"]
+[connection signal="value_changed" from="splits/Right_Side/verticalScrolls/VBoxContainer/PositionSlider" to="." method="_on_position_slider_value_changed"]
+[connection signal="value_changed" from="splits/Right_Side/verticalScrolls/Right_Side/zoom_slider" to="." method="_on_zoom_slider_value_changed"]
+[connection signal="pressed" from="splits/Right_Side/verticalScrolls/Right_Side/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="splits/Right_Side/verticalScrolls/Right_Side/Export" to="." method="_on_export_pressed"]

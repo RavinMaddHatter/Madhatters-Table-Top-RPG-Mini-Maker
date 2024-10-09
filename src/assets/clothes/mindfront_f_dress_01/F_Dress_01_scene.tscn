@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://cnvx3x2cxfkt4"]
-
-[ext_resource type="ArrayMesh" uid="uid://qmar78b3n6cp" path="res://assets/clothes/mindfront_f_dress_01/F_Dress_01_mesh.res" id="1_cxp3s"]
-[ext_resource type="Material" uid="uid://jtn85628ggie" path="res://assets/clothes/mindfront_f_dress_01/mindfront_f_dress_01_material.res" id="2_iq1ix"]
-
-[node name="F_Dress_01" type="MeshInstance3D"]
-mesh = ExtResource("1_cxp3s")
-surface_material_override/0 = ExtResource("2_iq1ix")

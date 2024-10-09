@@ -24,4 +24,3 @@ func load_bone_weights() -> Dictionary:
 		weights[out_name] = weights[in_name]
 		weights.erase(in_name)
 	return weights
-	

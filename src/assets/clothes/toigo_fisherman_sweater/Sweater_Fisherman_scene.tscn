@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://d2qscsjl0rhud"]
-
-[ext_resource type="ArrayMesh" uid="uid://dkcjjbejpmhvx" path="res://assets/clothes/toigo_fisherman_sweater/Sweater_Fisherman_mesh.res" id="1_b7cix"]
-[ext_resource type="Material" uid="uid://htrbmom3v5fa" path="res://assets/clothes/toigo_fisherman_sweater/toigo_fisherman_sweater_material.res" id="2_ttxr1"]
-
-[node name="Sweater_Fisherman" type="MeshInstance3D"]
-mesh = ExtResource("1_b7cix")
-surface_material_override/0 = ExtResource("2_ttxr1")

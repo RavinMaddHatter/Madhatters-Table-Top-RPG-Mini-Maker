@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://cro02gdvx1r1n"]
-
-[ext_resource type="ArrayMesh" uid="uid://dhes4dcrym2el" path="res://assets/clothes/namuhekam_male_polo_shirt/Polo_mesh.res" id="1_2ym3p"]
-[ext_resource type="Material" uid="uid://bokaqsk6lmn1y" path="res://assets/clothes/namuhekam_male_polo_shirt/namuhekam_male_polo_shirt_material.res" id="2_08bn0"]
-
-[node name="Polo" type="MeshInstance3D"]
-mesh = ExtResource("1_2ym3p")
-surface_material_override/0 = ExtResource("2_08bn0")

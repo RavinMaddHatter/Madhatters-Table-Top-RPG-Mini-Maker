@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://bpmbjdddvq7tn"]
-
-[ext_resource type="ArrayMesh" uid="uid://bdn5j6q8f1i74" path="res://assets/clothes/maciekg_wizard_hat/wizard_hat_mesh.res" id="1_4ispf"]
-[ext_resource type="Material" uid="uid://dpnvtsmb2cxim" path="res://assets/clothes/maciekg_wizard_hat/maciekg_wizard_hat_material.res" id="2_ln8dr"]
-
-[node name="wizard_hat" type="MeshInstance3D"]
-mesh = ExtResource("1_4ispf")
-surface_material_override/0 = ExtResource("2_ln8dr")

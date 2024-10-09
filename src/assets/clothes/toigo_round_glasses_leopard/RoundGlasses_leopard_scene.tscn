@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://c6w0h1eef2wpx"]
-
-[ext_resource type="ArrayMesh" uid="uid://c7xgwftlt5oij" path="res://assets/clothes/toigo_round_glasses_leopard/RoundGlasses_leopard_mesh.res" id="1_38v6i"]
-[ext_resource type="Material" uid="uid://d028g2ryjcndo" path="res://assets/clothes/toigo_round_glasses_leopard/toigo_round_glasses_leopard_material.res" id="2_ifujy"]
-
-[node name="RoundGlasses_leopard" type="MeshInstance3D"]
-mesh = ExtResource("1_38v6i")
-surface_material_override/0 = ExtResource("2_ifujy")

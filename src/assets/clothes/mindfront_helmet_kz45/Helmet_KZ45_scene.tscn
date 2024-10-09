@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://p10e57xbupyx"]
-
-[ext_resource type="ArrayMesh" uid="uid://d0jaqmkigbngl" path="res://assets/clothes/mindfront_helmet_kz45/Helmet_KZ45_mesh.res" id="1_bc3n0"]
-[ext_resource type="Material" uid="uid://diqb0wqhqj5jr" path="res://assets/clothes/mindfront_helmet_kz45/mindfront_helmet_kz45_material.res" id="2_eamy0"]
-
-[node name="Helmet_KZ45" type="MeshInstance3D"]
-mesh = ExtResource("1_bc3n0")
-surface_material_override/0 = ExtResource("2_eamy0")
