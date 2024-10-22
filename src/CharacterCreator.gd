@@ -6,7 +6,7 @@ extends MarginContainer
 @export var home_button: Button
 @export var nameBox : TextEdit
 @export var baseMesh : MeshInstance3D
-
+@export var progress : ProgressBar
 var rng = RandomNumberGenerator.new()
 var camera_zoom = 0
 var zoom_in_offset = 0
@@ -17,10 +17,12 @@ var zoom_mid_ratio = 0
 var zoom_mid_offset = 0
 var shapekey_slider = {}
 var equipment_categories = {}
-
+var attach_points = {}
+var attach_menu ={}
+var attachment_points = ["LeftHand","RightHand","Head","RightFoot","LeftFoot","Hips","Chest"]
 func _ready() -> void:
-	make_character()
 	make_menu()
+	make_character()
 	$FileDialog.current_dir = "/"
 	$FileDialog.use_native_dialog=true
 	$FileDialog.access=FileDialog.ACCESS_FILESYSTEM
@@ -36,9 +38,17 @@ func make_character():
 	humanizer.add_equipment(HumanizerEquipment.new("RightEyeball-LowPoly"))
 	humanizer.add_equipment(HumanizerEquipment.new("LeftEyeBall-LowPoly"))
 	humanizer.get_node("AnimationTree").active=false
+	var skelton = humanizer.skeleton
+	for slot in attachment_points:
+		attach_points[slot] = BoneAttachment3D.new()
+		skelton.add_child(attach_points[slot])
+		attach_points[slot].set_bone_name(slot)
+		attach_menu[slot].set_anchor_point(attach_points[slot])
+	
 
 func make_menu():
 	make_basic_menu()
+	make_attachments_menu()
 	make_equipment_menu()
 	make_pose_menu()
 	make_detailed_menu()
@@ -80,11 +90,23 @@ func make_detailed_menu():
 			slider.change_shapekeys.connect(_set_shapekey)
 			category_vbox.add_child(slider)
 			shapekey_slider[key_name]=slider
-
 func make_equipment_menu():
 	var pannel = ScrollContainer.new()
 	menu_root.add_child(pannel)
 	pannel.name = "Equipment"
+	var vbox = VBoxContainer.new()
+	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
+	pannel.add_child(vbox)
+	
+	for point in attachment_points:
+		attach_menu[point] = load("res://attachment.tscn").instantiate()
+		attach_menu[point].set_label(point)
+		vbox.add_child(attach_menu[point])
+
+func make_attachments_menu():
+	var pannel = ScrollContainer.new()
+	menu_root.add_child(pannel)
+	pannel.name = "Body Parts/Cloths"
 	var vbox = VBoxContainer.new()
 	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	pannel.add_child(vbox)
@@ -97,7 +119,10 @@ func make_equipment_menu():
 				equipment_categories[cat].set_slot(cat)
 				equipment_categories[cat].change_equipment.connect(_set_equipment)
 				vbox.add_child(equipment_categories[cat])
-				equipment_categories[cat].add_entry("None")
+				if cat != "Body":
+					equipment_categories[cat].add_entry("None")
+				else:
+					equipment_categories[cat].cur_equipment="DefaultBody"
 			equipment_categories[cat].add_entry(item)
 
 func make_basic_menu():
@@ -108,8 +133,8 @@ func make_basic_menu():
 	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	vbox.set_custom_minimum_size(Vector2(300,0))
 	pannel.add_child(vbox)
-	var  macros = HumanizerMacroService.macro_options
-	var  racial = HumanizerMacroService.race_options
+	var macros = HumanizerTargetService.get_shapekey_categories()["Macro"]
+	var racial = HumanizerMacroService.race_options
 	for key_name in macros:
 		var slider = load("res://shapekey_slider.tscn").instantiate()
 		slider.label_name = key_name
@@ -274,11 +299,11 @@ func _on_save_pressed():
 	if not(dir.dir_exists("user://saves")):
 		DirAccess.make_dir_absolute("user://saves")
 	var saveFile = FileAccess.open("user://saves/%s.save" % nameBox.text,FileAccess.WRITE)
-	saveFile.store_var(humanizer.human_config.shapekeys)
+	saveFile.store_var(humanizer.humanizer.human_config.targets)
 	var clothsFile = FileAccess.open("user://saves/%s.clo" % nameBox.text,FileAccess.WRITE)
 	var equip_dict = {}
 	for item in equipment_categories:
-		equip_dict[equipment_categories.slot]=equipment_categories.cur_equipment
+		equip_dict[equipment_categories[item].slot]=equipment_categories[item].cur_equipment
 	clothsFile.store_var(equip_dict)
 	$Warning.dialog_text="Saving operation for character %s is completed."%nameBox.text
 	$Warning.title="Save Complete"
@@ -291,15 +316,24 @@ func _warning(message:String):
 	$Warning.initial_position=$Warning.WINDOW_INITIAL_POSITION_CENTER_MAIN_WINDOW_SCREEN
 	$Warning.show()
 
-func load_character_file(file:String):
+func load_character_file(characterName:String):
 	make_character()
+	var path="user://saves/"+characterName+".save"
+	var file = FileAccess.open(path, FileAccess.READ)
+	var clothesFile = FileAccess.open("user://saves/"+characterName+".clo", FileAccess.READ)
+	var shapekeys = file.get_var()
+	var equip_dict = clothesFile.get_var()
+	if not(equip_dict):
+		equip_dict = {}
+	setup_character(shapekeys)
+	for slot in equip_dict:
+		_set_equipment({"item_name":equip_dict[slot],"slot":slot})
 
 func _on_export_pressed():
 	$FileDialog.show()
 	var file_path = $FileDialog.current_file
 	if len(file_path)>2:
 		_on_save_pressed()
-		var save_material = StandardMaterial3D.new()
 		humanizer.bake_textures=false
 		humanizer.set_bake_meshes('Opaque')
 		humanizer.bake_surface()
@@ -315,8 +349,9 @@ func _on_export_pressed():
 		humanizer.get_node("AnimationTree").active=false  
 
 func _on_export_started():
-	print("Export started")
-func _on_export_completed(obj_file):
-	print("Export completed: ", obj_file)
+	pass
+func _on_export_completed(_obj_file):
+	pass
 func _on_export_progress(_surf_idx, _progress_value):
-	print("progress %s percent on model %s"%[_progress_value,_surf_idx])
+	#progress.value=_progress_value
+	pass

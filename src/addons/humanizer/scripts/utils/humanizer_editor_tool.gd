@@ -316,7 +316,7 @@ func _deserialize() -> void:
 	## Update materials with overlays
 	for equip in human_config.equipment.values():
 		var node = get_node(equip.type)
-		if node is HumanizerMeshInstance and node.material_config != null:
+		if node is HumanizerMeshInstance and node.material_config != null and bake_textures:
 			if node.material_config.overlays.size() > 0:
 				node.material_config.update_material()
 

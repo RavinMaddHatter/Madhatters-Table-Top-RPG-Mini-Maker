@@ -1,0 +1,146 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfe585ase8xvp"]
+
+[ext_resource type="Script" path="res://attachment.gd" id="1_m5ecp"]
+
+[node name="attachment" type="VBoxContainer" node_paths=PackedStringArray("lable", "upload_button", "remove_button", "x_pos_slider", "y_pos_slider", "z_pos_slider", "x_rot_slider", "y_rot_slider", "z_rot_slider", "scale_slider", "slider_vbox", "file_dialog")]
+custom_minimum_size = Vector2(300, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -852.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+script = ExtResource("1_m5ecp")
+lable = NodePath("Label")
+upload_button = NodePath("HBoxContainer7/Upload")
+remove_button = NodePath("HBoxContainer7/Remove")
+x_pos_slider = NodePath("sliders/HBoxContainer/x-loc")
+y_pos_slider = NodePath("sliders/HBoxContainer2/y-loc")
+z_pos_slider = NodePath("sliders/HBoxContainer3/z-loc")
+x_rot_slider = NodePath("sliders/HBoxContainer4/x-rot")
+y_rot_slider = NodePath("sliders/HBoxContainer5/y-rot")
+z_rot_slider = NodePath("sliders/HBoxContainer6/z-rot")
+scale_slider = NodePath("sliders/HBoxContainer7/scale")
+slider_vbox = NodePath("sliders")
+file_dialog = NodePath("FileDialog")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "LeftHand"
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Upload" type="Button" parent="HBoxContainer7"]
+layout_mode = 2
+text = "Upload Obj"
+
+[node name="Remove" type="Button" parent="HBoxContainer7"]
+visible = false
+layout_mode = 2
+text = "Remove Object"
+
+[node name="sliders" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="sliders"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="sliders/HBoxContainer"]
+layout_mode = 2
+text = "X-Loc:"
+
+[node name="x-loc" type="HSlider" parent="sliders/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -1.0
+max_value = 1.0
+step = 0.01
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="sliders"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="sliders/HBoxContainer2"]
+layout_mode = 2
+text = "Y-Loc:"
+
+[node name="y-loc" type="HSlider" parent="sliders/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -1.0
+max_value = 1.0
+step = 0.01
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="sliders"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="sliders/HBoxContainer3"]
+layout_mode = 2
+text = "Z-Loc:"
+
+[node name="z-loc" type="HSlider" parent="sliders/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -1.0
+max_value = 1.0
+step = 0.01
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="sliders"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="sliders/HBoxContainer4"]
+layout_mode = 2
+text = "X-Rot:"
+
+[node name="x-rot" type="HSlider" parent="sliders/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 6.28
+step = 0.01
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="sliders"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="sliders/HBoxContainer5"]
+layout_mode = 2
+text = "Y-Rot:"
+
+[node name="y-rot" type="HSlider" parent="sliders/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 6.28
+step = 0.01
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="sliders"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="sliders/HBoxContainer6"]
+layout_mode = 2
+text = "Z-Rot:"
+
+[node name="z-rot" type="HSlider" parent="sliders/HBoxContainer6"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 6.28
+step = 0.01
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="sliders"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="sliders/HBoxContainer7"]
+layout_mode = 2
+text = "Scale"
+
+[node name="scale" type="HSlider" parent="sliders/HBoxContainer7"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 2.0
+step = 0.01
+value = 0.2
+
+[node name="FileDialog" type="FileDialog" parent="."]
+
+[connection signal="pressed" from="HBoxContainer7/Upload" to="." method="_upload_pressed"]
+[connection signal="pressed" from="HBoxContainer7/Remove" to="." method="_remove_pressed"]

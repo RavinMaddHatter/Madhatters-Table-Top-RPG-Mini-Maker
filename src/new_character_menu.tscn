@@ -593,28 +593,28 @@ sky = SubResource("Sky_iscjs")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="Resource" id="Resource_omx1s"]
+[sub_resource type="Resource" id="Resource_iwgfn"]
 resource_name = "middleage_african_female"
 script = ExtResource("3_enu8t")
-albedo_texture_path = "res://addons/humanizer/data/assets/body_parts/Body/Default/middleage_asian_male/middleage_asian_male_diffuse2.png"
+albedo_texture_path = "res://addons/humanizer/data/assets/body_parts/Body/Default/young_caucasian_female2/young_caucasian_female2_diffuse.png"
 normal_texture_path = ""
 ao_texture_path = ""
 color = Color(1, 1, 1, 1)
 offset = Vector2i(0, 0)
 normal_strength = 1.0
 
-[sub_resource type="Resource" id="Resource_6fw3s"]
+[sub_resource type="Resource" id="Resource_4i16v"]
 resource_local_to_scene = true
 script = ExtResource("4_1e5ii")
-overlays = Array[ExtResource("3_enu8t")]([SubResource("Resource_omx1s")])
+overlays = Array[ExtResource("3_enu8t")]([SubResource("Resource_iwgfn")])
 
-[sub_resource type="Resource" id="Resource_5vhe4"]
+[sub_resource type="Resource" id="Resource_hivel"]
 script = ExtResource("5_fnub2")
 type = "DefaultBody"
-texture_name = "middleage_asian_male_diffuse2"
-material_config = SubResource("Resource_6fw3s")
+texture_name = "young_caucasian_female2_diffuse"
+material_config = SubResource("Resource_4i16v")
 
-[sub_resource type="Resource" id="Resource_ut0dy"]
+[sub_resource type="Resource" id="Resource_a4h6y"]
 resource_name = "eyeball"
 script = ExtResource("3_enu8t")
 albedo_texture_path = "res://addons/humanizer/data/assets/body_parts/Eyes/Eyeballs/eyeball_albedo.png"
@@ -634,18 +634,18 @@ color = Color(0.529412, 0.807843, 0.921569, 1)
 offset = Vector2i(0, 0)
 normal_strength = 1.0
 
-[sub_resource type="Resource" id="Resource_0gj2a"]
+[sub_resource type="Resource" id="Resource_jiwap"]
 resource_local_to_scene = true
 script = ExtResource("4_1e5ii")
-overlays = Array[ExtResource("3_enu8t")]([SubResource("Resource_ut0dy"), SubResource("Resource_7fltc")])
+overlays = Array[ExtResource("3_enu8t")]([SubResource("Resource_a4h6y"), SubResource("Resource_7fltc")])
 
-[sub_resource type="Resource" id="Resource_sy6n8"]
+[sub_resource type="Resource" id="Resource_yrkoy"]
 script = ExtResource("5_fnub2")
 type = "RightEyeball-LowPoly"
 texture_name = "eyeball_albedo"
-material_config = SubResource("Resource_0gj2a")
+material_config = SubResource("Resource_jiwap")
 
-[sub_resource type="Resource" id="Resource_eicbk"]
+[sub_resource type="Resource" id="Resource_3cn0e"]
 resource_name = "eyeball"
 script = ExtResource("3_enu8t")
 albedo_texture_path = "res://addons/humanizer/data/assets/body_parts/Eyes/Eyeballs/eyeball_albedo.png"
@@ -665,18 +665,18 @@ color = Color(0.529412, 0.807843, 0.921569, 1)
 offset = Vector2i(0, 0)
 normal_strength = 1.0
 
-[sub_resource type="Resource" id="Resource_8lbqq"]
+[sub_resource type="Resource" id="Resource_kxvk5"]
 resource_local_to_scene = true
 script = ExtResource("4_1e5ii")
-overlays = Array[ExtResource("3_enu8t")]([SubResource("Resource_eicbk"), SubResource("Resource_gfvi2")])
+overlays = Array[ExtResource("3_enu8t")]([SubResource("Resource_3cn0e"), SubResource("Resource_gfvi2")])
 
-[sub_resource type="Resource" id="Resource_bb3fp"]
+[sub_resource type="Resource" id="Resource_uhy0h"]
 script = ExtResource("5_fnub2")
 type = "LeftEyeBall-LowPoly"
 texture_name = "eyeball_albedo"
-material_config = SubResource("Resource_8lbqq")
+material_config = SubResource("Resource_kxvk5")
 
-[sub_resource type="Resource" id="Resource_iam8b"]
+[sub_resource type="Resource" id="Resource_6paq5"]
 script = ExtResource("6_4floc")
 rig = "game_engine-RETARGETED"
 targets = {
@@ -710,9 +710,9 @@ targets = {
 }
 components = [&"main_collider", &"lod"]
 equipment = {
-"DefaultBody": SubResource("Resource_5vhe4"),
-"LeftEyeBall-LowPoly": SubResource("Resource_bb3fp"),
-"RightEyeball-LowPoly": SubResource("Resource_sy6n8")
+"DefaultBody": SubResource("Resource_hivel"),
+"LeftEyeBall-LowPoly": SubResource("Resource_uhy0h"),
+"RightEyeball-LowPoly": SubResource("Resource_yrkoy")
 }
 transforms = {}
 skin_color = Color(1, 1, 1, 1)
@@ -720,28 +720,28 @@ eye_color = Color(0.529412, 0.807843, 0.921569, 1)
 eyebrow_color = Color(0.2, 0, 0, 1)
 hair_color = Color(0.501961, 0, 0, 1)
 
-[sub_resource type="Resource" id="Resource_ff83j"]
+[sub_resource type="Resource" id="Resource_lsanr"]
 resource_name = "middleage_african_female"
 script = ExtResource("3_enu8t")
-albedo_texture_path = "res://addons/humanizer/data/assets/body_parts/Body/Default/young_asian_female/young_asian_female_diffuse3.png"
+albedo_texture_path = "res://addons/humanizer/data/assets/body_parts/Body/Default/middleage_caucasian_male/middleage_caucasian_male_diffuse.png"
 normal_texture_path = ""
 ao_texture_path = ""
 color = Color(1, 1, 1, 1)
 offset = Vector2i(0, 0)
 normal_strength = 1.0
 
-[sub_resource type="Resource" id="Resource_v7lcl"]
+[sub_resource type="Resource" id="Resource_uplvc"]
 resource_local_to_scene = true
 script = ExtResource("4_1e5ii")
-overlays = Array[ExtResource("3_enu8t")]([SubResource("Resource_ff83j")])
+overlays = Array[ExtResource("3_enu8t")]([SubResource("Resource_lsanr")])
 
-[sub_resource type="Resource" id="Resource_b4ky0"]
+[sub_resource type="Resource" id="Resource_n53y6"]
 script = ExtResource("5_fnub2")
 type = "DefaultBody"
-texture_name = "young_asian_female_diffuse3"
-material_config = SubResource("Resource_v7lcl")
+texture_name = "middleage_caucasian_male_diffuse"
+material_config = SubResource("Resource_uplvc")
 
-[sub_resource type="Resource" id="Resource_rtp7v"]
+[sub_resource type="Resource" id="Resource_dil6n"]
 resource_name = "eyeball"
 script = ExtResource("3_enu8t")
 albedo_texture_path = "res://addons/humanizer/data/assets/body_parts/Eyes/Eyeballs/eyeball_albedo.png"
@@ -751,18 +751,18 @@ color = Color(1, 1, 1, 1)
 offset = Vector2i(0, 0)
 normal_strength = 1.0
 
-[sub_resource type="Resource" id="Resource_a55q4"]
+[sub_resource type="Resource" id="Resource_4ybl5"]
 resource_local_to_scene = true
 script = ExtResource("4_1e5ii")
-overlays = Array[ExtResource("3_enu8t")]([SubResource("Resource_rtp7v"), SubResource("Resource_7fltc")])
+overlays = Array[ExtResource("3_enu8t")]([SubResource("Resource_dil6n"), SubResource("Resource_7fltc")])
 
-[sub_resource type="Resource" id="Resource_yt7w5"]
+[sub_resource type="Resource" id="Resource_btfpa"]
 script = ExtResource("5_fnub2")
 type = "RightEyeball-LowPoly"
 texture_name = "eyeball_albedo"
-material_config = SubResource("Resource_a55q4")
+material_config = SubResource("Resource_4ybl5")
 
-[sub_resource type="Resource" id="Resource_yltsw"]
+[sub_resource type="Resource" id="Resource_8urud"]
 resource_name = "eyeball"
 script = ExtResource("3_enu8t")
 albedo_texture_path = "res://addons/humanizer/data/assets/body_parts/Eyes/Eyeballs/eyeball_albedo.png"
@@ -772,18 +772,18 @@ color = Color(1, 1, 1, 1)
 offset = Vector2i(0, 0)
 normal_strength = 1.0
 
-[sub_resource type="Resource" id="Resource_oyw8l"]
+[sub_resource type="Resource" id="Resource_mru60"]
 resource_local_to_scene = true
 script = ExtResource("4_1e5ii")
-overlays = Array[ExtResource("3_enu8t")]([SubResource("Resource_yltsw"), SubResource("Resource_gfvi2")])
+overlays = Array[ExtResource("3_enu8t")]([SubResource("Resource_8urud"), SubResource("Resource_gfvi2")])
 
-[sub_resource type="Resource" id="Resource_esmrl"]
+[sub_resource type="Resource" id="Resource_5dxdf"]
 script = ExtResource("5_fnub2")
 type = "LeftEyeBall-LowPoly"
 texture_name = "eyeball_albedo"
-material_config = SubResource("Resource_oyw8l")
+material_config = SubResource("Resource_mru60")
 
-[sub_resource type="Resource" id="Resource_k0oev"]
+[sub_resource type="Resource" id="Resource_wg76e"]
 script = ExtResource("6_4floc")
 rig = "game_engine-RETARGETED"
 targets = {
@@ -817,9 +817,9 @@ targets = {
 }
 components = [&"main_collider", &"lod"]
 equipment = {
-"DefaultBody": SubResource("Resource_b4ky0"),
-"LeftEyeBall-LowPoly": SubResource("Resource_esmrl"),
-"RightEyeball-LowPoly": SubResource("Resource_yt7w5")
+"DefaultBody": SubResource("Resource_n53y6"),
+"LeftEyeBall-LowPoly": SubResource("Resource_5dxdf"),
+"RightEyeball-LowPoly": SubResource("Resource_btfpa")
 }
 transforms = {}
 skin_color = Color(1, 1, 1, 1)
@@ -931,7 +931,7 @@ skeleton = NodePath("../..")
 
 [node name="HumanizerEditorTool" type="Node3D" parent="Split_Screen/Right_Side/CharacterView/Viewport/SubViewport/collection"]
 script = ExtResource("2_5dotk")
-human_config = SubResource("Resource_iam8b")
+human_config = SubResource("Resource_6paq5")
 _baked_root_node = "CharacterBody3D"
 atlas_resolution = 2048
 _animator_scene = ExtResource("7_6sika")
@@ -1096,7 +1096,7 @@ mesh = ExtResource("4_8gh7d")
 skeleton = NodePath("../..")
 
 [node name="Authoring_Scene" parent="Split_Screen/Right_Side/Right_Side/CharacterView/Viewport/SubViewport/collection" instance=ExtResource("8_t6agc")]
-human_config = SubResource("Resource_k0oev")
+human_config = SubResource("Resource_wg76e")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Split_Screen/Right_Side/Right_Side/CharacterView"]
 layout_mode = 2
