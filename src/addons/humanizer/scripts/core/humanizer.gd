@@ -34,17 +34,11 @@ func get_CharacterBody3D(baked:bool):
 	human.add_child(skeleton)
 	skeleton.set_unique_name_in_owner(true)
 	var body_mesh = MeshInstance3D.new()
+	body_mesh.name = "Avatar"
 	if baked:
 		body_mesh.mesh = standard_bake_meshes()	
 	else:
-		body_mesh.mesh = ArrayMesh.new()
-		for equip_name in mesh_arrays:
-			var new_arrays = get_mesh_arrays(equip_name)
-			if not new_arrays.is_empty():
-				body_mesh.mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,new_arrays)
-				var surface_id = body_mesh.mesh.get_surface_count()-1
-				body_mesh.mesh.surface_set_material(surface_id,materials[equip_name])
-				body_mesh.mesh.surface_set_name(surface_id,equip_name)	
+		body_mesh.mesh = get_combined_meshes()
 	human.add_child(body_mesh)
 	body_mesh.skeleton = NodePath('../' + skeleton.name)
 	body_mesh.skin = skeleton.create_skin_from_rest_transforms()
@@ -60,6 +54,17 @@ func get_CharacterBody3D(baked:bool):
 	if human_config.has_component("ragdoll"):
 		add_ragdoll_colliders(skeleton)
 	return human
+
+func get_combined_meshes() -> ArrayMesh:
+	var new_mesh = ArrayMesh.new()
+	for equip_name in mesh_arrays:
+		var new_arrays = get_mesh_arrays(equip_name)
+		if not new_arrays.is_empty():
+			new_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,new_arrays)
+			var surface_id = new_mesh.get_surface_count()-1
+			new_mesh.surface_set_material(surface_id,materials[equip_name])
+			new_mesh.surface_set_name(surface_id,equip_name)	
+	return new_mesh
 	
 func get_animation_tree():
 	if human_config.rig == 'default-RETARGETED':
@@ -157,6 +162,12 @@ func set_equipment_material(equipment:HumanizerEquipment, texture: String)-> voi
 		material.albedo_color = human_config.eyebrow_color
 	if mat_config != null:
 		mat_config.update_standard_material_3D(material)
+
+func update_materials(): # not normally needed, use this if generated humans arent updating textures properly (was an issue in the stress test - has something to do with threads)
+	for equip in human_config.equipment.values():
+		if equip.material_config != null:
+			await RenderingServer.frame_post_draw	
+			equip.material_config.update_standard_material_3D(materials[equip.type])
 		
 func get_mesh(mesh_name:String):
 	var mesh = ArrayMesh.new()
@@ -198,6 +209,9 @@ func get_body_mesh():
 
 func hide_clothes_vertices():
 	HumanizerEquipmentService.hide_vertices(human_config.equipment,mesh_arrays)
+
+func show_clothes_vertices():
+	HumanizerEquipmentService.show_vertices(human_config.equipment,mesh_arrays)
 			
 func set_targets(target_data:Dictionary):
 	HumanizerTargetService.set_targets(target_data,human_config.targets,helper_vertex)

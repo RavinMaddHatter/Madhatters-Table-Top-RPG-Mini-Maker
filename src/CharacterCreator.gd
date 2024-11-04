@@ -334,7 +334,6 @@ func _on_export_pressed():
 	var file_path = $FileDialog.current_file
 	if len(file_path)>2:
 		_on_save_pressed()
-		humanizer.bake_textures=false
 		humanizer.set_bake_meshes('Opaque')
 		humanizer.bake_surface()
 		var mesh = humanizer.find_child("Baked-Opaque").mesh

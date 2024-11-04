@@ -11,7 +11,6 @@ var bake_in_progress := false
 var scene_loaded: bool = false
 var main_collider: CollisionShape3D
 var animator: Node
-var bake_textures =true
 
 var _base_hips_height: float:
 	get:
@@ -45,9 +44,9 @@ var morph_data := {}
 @export var human_config: HumanConfig:
 	set(value):
 		human_config = value
-		#if scene_loaded and human_config != null:
-			#load_human()
-			#notify_property_list_changed()
+		if scene_loaded and human_config != null:
+			load_human()
+			notify_property_list_changed()
 
 @export_group('Node Overrides')
 ## The root node type for baked humans
@@ -78,8 +77,6 @@ var morph_data := {}
 
 
 func _ready() -> void:
-	if human_config == null:
-		human_config = HumanConfig.new()
 	for child in get_children():
 		if child.name.begins_with('Baked-'):
 			baked = true
@@ -91,8 +88,14 @@ func _ready() -> void:
 ## continuously updated with every change
 
 func reset():
-	load_human()
-
+	var new_config = HumanConfig.new()
+	new_config.init_macros()
+	new_config.rig = HumanizerGlobalConfig.config.default_skeleton
+	new_config.add_equipment(HumanizerEquipment.new("DefaultBody"))
+	new_config.add_equipment(HumanizerEquipment.new("RightEyeball-LowPoly"))
+	new_config.add_equipment(HumanizerEquipment.new("LeftEyeBall-LowPoly"))
+	human_config = new_config
+	
 func set_human_config(config: HumanConfig) -> void:
 	human_config = config
 	
@@ -124,12 +127,12 @@ func set_shapekeys(shapekeys: Dictionary) -> void:
 
 
 ####  HumanConfig Resource and Scene Management ####
-func reset_human() -> void:
+func reset_scene() -> void:
 	if has_node('MorphDriver'):
 		_delete_child_node($MorphDriver)
 	baked = false
-	humanizer = Humanizer.new()
-	human_config = humanizer.human_config
+	if human_config.rig == '':
+		human_config.rig = HumanizerGlobalConfig.config.default_skeleton
 	for child in get_children():
 		if child is MeshInstance3D:
 			_delete_child_node(child)
@@ -140,10 +143,9 @@ func reset_human() -> void:
 	notify_property_list_changed()
 
 func load_human() -> void:
-	if human_config.rig == '':
-		human_config.rig = HumanizerGlobalConfig.config.default_skeleton
 	baked = false
-	reset_human()
+	humanizer = Humanizer.new(human_config)
+	reset_scene()
 	_deserialize()
 	notify_property_list_changed()
 
@@ -246,35 +248,17 @@ func create_human_branch() -> Node3D:
 	return root_node
 
 func save_human_scene() -> void:
+	if FileAccess.file_exists(save_path.path_join('scene_' + human_name + '.tscn')):
+		printerr(" Human already exists at " + save_path)
+		return
 	var scene_root_node = create_human_branch()
 	var mi: MeshInstance3D = scene_root_node.get_node('Avatar')
 	var scene = PackedScene.new()
 	scene.pack(scene_root_node)
 	DirAccess.make_dir_recursive_absolute(save_path)
-	
-	for surface in mi.mesh.get_surface_count():
-		var mat = mi.mesh.surface_get_material(surface)
-		var surf_name: String = mi.mesh.surface_get_name(surface)
-		if mat.albedo_texture != null:
-			var path := save_path.path_join('texture_albedo_' + surf_name + '.res')
-			mat.albedo_texture.take_over_path(path)
-		if mat.normal_texture != null:
-			var path := save_path.path_join('texture_normal_' + surf_name + '.res')
-			mat.normal_texture.take_over_path(path)
-		if mat.ao_texture != null:
-			var path := save_path.path_join('texture_ao_' + surf_name + '.res')
-			mat.ao_texture.take_over_path(path)
-		var path := save_path.path_join('material_' + surf_name + '.tres')
-		ResourceSaver.save(mat, path)
-		mat.take_over_path(path)
-		
-	var path := save_path.path_join('mesh.tres')
-	ResourceSaver.save(mi.mesh, path)
-	mi.mesh.take_over_path(path)
-	path = save_path.path_join('config_' + human_name + '.res')
-	ResourceSaver.save(human_config, save_path.path_join('config_' + human_name + '.res'))
-	if not FileAccess.file_exists(save_path.path_join('scene_' + human_name + '.tscn')):
-		ResourceSaver.save(scene, save_path.path_join('scene_' + human_name + '.tscn'))
+	var config_path = save_path.path_join('config_' + human_name + '.res')
+	ResourceSaver.save(human_config, config_path)
+	ResourceSaver.save(scene, save_path.path_join('scene_' + human_name + '.tscn'))
 	print('Saved human to : ' + save_path)
 	HumanizerJobQueue.enqueue({callable=HumanizerMeshService.compress_material,mesh=mi.mesh})
 	
@@ -316,7 +300,7 @@ func _deserialize() -> void:
 	## Update materials with overlays
 	for equip in human_config.equipment.values():
 		var node = get_node(equip.type)
-		if node is HumanizerMeshInstance and node.material_config != null and bake_textures:
+		if node is HumanizerMeshInstance and node.material_config != null:
 			if node.material_config.overlays.size() > 0:
 				node.material_config.update_material()
 
@@ -385,9 +369,8 @@ func unhide_clothes_vertices() -> void:
 	if baked:
 		push_warning("Can't alter meshes.  Already baked")
 		return
-	for equip:HumanizerEquipment in human_config.equipment.values():
-		equip.node.mesh = load(equip.get_mesh_path())
-		_add_bone_weights(equip)
+	humanizer.show_clothes_vertices()
+	_fit_all_meshes()
 
 func set_bake_meshes(subset: String) -> void:
 	_bake_meshes = []
@@ -429,8 +412,7 @@ func bake_surface() -> void:
 		bake_mesh_names.append(node.name)
 		if not node.transform == Transform3D.IDENTITY:
 			human_config.transforms[node.name] = Transform3D(node.transform)
-		
-		if node is HumanizerMeshInstance and node.material_config != null and bake_textures:
+		if node is HumanizerMeshInstance and node.material_config != null:
 			node.material_config.update_material()
 
 	if human_config.components.has(&'size_morphs') or human_config.components.has(&'age_morphs'):
@@ -502,9 +484,9 @@ func _combine_meshes() -> ArrayMesh:
 			continue
 		var material: BaseMaterial3D
 		if child.get_surface_override_material(0) != null:
-			material = child.get_surface_override_material(0).duplicate(true)
+			material = child.get_surface_override_material(0)
 		else:
-			material = child.mesh.surface_get_material(0).duplicate(true)
+			material = child.mesh.surface_get_material(0)
 		var surface_arrays = child.mesh.surface_get_arrays(0)
 		if child.transform != Transform3D.IDENTITY and not child.name.begins_with('Baked-'):
 			human_config.transforms[child.name] = Transform3D(child.transform)

@@ -257,11 +257,11 @@ tooltip_text = "Skin texture selector"
 selected = 0
 item_count = 4
 popup/item_0/text = "None"
-popup/item_1/text = "Aksel_Skin_NRM"
+popup/item_1/text = "skin_male_african_middleage_NRM"
 popup/item_1/id = 1
-popup/item_2/text = "orkMeshNORMAL"
+popup/item_2/text = "Aksel_Skin_NRM"
 popup/item_2/id = 2
-popup/item_3/text = "skin_male_african_middleage_NRM"
+popup/item_3/text = "orkMeshNORMAL"
 popup/item_3/id = 3
 script = SubResource("GDScript_crbyj")
 

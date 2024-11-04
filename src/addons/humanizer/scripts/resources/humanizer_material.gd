@@ -16,6 +16,8 @@ func update_standard_material_3D(mat:StandardMaterial3D,update_textures=true) ->
 		mat.albedo_color = overlays[0].color
 		if not overlays[0].albedo_texture_path in ["",null]:
 			mat.set_texture(BaseMaterial3D.TEXTURE_ALBEDO, load(overlays[0].albedo_texture_path))
+		else:
+			mat.set_texture(BaseMaterial3D.TEXTURE_ALBEDO,null)
 		if overlays[0].normal_texture_path in ["",null]:
 			mat.normal_enabled = false
 			mat.set_texture(BaseMaterial3D.TEXTURE_NORMAL,null)
@@ -27,7 +29,7 @@ func update_standard_material_3D(mat:StandardMaterial3D,update_textures=true) ->
 			mat.set_texture(BaseMaterial3D.TEXTURE_AMBIENT_OCCLUSION, load(overlays[0].ao_texture_path))
 	else:
 		if update_textures:
-			update_material()
+			await update_material()
 		mat.normal_enabled = normal_texture != null
 		mat.ao_enabled = ao_texture != null
 		mat.set_texture(BaseMaterial3D.TEXTURE_ALBEDO, albedo_texture)
@@ -35,44 +37,49 @@ func update_standard_material_3D(mat:StandardMaterial3D,update_textures=true) ->
 		mat.set_texture(BaseMaterial3D.TEXTURE_AMBIENT_OCCLUSION, ao_texture)
 	
 func update_material() -> void:
-	#print("updating material")
-	if overlays.size() == 0:
+	if overlays.size() <= 1:
 		return
 	
 	for texture in TEXTURE_LAYERS: #albedo, normal, ambient occulsion ect..
-		var image: Image = null #the final image for this layer
+		var texture_size = load(overlays[0].albedo_texture_path).get_size()
+		var image_vp = SubViewport.new()
+		
+		image_vp.size = texture_size
+		image_vp.transparent_bg = true
+		Engine.get_main_loop().get_root().add_child.call_deferred(image_vp)
+	
+
 		for overlay in overlays:
 			if overlay == null:
 				continue
 			var path = overlay.get(texture + '_texture_path')
 			if path == '':
-				if image == null and texture == 'albedo':
-					image = Image.create(2^11,2^11,true,Image.FORMAT_RGBA8)
-					image.fill(overlay.color)
+				if texture == 'albedo':
+					var im_col_rect = ColorRect.new()
+					im_col_rect.color = overlay.color
+					image_vp.add_child(im_col_rect)
 				continue
-			var overlay_image = load(path).get_image()
-			overlay_image.convert(Image.FORMAT_RGBA8)
-			
+			var im_texture = load(path)
+			var im_tex_rect = TextureRect.new()
+			im_tex_rect.position = overlay.offset
+			im_tex_rect.texture = im_texture
+			image_vp.add_child(im_tex_rect)
+
 			if texture == 'albedo':
 				#blend color with overlay texture and then copy to base image
-				_blend_color(overlay_image, overlay.color)
-			if image == null:
-				image = overlay_image
-			else:
-				image.blend_rect(overlay_image, 
-								Rect2i(Vector2i.ZERO, overlay_image.get_size()), 
-								overlay.offset)
-		## Create output textures
-		if image != null:
+				im_tex_rect.modulate = overlay.color
+		
+		if image_vp.get_child_count() == 0:
+			set(texture + '_texture',null)
+		else:
+			image_vp.render_target_update_mode = SubViewport.UPDATE_ONCE
+			await RenderingServer.frame_post_draw	
+			var image = image_vp.get_texture().get_image()
 			image.generate_mipmaps()
+			set(texture + '_texture', ImageTexture.create_from_image(image))
+		image_vp.queue_free()
+		on_material_updated.emit()
 
-		set(texture + '_texture', ImageTexture.create_from_image(image) if image != null else null)
-	on_material_updated.emit()
-
-func _blend_color(image: Image, color: Color) -> void:
-	for x in image.get_width():
-		for y in image.get_height():
-			image.set_pixel(x, y, image.get_pixel(x, y) * color)
 
 func set_base_textures(overlay: HumanizerOverlay) -> void:
 	if overlays.size() == 0:
