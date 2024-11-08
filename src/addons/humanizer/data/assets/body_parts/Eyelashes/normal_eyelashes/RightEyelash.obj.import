@@ -18,5 +18,4 @@ dest_files=["res://.godot/imported/RightEyelash.obj-7f8a8168e942e6aa9fd67afac9d7
 generate_tangents=true
 scale_mesh=Vector3(1, 1, 1)
 offset_mesh=Vector3(0, 0, 0)
-optimize_mesh=true
 force_disable_mesh_compression=false

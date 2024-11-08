@@ -18,5 +18,4 @@ dest_files=["res://.godot/imported/RightEyebrow-001.obj-468079a0dc6d5832a50d4fe1
 generate_tangents=true
 scale_mesh=Vector3(1, 1, 1)
 offset_mesh=Vector3(0, 0, 0)
-optimize_mesh=true
 force_disable_mesh_compression=false

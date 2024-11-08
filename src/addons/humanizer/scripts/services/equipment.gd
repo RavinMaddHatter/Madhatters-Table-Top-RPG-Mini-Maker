@@ -5,6 +5,7 @@ class_name HumanizerEquipmentService
 static func load_mesh_arrays(equip:HumanizerEquipmentType):
 	var sf_arrays = []
 	sf_arrays.resize(Mesh.ARRAY_MAX)
+	print(equip.mhclo_path)
 	var mhclo = load(equip.mhclo_path)
 	sf_arrays[Mesh.ARRAY_TEX_UV] = mhclo.uv_array
 	sf_arrays[Mesh.ARRAY_INDEX] = mhclo.index_array.duplicate()
@@ -50,6 +51,7 @@ static func hide_vertices(equip_list:Dictionary,mesh_arrays:Dictionary):
 		cl_delete_verts_mh.resize(mhclo.vertex_data.size())
 		cl_delete_verts_mh.fill(false)
 		var cl_delete_verts_gd = []
+		#print(mesh_arrays[equip.type])
 		cl_delete_verts_gd.resize(mesh_arrays[equip.type][Mesh.ARRAY_VERTEX].size())
 		cl_delete_verts_gd.fill(false)
 		var any_deleted = false

@@ -18,5 +18,4 @@ dest_files=["res://.godot/imported/teeth_shape01.obj-a2307738f294a8d89d25b84b713
 generate_tangents=true
 scale_mesh=Vector3(1, 1, 1)
 offset_mesh=Vector3(0, 0, 0)
-optimize_mesh=true
 force_disable_mesh_compression=false

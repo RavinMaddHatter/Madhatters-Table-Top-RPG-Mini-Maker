@@ -29,22 +29,19 @@ func _ready() -> void:
 	OBJExporter.export_started.connect(_on_export_started)
 	OBJExporter.export_completed.connect(_on_export_completed)
 	OBJExporter.export_progress_updated.connect(_on_export_progress)
-	#HelperFunctions.import_bvh("res://assets/poses/Snek_01.bvh")
-
 func make_character():
 	humanizer.reset()
-	humanizer.remove_equipment(HumanizerEquipment.new("DefaultBody","none_diffuse"))
-	humanizer.add_equipment(HumanizerEquipment.new("DefaultBody","none_diffuse"))
-	humanizer.add_equipment(HumanizerEquipment.new("RightEyeball-LowPoly"))
-	humanizer.add_equipment(HumanizerEquipment.new("LeftEyeBall-LowPoly"))
-	humanizer.get_node("AnimationTree").active=false
+	humanizer.remove_equipment(HumanizerEquipment.new("DefaultBody","old_caucasian_male_detailed"))
+	humanizer.add_equipment(HumanizerEquipment.new("DefaultBody","old_caucasian_male_detailed"))
+	#humanizer.add_equipment(HumanizerEquipment.new("RightEyeball-LowPoly"))
+	#humanizer.add_equipment(HumanizerEquipment.new("LeftEyeBall-LowPoly"))
 	var skelton = humanizer.skeleton
+	humanizer.stop_animations()
 	for slot in attachment_points:
 		attach_points[slot] = BoneAttachment3D.new()
 		skelton.add_child(attach_points[slot])
 		attach_points[slot].set_bone_name(slot)
 		attach_menu[slot].set_anchor_point(attach_points[slot])
-	
 
 func make_menu():
 	make_basic_menu()
@@ -332,25 +329,24 @@ func load_character_file(characterName:String):
 func _on_export_pressed():
 	$FileDialog.show()
 	var file_path = $FileDialog.current_file
+
+func _on_file_dialog_file_selected(file_path: String) -> void:
 	if len(file_path)>2:
 		_on_save_pressed()
-		humanizer.set_bake_meshes('Opaque')
-		humanizer.bake_surface()
-		var mesh = humanizer.find_child("Baked-Opaque").mesh
+		var mesh = humanizer.find_child("DefaultBody")
+		var baked_pose : ArrayMesh
+		baked_pose = mesh.bake_mesh_from_current_skeleton_pose()
 		var surface_tool= SurfaceTool.new()
-		surface_tool.append_from(mesh, 0,humanizer.transform)
+		surface_tool.append_from(baked_pose, 0,humanizer.transform)
 		surface_tool.append_from(baseMesh.mesh, 0, baseMesh.transform)
 		var combinedMesh:ArrayMesh=surface_tool.commit()
 		OBJExporter.save_mesh_to_files(combinedMesh, file_path)
 		_warning("Poses not currently supported. The default pose was exported.")
 		make_character()
-		load_character_file(nameBox.text)  
-		humanizer.get_node("AnimationTree").active=false  
-
+		load_character_file(nameBox.text) 
 func _on_export_started():
 	pass
 func _on_export_completed(_obj_file):
 	pass
 func _on_export_progress(_surf_idx, _progress_value):
-	#progress.value=_progress_value
 	pass

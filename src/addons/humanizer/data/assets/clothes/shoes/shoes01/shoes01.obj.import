@@ -18,5 +18,4 @@ dest_files=["res://.godot/imported/shoes01.obj-e1a8553266a356bc93f6c0b71702bf2d.
 generate_tangents=true
 scale_mesh=Vector3(1, 1, 1)
 offset_mesh=Vector3(0, 0, 0)
-optimize_mesh=true
 force_disable_mesh_compression=false

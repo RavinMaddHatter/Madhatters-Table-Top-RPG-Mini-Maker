@@ -4,7 +4,7 @@ extends Node3D
 
 ## editor tool for creating new humans
 
-var humanizer : Humanizer
+var humanizer := Humanizer.new()
 var skeleton: Skeleton3D
 var baked := false
 var bake_in_progress := false
@@ -75,8 +75,8 @@ var morph_data := {}
 ## The physics layers the physical bones collide with
 @export_flags_3d_physics var _ragdoll_mask = HumanizerGlobalConfig.config.default_physical_bone_mask
 
-
 func _ready() -> void:
+	humanizer.material_updated.connect(on_material_updated)
 	for child in get_children():
 		if child.name.begins_with('Baked-'):
 			baked = true
@@ -87,7 +87,13 @@ func _ready() -> void:
 ## For use in character editor scenes where the character should be 
 ## continuously updated with every change
 
+func on_material_updated(equip):
+	#print("material updated " + equip.type)
+	if has_node(equip.type): #otherwise it will load with the correct texture
+		get_node(equip.type).set_surface_override_material(0,humanizer.materials[equip.type])
+
 func reset():
+	#print("reseting")
 	var new_config = HumanConfig.new()
 	new_config.init_macros()
 	new_config.rig = HumanizerGlobalConfig.config.default_skeleton
@@ -128,23 +134,25 @@ func set_shapekeys(shapekeys: Dictionary) -> void:
 
 ####  HumanConfig Resource and Scene Management ####
 func reset_scene() -> void:
+	#print("resetting scene")
 	if has_node('MorphDriver'):
 		_delete_child_node($MorphDriver)
 	baked = false
-	if human_config.rig == '':
-		human_config.rig = HumanizerGlobalConfig.config.default_skeleton
+	#if human_config.rig == '':
+		#human_config.rig = HumanizerGlobalConfig.config.default_skeleton
 	for child in get_children():
-		if child is MeshInstance3D:
+		if child is MeshInstance3D or child is Skeleton3D:
 			_delete_child_node(child)
-	set_component_state(true, &'main_collider')
+	#set_component_state(true, &'main_collider')
 	if has_node('Saccades'):
 		_delete_child_by_name('Saccades')
 	_new_shapekeys = {}
 	notify_property_list_changed()
 
 func load_human() -> void:
+	#print("loading human")
 	baked = false
-	humanizer = Humanizer.new(human_config)
+	await humanizer.load_config(human_config)
 	reset_scene()
 	_deserialize()
 	notify_property_list_changed()
@@ -152,7 +160,6 @@ func load_human() -> void:
 func create_human_branch() -> Node3D:
 	#_adjust_skeleton()
 	var new_mesh = _combine_meshes()
-
 	var root_node: Node
 	var script: String
 	if _baked_root_node == 'StaticBody3D':
@@ -285,42 +292,31 @@ func _get_asset_by_name(mesh_name: String) -> HumanizerEquipment:
 
 func _deserialize() -> void:
 	## set rig
-	set_rig(human_config.rig)
-#
+	init_rig()
+
 	## Load Assets
 	for equip: HumanizerEquipment in human_config.equipment.values():
-		add_equipment(equip)
-		#
-	## Load components
-	for component in human_config.components:
-		if component in [&'root_bone', &'ragdoll']:
-			continue  # These are already set in set_rig
-		set_component_state(true, component)
+		init_equipment(equip)
 
-	## Update materials with overlays
-	for equip in human_config.equipment.values():
-		var node = get_node(equip.type)
-		if node is HumanizerMeshInstance and node.material_config != null:
-			if node.material_config.overlays.size() > 0:
-				node.material_config.update_material()
+	### Load components
+	#for component in human_config.components:
+		#if component in [&'root_bone', &'ragdoll']:
+			#continue  # These are already set in set_rig
+		#set_component_state(true, component)
+	pass
 
 #### Mesh Management ####
 func add_equipment_type(equip_type:HumanizerEquipmentType)->void:
 	var equip := HumanizerEquipment.new(equip_type.resource_name)
-	equip.texture_name = Random.choice(equip_type.textures.keys())
 	add_equipment(equip)
 
-func add_equipment(equip: HumanizerEquipment) -> void:
+func init_equipment(equip: HumanizerEquipment) -> void:
 	if baked:
 		push_warning("Can't change equipment.  Already baked")
 		notify_property_list_changed()
 		return
 	
 	var equip_type = equip.get_type()
-	for prev_equip in human_config.get_equipment_in_slots(equip_type.slots):
-		remove_equipment(prev_equip)
-	humanizer.add_equipment(equip)	
-	
 	var mesh_inst = HumanizerMeshInstance.new()
 	mesh_inst.name = equip.type
 	mesh_inst.mesh = humanizer.get_mesh(equip.type)
@@ -337,8 +333,22 @@ func add_equipment(equip: HumanizerEquipment) -> void:
 	mesh_inst.skeleton = '../' + skeleton.name
 	mesh_inst.skin = skeleton.create_skin_from_rest_transforms()
 	notify_property_list_changed()
+
+func add_equipment(equip: HumanizerEquipment) -> void:
+	#print("Adding equipment")
+	if baked:
+		push_warning("Can't change equipment.  Already baked")
+		notify_property_list_changed()
+		return
+	
+	var equip_type = equip.get_type()
+	for prev_equip in human_config.get_equipment_in_slots(equip_type.slots):
+		remove_equipment(prev_equip)
+	await humanizer.add_equipment(equip)	
+	init_equipment(equip)
 	
 func remove_equipment(equip: HumanizerEquipment) -> void:
+	#print("removing equipment")
 	if baked:
 		push_warning("Can't change equipment.  Already baked")
 		notify_property_list_changed()
@@ -413,7 +423,8 @@ func bake_surface() -> void:
 		if not node.transform == Transform3D.IDENTITY:
 			human_config.transforms[node.name] = Transform3D(node.transform)
 		if node is HumanizerMeshInstance and node.material_config != null:
-			node.material_config.update_material()
+			if node.material_config.has_method("update_material"):
+				node.material_config.update_material()
 
 	if human_config.components.has(&'size_morphs') or human_config.components.has(&'age_morphs'):
 		
@@ -537,13 +548,6 @@ func add_shapekey() -> void:
 	notify_property_list_changed()
 
 #### Materials ####
-func set_skin_texture(texture_name: String) -> void:
-	#print('setting skin texture : ' + name)
-	if baked:
-		push_warning("Can't change skin.  Already baked")
-		notify_property_list_changed()
-		return
-	humanizer.set_skin_texture(texture_name)
 	
 func set_skin_normal_texture(texture_name: String) -> void:
 	if baked:
@@ -570,28 +574,24 @@ func set_equipment_texture_by_name(equip_name:String, texture:String):
 		var equip = human_config.equipment[equip_name]
 		set_equipment_material(equip,texture)
 
-func set_equipment_material(equipment:HumanizerEquipment, texture: String) -> void:
+func set_equipment_material(equip:HumanizerEquipment, texture: String) -> void:
 	if baked:
 		printerr('Cannot change materials. Already baked.')
 		return
-	humanizer.set_equipment_material(equipment,texture)
+	humanizer.set_equipment_material(equip,texture)
+	get_node(equip.type).set_surface_override_material(0,humanizer.materials[equip.type])
 	notify_property_list_changed()
 	
-func _setup_overlay_material(asset: HumanizerEquipmentType, existing_config: HumanizerMaterial = null) -> void:
-	var mi: MeshInstance3D = get_node(asset.resource_name)
-	mi.set_script(load("res://addons/humanizer/scripts/core/humanizer_mesh_instance.gd"))
-	if existing_config != null:
-		mi.material_config = existing_config
-		return
-	mi.material_config = HumanizerMaterial.new()
-	var overlay_dict = {'albedo': asset.textures.values()[0]}
-	if mi.get_surface_override_material(0).normal_texture != null:
-		overlay_dict['normal'] = mi.get_surface_override_material(0).normal_texture.resource_path
-	if mi.get_surface_override_material(0).ao_texture != null:
-		overlay_dict['ao'] = mi.get_surface_override_material(0).ao_texture.resource_path
-	var overlay = HumanizerOverlay.from_dict(overlay_dict)
-	mi.material_config.set_base_textures(HumanizerOverlay.from_dict(overlay_dict))
-	mi.material_config.add_overlay(asset.default_overlay.duplicate(true))
+func init_rig() -> void:
+	skeleton = humanizer.get_skeleton()
+	_add_child_node(skeleton)
+	_reset_animator()
+	
+	if human_config.components.has(&'ragdoll'):
+		set_component_state(true, &'ragdoll')
+	if human_config.components.has(&'saccades'):
+		if human_config.rig != &'default-RETARGETED':
+			set_component_state(false, &'saccades')
 
 #### Animation ####
 func set_rig(rig_name: String) -> void:
@@ -607,17 +607,8 @@ func set_rig(rig_name: String) -> void:
 		return
 		
 	humanizer.set_rig(rig_name)
-	skeleton = humanizer.get_skeleton()
-	_add_child_node(skeleton)
-	_reset_animator()
-
-	if human_config.components.has(&'ragdoll'):
-		set_component_state(true, &'ragdoll')
-	if human_config.components.has(&'saccades'):
-		if rig_name != &'default-RETARGETED':
-			set_component_state(false, &'saccades')
-			
-	_adjust_skeleton()
+	init_rig()
+	update_bone_weights()
 
 func _adjust_skeleton() -> void:
 	if skeleton == null:
@@ -625,9 +616,16 @@ func _adjust_skeleton() -> void:
 	skeleton.reset_bone_poses()
 	humanizer.adjust_skeleton(skeleton)	
 	skeleton.reset_bone_poses()
+	update_skeleton_skins()
+	
+func update_skeleton_skins():
 	for child in get_children():
 		if child is MeshInstance3D:
 			child.skin = skeleton.create_skin_from_rest_transforms()
+
+func update_bone_weights():
+	for equip in human_config.equipment.values():
+		_add_bone_weights(equip)	
 		
 func _add_bone_weights(asset: HumanizerEquipment) -> void:
 	var equip_type = asset.get_type()
@@ -635,7 +633,9 @@ func _add_bone_weights(asset: HumanizerEquipment) -> void:
 	mi.mesh = humanizer.get_mesh(asset.type)
 	mi.skeleton = &'../' + skeleton.name
 	mi.skin = skeleton.create_skin_from_rest_transforms()
-
+func stop_animations():
+	humanizer.pause_animations=true
+	_reset_animator()
 func _reset_animator() -> void:
 	for child in get_children():
 		if child is AnimationTree or child is AnimationPlayer:

@@ -8,8 +8,14 @@ var mesh_arrays : Dictionary = {}
 var materials: Dictionary = {}
 var rig: HumanizerRig 
 var skeleton_data : Dictionary = {} #bone names with parent, position and rotation data
+signal material_updated
+var pause_animations = false
 
-func _init(_human_config = null):
+func load_config(_human_config):
+	materials = {}
+	mesh_arrays = {}
+	skeleton_data = {}
+	rig = null
 	if _human_config == null:
 		human_config = HumanConfig.new()
 		human_config.init_macros()
@@ -22,7 +28,7 @@ func _init(_human_config = null):
 	helper_vertex = HumanizerTargetService.init_helper_vertex(human_config.targets)
 	for equip in human_config.equipment.values():
 		mesh_arrays[equip.type] = HumanizerEquipmentService.load_mesh_arrays(equip.get_type())
-		init_equipment_material(equip)
+		await init_equipment_material(equip)
 	fit_all_meshes()
 	set_rig(human_config.rig) #this adds the rigged bones and updates all the bone weights
 
@@ -56,6 +62,7 @@ func get_CharacterBody3D(baked:bool):
 	return human
 
 func get_combined_meshes() -> ArrayMesh:
+	#print("getting combined meshes")
 	var new_mesh = ArrayMesh.new()
 	for equip_name in mesh_arrays:
 		var new_arrays = get_mesh_arrays(equip_name)
@@ -63,11 +70,13 @@ func get_combined_meshes() -> ArrayMesh:
 			new_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,new_arrays)
 			var surface_id = new_mesh.get_surface_count()-1
 			new_mesh.surface_set_material(surface_id,materials[equip_name])
-			new_mesh.surface_set_name(surface_id,equip_name)	
+			new_mesh.surface_set_name(surface_id,equip_name)
 	return new_mesh
 	
 func get_animation_tree():
-	if human_config.rig == 'default-RETARGETED':
+	if pause_animations:
+		return
+	elif human_config.rig == 'default-RETARGETED':
 		return load("res://addons/humanizer/data/animations/face_animation_tree.tscn").instantiate()
 	elif human_config.rig.ends_with('RETARGETED'):
 		return load("res://addons/humanizer/data/animations/animation_tree.tscn").instantiate()
@@ -114,14 +123,16 @@ func get_group_bake_arrays(group_name:String): #transparent, opaque or all
 func set_skin_color(color:Color):
 	human_config.skin_color = color
 	var body = human_config.get_equipment_in_slot("Body")
-	body.material_config.update_standard_material_3D(materials[body.type])
-
+	materials[body.type] = await body.material_config.generate_material_3D()
+	material_updated.emit(body)
+	
 func set_eye_color(color:Color):
 	human_config.eye_color = color
 	var slots = ["LeftEye","RightEye","Eyes"]
 	for equip in human_config.get_equipment_in_slots(slots):
-		equip.material_config.update_standard_material_3D(materials[equip.type])
-
+		materials[equip.type] = await equip.material_config.generate_material_3D()
+		material_updated.emit(equip)
+		
 func set_hair_color(color:Color):
 	human_config.hair_color = color
 	var hair_equip = human_config.get_equipment_in_slot("Hair")
@@ -134,36 +145,19 @@ func set_eyebrow_color(color:Color):
 	var slots = ["LeftEyebrow","RightEyebrow","Eyebrows"]
 	for eyebrow_equip in human_config.get_equipment_in_slots(slots):
 		materials[eyebrow_equip.type].albedo_color = color
-		
-func init_equipment_material(equipment:HumanizerEquipment):
-	var equip_type = equipment.get_type()
-	materials[equipment.type] = load(equip_type.material_path).duplicate()
-	materials[equipment.type].resource_local_to_scene = true
-	set_equipment_material(equipment,equipment.texture_name)
+		material_updated.emit(eyebrow_equip)
 
-func set_equipment_material(equipment:HumanizerEquipment, texture: String)-> void:
-	var equip_type = equipment.get_type()
-	equipment.texture_name = texture
-	var material = materials[equipment.type]
-	var mat_config: HumanizerMaterial = equipment.material_config
-	if mat_config != null:
-		if texture in equip_type.textures:
-			mat_config.overlays[0].albedo_texture_path = equip_type.textures[texture]
-		else:
-			mat_config.overlays[0].albedo_texture_path = ""
-	elif texture not in equip_type.textures:
-		material.albedo_texture = null
-	else:
-		material.albedo_texture = load(equip_type.textures[texture])
-		
-	if equip_type.in_slot(["Hair"]):
-		material.albedo_color = human_config.hair_color
-	elif equip_type.in_slot(["LeftEyebrow","RightEyebrow"]):
-		material.albedo_color = human_config.eyebrow_color
-	if mat_config != null:
-		mat_config.update_standard_material_3D(material)
+func init_equipment_material(equip:HumanizerEquipment): #called from thread
+	#print("initializing equipment")
+	var equip_type = equip.get_type()
+	materials[equip.type] = await equip.material_config.generate_material_3D()
+	material_updated.emit(equip)
 
-func update_materials(): # not normally needed, use this if generated humans arent updating textures properly (was an issue in the stress test - has something to do with threads)
+func set_equipment_material(equip:HumanizerEquipment, material_name: String)-> void:
+	human_config.set_equipment_material(equip,material_name)	
+	await init_equipment_material(equip)
+
+func force_update_materials(): # not normally needed, use this if generated humans arent updating textures properly (was an issue in the stress test - has something to do with threads)
 	for equip in human_config.equipment.values():
 		if equip.material_config != null:
 			await RenderingServer.frame_post_draw	
@@ -179,6 +173,7 @@ func get_mesh(mesh_name:String):
 	return mesh
 
 func get_mesh_arrays(mesh_name:String) -> Array: # generate normals/tangents, without the cutom0
+	#print("getting mesh arrays")
 	var new_arrays = mesh_arrays[mesh_name].duplicate()
 	new_arrays[Mesh.ARRAY_CUSTOM0] = null
 	if new_arrays[Mesh.ARRAY_INDEX].is_empty():
@@ -194,8 +189,8 @@ func add_equipment(equip:HumanizerEquipment):
 	if equip_type.rigged:
 		HumanizerRigService.skeleton_add_rigged_equipment(equip,mesh_arrays[equip_type.resource_name], skeleton_data)
 	update_equipment_weights(equip_type.resource_name)
-	init_equipment_material(equip)
-	
+	await init_equipment_material(equip)
+
 func remove_equipment(equip:HumanizerEquipment):
 	human_config.remove_equipment(equip)
 	var equip_type = equip.get_type()

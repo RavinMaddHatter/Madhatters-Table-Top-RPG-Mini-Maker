@@ -18,5 +18,4 @@ dest_files=["res://.godot/imported/short03.obj-eecac913ef4d10f5add3d39abcb38220.
 generate_tangents=true
 scale_mesh=Vector3(1, 1, 1)
 offset_mesh=Vector3(0, 0, 0)
-optimize_mesh=true
 force_disable_mesh_compression=false

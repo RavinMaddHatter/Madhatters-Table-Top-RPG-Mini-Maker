@@ -9,12 +9,11 @@ script/source = "extends Node
 
 @export var randomizer: HumanRandomizer
 
-var thread := Thread.new()
-var new_human: Node3D
 var n_humans: int = 0
 var generating: bool = true
 var t0: float
 var pos: Vector3 = Vector3.ZERO
+var threads : Array[Thread] = []
 
 func _ready() -> void:
 	## You have to feed in the following randomization parameters to the randomizer
@@ -27,6 +26,31 @@ func _ready() -> void:
 		randomizer.asymmetry[cat] = 0.1 
 		randomizer.categories[cat] = true
 
+func new_thread() -> Thread:
+	var thread = Thread.new()
+	threads.append(thread)
+	return thread
+
+func thread_cleanup():
+	for thread in threads:
+		if thread.is_started() and not thread.is_alive():
+			var character3d = thread.wait_to_finish()
+			#print(character3d)
+			add_child(character3d)
+			character3d.global_position = pos
+			character3d.camera = $Camera3D
+			
+			pos.x += 1
+			if pos.x > 15.5:
+				pos.z += 1
+				pos.x = 0
+			n_humans += 1
+			$UI/humans.text = str(n_humans)
+			print(\"New human took \" + str((Time.get_ticks_msec() - t0) / 1000) + ' seconds')
+			t0 = Time.get_ticks_msec()
+			threads.erase(thread)
+			
+	
 func _process(delta) -> void:
 	var fps = Engine.get_frames_per_second()
 	$UI/fps.text = str(int(fps))
@@ -34,38 +58,22 @@ func _process(delta) -> void:
 	if Input.is_action_just_pressed(&'ui_accept'):
 		generating = not generating
 		print('Generating new humans : ' + str(generating))
-		
-	if thread.is_alive():
-		return
-	elif new_human != null:
-		add_child(new_human)
-		new_human.global_position = pos
-		new_human.camera = $Camera3D
-		
-		pos.x += 1
-		if pos.x > 15.5:
-			pos.z += 1
-			pos.x = 0
-		n_humans += 1
-		$UI/humans.text = str(n_humans)
-		print(\"New human took \" + str((Time.get_ticks_msec() - t0) / 1000) + ' seconds')
-		new_human = null
-		
+	
+	thread_cleanup()
+	
 	if fps < 55:
 		return
+	if threads.size() > 0:
+		return
+	if generating:
+		var thread = new_thread()
+		thread.start(_generate_human.bind(thread))
 	
-	if thread.is_started():
-		thread.wait_to_finish()
-	
-	if generating and new_human == null:
-		t0 = Time.get_ticks_msec()
-		thread.start(_generate_human)
-	
-func _generate_human() -> void:
+func _generate_human(thread:Thread):
 	print('starting new human')
 	var human_config = HumanConfig.new()
 	human_config.rig = HumanizerGlobalConfig.config.default_skeleton
-	human_config.enable_component(&'ragdoll')
+	#human_config.enable_component(&'ragdoll')
 	print('randomizing')
 	randomizer.human = human_config
 	#human_config.set_component_state(true, &'ragdoll')
@@ -73,9 +81,10 @@ func _generate_human() -> void:
 	randomizer.randomize_clothes()
 	randomizer.randomize_shapekeys()
 	human_config.init_macros()
-	var humanizer = Humanizer.new(human_config) 
-	humanizer.update_materials()
-	new_human = humanizer.get_CharacterBody3D(false)
+	var humanizer = Humanizer.new()
+	humanizer.load_config(human_config)
+	var new_human = humanizer.get_CharacterBody3D(false)
+	return new_human
 "
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_vyou0"]
