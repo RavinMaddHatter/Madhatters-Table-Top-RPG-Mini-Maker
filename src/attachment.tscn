@@ -144,3 +144,4 @@ value = 0.2
 
 [connection signal="pressed" from="HBoxContainer7/Upload" to="." method="_upload_pressed"]
 [connection signal="pressed" from="HBoxContainer7/Remove" to="." method="_remove_pressed"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]

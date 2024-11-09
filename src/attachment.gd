@@ -35,12 +35,15 @@ func set_anchor_point(anchor:BoneAttachment3D):
 
 func _upload_pressed():
 	file_dialog.show()
+
+func _on_file_dialog_file_selected(file_path: String) -> void:
 	slider_vbox.show()
 	remove_button.show()
 	upload_button.hide()
-	var file_path = $FileDialog.current_file
 	var mesh = ObjParse.load_obj(file_path)
 	mesh_object = MeshInstance3D.new()
+	print(mesh_object)
+	print(mesh)
 	var aabb = mesh.get_aabb()
 	maxsize = max(aabb.size.x,aabb.size.y,aabb.size.z) - min(aabb.size.x,aabb.size.y,aabb.size.z)
 	mesh_object.mesh=mesh

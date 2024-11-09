@@ -423,8 +423,7 @@ func bake_surface() -> void:
 		if not node.transform == Transform3D.IDENTITY:
 			human_config.transforms[node.name] = Transform3D(node.transform)
 		if node is HumanizerMeshInstance and node.material_config != null:
-			if node.material_config.has_method("update_material"):
-				node.material_config.update_material()
+			node.material_config.update_material()
 
 	if human_config.components.has(&'size_morphs') or human_config.components.has(&'age_morphs'):
 		
@@ -581,12 +580,12 @@ func set_equipment_material(equip:HumanizerEquipment, texture: String) -> void:
 	humanizer.set_equipment_material(equip,texture)
 	get_node(equip.type).set_surface_override_material(0,humanizer.materials[equip.type])
 	notify_property_list_changed()
-	
+var second=false
 func init_rig() -> void:
 	skeleton = humanizer.get_skeleton()
 	_add_child_node(skeleton)
 	_reset_animator()
-	
+	second=true
 	if human_config.components.has(&'ragdoll'):
 		set_component_state(true, &'ragdoll')
 	if human_config.components.has(&'saccades'):
@@ -633,9 +632,7 @@ func _add_bone_weights(asset: HumanizerEquipment) -> void:
 	mi.mesh = humanizer.get_mesh(asset.type)
 	mi.skeleton = &'../' + skeleton.name
 	mi.skin = skeleton.create_skin_from_rest_transforms()
-func stop_animations():
-	humanizer.pause_animations=true
-	_reset_animator()
+
 func _reset_animator() -> void:
 	for child in get_children():
 		if child is AnimationTree or child is AnimationPlayer:

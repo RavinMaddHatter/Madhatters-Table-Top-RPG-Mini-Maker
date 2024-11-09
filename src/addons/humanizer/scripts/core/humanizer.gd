@@ -9,7 +9,6 @@ var materials: Dictionary = {}
 var rig: HumanizerRig 
 var skeleton_data : Dictionary = {} #bone names with parent, position and rotation data
 signal material_updated
-var pause_animations = false
 
 func load_config(_human_config):
 	materials = {}
@@ -74,9 +73,7 @@ func get_combined_meshes() -> ArrayMesh:
 	return new_mesh
 	
 func get_animation_tree():
-	if pause_animations:
-		return
-	elif human_config.rig == 'default-RETARGETED':
+	if human_config.rig == 'default-RETARGETED':
 		return load("res://addons/humanizer/data/animations/face_animation_tree.tscn").instantiate()
 	elif human_config.rig.ends_with('RETARGETED'):
 		return load("res://addons/humanizer/data/animations/animation_tree.tscn").instantiate()

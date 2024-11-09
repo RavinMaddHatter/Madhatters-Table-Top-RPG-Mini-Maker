@@ -22,27 +22,31 @@ var attach_menu ={}
 var attachment_points = ["LeftHand","RightHand","Head","RightFoot","LeftFoot","Hips","Chest"]
 func _ready() -> void:
 	make_menu()
-	make_character()
 	$FileDialog.current_dir = "/"
 	$FileDialog.use_native_dialog=true
 	$FileDialog.access=FileDialog.ACCESS_FILESYSTEM
 	OBJExporter.export_started.connect(_on_export_started)
 	OBJExporter.export_completed.connect(_on_export_completed)
 	OBJExporter.export_progress_updated.connect(_on_export_progress)
+	make_character()
+	print("completed make character")
 func make_character():
 	humanizer.reset()
-	humanizer.remove_equipment(HumanizerEquipment.new("DefaultBody","old_caucasian_male_detailed"))
-	humanizer.add_equipment(HumanizerEquipment.new("DefaultBody","old_caucasian_male_detailed"))
-	#humanizer.add_equipment(HumanizerEquipment.new("RightEyeball-LowPoly"))
-	#humanizer.add_equipment(HumanizerEquipment.new("LeftEyeBall-LowPoly"))
+	humanizer.remove_equipment(HumanizerEquipment.new("DefaultBody","basic_statue"))
+	humanizer.add_equipment(HumanizerEquipment.new("DefaultBody","basic_statue"))
+	humanizer.find_child("AnimationTree").active=false
+	humanizer.humanizer.material_updated.connect(test)
+	
+func test(equipment):
+	humanizer.find_child("AnimationTree").active=false
+	await get_tree().process_frame
+	humanizer.find_child("AnimationTree").active=false
 	var skelton = humanizer.skeleton
-	humanizer.stop_animations()
 	for slot in attachment_points:
 		attach_points[slot] = BoneAttachment3D.new()
 		skelton.add_child(attach_points[slot])
 		attach_points[slot].set_bone_name(slot)
 		attach_menu[slot].set_anchor_point(attach_points[slot])
-
 func make_menu():
 	make_basic_menu()
 	make_attachments_menu()
@@ -334,15 +338,15 @@ func _on_file_dialog_file_selected(file_path: String) -> void:
 	if len(file_path)>2:
 		_on_save_pressed()
 		var mesh = humanizer.find_child("DefaultBody")
-		var baked_pose : ArrayMesh
-		baked_pose = mesh.bake_mesh_from_current_skeleton_pose()
 		var surface_tool= SurfaceTool.new()
-		surface_tool.append_from(baked_pose, 0,humanizer.transform)
-		surface_tool.append_from(baseMesh.mesh, 0, baseMesh.transform)
+		for child in humanizer.get_children():
+			if child.get_class() == "MeshInstance3D":
+				print(child.name)
+				var baked_pose : ArrayMesh
+				baked_pose = child.bake_mesh_from_current_skeleton_pose()
+				surface_tool.append_from(baked_pose, 0,baked_pose.transform)
 		var combinedMesh:ArrayMesh=surface_tool.commit()
 		OBJExporter.save_mesh_to_files(combinedMesh, file_path)
-		_warning("Poses not currently supported. The default pose was exported.")
-		make_character()
 		load_character_file(nameBox.text) 
 func _on_export_started():
 	pass

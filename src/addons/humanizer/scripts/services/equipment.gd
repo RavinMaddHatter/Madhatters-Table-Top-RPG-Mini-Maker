@@ -5,7 +5,6 @@ class_name HumanizerEquipmentService
 static func load_mesh_arrays(equip:HumanizerEquipmentType):
 	var sf_arrays = []
 	sf_arrays.resize(Mesh.ARRAY_MAX)
-	print(equip.mhclo_path)
 	var mhclo = load(equip.mhclo_path)
 	sf_arrays[Mesh.ARRAY_TEX_UV] = mhclo.uv_array
 	sf_arrays[Mesh.ARRAY_INDEX] = mhclo.index_array.duplicate()
