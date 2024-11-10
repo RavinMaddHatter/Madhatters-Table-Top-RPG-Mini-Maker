@@ -75,6 +75,8 @@ var morph_data := {}
 ## The physics layers the physical bones collide with
 @export_flags_3d_physics var _ragdoll_mask = HumanizerGlobalConfig.config.default_physical_bone_mask
 
+signal done_loading
+
 func _ready() -> void:
 	humanizer.material_updated.connect(on_material_updated)
 	for child in get_children():
@@ -156,6 +158,7 @@ func load_human() -> void:
 	reset_scene()
 	_deserialize()
 	notify_property_list_changed()
+	done_loading.emit()
 
 func create_human_branch() -> Node3D:
 	#_adjust_skeleton()
@@ -580,12 +583,12 @@ func set_equipment_material(equip:HumanizerEquipment, texture: String) -> void:
 	humanizer.set_equipment_material(equip,texture)
 	get_node(equip.type).set_surface_override_material(0,humanizer.materials[equip.type])
 	notify_property_list_changed()
-var second=false
+	
 func init_rig() -> void:
 	skeleton = humanizer.get_skeleton()
 	_add_child_node(skeleton)
 	_reset_animator()
-	second=true
+	
 	if human_config.components.has(&'ragdoll'):
 		set_component_state(true, &'ragdoll')
 	if human_config.components.has(&'saccades'):

@@ -21,25 +21,23 @@ var attach_points = {}
 var attach_menu ={}
 var attachment_points = ["LeftHand","RightHand","Head","RightFoot","LeftFoot","Hips","Chest"]
 func _ready() -> void:
-	make_menu()
+	humanizer.done_loading.connect(after_load)
+	humanizer.reset()
+	humanizer.remove_equipment(HumanizerEquipment.new("DefaultBody","basic_statue"))
+	humanizer.add_equipment(HumanizerEquipment.new("DefaultBody","basic_statue"))
 	$FileDialog.current_dir = "/"
 	$FileDialog.use_native_dialog=true
 	$FileDialog.access=FileDialog.ACCESS_FILESYSTEM
 	OBJExporter.export_started.connect(_on_export_started)
 	OBJExporter.export_completed.connect(_on_export_completed)
 	OBJExporter.export_progress_updated.connect(_on_export_progress)
+func after_load():
+	make_menu()
 	make_character()
-	print("completed make character")
 func make_character():
 	humanizer.reset()
 	humanizer.remove_equipment(HumanizerEquipment.new("DefaultBody","basic_statue"))
 	humanizer.add_equipment(HumanizerEquipment.new("DefaultBody","basic_statue"))
-	humanizer.find_child("AnimationTree").active=false
-	humanizer.humanizer.material_updated.connect(test)
-	
-func test(equipment):
-	humanizer.find_child("AnimationTree").active=false
-	await get_tree().process_frame
 	humanizer.find_child("AnimationTree").active=false
 	var skelton = humanizer.skeleton
 	for slot in attachment_points:
@@ -49,10 +47,10 @@ func test(equipment):
 		attach_menu[slot].set_anchor_point(attach_points[slot])
 func make_menu():
 	make_basic_menu()
+	make_detailed_menu()
 	make_attachments_menu()
 	make_equipment_menu()
 	make_pose_menu()
-	make_detailed_menu()
 	make_detailed_pose()
 
 func make_detailed_menu():
@@ -114,7 +112,9 @@ func make_attachments_menu():
 	equipment_categories = {}
 	for item in HumanizerRegistry.equipment:
 		var slots = HumanizerRegistry.equipment[item].slots
+		print(slots)
 		for cat in slots:
+			print(cat)
 			if not(cat in equipment_categories):
 				equipment_categories[cat] = load("res://equip_menu.tscn").instantiate()
 				equipment_categories[cat].set_slot(cat)
