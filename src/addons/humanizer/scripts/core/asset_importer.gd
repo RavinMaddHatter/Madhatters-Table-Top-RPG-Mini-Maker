@@ -16,6 +16,8 @@ enum AssetType {
 }
 
 func run(clean_only: bool = false) -> void:
+	print("--START--")
+	print_all()
 	basis = HumanizerTargetService.data.basis
 	if _asset_path != '':  # User operating from scene
 		for fl in OSPath.get_files(_asset_path):
@@ -36,10 +38,14 @@ func run(clean_only: bool = false) -> void:
 				_clean_recursive(dir)
 				if not clean_only:
 					_scan_recursive(dir)
-	print("Reloading Registry")
-	HumanizerRegistry.load_all()
+	#print("Reloading Registry")
+	#HumanizerRegistry.load_all()
 	print('Done')
-	
+func print_all():
+	for item in HumanizerRegistry.equipment:
+		var slots = HumanizerRegistry.equipment[item].slots
+		print(item)
+		print(slots)
 func _clean_recursive(path: String) -> void:
 	for dir in OSPath.get_dirs(path):
 		_clean_recursive(dir)
@@ -131,13 +137,12 @@ func _import_asset(path: String, data: Dictionary, softbody: bool = false):
 		if resource.slots.size() == 0:
 			printerr('No slots found for clothes.  Check your mhclo tags.')
 			return
-	
 	_calculate_bone_weights(data,resource)
-	
 	# Save resources
 	data.mhclo.mh2gd_index = HumanizerUtils.get_mh2gd_index_from_mesh(data.mesh)
 	resource.take_over_path(path.path_join(resource.resource_name + '.res'))
 	ResourceSaver.save(resource, resource.resource_path)
+	
 	#build rigged equipment
 	if data.has('rigged'):
 		var rigged_resource = resource.duplicate()

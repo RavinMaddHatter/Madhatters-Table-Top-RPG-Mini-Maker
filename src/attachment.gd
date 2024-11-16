@@ -14,6 +14,7 @@ var anchor_point:BoneAttachment3D
 @export var file_dialog:FileDialog
 var mesh_object:MeshInstance3D
 var maxsize:float
+var skeleton
 
 func _ready() -> void:
 	file_dialog.current_dir = "/"
@@ -42,13 +43,14 @@ func _on_file_dialog_file_selected(file_path: String) -> void:
 	upload_button.hide()
 	var mesh = ObjParse.load_obj(file_path)
 	mesh_object = MeshInstance3D.new()
-	print(mesh_object)
-	print(mesh)
+	mesh_object.name = lable.text
+	var greyMaterial = load("res://assets/grey_material.tres")
 	var aabb = mesh.get_aabb()
 	maxsize = max(aabb.size.x,aabb.size.y,aabb.size.z) - min(aabb.size.x,aabb.size.y,aabb.size.z)
 	mesh_object.mesh=mesh
 	anchor_point.add_child(mesh_object)
-
+	_change_pose(0)
+	
 func _remove_pressed():
 	slider_vbox.hide()
 	remove_button.hide()

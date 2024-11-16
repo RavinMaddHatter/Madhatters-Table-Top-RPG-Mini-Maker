@@ -1,0 +1,1016 @@
+HIERARCHY
+ROOT root
+{
+	OFFSET 0.000000 0.000000 0.288685
+	CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+	JOINT spine05
+	{
+		OFFSET 0.000000 -0.091157 -0.003204
+		CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+		JOINT spine04
+		{
+			OFFSET 0.000000 0.046994 0.076604
+			CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+			JOINT spine03
+			{
+				OFFSET 0.000000 -0.022825 0.068300
+				CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+				JOINT spine02
+				{
+					OFFSET 0.000000 -0.012242 0.097120
+					CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+					JOINT breast.L
+					{
+						OFFSET 0.000000 0.000918 0.145050
+						CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+						End Site
+						{
+							OFFSET 0.100877 -0.165788 -0.041654
+						}
+					}
+					JOINT breast.R
+					{
+						OFFSET 0.000000 0.000918 0.145050
+						CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+						End Site
+						{
+							OFFSET -0.100877 -0.165788 -0.041654
+						}
+					}
+					JOINT spine01
+					{
+						OFFSET 0.000000 0.000918 0.145050
+						CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+						JOINT clavicle.L
+						{
+							OFFSET 0.024144 -0.013307 0.081340
+							CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+							JOINT shoulder01.L
+							{
+								OFFSET 0.072592 -0.000715 0.020460
+								CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+								JOINT upperarm01.L
+								{
+									OFFSET 0.067434 0.003284 -0.036220
+									CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+									JOINT upperarm02.L
+									{
+										OFFSET 0.057860 0.000886 -0.062030
+										CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+										JOINT lowerarm01.L
+										{
+											OFFSET 0.132050 -0.007151 -0.146170
+											CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+											JOINT lowerarm02.L
+											{
+												OFFSET 0.062260 -0.081655 -0.069180
+												CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+												JOINT wrist.L
+												{
+													OFFSET 0.062250 -0.081650 -0.069180
+													CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+													JOINT finger1-1.L
+													{
+														OFFSET 0.000940 -0.041760 -0.009020
+														CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+														JOINT finger1-2.L
+														{
+															OFFSET -0.020390 -0.019710 -0.009330
+															CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+															JOINT finger1-3.L
+															{
+																OFFSET -0.012430 -0.031440 -0.015650
+																CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+																End Site
+																{
+																	OFFSET -0.005803 -0.022822 -0.018936
+																}
+															}
+														}
+													}
+													JOINT metacarpal1.L
+													{
+														OFFSET 0.010150 -0.024330 -0.016150
+														CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+														JOINT finger2-1.L
+														{
+															OFFSET 0.016330 -0.064650 -0.026750
+															CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+															JOINT finger2-2.L
+															{
+																OFFSET 0.004030 -0.021700 -0.016850
+																CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+																JOINT finger2-3.L
+																{
+																	OFFSET -0.000430 -0.016730 -0.018090
+																	CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+																	End Site
+																	{
+																		OFFSET -0.003651 -0.017762 -0.021698
+																	}
+																}
+															}
+														}
+													}
+													JOINT metacarpal2.L
+													{
+														OFFSET 0.010150 -0.024330 -0.016150
+														CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+														JOINT finger3-1.L
+														{
+															OFFSET 0.031540 -0.046760 -0.036470
+															CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+															JOINT finger3-2.L
+															{
+																OFFSET 0.007710 -0.019900 -0.026800
+																CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+																JOINT finger3-3.L
+																{
+																	OFFSET 0.003080 -0.017460 -0.023123
+																	CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+																	End Site
+																	{
+																		OFFSET 0.000349 -0.015046 -0.024219
+																	}
+																}
+															}
+														}
+													}
+													JOINT metacarpal3.L
+													{
+														OFFSET 0.021380 -0.013710 -0.030310
+														CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+														JOINT finger4-1.L
+														{
+															OFFSET 0.027300 -0.041010 -0.029120
+															CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+															JOINT finger4-2.L
+															{
+																OFFSET 0.010510 -0.014150 -0.025830
+																CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+																JOINT finger4-3.L
+																{
+																	OFFSET 0.003920 -0.011140 -0.020455
+																	CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+																	End Site
+																	{
+																		OFFSET 0.002921 -0.010605 -0.025096
+																	}
+																}
+															}
+														}
+													}
+													JOINT metacarpal4.L
+													{
+														OFFSET 0.021380 -0.013710 -0.030310
+														CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+														JOINT finger5-1.L
+														{
+															OFFSET 0.029280 -0.022200 -0.036630
+															CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+															JOINT finger5-2.L
+															{
+																OFFSET 0.006590 -0.007120 -0.020090
+																CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+																JOINT finger5-3.L
+																{
+																	OFFSET 0.002210 -0.005630 -0.015271
+																	CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+																	End Site
+																	{
+																		OFFSET 0.002809 -0.006397 -0.018952
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+						JOINT clavicle.R
+						{
+							OFFSET -0.024144 -0.013307 0.081340
+							CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+							JOINT shoulder01.R
+							{
+								OFFSET -0.072592 -0.000715 0.020460
+								CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+								JOINT upperarm01.R
+								{
+									OFFSET -0.067434 0.003284 -0.036220
+									CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+									JOINT upperarm02.R
+									{
+										OFFSET -0.057850 0.000886 -0.062030
+										CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+										JOINT lowerarm01.R
+										{
+											OFFSET -0.132070 -0.007151 -0.146190
+											CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+											JOINT lowerarm02.R
+											{
+												OFFSET -0.062240 -0.081655 -0.069160
+												CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+												JOINT wrist.R
+												{
+													OFFSET -0.062240 -0.081650 -0.069160
+													CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+													JOINT finger1-1.R
+													{
+														OFFSET -0.000960 -0.041760 -0.009040
+														CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+														JOINT finger1-2.R
+														{
+															OFFSET 0.020390 -0.019710 -0.009330
+															CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+															JOINT finger1-3.R
+															{
+																OFFSET 0.012430 -0.031440 -0.015650
+																CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+																End Site
+																{
+																	OFFSET 0.005803 -0.022822 -0.018936
+																}
+															}
+														}
+													}
+													JOINT metacarpal1.R
+													{
+														OFFSET -0.010170 -0.024330 -0.016170
+														CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+														JOINT finger2-1.R
+														{
+															OFFSET -0.016330 -0.064650 -0.026750
+															CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+															JOINT finger2-2.R
+															{
+																OFFSET -0.004030 -0.021700 -0.016850
+																CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+																JOINT finger2-3.R
+																{
+																	OFFSET 0.000430 -0.016730 -0.018090
+																	CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+																	End Site
+																	{
+																		OFFSET 0.003651 -0.017762 -0.021698
+																	}
+																}
+															}
+														}
+													}
+													JOINT metacarpal2.R
+													{
+														OFFSET -0.010170 -0.024330 -0.016170
+														CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+														JOINT finger3-1.R
+														{
+															OFFSET -0.031540 -0.046760 -0.036470
+															CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+															JOINT finger3-2.R
+															{
+																OFFSET -0.007710 -0.019900 -0.026800
+																CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+																JOINT finger3-3.R
+																{
+																	OFFSET -0.003080 -0.017460 -0.023124
+																	CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+																	End Site
+																	{
+																		OFFSET -0.000349 -0.015045 -0.024218
+																	}
+																}
+															}
+														}
+													}
+													JOINT metacarpal3.R
+													{
+														OFFSET -0.021400 -0.013710 -0.030330
+														CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+														JOINT finger4-1.R
+														{
+															OFFSET -0.027300 -0.041010 -0.029120
+															CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+															JOINT finger4-2.R
+															{
+																OFFSET -0.010510 -0.014150 -0.025830
+																CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+																JOINT finger4-3.R
+																{
+																	OFFSET -0.003920 -0.011140 -0.020456
+																	CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+																	End Site
+																	{
+																		OFFSET -0.002921 -0.010604 -0.025095
+																	}
+																}
+															}
+														}
+													}
+													JOINT metacarpal4.R
+													{
+														OFFSET -0.021400 -0.013710 -0.030330
+														CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+														JOINT finger5-1.R
+														{
+															OFFSET -0.029280 -0.022200 -0.036630
+															CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+															JOINT finger5-2.R
+															{
+																OFFSET -0.006590 -0.007120 -0.020090
+																CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+																JOINT finger5-3.R
+																{
+																	OFFSET -0.002210 -0.005630 -0.015271
+																	CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+																	End Site
+																	{
+																		OFFSET -0.002809 -0.006397 -0.018952
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+						JOINT neck01
+						{
+							OFFSET 0.000000 0.011648 0.153440
+							CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+							JOINT neck02
+							{
+								OFFSET 0.000000 -0.019932 0.031980
+								CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+								JOINT neck03
+								{
+									OFFSET 0.000000 -0.010862 0.032310
+									CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+									JOINT head
+									{
+										OFFSET 0.000000 -0.011110 0.038330
+										CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+										JOINT jaw
+										{
+											OFFSET 0.000000 -0.018111 -0.001120
+											CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+											JOINT special04
+											{
+												OFFSET 0.000000 -0.049851 -0.077310
+												CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+												JOINT oris02
+												{
+													OFFSET 0.000000 -0.024890 0.018410
+													CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+													JOINT oris01
+													{
+														OFFSET 0.000000 -0.007240 0.011950
+														CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+														End Site
+														{
+															OFFSET 0.000000 -0.007224 0.010967
+														}
+													}
+												}
+												JOINT oris06.L
+												{
+													OFFSET 0.000000 -0.024890 0.018410
+													CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+													JOINT oris07.L
+													{
+														OFFSET 0.010721 -0.004990 0.004250
+														CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+														End Site
+														{
+															OFFSET 0.003998 -0.002472 0.012070
+														}
+													}
+												}
+												JOINT oris06.R
+												{
+													OFFSET 0.000000 -0.024890 0.018410
+													CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+													JOINT oris07.R
+													{
+														OFFSET -0.010721 -0.004990 0.004180
+														CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+														End Site
+														{
+															OFFSET -0.003997 -0.002471 0.012140
+														}
+													}
+												}
+											}
+											JOINT tongue00
+											{
+												OFFSET 0.000000 -0.049851 -0.077310
+												CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+												JOINT tongue01
+												{
+													OFFSET 0.000000 0.044926 0.046820
+													CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+													JOINT tongue02
+													{
+														OFFSET 0.000000 -0.030930 0.003120
+														CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+														JOINT tongue03
+														{
+															OFFSET 0.000000 -0.021636 -0.000760
+															CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+															JOINT tongue04
+															{
+																OFFSET 0.000000 -0.006830 -0.005080
+																CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+																End Site
+																{
+																	OFFSET 0.000000 -0.006838 -0.005083
+																}
+															}
+															JOINT tongue07.L
+															{
+																OFFSET 0.000000 -0.006830 -0.005080
+																CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+																End Site
+																{
+																	OFFSET 0.012340 0.000979 -0.003330
+																}
+															}
+															JOINT tongue07.R
+															{
+																OFFSET 0.000000 -0.006830 -0.005080
+																CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+																End Site
+																{
+																	OFFSET -0.012340 0.000979 -0.003330
+																}
+															}
+														}
+														JOINT tongue06.L
+														{
+															OFFSET 0.000000 -0.021636 -0.000760
+															CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+															End Site
+															{
+																OFFSET 0.017490 0.004285 -0.004369
+															}
+														}
+														JOINT tongue06.R
+														{
+															OFFSET 0.000000 -0.021636 -0.000760
+															CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+															End Site
+															{
+																OFFSET -0.017490 0.004285 -0.004369
+															}
+														}
+													}
+													JOINT tongue05.L
+													{
+														OFFSET 0.000000 -0.030930 0.003120
+														CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+														End Site
+														{
+															OFFSET 0.020939 -0.001463 -0.003382
+														}
+													}
+													JOINT tongue05.R
+													{
+														OFFSET 0.000000 -0.030930 0.003120
+														CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+														End Site
+														{
+															OFFSET -0.020939 -0.001463 -0.003382
+														}
+													}
+												}
+											}
+										}
+										JOINT levator02.L
+										{
+											OFFSET 0.002472 -0.112332 0.016490
+											CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+											JOINT levator03.L
+											{
+												OFFSET 0.016560 0.014300 -0.015620
+												CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+												JOINT levator04.L
+												{
+													OFFSET 0.005926 0.000320 -0.017380
+													CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+													JOINT levator05.L
+													{
+														OFFSET 0.002735 0.004740 -0.017940
+														CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+														End Site
+														{
+															OFFSET -0.004019 0.000852 -0.008640
+														}
+													}
+												}
+											}
+										}
+										JOINT levator02.R
+										{
+											OFFSET -0.004140 -0.112522 0.016590
+											CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+											JOINT levator03.R
+											{
+												OFFSET -0.015782 0.014490 -0.015720
+												CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+												JOINT levator04.R
+												{
+													OFFSET -0.005314 0.000320 -0.017380
+													CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+													JOINT levator05.R
+													{
+														OFFSET -0.002457 0.004740 -0.017940
+														CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+														End Site
+														{
+															OFFSET 0.004019 0.000852 -0.008640
+														}
+													}
+												}
+											}
+										}
+										JOINT special01
+										{
+											OFFSET 0.000000 0.063670 -0.008340
+											CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+											JOINT oris04.L
+											{
+												OFFSET -0.000834 -0.172942 -0.009820
+												CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+												JOINT oris03.L
+												{
+													OFFSET 0.014261 0.003980 -0.005720
+													CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+													End Site
+													{
+														OFFSET 0.003700 0.001614 -0.006068
+													}
+												}
+											}
+											JOINT oris04.R
+											{
+												OFFSET -0.000834 -0.172942 -0.009820
+												CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+												JOINT oris03.R
+												{
+													OFFSET -0.013817 0.003980 -0.005720
+													CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+													End Site
+													{
+														OFFSET -0.002643 0.001614 -0.006068
+													}
+												}
+											}
+											JOINT oris06
+											{
+												OFFSET -0.000834 -0.172942 -0.009820
+												CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+												JOINT oris05
+												{
+													OFFSET 0.000111 0.000490 -0.004720
+													CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+													End Site
+													{
+														OFFSET 0.000445 -0.002069 -0.006300
+													}
+												}
+											}
+										}
+										JOINT special03
+										{
+											OFFSET 0.000000 -0.018111 -0.001120
+											CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+											JOINT levator06.L
+											{
+												OFFSET 0.004976 -0.104461 -0.000120
+												CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+												End Site
+												{
+													OFFSET 0.010945 0.023070 -0.002160
+												}
+											}
+											JOINT levator06.R
+											{
+												OFFSET -0.006644 -0.104461 -0.000170
+												CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+												End Site
+												{
+													OFFSET -0.010889 0.023071 -0.002104
+												}
+											}
+										}
+										JOINT special06.L
+										{
+											OFFSET 0.000000 0.005970 0.152160
+											CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+											JOINT special05.L
+											{
+												OFFSET 0.019139 -0.057616 -0.016110
+												CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+												JOINT eye.L
+												{
+													OFFSET 0.011141 -0.025446 -0.102330
+													CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+													End Site
+													{
+														OFFSET 0.001051 -0.043060 -0.002680
+													}
+												}
+												JOINT orbicularis03.L
+												{
+													OFFSET 0.011141 -0.025446 -0.102330
+													CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+													End Site
+													{
+														OFFSET 0.000928 -0.041079 0.009972
+													}
+												}
+												JOINT orbicularis04.L
+												{
+													OFFSET 0.011141 -0.025446 -0.102330
+													CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+													End Site
+													{
+														OFFSET 0.001071 -0.040188 -0.014984
+													}
+												}
+											}
+										}
+										JOINT special06.R
+										{
+											OFFSET 0.000000 0.005970 0.152160
+											CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+											JOINT special05.R
+											{
+												OFFSET -0.019139 -0.057616 -0.016110
+												CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+												JOINT eye.R
+												{
+													OFFSET -0.011141 -0.025446 -0.102330
+													CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+													End Site
+													{
+														OFFSET -0.001051 -0.043060 -0.002680
+													}
+												}
+												JOINT orbicularis03.R
+												{
+													OFFSET -0.011141 -0.025446 -0.102330
+													CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+													End Site
+													{
+														OFFSET -0.000928 -0.041079 0.009972
+													}
+												}
+												JOINT orbicularis04.R
+												{
+													OFFSET -0.011141 -0.025446 -0.102330
+													CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+													End Site
+													{
+														OFFSET -0.001071 -0.040188 -0.014984
+													}
+												}
+											}
+										}
+										JOINT temporalis01.L
+										{
+											OFFSET 0.062943 -0.064082 0.042450
+											CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+											JOINT oculi02.L
+											{
+												OFFSET -0.007740 -0.015190 -0.001520
+												CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+												JOINT oculi01.L
+												{
+													OFFSET -0.022313 -0.023120 0.013320
+													CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+													End Site
+													{
+														OFFSET -0.016771 -0.005683 0.003059
+													}
+												}
+											}
+										}
+										JOINT temporalis01.R
+										{
+											OFFSET -0.062943 -0.064082 0.042450
+											CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+											JOINT oculi02.R
+											{
+												OFFSET 0.007740 -0.015190 -0.001520
+												CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+												JOINT oculi01.R
+												{
+													OFFSET 0.022313 -0.023120 0.013320
+													CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+													End Site
+													{
+														OFFSET 0.016771 -0.005683 0.003059
+													}
+												}
+											}
+										}
+										JOINT temporalis02.L
+										{
+											OFFSET 0.064412 -0.062272 0.018780
+											CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+											JOINT risorius02.L
+											{
+												OFFSET -0.008924 -0.014980 0.003500
+												CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+												JOINT risorius03.L
+												{
+													OFFSET -0.005658 -0.006470 -0.027820
+													CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+													End Site
+													{
+														OFFSET 0.004759 0.016296 -0.022233
+													}
+												}
+											}
+										}
+										JOINT temporalis02.R
+										{
+											OFFSET -0.064412 -0.062272 0.018780
+											CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+											JOINT risorius02.R
+											{
+												OFFSET 0.008924 -0.014980 0.003500
+												CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+												JOINT risorius03.R
+												{
+													OFFSET 0.005658 -0.006470 -0.027820
+													CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+													End Site
+													{
+														OFFSET -0.004759 0.016296 -0.022233
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	JOINT pelvis.L
+	{
+		OFFSET 0.000000 -0.091157 -0.003204
+		CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+		JOINT upperleg01.L
+		{
+			OFFSET 0.100760 0.006448 -0.011869
+			CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+			JOINT upperleg02.L
+			{
+				OFFSET 0.007620 -0.026192 -0.071621
+				CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+				JOINT lowerleg01.L
+				{
+					OFFSET 0.033050 -0.005529 -0.331166
+					CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+					JOINT lowerleg02.L
+					{
+						OFFSET 0.017670 0.011183 -0.198120
+						CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+						JOINT foot.L
+						{
+							OFFSET 0.017670 0.011183 -0.198130
+							CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+							JOINT toe1-1.L
+							{
+								OFFSET -0.028410 -0.150536 -0.053210
+								CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+								JOINT toe1-2.L
+								{
+									OFFSET 0.002460 -0.027170 -0.005370
+									CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+									End Site
+									{
+										OFFSET 0.004807 -0.030810 -0.004382
+									}
+								}
+							}
+							JOINT toe2-1.L
+							{
+								OFFSET -0.002350 -0.150836 -0.054820
+								CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+								JOINT toe2-2.L
+								{
+									OFFSET 0.002360 -0.022880 -0.003420
+									CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+									JOINT toe2-3.L
+									{
+										OFFSET 0.001110 -0.013790 -0.003060
+										CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+										End Site
+										{
+											OFFSET 0.000220 -0.019449 -0.006034
+										}
+									}
+								}
+							}
+							JOINT toe3-1.L
+							{
+								OFFSET 0.015230 -0.148246 -0.055350
+								CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+								JOINT toe3-2.L
+								{
+									OFFSET 0.002840 -0.019650 -0.002590
+									CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+									JOINT toe3-3.L
+									{
+										OFFSET 0.000960 -0.013860 -0.004280
+										CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+										End Site
+										{
+											OFFSET -0.000645 -0.014688 -0.004397
+										}
+									}
+								}
+							}
+							JOINT toe4-1.L
+							{
+								OFFSET 0.032890 -0.140616 -0.054880
+								CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+								JOINT toe4-2.L
+								{
+									OFFSET 0.002900 -0.016900 -0.004690
+									CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+									JOINT toe4-3.L
+									{
+										OFFSET 0.000310 -0.012870 -0.000830
+										CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+										End Site
+										{
+											OFFSET 0.001272 -0.010351 -0.005757
+										}
+									}
+								}
+							}
+							JOINT toe5-1.L
+							{
+								OFFSET 0.048620 -0.130516 -0.052810
+								CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+								JOINT toe5-2.L
+								{
+									OFFSET 0.001000 -0.010160 -0.002870
+									CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+									JOINT toe5-3.L
+									{
+										OFFSET -0.000570 -0.009040 -0.005480
+										CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+										End Site
+										{
+											OFFSET 0.000905 -0.012509 -0.004152
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	JOINT pelvis.R
+	{
+		OFFSET 0.000000 -0.091157 -0.003204
+		CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+		JOINT upperleg01.R
+		{
+			OFFSET -0.100760 0.006448 -0.011872
+			CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+			JOINT upperleg02.R
+			{
+				OFFSET -0.007620 -0.026192 -0.071618
+				CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+				JOINT lowerleg01.R
+				{
+					OFFSET -0.033050 -0.005529 -0.331186
+					CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+					JOINT lowerleg02.R
+					{
+						OFFSET -0.017670 0.011183 -0.198110
+						CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+						JOINT foot.R
+						{
+							OFFSET -0.017670 0.011183 -0.198120
+							CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+							JOINT toe1-1.R
+							{
+								OFFSET 0.028410 -0.150536 -0.053210
+								CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+								JOINT toe1-2.R
+								{
+									OFFSET -0.002460 -0.027170 -0.005370
+									CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+									End Site
+									{
+										OFFSET -0.004807 -0.030810 -0.004382
+									}
+								}
+							}
+							JOINT toe2-1.R
+							{
+								OFFSET 0.002350 -0.150836 -0.054820
+								CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+								JOINT toe2-2.R
+								{
+									OFFSET -0.002360 -0.022880 -0.003420
+									CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+									JOINT toe2-3.R
+									{
+										OFFSET -0.001110 -0.013790 -0.003060
+										CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+										End Site
+										{
+											OFFSET -0.000220 -0.019452 -0.006035
+										}
+									}
+								}
+							}
+							JOINT toe3-1.R
+							{
+								OFFSET -0.015230 -0.148246 -0.055350
+								CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+								JOINT toe3-2.R
+								{
+									OFFSET -0.002840 -0.019650 -0.002590
+									CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+									JOINT toe3-3.R
+									{
+										OFFSET -0.000960 -0.013860 -0.004280
+										CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+										End Site
+										{
+											OFFSET 0.000645 -0.014688 -0.004397
+										}
+									}
+								}
+							}
+							JOINT toe4-1.R
+							{
+								OFFSET -0.032890 -0.140616 -0.054880
+								CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+								JOINT toe4-2.R
+								{
+									OFFSET -0.002900 -0.016900 -0.004690
+									CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+									JOINT toe4-3.R
+									{
+										OFFSET -0.000310 -0.012870 -0.000830
+										CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+										End Site
+										{
+											OFFSET -0.001272 -0.010351 -0.005757
+										}
+									}
+								}
+							}
+							JOINT toe5-1.R
+							{
+								OFFSET -0.048620 -0.130516 -0.052810
+								CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+								JOINT toe5-2.R
+								{
+									OFFSET -0.001000 -0.010160 -0.002870
+									CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+									JOINT toe5-3.R
+									{
+										OFFSET 0.000570 -0.009040 -0.005480
+										CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+										End Site
+										{
+											OFFSET -0.000905 -0.012509 -0.004152
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+MOTION
+Frames: 1
+Frame Time: 0.040000
+0.000000 0.000000 -0.299436 0.000000 -2.777733 0.000012 -0.000000 -0.091157 -0.003204 10.089446 0.000000 0.000000 0.000000 0.046994 0.076604 -17.606909 0.000000 -0.000000 0.000000 -0.022825 0.068300 10.022558 -0.869224 10.236553 0.000000 -0.012242 0.097120 23.664766 2.254013 17.262034 -0.000000 0.000918 0.145050 -0.000004 0.000001 -0.000001 -0.000000 0.000918 0.145050 0.000000 0.000001 -0.000001 -0.000000 0.000918 0.145050 13.351216 -0.000000 -0.000002 0.024144 -0.013307 0.081340 -1.746354 0.024709 -0.492080 0.072592 -0.000715 0.020460 -10.682417 6.553029 2.149669 0.067434 0.003284 -0.036220 -1.703873 33.705450 -16.676598 0.057860 0.000886 -0.062030 -3.880509 0.064581 4.294384 0.132050 -0.007151 -0.146170 -31.406470 15.143571 -15.941967 0.062260 -0.081655 -0.069180 -21.924470 19.038071 23.591040 0.062250 -0.081650 -0.069180 -7.836473 -3.090216 13.110092 0.000940 -0.041760 -0.009020 -5.223150 27.946288 -10.941955 -0.020390 -0.019710 -0.009330 19.779849 -17.361333 -8.110398 -0.012430 -0.031440 -0.015650 -29.174228 12.997310 -2.370537 0.010150 -0.024330 -0.016150 4.225260 -0.247766 3.667803 0.016330 -0.064650 -0.026750 25.193824 17.753994 -14.706797 0.004030 -0.021700 -0.016850 31.147657 12.823489 -21.570636 -0.000430 -0.016730 -0.018090 40.592777 12.354531 -29.890585 0.010150 -0.024330 -0.016150 3.835617 4.560093 -2.909866 0.031540 -0.046760 -0.036470 14.808519 20.948747 -7.563515 0.007710 -0.019900 -0.026800 53.639545 28.372809 -46.551632 0.003080 -0.017460 -0.023123 33.009263 24.863087 -27.396580 0.021380 -0.013710 -0.030310 5.201285 1.283830 2.149437 0.027300 -0.041010 -0.029120 6.383163 27.111941 -5.648931 0.010510 -0.014150 -0.025830 34.061009 33.002822 -27.970984 0.003920 -0.011140 -0.020455 48.484569 40.839258 -39.170459 0.021380 -0.013710 -0.030310 0.668105 -0.014287 0.545007 0.029280 -0.022200 -0.036630 1.050067 3.844931 -1.069382 0.006590 -0.007120 -0.020090 16.158691 34.550973 -17.442973 0.002210 -0.005630 -0.015271 19.018984 45.228095 -6.526625 -0.024144 -0.013307 0.081340 -7.186027 -0.197591 2.017125 -0.072592 -0.000715 0.020460 2.986129 2.679660 2.128781 -0.067434 0.003284 -0.036220 -7.855421 -28.205210 11.049321 -0.057850 0.000886 -0.062030 -0.000003 -0.000002 0.000000 -0.132070 -0.007151 -0.146190 -3.939154 20.262381 24.725440 -0.062240 -0.081655 -0.069160 -4.439326 -5.334492 -4.886390 -0.062240 -0.081650 -0.069160 0.801973 2.353127 -20.043182 -0.000960 -0.041760 -0.009040 15.976554 -0.672276 -8.959104 0.020390 -0.019710 -0.009330 34.122700 12.113016 -5.485314 0.012430 -0.031440 -0.015650 -26.121364 -11.604538 2.431463 -0.010170 -0.024330 -0.016170 10.907913 -4.593128 6.789396 -0.016330 -0.064650 -0.026750 5.901826 -13.425049 -7.244893 -0.004030 -0.021700 -0.016850 37.539532 -13.795345 26.336373 0.000430 -0.016730 -0.018090 27.772041 -10.975351 20.079773 -0.010170 -0.024330 -0.016170 3.848096 -6.108297 4.923024 -0.031540 -0.046760 -0.036470 -3.116805 -7.965203 3.371216 -0.007710 -0.019900 -0.026800 25.457893 -20.902739 21.243519 -0.003080 -0.017460 -0.023124 29.271421 -23.310647 24.119637 -0.021400 -0.013710 -0.030330 0.045043 -2.040882 2.780767 -0.027300 -0.041010 -0.029120 0.540525 -18.867228 7.940529 -0.010510 -0.014150 -0.025830 6.052888 -8.915951 4.365192 -0.003920 -0.011140 -0.020456 22.509508 -27.519450 16.556372 -0.021400 -0.013710 -0.030330 -6.544344 -1.277294 7.247170 -0.029280 -0.022200 -0.036630 6.657323 -20.178546 6.754087 -0.006590 -0.007120 -0.020090 -0.000003 0.000000 0.000005 -0.002210 -0.005630 -0.015271 6.137673 -18.034498 6.468044 0.000000 0.011648 0.153440 -0.000005 -0.000001 -0.000003 -0.000000 -0.019932 0.031980 4.269810 3.460818 -13.370395 0.000000 -0.010862 0.032310 -0.000006 0.000001 0.000001 -0.000000 -0.011110 0.038330 -0.000004 -0.000000 0.000002 0.000000 -0.018111 -0.001120 -0.000003 0.000002 0.000000 0.000000 -0.049851 -0.077310 -0.000000 0.000001 0.000001 -0.000000 -0.024890 0.018410 0.000002 -0.000001 -0.000000 -0.000000 -0.007240 0.011950 -0.000003 -0.000001 -0.000001 -0.000000 -0.024890 0.018410 0.000003 -0.000002 -0.000002 0.010721 -0.004990 0.004250 0.000001 0.000004 0.000001 -0.000000 -0.024890 0.018410 -0.000000 -0.000005 -0.000002 -0.010721 -0.004990 0.004180 0.000002 0.000002 0.000001 0.000000 -0.049851 -0.077310 0.000003 0.000001 0.000001 -0.000000 0.044926 0.046820 -0.000007 -0.000001 -0.000002 -0.000000 -0.030930 0.003120 0.000002 -0.000000 -0.000000 0.000000 -0.021636 -0.000760 0.000002 -0.000000 0.000001 0.000000 -0.006830 -0.005080 -0.000003 -0.000001 -0.000000 0.000000 -0.006830 -0.005080 0.000000 0.000000 0.000000 0.000000 -0.006830 -0.005080 -0.000002 -0.000000 -0.000001 -0.000000 -0.021636 -0.000760 -0.000002 0.000000 0.000000 -0.000000 -0.021636 -0.000760 -0.000004 0.000001 0.000001 0.000000 -0.030930 0.003120 0.000003 0.000002 0.000001 0.000000 -0.030930 0.003120 0.000003 0.000000 0.000001 0.002472 -0.112332 0.016490 -0.000000 0.000000 0.000003 0.016560 0.014300 -0.015620 -0.000007 -0.000001 0.000003 0.005926 0.000320 -0.017380 -0.000001 0.000002 0.000007 0.002735 0.004740 -0.017940 -0.000004 -0.000001 0.000001 -0.004140 -0.112522 0.016590 -0.000005 -0.000002 -0.000001 -0.015782 0.014490 -0.015720 0.000001 0.000000 -0.000006 -0.005314 0.000320 -0.017380 -0.000000 0.000003 -0.000004 -0.002457 0.004740 -0.017940 -0.000003 0.000000 0.000004 0.000000 0.063670 -0.008340 -0.000001 0.000000 0.000001 -0.000834 -0.172942 -0.009820 -0.000002 -0.000003 -0.000003 0.014261 0.003980 -0.005720 0.000001 0.000003 0.000004 -0.000834 -0.172942 -0.009820 -0.000000 0.000004 -0.000000 -0.013817 0.003980 -0.005720 -0.000001 0.000001 0.000000 -0.000834 -0.172942 -0.009820 -0.000004 0.000000 -0.000001 0.000111 0.000490 -0.004720 0.000003 -0.000001 0.000000 0.000000 -0.018111 -0.001120 -0.000004 -0.000001 0.000001 0.004976 -0.104461 -0.000120 -0.000003 0.000001 0.000003 -0.006644 -0.104461 -0.000170 -0.000002 -0.000001 -0.000000 0.000000 0.005970 0.152160 -0.000005 0.000000 -0.000001 0.019139 -0.057616 -0.016110 0.000002 -0.000002 -0.000000 0.011141 -0.025446 -0.102330 0.000001 0.000001 0.000001 0.011141 -0.025446 -0.102330 -0.000001 -0.000001 -0.000001 0.011141 -0.025446 -0.102330 -0.000004 0.000000 0.000004 0.000000 0.005970 0.152160 -0.000000 0.000001 -0.000002 -0.019139 -0.057616 -0.016110 0.000000 -0.000001 0.000001 -0.011141 -0.025446 -0.102330 0.000001 -0.000002 -0.000003 -0.011141 -0.025446 -0.102330 0.000002 -0.000002 -0.000002 -0.011141 -0.025446 -0.102330 0.000008 -0.000003 -0.000003 0.062943 -0.064082 0.042450 -0.000003 -0.000002 -0.000003 -0.007740 -0.015190 -0.001520 -0.000005 0.000000 0.000004 -0.022313 -0.023120 0.013320 0.000002 -0.000001 -0.000004 -0.062943 -0.064082 0.042450 -0.000001 0.000001 -0.000002 0.007740 -0.015190 -0.001520 -0.000003 0.000000 0.000002 0.022313 -0.023120 0.013320 0.000005 0.000003 -0.000002 0.064412 -0.062272 0.018780 -0.000002 0.000001 -0.000004 -0.008924 -0.014980 0.003500 0.000004 -0.000001 0.000001 -0.005658 -0.006470 -0.027820 0.000001 0.000000 -0.000004 -0.064412 -0.062272 0.018780 -0.000000 0.000001 0.000004 0.008924 -0.014980 0.003500 0.000005 -0.000001 0.000000 0.005658 -0.006470 -0.027820 -0.000005 -0.000000 -0.000001 0.000000 -0.091157 -0.003204 -29.719881 -2.711174 2.868819 0.100760 0.006448 -0.011869 -35.686895 -30.580444 8.465418 0.007620 -0.026192 -0.071621 -0.587409 5.873336 5.899391 0.033050 -0.005529 -0.331166 78.352351 4.709747 -3.787151 0.017670 0.011183 -0.198120 0.000000 -0.000001 -0.000002 0.017670 0.011183 -0.198130 -3.177512 -0.002947 -0.284287 -0.028410 -0.150536 -0.053210 -10.440036 -0.630299 -1.136956 0.002460 -0.027170 -0.005370 -0.000000 -0.000000 0.000000 -0.002350 -0.150836 -0.054820 0.000002 0.000000 -0.000003 0.002360 -0.022880 -0.003420 -0.000003 0.000001 0.000004 0.001110 -0.013790 -0.003060 0.000001 0.000001 0.000000 0.015230 -0.148246 -0.055350 0.000002 0.000001 0.000001 0.002840 -0.019650 -0.002590 0.000001 -0.000002 0.000002 0.000960 -0.013860 -0.004280 -0.000001 0.000001 0.000002 0.032890 -0.140616 -0.054880 0.000005 -0.000001 0.000003 0.002900 -0.016900 -0.004690 -0.000000 -0.000001 -0.000001 0.000310 -0.012870 -0.000830 0.000001 -0.000000 -0.000002 0.048620 -0.130516 -0.052810 0.000004 0.000001 0.000000 0.001000 -0.010160 -0.002870 -0.000001 -0.000001 0.000002 -0.000570 -0.009040 -0.005480 -0.000003 0.000000 0.000001 0.000000 -0.091157 -0.003204 -22.454404 1.915417 -2.303754 -0.100760 0.006448 -0.011872 5.095278 40.338544 30.128873 -0.007620 -0.026192 -0.071618 -3.441768 -5.321015 -35.096760 -0.033050 -0.005529 -0.331186 77.176186 -4.182198 -4.848015 -0.017670 0.011183 -0.198110 -0.000002 0.000001 -0.000001 -0.017670 0.011183 -0.198120 -40.354021 -27.185271 11.352061 0.028410 -0.150536 -0.053210 0.000000 0.000000 -0.000002 -0.002460 -0.027170 -0.005370 0.000001 0.000001 0.000002 0.002350 -0.150836 -0.054820 -0.000004 0.000002 -0.000003 -0.002360 -0.022880 -0.003420 -0.000001 0.000000 -0.000000 -0.001110 -0.013790 -0.003060 -0.000004 -0.000002 0.000000 -0.015230 -0.148246 -0.055350 -0.000002 0.000001 -0.000003 -0.002840 -0.019650 -0.002590 -0.000002 0.000000 -0.000000 -0.000960 -0.013860 -0.004280 -0.000000 0.000002 0.000002 -0.032890 -0.140616 -0.054880 0.000000 0.000001 -0.000005 -0.002900 -0.016900 -0.004690 -0.000000 0.000001 -0.000001 -0.000310 -0.012870 -0.000830 0.000003 -0.000000 0.000002 -0.048620 -0.130516 -0.052810 -0.000002 -0.000000 -0.000002 -0.001000 -0.010160 -0.002870 -0.000003 0.000002 0.000000 0.000570 -0.009040 -0.005480 0.000003 0.000001 -0.000000 

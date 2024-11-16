@@ -97,6 +97,7 @@ text = "X-Rot:"
 [node name="x-rot" type="HSlider" parent="sliders/HBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
+min_value = -6.28
 max_value = 6.28
 step = 0.01
 
@@ -110,6 +111,7 @@ text = "Y-Rot:"
 [node name="y-rot" type="HSlider" parent="sliders/HBoxContainer5"]
 layout_mode = 2
 size_flags_horizontal = 3
+min_value = -6.28
 max_value = 6.28
 step = 0.01
 
@@ -123,6 +125,7 @@ text = "Z-Rot:"
 [node name="z-rot" type="HSlider" parent="sliders/HBoxContainer6"]
 layout_mode = 2
 size_flags_horizontal = 3
+min_value = -6.28
 max_value = 6.28
 step = 0.01
 

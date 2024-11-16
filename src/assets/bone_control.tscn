@@ -1,0 +1,82 @@
+[gd_scene load_steps=2 format=3 uid="uid://bv5k4jons4n5q"]
+
+[ext_resource type="Script" path="res://bone_control.gd" id="1_kucy3"]
+
+[node name="BoneControl" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+script = ExtResource("1_kucy3")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+
+[node name="Sliders" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Labels" type="HBoxContainer" parent="Sliders"]
+layout_mode = 2
+
+[node name="x Label" type="Label" parent="Sliders/Labels"]
+layout_mode = 2
+text = "X Rotation
+"
+
+[node name="Value_Edit" type="LineEdit" parent="Sliders/Labels"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "0"
+alignment = 1
+
+[node name="x slider" type="HSlider" parent="Sliders"]
+layout_mode = 2
+min_value = -6.28
+max_value = 6.28
+step = 0.1
+value = 0.02
+
+[node name="Labelsy" type="HBoxContainer" parent="Sliders"]
+layout_mode = 2
+
+[node name="y Label" type="Label" parent="Sliders/Labelsy"]
+layout_mode = 2
+text = "Y Rotation
+"
+
+[node name="Value_Edit" type="LineEdit" parent="Sliders/Labelsy"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "0"
+alignment = 1
+
+[node name="HSlider2" type="HSlider" parent="Sliders"]
+layout_mode = 2
+min_value = -6.28
+max_value = 6.28
+step = 0.1
+value = 0.02
+
+[node name="Labels2" type="HBoxContainer" parent="Sliders"]
+layout_mode = 2
+
+[node name="x Label" type="Label" parent="Sliders/Labels2"]
+layout_mode = 2
+text = "Z Rotation
+"
+
+[node name="Value_Edit" type="LineEdit" parent="Sliders/Labels2"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "0"
+alignment = 1
+
+[node name="HSlider" type="HSlider" parent="Sliders"]
+layout_mode = 2
+min_value = -6.28
+max_value = 6.28
+step = 0.1
+value = 0.02

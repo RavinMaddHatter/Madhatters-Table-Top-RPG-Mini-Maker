@@ -21,10 +21,8 @@ var attach_points = {}
 var attach_menu ={}
 var attachment_points = ["LeftHand","RightHand","Head","RightFoot","LeftFoot","Hips","Chest"]
 func _ready() -> void:
+	$splits.hide()
 	humanizer.done_loading.connect(after_load)
-	humanizer.reset()
-	humanizer.remove_equipment(HumanizerEquipment.new("DefaultBody","basic_statue"))
-	humanizer.add_equipment(HumanizerEquipment.new("DefaultBody","basic_statue"))
 	$FileDialog.current_dir = "/"
 	$FileDialog.use_native_dialog=true
 	$FileDialog.access=FileDialog.ACCESS_FILESYSTEM
@@ -34,8 +32,8 @@ func _ready() -> void:
 func after_load():
 	make_menu()
 	make_character()
+	$splits.show()
 func make_character():
-	humanizer.reset()
 	humanizer.remove_equipment(HumanizerEquipment.new("DefaultBody","basic_statue"))
 	humanizer.add_equipment(HumanizerEquipment.new("DefaultBody","basic_statue"))
 	humanizer.find_child("AnimationTree").active=false
@@ -110,11 +108,16 @@ func make_attachments_menu():
 	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	pannel.add_child(vbox)
 	equipment_categories = {}
+	#for filter in HumanizerGlobalConfig.config.body_part_slots:
+		#print(filter)
+		#print(HumanizerRegistry.filter_equipment({"slot"=filter}))
+	#print(HumanizerGlobalConfig.config.clothing_slots)
+	#for filter in HumanizerGlobalConfig.config.clothing_slots:
+		#print(filter+"Clothes")
+		#print(HumanizerRegistry.filter_equipment({"slot"=filter+"Clothes"}))
 	for item in HumanizerRegistry.equipment:
 		var slots = HumanizerRegistry.equipment[item].slots
-		print(slots)
 		for cat in slots:
-			print(cat)
 			if not(cat in equipment_categories):
 				equipment_categories[cat] = load("res://equip_menu.tscn").instantiate()
 				equipment_categories[cat].set_slot(cat)
@@ -163,6 +166,7 @@ func make_pose_menu():
 	var vbox = VBoxContainer.new()
 	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	pannel.add_child(vbox)
+	HelperFunctions.read_bvh("res://assets/poses/akimbo01.bvh")
 
 func make_detailed_pose():
 	var pannel = ScrollContainer.new()
@@ -207,13 +211,14 @@ func make_detailed_pose():
 		category_vbox.size_flags_horizontal=Control.SIZE_FILL
 		category_pannel.add_child(category_vbox)
 		for bone_name in categories[categoryName]:
-			for axis in ["x","y","z"]:
-				var slider = load("res://pose_slider.tscn").instantiate()
-				slider.label_name = bone_name + " / " + axis
-				slider.pose = bone_name
-				slider.axis = axis
-				slider.change_pose.connect(set_pose)
-				category_vbox.add_child(slider)
+			
+			#for axis in ["x","y","z"]:
+				#var slider = load("res://pose_slider.tscn").instantiate()
+				#slider.label_name = bone_name + " / " + axis
+				#slider.pose = bone_name
+				#slider.axis = axis
+				#slider.change_pose.connect(set_pose)
+				#category_vbox.add_child(slider)
 		var spacer=Label.new()
 		spacer.name=" "
 		spacer.size_flags_horizontal=Control.SIZE_EXPAND_FILL
@@ -249,6 +254,7 @@ func _on_position_slider_value_changed(value: float) -> void:
 	camera.v_offset=(value*humanizer.humanizer.get_head_height()*1.2)/100-0.1
 	
 func _set_equipment(equipment:Dictionary):
+	## NEEDS SKIN
 	humanizer.remove_equipment_in_slot(equipment["slot"])
 	if equipment["item_name"] !="None":
 		humanizer.add_equipment(HumanizerEquipment.new(equipment["item_name"],"none_diffuse"))
@@ -333,24 +339,54 @@ func load_character_file(characterName:String):
 func _on_export_pressed():
 	$FileDialog.show()
 	var file_path = $FileDialog.current_file
-
+func scal_pose_equipment(eqipment:MeshInstance3D):
+	var out_mesh= ArrayMesh.new()
+	var mdt = MeshDataTool.new()
+	var mesh_scale = eqipment.scale
+	mdt.create_from_surface(eqipment.mesh,0)
+	for i in range(mdt.get_vertex_count()):
+		var vertex = mdt.get_vertex(i)*mesh_scale
+		mdt.set_vertex(i, vertex)
+	mdt.commit_to_surface(out_mesh)
+	return out_mesh
 func _on_file_dialog_file_selected(file_path: String) -> void:
 	if len(file_path)>2:
-		_on_save_pressed()
 		var mesh = humanizer.find_child("DefaultBody")
 		var surface_tool= SurfaceTool.new()
 		for child in humanizer.get_children():
-			if child.get_class() == "MeshInstance3D":
-				print(child.name)
+			if child.get_class() == "Skeleton3D":
+				for bone in child.get_children():
+					for equipMesh in bone.get_children():
+						if equipMesh.get_class() == "MeshInstance3D":
+							var baked_pose = scal_pose_equipment(equipMesh) 
+							var transformer=Transform3D()
+							var x = Vector3()
+							var y = Vector3()
+							var z = Vector3()
+							x.x=1
+							y.y=1
+							z.z=1
+							transformer=transformer.rotated(x,equipMesh.rotation.x)
+							transformer=transformer.rotated(y,equipMesh.rotation.y)
+							transformer=transformer.rotated(z,equipMesh.rotation.z)
+							transformer=transformer.translated(equipMesh.position)
+							transformer=equipMesh.get_parent().transform*transformer
+							surface_tool.append_from(baked_pose, 0,transformer)
+			elif child.get_class() == "MeshInstance3D":
 				var baked_pose : ArrayMesh
 				baked_pose = child.bake_mesh_from_current_skeleton_pose()
-				surface_tool.append_from(baked_pose, 0,baked_pose.transform)
+				var tranformer=Transform3D()
+				if "transform" in baked_pose:
+					tranformer=baked_pose.transform
+				surface_tool.append_from(baked_pose, 0,tranformer)
+		
+		surface_tool.append_from(baseMesh.mesh, 0,baseMesh.transform)
 		var combinedMesh:ArrayMesh=surface_tool.commit()
 		OBJExporter.save_mesh_to_files(combinedMesh, file_path)
-		load_character_file(nameBox.text) 
 func _on_export_started():
-	pass
+	$progressContainer.show()
 func _on_export_completed(_obj_file):
-	pass
+	$progressContainer.hide()
 func _on_export_progress(_surf_idx, _progress_value):
-	pass
+	print(_progress_value)
+	$progressContainer/ProgressBar.value=_progress_value * 100

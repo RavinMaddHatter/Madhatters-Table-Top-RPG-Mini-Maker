@@ -1,37 +1,25 @@
 extends Node
 
-func import_bvh(file_name:String):
-	var file = FileAccess.open(file_name, FileAccess.READ)
-	var content = file.get_as_text()
-	var loaded_object={}
-	if content:
-		content=content.replace("\r","\n")
-		var lines = content.split("\n")
-		var root_lin=get_root(lines)
-		loaded_object=parse_object(lines,root_lin+1,"root")
-	print(loaded_object)
-func get_root(lines:Array):
-	for i in range(len(lines)):
-		if "root" in lines[i]:
-			return i
-func parse_object(lines,idx,next_child=""):
-	var object={}
-	for line_idx in range(len(lines)-idx):
-		var line=lines[line_idx+idx]
-		if "JOINT" in line:
-			next_child = line.replace("JOINT","").strip_edges()
-		if "{" in line:
-			object[next_child]=parse_object(lines,line_idx+idx+1)
-		if "OFFSET" in line:
-			var temp  = []
-			for text in line.replace("OFFSET","").strip_edges().split(" "):
-				temp.append(text.to_float())
-			object["OFFSET"]=temp
-		if "}" in line:
-			return object
-		if "CHANNELS" in line:
-			object["CHANNELS"]=[]
-			for text in line.replace("CHANNELS","").strip_edges().split(" "):
-				if not(text.is_valid_int()):
-					object["CHANNELS"].append(text)
+class BvhJoint:
+	var name : String
+	var parent : BvhJoint
+	var offset := Vector3(0,0,0)
+	var children : Array[BvhJoint]
+	var position := Vector3(0,0,0)
+	var rotation := Quaternion()
 	
+func quat(r : Vector3) -> Quaternion:
+	var q1 = Quaternion(Vector3(1,0,0), deg_to_rad(r.x))
+	var q2 = Quaternion(Vector3(0,1,0), deg_to_rad(r.y))
+	var q3 = Quaternion(Vector3(0,0,1), deg_to_rad(r.z))
+	return q3 * q2 * q1 #best best	
+
+func read_bvh(file_path):
+	var bvh_file: FileAccess = FileAccess.open(file_path, FileAccess.READ)
+	var lines = bvh_file.get_as_text().split("\n", false)
+	
+	var index = 1
+	for line in lines:
+		index += 1
+		print(line)
+		

@@ -33,9 +33,10 @@ static func _get_materials():
 static func add_equipment_type(equip:HumanizerEquipmentType):
 	#print('Registering equipment ' + equip.resource_name)
 	if equipment.has(equip.resource_name):
-		equipment.erase(equip.resource_name)
+		equipment[equip.resource_name]=[]
+		#equipment.erase(equip.resource_name)
 	equipment[equip.resource_name] = equip
-
+	
 static func filter_equipment(filter: Dictionary) -> Array[HumanizerEquipmentType]:
 	var filtered: Array[HumanizerEquipmentType]
 	for equip in equipment.values():

@@ -16,3 +16,8 @@ mono_crash.*.json
 /src/Exports
 src/addons/humanizer/data/assets/clothes/outfits/male_elegantsuit01/toigo_male_elegant_suit_gray_pinstripe_with_paisley_tie/toigo_male_elegant_suit_gray_pinstripe_with_paisley_tie.mhmat
 src/addons/humanizer/data/assets/clothes/outfits/male_elegantsuit01/toigo_male_elegant_suit_gray_pinstripe_with_paisley_tie/toigo_male_elegant_suit_gray_pinstripe_with_paisley_tie.thumb
+/src/addons/humanizer/data
+/src/addons/humanizer/data/assets
+/src/addons/humanizer/data/assets
+/src/addons/humanizer/data/assets/body_parts
+/src/addons/humanizer/data/assets
