@@ -1,0 +1,96 @@
+[gd_scene load_steps=2 format=3 uid="uid://bv5k4jons4n5q"]
+
+[ext_resource type="Script" path="res://bone_control.gd" id="1_iy8l2"]
+
+[node name="BoneControl" type="MarginContainer" node_paths=PackedStringArray("x_slider", "y_slider", "z_slider", "title", "x_text", "y_text", "z_text")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+script = ExtResource("1_iy8l2")
+x_slider = NodePath("VBoxContainer/Sliders/x slider")
+y_slider = NodePath("VBoxContainer/Sliders/y slider")
+z_slider = NodePath("VBoxContainer/Sliders/z slider")
+title = NodePath("VBoxContainer/Label")
+x_text = NodePath("VBoxContainer/Sliders/Labels/Value_Edit")
+y_text = NodePath("VBoxContainer/Sliders/Labelsy/y_edit_value")
+z_text = NodePath("VBoxContainer/Sliders/Labels2/z_edit_value")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Sliders" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Labels" type="HBoxContainer" parent="VBoxContainer/Sliders"]
+layout_mode = 2
+
+[node name="x Label" type="Label" parent="VBoxContainer/Sliders/Labels"]
+layout_mode = 2
+text = "X Rotation
+"
+
+[node name="Value_Edit" type="LineEdit" parent="VBoxContainer/Sliders/Labels"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "0"
+alignment = 1
+
+[node name="x slider" type="HSlider" parent="VBoxContainer/Sliders"]
+layout_mode = 2
+min_value = -6.28
+max_value = 6.28
+step = 0.01
+
+[node name="Labelsy" type="HBoxContainer" parent="VBoxContainer/Sliders"]
+layout_mode = 2
+
+[node name="y Label" type="Label" parent="VBoxContainer/Sliders/Labelsy"]
+layout_mode = 2
+text = "Y Rotation
+"
+
+[node name="y_edit_value" type="LineEdit" parent="VBoxContainer/Sliders/Labelsy"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "0"
+alignment = 1
+
+[node name="y slider" type="HSlider" parent="VBoxContainer/Sliders"]
+layout_mode = 2
+min_value = -6.28
+max_value = 6.28
+step = 0.01
+
+[node name="Labels2" type="HBoxContainer" parent="VBoxContainer/Sliders"]
+layout_mode = 2
+
+[node name="x Label" type="Label" parent="VBoxContainer/Sliders/Labels2"]
+layout_mode = 2
+text = "Z Rotation
+"
+
+[node name="z_edit_value" type="LineEdit" parent="VBoxContainer/Sliders/Labels2"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "0"
+alignment = 1
+
+[node name="z slider" type="HSlider" parent="VBoxContainer/Sliders"]
+layout_mode = 2
+min_value = -6.28
+max_value = 6.28
+step = 0.01
+
+[connection signal="text_submitted" from="VBoxContainer/Sliders/Labels/Value_Edit" to="." method="_on_value_edit_text_submitted"]
+[connection signal="value_changed" from="VBoxContainer/Sliders/x slider" to="." method="_on_x_slider_value_changed"]
+[connection signal="text_submitted" from="VBoxContainer/Sliders/Labelsy/y_edit_value" to="." method="_on_y_edit_value_text_submitted"]
+[connection signal="value_changed" from="VBoxContainer/Sliders/y slider" to="." method="_on_y_slider_value_changed"]
+[connection signal="text_submitted" from="VBoxContainer/Sliders/Labels2/z_edit_value" to="." method="_on_z_edit_value_text_submitted"]
+[connection signal="value_changed" from="VBoxContainer/Sliders/z slider" to="." method="_on_z_slider_value_changed"]

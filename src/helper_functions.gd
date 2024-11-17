@@ -21,5 +21,6 @@ func read_bvh(file_path):
 	var index = 1
 	for line in lines:
 		index += 1
+		print(index)
 		print(line)
 		

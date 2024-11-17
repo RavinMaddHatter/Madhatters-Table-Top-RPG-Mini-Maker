@@ -1,0 +1,277 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjpqdtjfp0iqc"]
+
+[ext_resource type="Script" path="res://basic_hand_controls.gd" id="1_2n86l"]
+[ext_resource type="FontVariation" uid="uid://diciev1hwck0j" path="res://assets/Bold_font_variation.tres" id="2_8y4b7"]
+
+[node name="BasicControls" type="MarginContainer" node_paths=PackedStringArray("left_fist")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_2n86l")
+left_fist = NodePath("Menu/LeftHand/HBoxContainer/LeftFistSlider")
+
+[node name="Menu" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Chest" type="VBoxContainer" parent="Menu"]
+layout_mode = 2
+
+[node name="LeftHandLb" type="Label" parent="Menu/Chest"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_8y4b7")
+theme_override_font_sizes/font_size = 20
+text = "Torso"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/Chest"]
+layout_mode = 2
+
+[node name="Curve" type="Label" parent="Menu/Chest/HBoxContainer"]
+layout_mode = 2
+text = "Curve"
+
+[node name="Back curve" type="HSlider" parent="Menu/Chest/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="Twist" type="HBoxContainer" parent="Menu/Chest"]
+layout_mode = 2
+
+[node name="Twist" type="Label" parent="Menu/Chest/Twist"]
+layout_mode = 2
+text = "Twist"
+
+[node name="Twist2" type="HSlider" parent="Menu/Chest/Twist"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="Lean" type="HBoxContainer" parent="Menu/Chest"]
+layout_mode = 2
+
+[node name="Lean2" type="Label" parent="Menu/Chest/Lean"]
+layout_mode = 2
+text = "Lean"
+
+[node name="Lean" type="HSlider" parent="Menu/Chest/Lean"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="LeftHand" type="VBoxContainer" parent="Menu"]
+layout_mode = 2
+
+[node name="LeftHandLb" type="Label" parent="Menu/LeftHand"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_8y4b7")
+theme_override_font_sizes/font_size = 20
+text = "Left Hand"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/LeftHand"]
+layout_mode = 2
+
+[node name="Fist" type="Label" parent="Menu/LeftHand/HBoxContainer"]
+layout_mode = 2
+text = "fingers"
+
+[node name="LeftFistSlider" type="HSlider" parent="Menu/LeftHand/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Menu/LeftHand"]
+layout_mode = 2
+
+[node name="Fist" type="Label" parent="Menu/LeftHand/HBoxContainer2"]
+layout_mode = 2
+text = "Thumb"
+
+[node name="thumb" type="HSlider" parent="Menu/LeftHand/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+
+[node name="Right Hand" type="VBoxContainer" parent="Menu"]
+layout_mode = 2
+
+[node name="RightHandLb" type="Label" parent="Menu/Right Hand"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_8y4b7")
+theme_override_font_sizes/font_size = 20
+text = "Right Hand"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/Right Hand"]
+layout_mode = 2
+
+[node name="Fist" type="Label" parent="Menu/Right Hand/HBoxContainer"]
+layout_mode = 2
+text = "Fist"
+
+[node name="RightFistSlider" type="HSlider" parent="Menu/Right Hand/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Menu/Right Hand"]
+layout_mode = 2
+
+[node name="Fist" type="Label" parent="Menu/Right Hand/HBoxContainer2"]
+layout_mode = 2
+text = "Thumb"
+
+[node name="thumb" type="HSlider" parent="Menu/Right Hand/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+
+[node name="LeftLeg" type="VBoxContainer" parent="Menu"]
+layout_mode = 2
+
+[node name="LegLb" type="Label" parent="Menu/LeftLeg"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_8y4b7")
+theme_override_font_sizes/font_size = 20
+text = "Left Leg"
+
+[node name="kneeHb" type="HBoxContainer" parent="Menu/LeftLeg"]
+layout_mode = 2
+
+[node name="Knee" type="Label" parent="Menu/LeftLeg/kneeHb"]
+layout_mode = 2
+text = "Knee"
+
+[node name="KneeSlider" type="HSlider" parent="Menu/LeftLeg/kneeHb"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+
+[node name="SpreadHB" type="HBoxContainer" parent="Menu/LeftLeg"]
+layout_mode = 2
+
+[node name="HipSpread" type="Label" parent="Menu/LeftLeg/SpreadHB"]
+layout_mode = 2
+text = "Spread"
+
+[node name="SpreadSlider" type="HSlider" parent="Menu/LeftLeg/SpreadHB"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+
+[node name="KickHB" type="HBoxContainer" parent="Menu/LeftLeg"]
+layout_mode = 2
+
+[node name="KickLB" type="Label" parent="Menu/LeftLeg/KickHB"]
+layout_mode = 2
+text = "Kick"
+
+[node name="kickSlider" type="HSlider" parent="Menu/LeftLeg/KickHB"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+
+[node name="TwistHB" type="HBoxContainer" parent="Menu/LeftLeg"]
+layout_mode = 2
+
+[node name="TwistLB" type="Label" parent="Menu/LeftLeg/TwistHB"]
+layout_mode = 2
+text = "Twist"
+
+[node name="TwistSlider" type="HSlider" parent="Menu/LeftLeg/TwistHB"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+
+[node name="RightLeg" type="VBoxContainer" parent="Menu"]
+layout_mode = 2
+
+[node name="LegLb" type="Label" parent="Menu/RightLeg"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_8y4b7")
+theme_override_font_sizes/font_size = 20
+text = "Right Leg"
+
+[node name="kneeHb" type="HBoxContainer" parent="Menu/RightLeg"]
+layout_mode = 2
+
+[node name="Knee" type="Label" parent="Menu/RightLeg/kneeHb"]
+layout_mode = 2
+text = "Knee"
+
+[node name="KneeSlider" type="HSlider" parent="Menu/RightLeg/kneeHb"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+
+[node name="SpreadHB" type="HBoxContainer" parent="Menu/RightLeg"]
+layout_mode = 2
+
+[node name="HipSpread" type="Label" parent="Menu/RightLeg/SpreadHB"]
+layout_mode = 2
+text = "Spread"
+
+[node name="SpreadSlider" type="HSlider" parent="Menu/RightLeg/SpreadHB"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+
+[node name="KickHB" type="HBoxContainer" parent="Menu/RightLeg"]
+layout_mode = 2
+
+[node name="KickLB" type="Label" parent="Menu/RightLeg/KickHB"]
+layout_mode = 2
+text = "Kick"
+
+[node name="kickSlider" type="HSlider" parent="Menu/RightLeg/KickHB"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+
+[node name="TwistHB" type="HBoxContainer" parent="Menu/RightLeg"]
+layout_mode = 2
+
+[node name="TwistLB" type="Label" parent="Menu/RightLeg/TwistHB"]
+layout_mode = 2
+text = "Twist"
+
+[node name="TwistSlider" type="HSlider" parent="Menu/RightLeg/TwistHB"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+
+[connection signal="value_changed" from="Menu/Chest/HBoxContainer/Back curve" to="." method="curve_back"]
+[connection signal="value_changed" from="Menu/Chest/Twist/Twist2" to="." method="back_twist"]
+[connection signal="value_changed" from="Menu/Chest/Lean/Lean" to="." method="back_lean"]
+[connection signal="value_changed" from="Menu/LeftHand/HBoxContainer/LeftFistSlider" to="." method="left_hand"]
+[connection signal="value_changed" from="Menu/LeftHand/HBoxContainer2/thumb" to="." method="left_thumb_close"]
+[connection signal="value_changed" from="Menu/Right Hand/HBoxContainer/RightFistSlider" to="." method="right_hand"]
+[connection signal="value_changed" from="Menu/Right Hand/HBoxContainer2/thumb" to="." method="right_thumb_close"]
+[connection signal="value_changed" from="Menu/LeftLeg/kneeHb/KneeSlider" to="." method="bend_left_knee"]
+[connection signal="value_changed" from="Menu/LeftLeg/SpreadHB/SpreadSlider" to="." method="spread_left_leg"]
+[connection signal="value_changed" from="Menu/LeftLeg/KickHB/kickSlider" to="." method="kick_left_leg"]
+[connection signal="value_changed" from="Menu/LeftLeg/TwistHB/TwistSlider" to="." method="twist_left_leg"]
+[connection signal="value_changed" from="Menu/RightLeg/kneeHb/KneeSlider" to="." method="bend_right_knee"]
+[connection signal="value_changed" from="Menu/RightLeg/SpreadHB/SpreadSlider" to="." method="spread_right_leg"]
+[connection signal="value_changed" from="Menu/RightLeg/KickHB/kickSlider" to="." method="kick_right_leg"]
+[connection signal="value_changed" from="Menu/RightLeg/TwistHB/TwistSlider" to="." method="twist_right_leg"]

@@ -20,6 +20,7 @@ var equipment_categories = {}
 var attach_points = {}
 var attach_menu ={}
 var attachment_points = ["LeftHand","RightHand","Head","RightFoot","LeftFoot","Hips","Chest"]
+var simple_pose
 func _ready() -> void:
 	$splits.hide()
 	humanizer.done_loading.connect(after_load)
@@ -108,13 +109,6 @@ func make_attachments_menu():
 	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	pannel.add_child(vbox)
 	equipment_categories = {}
-	#for filter in HumanizerGlobalConfig.config.body_part_slots:
-		#print(filter)
-		#print(HumanizerRegistry.filter_equipment({"slot"=filter}))
-	#print(HumanizerGlobalConfig.config.clothing_slots)
-	#for filter in HumanizerGlobalConfig.config.clothing_slots:
-		#print(filter+"Clothes")
-		#print(HumanizerRegistry.filter_equipment({"slot"=filter+"Clothes"}))
 	for item in HumanizerRegistry.equipment:
 		var slots = HumanizerRegistry.equipment[item].slots
 		for cat in slots:
@@ -165,8 +159,9 @@ func make_pose_menu():
 	pannel.name = "Basic Poses"
 	var vbox = VBoxContainer.new()
 	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
-	pannel.add_child(vbox)
-	HelperFunctions.read_bvh("res://assets/poses/akimbo01.bvh")
+	simple_pose = load("res://basic_pose.tscn").instantiate()
+	simple_pose.skeleton=humanizer.skeleton
+	pannel.add_child(simple_pose)
 
 func make_detailed_pose():
 	var pannel = ScrollContainer.new()
@@ -184,16 +179,16 @@ func make_detailed_pose():
 	categories.root = ["Root","Hips"]
 	categories.head = ["Neck","Head"]
 	categories.torso = ["Spine","Chest","UpperChest"]
-	categories.leftArm = ["LeftShoulder","LeftUpperArm","LeftHand"]
+	categories.leftArm = ["LeftShoulder","LeftUpperArm","LeftLowerArm","LeftHand"]
 	categories.leftHand = ["LeftIndexProximal","LeftIndexIntermediate","LeftIndexDistal",
 							"LeftMiddleProximal","LeftMiddleIntermediate","LeftMiddleDistal",
 							"LeftLittleProximal","LeftLittleIntermediate","LeftLittleDistal",
 							"LeftRingProximal","LeftRingIntermediate","LeftRingDistal",
 							"LeftThumbProximal","LeftThumbMetacarpal","LeftThumbDistal"]
-	categories.rightArm = ["RightShoulder","RightUpperArm","RightHand"]
+	categories.rightArm = ["RightShoulder","RightUpperArm","RightLowerArm","RightHand"]
 	categories.rightHand = ["RightIndexProximal","RightIndexIntermediate","RightIndexDistal",
 							"RightMiddleProximal","RightMiddleIntermediate","RightMiddleDistal",
-							"RightLittleProximal","RightLittleIntermediate","LittleDistal",
+							"RightLittleProximal","RightLittleIntermediate","RightLittleDistal",
 							"RightRingProximal","RightRingIntermediate","RightRingDistal",
 							"RightThumbProximal","RightThumbMetacarpal","RightThumbDistal"]
 	categories.leftLeg = ["LeftUpperLeg","LeftLowerLeg","LeftFoot"]
@@ -211,14 +206,11 @@ func make_detailed_pose():
 		category_vbox.size_flags_horizontal=Control.SIZE_FILL
 		category_pannel.add_child(category_vbox)
 		for bone_name in categories[categoryName]:
-			
-			#for axis in ["x","y","z"]:
-				#var slider = load("res://pose_slider.tscn").instantiate()
-				#slider.label_name = bone_name + " / " + axis
-				#slider.pose = bone_name
-				#slider.axis = axis
-				#slider.change_pose.connect(set_pose)
-				#category_vbox.add_child(slider)
+			var bone_config = load("res://bone_control.tscn").instantiate()
+			category_vbox.add_child(bone_config)
+			var bone_id = humanizer.skeleton.find_bone(bone_name)
+			bone_config.setup(bone_name,humanizer.skeleton,bone_id)
+			simple_pose.position_macro_set.connect(bone_config.set_sliders)
 		var spacer=Label.new()
 		spacer.name=" "
 		spacer.size_flags_horizontal=Control.SIZE_EXPAND_FILL
@@ -338,7 +330,6 @@ func load_character_file(characterName:String):
 
 func _on_export_pressed():
 	$FileDialog.show()
-	var file_path = $FileDialog.current_file
 func scal_pose_equipment(eqipment:MeshInstance3D):
 	var out_mesh= ArrayMesh.new()
 	var mdt = MeshDataTool.new()

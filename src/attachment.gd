@@ -44,7 +44,6 @@ func _on_file_dialog_file_selected(file_path: String) -> void:
 	var mesh = ObjParse.load_obj(file_path)
 	mesh_object = MeshInstance3D.new()
 	mesh_object.name = lable.text
-	var greyMaterial = load("res://assets/grey_material.tres")
 	var aabb = mesh.get_aabb()
 	maxsize = max(aabb.size.x,aabb.size.y,aabb.size.z) - min(aabb.size.x,aabb.size.y,aabb.size.z)
 	mesh_object.mesh=mesh
