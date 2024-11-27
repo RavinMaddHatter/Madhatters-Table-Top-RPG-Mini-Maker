@@ -23,13 +23,15 @@ var attachment_points = ["LeftHand","RightHand","Head","RightFoot","LeftFoot","H
 var simple_pose
 func _ready() -> void:
 	$splits.hide()
-	humanizer.done_loading.connect(after_load)
 	$FileDialog.current_dir = "/"
 	$FileDialog.use_native_dialog=true
 	$FileDialog.access=FileDialog.ACCESS_FILESYSTEM
 	OBJExporter.export_started.connect(_on_export_started)
 	OBJExporter.export_completed.connect(_on_export_completed)
 	OBJExporter.export_progress_updated.connect(_on_export_progress)
+	while humanizer.scene_loaded == false:
+		await get_tree().process_frame
+	after_load()
 func after_load():
 	make_menu()
 	make_character()

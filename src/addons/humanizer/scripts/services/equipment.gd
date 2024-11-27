@@ -94,8 +94,8 @@ static func hide_faces(surface_arrays:Array,delete_verts:Array):
 	surface_arrays[Mesh.ARRAY_INDEX] = keep_faces
 
 static func interpolate_weights( mhclo:MHCLO, rig:HumanizerRig,skeleton_data:Dictionary):
-    #"""Try to copy rigging weights from the base mesh to the clothes mesh, hopefully #making the clothes fit the provided rig."""
-    # Create an empty outline with placeholders arrays that will contain lists of
+	#"""Try to copy rigging weights from the base mesh to the clothes mesh, hopefully #making the clothes fit the provided rig."""
+	# Create an empty outline with placeholders arrays that will contain lists of
 	# vertices + weights per vertex group
 	var clothes_weights = []
 	for i in mhclo.vertex_data.size():

@@ -25,6 +25,9 @@ signal position_macro_set
 @export var right_hip_lift: HSlider
 @export var right_hip_twist: HSlider
 @export var right_hip_spread: HSlider
+@export var left_hip_lift: HSlider
+@export var left_hip_twist: HSlider
+@export var left_hip_spread: HSlider
 @export var back_twist: HSlider
 @export var back_lean: HSlider
 @export var back_curve: HSlider
@@ -133,7 +136,7 @@ func right_hip(_value):
 	bone_rot.x=lerp(80*TAU/360,-125*TAU/360,right_hip_lift.value)
 	bone_rot.y=lerp(45*TAU/360,-45*TAU/360,right_hip_twist.value)
 	bone_rot.z=lerp(190*TAU/360,56*TAU/360,right_hip_spread.value)
-	skeleton.set_bone_pose_rotation(bone_id,bone_rot)
+	skeleton.set_bone_pose_rotation(bone_id,Quaternion.from_euler( bone_rot))
 	#this is emitted to set the detailed poses.
 	emit_signal("position_macro_set")
 func left_hip(_value):
@@ -141,10 +144,10 @@ func left_hip(_value):
 	#applied in a consistent order.
 	var bone_id = skeleton.find_bone("LeftUpperLeg")
 	var bone_rot = Vector3()
-	bone_rot.x=lerp(80*TAU/360,-125*TAU/360,right_hip_lift.value)
-	bone_rot.y=lerp(-45*TAU/360,45*TAU/360,right_hip_twist.value)
-	bone_rot.z=lerp(170*TAU/360,300*TAU/360,right_hip_spread.value)
-	skeleton.set_bone_pose_rotation(bone_id,bone_rot)
+	bone_rot.x=lerp(80*TAU/360,-125*TAU/360,left_hip_lift.value)
+	bone_rot.y=lerp(-45*TAU/360,45*TAU/360,left_hip_twist.value)
+	bone_rot.z=lerp(170*TAU/360,300*TAU/360,left_hip_spread.value)
+	skeleton.set_bone_pose_rotation(bone_id,Quaternion.from_euler(bone_rot))
 	#this is emitted to set the detailed poses.
 	emit_signal("position_macro_set")
 
@@ -154,7 +157,7 @@ func left_elbow(value):
 	const bent = Vector3(80,-200,0)
 	var bone_id = skeleton.find_bone("LeftLowerArm")
 	var bone_rotation= Quaternion.from_euler(straight.lerp(bent,value)*TAU/360)
-	skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
+	skeleton.set_bone_pose_rotation(bone_id, bone_rotation)
 	emit_signal("position_macro_set")
 	
 func right_elbow(value):
@@ -196,16 +199,16 @@ func back(_value):
 	var chest_rot=Vector3()
 	var upper_chest_rot=Vector3()
 	#cacluating twist
-	chest_rot.y = lerp(-25*TAU/360,25*TAU/360,back_twist.value)
-	upper_chest_rot.y = lerp(-25*TAU/360,25*TAU/360,back_twist.value)
+	chest_rot.y = lerp(-45*TAU/360,45*TAU/360,back_twist.value)
+	upper_chest_rot.y = lerp(-45*TAU/360,45*TAU/360,back_twist.value)
 	#calculating lean
 	chest_rot.z = lerp(-25*TAU/360,25*TAU/360,back_lean.value)
 	upper_chest_rot.z = lerp(-25*TAU/360,25*TAU/360,back_lean.value)
 	#calculating curve
-	chest_rot.z = lerp(-22*TAU/360,22*TAU/360,back_curve.value)
-	upper_chest_rot.z = lerp(-35*TAU/360,35*TAU/360,back_curve.value)
-	skeleton.set_bone_pose_rotation(chest_id,chest_rot)
-	skeleton.set_bone_pose_rotation(upper_chest_id,upper_chest_rot)
+	chest_rot.x = lerp(-22*TAU/360,22*TAU/360,back_curve.value)
+	upper_chest_rot.x = lerp(-35*TAU/360,35*TAU/360,back_curve.value)
+	skeleton.set_bone_pose_rotation(chest_id,Quaternion.from_euler(chest_rot))
+	skeleton.set_bone_pose_rotation(upper_chest_id,Quaternion.from_euler( upper_chest_rot))
 	emit_signal("position_macro_set")
 
 

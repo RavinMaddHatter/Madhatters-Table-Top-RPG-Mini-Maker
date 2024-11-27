@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://basic_controls.gd" id="1_2n86l"]
 [ext_resource type="FontVariation" uid="uid://diciev1hwck0j" path="res://assets/Bold_font_variation.tres" id="2_8y4b7"]
 
-[node name="BasicControls" type="MarginContainer" node_paths=PackedStringArray("left_wrist_ud", "left_wrist_io", "left_wrist_tw", "right_wrist_ud", "right_wrist_io", "right_wrist_tw", "left_sholder_swing", "left_sholder_lift", "left_sholder_shrug", "left_sholder_curl", "right_sholder_swing", "right_sholder_lift", "right_sholder_shrug", "right_sholder_curl", "head_rotate", "head_pitch", "head_roll")]
+[node name="BasicControls" type="MarginContainer" node_paths=PackedStringArray("left_wrist_ud", "left_wrist_io", "left_wrist_tw", "right_wrist_ud", "right_wrist_io", "right_wrist_tw", "left_sholder_swing", "left_sholder_lift", "left_sholder_shrug", "left_sholder_curl", "right_sholder_swing", "right_sholder_lift", "right_sholder_shrug", "right_sholder_curl", "head_rotate", "head_pitch", "head_roll", "right_hip_lift", "right_hip_twist", "right_hip_spread", "left_hip_lift", "left_hip_twist", "left_hip_spread", "back_twist", "back_lean", "back_curve")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -29,6 +29,15 @@ right_sholder_curl = NodePath("Menu/RightArm/curl/sholderCurl")
 head_rotate = NodePath("Menu/Head/rotation/Rotate")
 head_pitch = NodePath("Menu/Head/upanddown/UpAndDown")
 head_roll = NodePath("Menu/Head/sidetoside/sideToSide")
+right_hip_lift = NodePath("Menu/RightLeg/hipLift/r_hip_kick")
+right_hip_twist = NodePath("Menu/RightLeg/hipTw/r_hip_twist")
+right_hip_spread = NodePath("Menu/RightLeg/HipSpread/r_hip_spread")
+left_hip_lift = NodePath("Menu/LeftLeg/KickHB/l_twist")
+left_hip_twist = NodePath("Menu/LeftLeg/TwistHB/l_twist")
+left_hip_spread = NodePath("Menu/LeftLeg/SpreadHB/l_spread")
+back_twist = NodePath("Menu/Chest/Twist/Twist2")
+back_lean = NodePath("Menu/Chest/Lean/Lean")
+back_curve = NodePath("Menu/Chest/curveSpine/Back curve")
 
 [node name="Menu" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -463,11 +472,12 @@ layout_mode = 2
 layout_mode = 2
 text = "Spread"
 
-[node name="SpreadSlider" type="HSlider" parent="Menu/LeftLeg/SpreadHB"]
+[node name="l_spread" type="HSlider" parent="Menu/LeftLeg/SpreadHB"]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
+value = 0.05
 
 [node name="TwistHB" type="HBoxContainer" parent="Menu/LeftLeg"]
 layout_mode = 2
@@ -476,11 +486,12 @@ layout_mode = 2
 layout_mode = 2
 text = "Twist"
 
-[node name="TwistSlider" type="HSlider" parent="Menu/LeftLeg/TwistHB"]
+[node name="l_twist" type="HSlider" parent="Menu/LeftLeg/TwistHB"]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
+value = 0.5
 
 [node name="KickHB" type="HBoxContainer" parent="Menu/LeftLeg"]
 layout_mode = 2
@@ -489,11 +500,12 @@ layout_mode = 2
 layout_mode = 2
 text = "Kick"
 
-[node name="kickSlider" type="HSlider" parent="Menu/LeftLeg/KickHB"]
+[node name="l_twist" type="HSlider" parent="Menu/LeftLeg/KickHB"]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
+value = 0.4
 
 [node name="kneeHb" type="HBoxContainer" parent="Menu/LeftLeg"]
 layout_mode = 2
@@ -529,6 +541,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
+value = 0.5
 
 [node name="hipLift" type="HBoxContainer" parent="Menu/RightLeg"]
 layout_mode = 2
@@ -542,6 +555,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
+value = 0.4
 
 [node name="HipSpread" type="HBoxContainer" parent="Menu/RightLeg"]
 layout_mode = 2
@@ -555,6 +569,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
+value = 0.05
 
 [node name="kneeHb" type="HBoxContainer" parent="Menu/RightLeg"]
 layout_mode = 2
@@ -595,8 +610,9 @@ step = 0.01
 [connection signal="value_changed" from="Menu/LeftHand/thumb/thumb" to="." method="left_thumb_close"]
 [connection signal="value_changed" from="Menu/Right Hand/fingers/RightFistSlider" to="." method="right_hand"]
 [connection signal="value_changed" from="Menu/Right Hand/thumb/thumb" to="." method="right_thumb_close"]
-[connection signal="value_changed" from="Menu/LeftLeg/SpreadHB/SpreadSlider" to="." method="left_hip"]
-[connection signal="value_changed" from="Menu/LeftLeg/KickHB/kickSlider" to="." method="left_hip"]
+[connection signal="value_changed" from="Menu/LeftLeg/SpreadHB/l_spread" to="." method="left_hip"]
+[connection signal="value_changed" from="Menu/LeftLeg/TwistHB/l_twist" to="." method="left_hip"]
+[connection signal="value_changed" from="Menu/LeftLeg/KickHB/l_twist" to="." method="left_hip"]
 [connection signal="value_changed" from="Menu/LeftLeg/kneeHb/KneeSlider" to="." method="bend_left_knee"]
 [connection signal="value_changed" from="Menu/RightLeg/hipTw/r_hip_twist" to="." method="right_hip"]
 [connection signal="value_changed" from="Menu/RightLeg/hipLift/r_hip_kick" to="." method="right_hip"]
