@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://bjpqdtjfp0iqc"]
 
-[ext_resource type="Script" path="res://basic_hand_controls.gd" id="1_2n86l"]
+[ext_resource type="Script" path="res://basic_controls.gd" id="1_2n86l"]
 [ext_resource type="FontVariation" uid="uid://diciev1hwck0j" path="res://assets/Bold_font_variation.tres" id="2_8y4b7"]
 
-[node name="BasicControls" type="MarginContainer" node_paths=PackedStringArray("left_fist")]
+[node name="BasicControls" type="MarginContainer" node_paths=PackedStringArray("left_wrist_ud", "left_wrist_io", "left_wrist_tw", "right_wrist_ud", "right_wrist_io", "right_wrist_tw", "left_sholder_swing", "left_sholder_lift", "left_sholder_shrug", "left_sholder_curl", "right_sholder_swing", "right_sholder_lift", "right_sholder_shrug", "right_sholder_curl", "head_rotate", "head_pitch", "head_roll")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -12,10 +12,71 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_2n86l")
-left_fist = NodePath("Menu/LeftHand/HBoxContainer/LeftFistSlider")
+left_wrist_ud = NodePath("Menu/LeftArm/HBoxContainer2/L_Wristud")
+left_wrist_io = NodePath("Menu/LeftArm/HBoxContainer3/L_Wristio")
+left_wrist_tw = NodePath("Menu/LeftArm/HBoxContainer4/L_Wristtw")
+right_wrist_ud = NodePath("Menu/RightArm/HBoxContainer2/R_Wristud")
+right_wrist_io = NodePath("Menu/RightArm/HBoxContainer3/R_Wristio")
+right_wrist_tw = NodePath("Menu/RightArm/HBoxContainer4/R_Wristtw")
+left_sholder_swing = NodePath("Menu/LeftArm/HBoxContainer6/sholderSwing")
+left_sholder_lift = NodePath("Menu/LeftArm/HBoxContainer5/sholderLift")
+left_sholder_shrug = NodePath("Menu/LeftArm/HBoxContainer7/sholderShrug")
+left_sholder_curl = NodePath("Menu/LeftArm/HBoxContainer8/sholderFront")
+right_sholder_swing = NodePath("Menu/RightArm/HBoxContainer6/sholderSwing")
+right_sholder_lift = NodePath("Menu/RightArm/HBoxContainer5/sholderLift")
+right_sholder_shrug = NodePath("Menu/RightArm/HBoxContainer7/sholderShrug")
+right_sholder_curl = NodePath("Menu/RightArm/HBoxContainer8/sholderFront")
+head_rotate = NodePath("Menu/Head/rotation/Rotate")
+head_pitch = NodePath("Menu/Head/up/Rotate")
+head_roll = NodePath("Menu/Head/side/Rotate")
 
 [node name="Menu" type="VBoxContainer" parent="."]
 layout_mode = 2
+
+[node name="Head" type="VBoxContainer" parent="Menu"]
+layout_mode = 2
+
+[node name="rotation" type="HBoxContainer" parent="Menu/Head"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Menu/Head/rotation"]
+layout_mode = 2
+text = "Rotate"
+
+[node name="Rotate" type="HSlider" parent="Menu/Head/rotation"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="side" type="HBoxContainer" parent="Menu/Head"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Menu/Head/side"]
+layout_mode = 2
+text = "Side to side"
+
+[node name="Rotate" type="HSlider" parent="Menu/Head/side"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="up" type="HBoxContainer" parent="Menu/Head"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Menu/Head/up"]
+layout_mode = 2
+text = "up/down"
+
+[node name="Rotate" type="HSlider" parent="Menu/Head/up"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.5
 
 [node name="Chest" type="VBoxContainer" parent="Menu"]
 layout_mode = 2
@@ -68,6 +129,127 @@ max_value = 1.0
 step = 0.01
 value = 0.5
 
+[node name="LeftArm" type="VBoxContainer" parent="Menu"]
+layout_mode = 2
+
+[node name="Arm LB" type="Label" parent="Menu/LeftArm"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_8y4b7")
+theme_override_font_sizes/font_size = 20
+text = "Left Arm"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/LeftArm"]
+layout_mode = 2
+
+[node name="Elbow" type="Label" parent="Menu/LeftArm/HBoxContainer"]
+layout_mode = 2
+text = "Elbow"
+
+[node name="Elbow2" type="HSlider" parent="Menu/LeftArm/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Menu/LeftArm"]
+layout_mode = 2
+
+[node name="wrist" type="Label" parent="Menu/LeftArm/HBoxContainer2"]
+layout_mode = 2
+text = "Wrist A"
+
+[node name="L_Wristud" type="HSlider" parent="Menu/LeftArm/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.33
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Menu/LeftArm"]
+layout_mode = 2
+
+[node name="wrist" type="Label" parent="Menu/LeftArm/HBoxContainer3"]
+layout_mode = 2
+text = "Wrist B"
+
+[node name="L_Wristio" type="HSlider" parent="Menu/LeftArm/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Menu/LeftArm"]
+layout_mode = 2
+
+[node name="wrist" type="Label" parent="Menu/LeftArm/HBoxContainer4"]
+layout_mode = 2
+text = "Wrist C"
+
+[node name="L_Wristtw" type="HSlider" parent="Menu/LeftArm/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.6
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Menu/LeftArm"]
+layout_mode = 2
+
+[node name="sholder" type="Label" parent="Menu/LeftArm/HBoxContainer5"]
+layout_mode = 2
+text = "Sholder Lift"
+
+[node name="sholderLift" type="HSlider" parent="Menu/LeftArm/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.47
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="Menu/LeftArm"]
+layout_mode = 2
+
+[node name="sholder" type="Label" parent="Menu/LeftArm/HBoxContainer6"]
+layout_mode = 2
+text = "Sholder swing"
+
+[node name="sholderSwing" type="HSlider" parent="Menu/LeftArm/HBoxContainer6"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="Menu/LeftArm"]
+layout_mode = 2
+
+[node name="sholder" type="Label" parent="Menu/LeftArm/HBoxContainer7"]
+layout_mode = 2
+text = "Sholder shrug"
+
+[node name="sholderShrug" type="HSlider" parent="Menu/LeftArm/HBoxContainer7"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.17
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="Menu/LeftArm"]
+layout_mode = 2
+
+[node name="sholder" type="Label" parent="Menu/LeftArm/HBoxContainer8"]
+layout_mode = 2
+text = "Sholder curl"
+
+[node name="sholderFront" type="HSlider" parent="Menu/LeftArm/HBoxContainer8"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.47
+
 [node name="LeftHand" type="VBoxContainer" parent="Menu"]
 layout_mode = 2
 
@@ -102,6 +284,127 @@ layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
+
+[node name="RightArm" type="VBoxContainer" parent="Menu"]
+layout_mode = 2
+
+[node name="Arm LB" type="Label" parent="Menu/RightArm"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_8y4b7")
+theme_override_font_sizes/font_size = 20
+text = "Right Arm"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/RightArm"]
+layout_mode = 2
+
+[node name="Elbow" type="Label" parent="Menu/RightArm/HBoxContainer"]
+layout_mode = 2
+text = "Elbow"
+
+[node name="Elbow2" type="HSlider" parent="Menu/RightArm/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Menu/RightArm"]
+layout_mode = 2
+
+[node name="wrist" type="Label" parent="Menu/RightArm/HBoxContainer2"]
+layout_mode = 2
+text = "Wrist A"
+
+[node name="R_Wristud" type="HSlider" parent="Menu/RightArm/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.33
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Menu/RightArm"]
+layout_mode = 2
+
+[node name="wrist" type="Label" parent="Menu/RightArm/HBoxContainer3"]
+layout_mode = 2
+text = "Wrist B"
+
+[node name="R_Wristio" type="HSlider" parent="Menu/RightArm/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Menu/RightArm"]
+layout_mode = 2
+
+[node name="wrist" type="Label" parent="Menu/RightArm/HBoxContainer4"]
+layout_mode = 2
+text = "Wrist C"
+
+[node name="R_Wristtw" type="HSlider" parent="Menu/RightArm/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.61
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Menu/RightArm"]
+layout_mode = 2
+
+[node name="sholder" type="Label" parent="Menu/RightArm/HBoxContainer5"]
+layout_mode = 2
+text = "Sholder Lift"
+
+[node name="sholderLift" type="HSlider" parent="Menu/RightArm/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.47
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="Menu/RightArm"]
+layout_mode = 2
+
+[node name="sholder" type="Label" parent="Menu/RightArm/HBoxContainer6"]
+layout_mode = 2
+text = "Sholder swing"
+
+[node name="sholderSwing" type="HSlider" parent="Menu/RightArm/HBoxContainer6"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="Menu/RightArm"]
+layout_mode = 2
+
+[node name="sholder" type="Label" parent="Menu/RightArm/HBoxContainer7"]
+layout_mode = 2
+text = "Sholder shrug"
+
+[node name="sholderShrug" type="HSlider" parent="Menu/RightArm/HBoxContainer7"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.17
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="Menu/RightArm"]
+layout_mode = 2
+
+[node name="sholder" type="Label" parent="Menu/RightArm/HBoxContainer8"]
+layout_mode = 2
+text = "Sholder curl"
+
+[node name="sholderFront" type="HSlider" parent="Menu/RightArm/HBoxContainer8"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.47
 
 [node name="Right Hand" type="VBoxContainer" parent="Menu"]
 layout_mode = 2
@@ -260,11 +563,30 @@ size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
 
+[connection signal="value_changed" from="Menu/Head/rotation/Rotate" to="." method="head"]
+[connection signal="value_changed" from="Menu/Head/side/Rotate" to="." method="head"]
+[connection signal="value_changed" from="Menu/Head/up/Rotate" to="." method="head"]
 [connection signal="value_changed" from="Menu/Chest/HBoxContainer/Back curve" to="." method="curve_back"]
 [connection signal="value_changed" from="Menu/Chest/Twist/Twist2" to="." method="back_twist"]
 [connection signal="value_changed" from="Menu/Chest/Lean/Lean" to="." method="back_lean"]
+[connection signal="value_changed" from="Menu/LeftArm/HBoxContainer/Elbow2" to="." method="left_elbow"]
+[connection signal="value_changed" from="Menu/LeftArm/HBoxContainer2/L_Wristud" to="." method="left_wrist"]
+[connection signal="value_changed" from="Menu/LeftArm/HBoxContainer3/L_Wristio" to="." method="left_wrist"]
+[connection signal="value_changed" from="Menu/LeftArm/HBoxContainer4/L_Wristtw" to="." method="left_wrist"]
+[connection signal="value_changed" from="Menu/LeftArm/HBoxContainer5/sholderLift" to="." method="left_sholder"]
+[connection signal="value_changed" from="Menu/LeftArm/HBoxContainer6/sholderSwing" to="." method="left_sholder"]
+[connection signal="value_changed" from="Menu/LeftArm/HBoxContainer7/sholderShrug" to="." method="left_sholder"]
+[connection signal="value_changed" from="Menu/LeftArm/HBoxContainer8/sholderFront" to="." method="left_sholder"]
 [connection signal="value_changed" from="Menu/LeftHand/HBoxContainer/LeftFistSlider" to="." method="left_hand"]
 [connection signal="value_changed" from="Menu/LeftHand/HBoxContainer2/thumb" to="." method="left_thumb_close"]
+[connection signal="value_changed" from="Menu/RightArm/HBoxContainer/Elbow2" to="." method="right_elbow"]
+[connection signal="value_changed" from="Menu/RightArm/HBoxContainer2/R_Wristud" to="." method="right_wrist"]
+[connection signal="value_changed" from="Menu/RightArm/HBoxContainer3/R_Wristio" to="." method="right_wrist"]
+[connection signal="value_changed" from="Menu/RightArm/HBoxContainer4/R_Wristtw" to="." method="right_wrist"]
+[connection signal="value_changed" from="Menu/RightArm/HBoxContainer5/sholderLift" to="." method="right_sholder"]
+[connection signal="value_changed" from="Menu/RightArm/HBoxContainer6/sholderSwing" to="." method="right_sholder"]
+[connection signal="value_changed" from="Menu/RightArm/HBoxContainer7/sholderShrug" to="." method="right_sholder"]
+[connection signal="value_changed" from="Menu/RightArm/HBoxContainer8/sholderFront" to="." method="right_sholder"]
 [connection signal="value_changed" from="Menu/Right Hand/HBoxContainer/RightFistSlider" to="." method="right_hand"]
 [connection signal="value_changed" from="Menu/Right Hand/HBoxContainer2/thumb" to="." method="right_thumb_close"]
 [connection signal="value_changed" from="Menu/LeftLeg/kneeHb/KneeSlider" to="." method="bend_left_knee"]

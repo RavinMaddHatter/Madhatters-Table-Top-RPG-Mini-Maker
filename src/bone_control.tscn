@@ -47,6 +47,7 @@ layout_mode = 2
 min_value = -6.28
 max_value = 6.28
 step = 0.01
+value = -0.28
 
 [node name="Labelsy" type="HBoxContainer" parent="VBoxContainer/Sliders"]
 layout_mode = 2
@@ -67,6 +68,7 @@ layout_mode = 2
 min_value = -6.28
 max_value = 6.28
 step = 0.01
+value = -0.28
 
 [node name="Labels2" type="HBoxContainer" parent="VBoxContainer/Sliders"]
 layout_mode = 2
@@ -87,6 +89,7 @@ layout_mode = 2
 min_value = -6.28
 max_value = 6.28
 step = 0.01
+value = -0.28
 
 [connection signal="text_submitted" from="VBoxContainer/Sliders/Labels/Value_Edit" to="." method="_on_value_edit_text_submitted"]
 [connection signal="value_changed" from="VBoxContainer/Sliders/x slider" to="." method="_on_x_slider_value_changed"]

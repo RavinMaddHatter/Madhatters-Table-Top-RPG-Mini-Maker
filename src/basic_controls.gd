@@ -1,8 +1,28 @@
+#the functions in this script were set up to make sensible poses using simple sliders
+#These are not perfect, i am not properly locking the joints. It is simply using lerp
+#to give the illusion of sensiblity. It constrains the poses a bit more than would be 
+#natural. but i am not good with kinimatics. It is just hacks to make it work. 
 extends MarginContainer
-@export var left_fist = HSlider
-@export var right_fist = HSlider
 var skeleton : Skeleton3D
 signal position_macro_set
+@export var left_wrist_ud: HSlider
+@export var left_wrist_io: HSlider
+@export var left_wrist_tw: HSlider
+@export var right_wrist_ud: HSlider
+@export var right_wrist_io: HSlider
+@export var right_wrist_tw: HSlider
+@export var left_sholder_swing: HSlider
+@export var left_sholder_lift: HSlider
+@export var left_sholder_shrug: HSlider
+@export var left_sholder_curl: HSlider
+@export var right_sholder_swing: HSlider
+@export var right_sholder_lift: HSlider
+@export var right_sholder_shrug: HSlider
+@export var right_sholder_curl: HSlider
+@export var head_rotate: HSlider
+@export var head_pitch: HSlider
+@export var head_roll: HSlider
+
 func left_hand(value):
 	const leftClosed={	"LeftIndexProximal":Vector3(5,48,50),
 						"LeftIndexIntermediate":Vector3(33, 68, 50),
@@ -139,12 +159,38 @@ func twist_left_leg(value):
 	var bone_rotation= Quaternion.from_euler(min_pos.lerp(max_pos,value))
 	skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
 	emit_signal("position_macro_set")
-func left_elbow(_value):
+func left_elbow(value):
+	const straight = Vector3(-20,-50,0)
+	const bent = Vector3(80,-200,0)
+	var bone_id = skeleton.find_bone("LeftLowerArm")
+	var bone_rotation= Quaternion.from_euler(straight.lerp(bent,value)*TAU/360)
+	skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
 	emit_signal("position_macro_set")
-func right_elbow(_value):
-	const default = {"RightLowerArm":Vector3(0,90,0)}
-	const straight = {"RightLowerArm":Vector3(0,90,0)}
+func right_elbow(value):
+	const straight = Vector3(-20,50,0)
+	const bent = Vector3(80,200,0)
+	var bone_id = skeleton.find_bone("RightLowerArm")
+	var bone_rotation= Quaternion.from_euler(straight.lerp(bent,value)*TAU/360)
+	skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
+func left_wrist(_value):
+	var bone_id = skeleton.find_bone("LeftHand")
+	var left_wrist_pose=Vector3()
+	left_wrist_pose.x=lerp(-71*TAU/360,137*TAU/360,left_wrist_ud.value)
+	left_wrist_pose.y=lerp(20*TAU/360,140*TAU/360,left_wrist_io.value)
+	left_wrist_pose.z=lerp(-90*TAU/360,60*TAU/360,left_wrist_tw.value)
+	var bone_rotation = Quaternion.from_euler(left_wrist_pose)
+	skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
 	emit_signal("position_macro_set")
+func right_wrist(_value):
+	var bone_id = skeleton.find_bone("RightHand")
+	var right_wrist_pose=Vector3()
+	right_wrist_pose.x=lerp(-71*TAU/360,137*TAU/360,right_wrist_ud.value)
+	right_wrist_pose.y=lerp(-20*TAU/360,-140*TAU/360,right_wrist_io.value)
+	right_wrist_pose.z=lerp(-90*TAU/360,60*TAU/360,right_wrist_tw.value)
+	var bone_rotation = Quaternion.from_euler(right_wrist_pose)
+	skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
+	emit_signal("position_macro_set")
+
 func curve_back(value):
 	var straight ={"Chest":-25,
 					"UpperChest":-25,
@@ -179,6 +225,45 @@ func back_twist(value):
 		var bone_rotation= Quaternion.from_euler(min_pos.lerp(max_pos,value))
 		skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
 	emit_signal("position_macro_set")
+func left_sholder(_value):
+	#This function is setup to make sensible repeatable poses. Euler angles can get really messy with application order
+	var sholder_id = skeleton.find_bone("LeftShoulder")
+	var sholderRotation = skeleton.get_bone_pose_rotation(sholder_id).get_euler()
+	sholderRotation.x = lerp(-103*TAU/360,-25*TAU/360,left_sholder_shrug.value)
+	sholderRotation.y = lerp(-134*TAU/360,-50*TAU/360,left_sholder_curl.value)
+	sholderRotation.z=0
+	skeleton.set_bone_pose_rotation(sholder_id,Quaternion.from_euler(sholderRotation))
+	var arm_id = skeleton.find_bone("LeftUpperArm")
+	var armRotation = skeleton.get_bone_pose_rotation(arm_id).get_euler()
+	armRotation.x=lerp(-70*TAU/360,80*TAU/360,left_sholder_lift.value)
+	armRotation.y=lerp( 90*TAU/360,270*TAU/360,left_sholder_swing.value)
+	skeleton.set_bone_pose_rotation(arm_id,Quaternion.from_euler(armRotation))
+func right_sholder(_value):
+	#This function is setup to make sensible repeatable poses. Euler angles can get really messy with application order
+	var sholder_id = skeleton.find_bone("RightShoulder")
+	var sholderRotation = skeleton.get_bone_pose_rotation(sholder_id).get_euler()
+	sholderRotation.x = lerp(-103*TAU/360,-25*TAU/360,right_sholder_shrug.value)
+	sholderRotation.y = lerp(134*TAU/360,50*TAU/360,right_sholder_curl.value)
+	sholderRotation.z=0
+	skeleton.set_bone_pose_rotation(sholder_id,Quaternion.from_euler(sholderRotation))
+	var arm_id = skeleton.find_bone("RightUpperArm")
+	var armRotation = skeleton.get_bone_pose_rotation(arm_id).get_euler()
+	armRotation.x=lerp(-70*TAU/360,80*TAU/360,right_sholder_lift.value)
+	armRotation.y=lerp( 90*TAU/360,270*TAU/360,right_sholder_swing.value)
+	skeleton.set_bone_pose_rotation(arm_id,Quaternion.from_euler(armRotation))
+func head(_value):
+	var neck_id = skeleton.find_bone("Neck")
+	var neck_rot = skeleton.get_bone_pose_rotation(neck_id).get_euler()
+	neck_rot.x = lerp(-30*TAU/360,35*TAU/360,head_pitch.value)
+	neck_rot.y = lerp(-45*TAU/360,45*TAU/360,head_rotate.value)
+	neck_rot.z=lerp( -20*TAU/360,20*TAU/360,head_roll.value)
+	skeleton.set_bone_pose_rotation(neck_id,Quaternion.from_euler(neck_rot))
+	var arm_id = skeleton.find_bone("Head")
+	var armRotation = skeleton.get_bone_pose_rotation(arm_id).get_euler()
+	armRotation.x=lerp(-30*TAU/360,35*TAU/360,head_pitch.value)
+	armRotation.y=lerp( -45*TAU/360,45*TAU/360,head_rotate.value)
+	armRotation.z=lerp( -30*TAU/360,30*TAU/360,head_roll.value)
+	skeleton.set_bone_pose_rotation(arm_id,Quaternion.from_euler(armRotation))
 func back_lean(value):
 	var left ={"Spine":-25,
 					"Chest":-25,
