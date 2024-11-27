@@ -5,7 +5,7 @@ class_name HumanizerEquipmentService
 static func load_mesh_arrays(equip:HumanizerEquipmentType):
 	var sf_arrays = []
 	sf_arrays.resize(Mesh.ARRAY_MAX)
-	var mhclo = load(equip.mhclo_path)
+	var mhclo = HumanizerResourceService.load_resource(equip.mhclo_path)
 	sf_arrays[Mesh.ARRAY_TEX_UV] = mhclo.uv_array
 	sf_arrays[Mesh.ARRAY_INDEX] = mhclo.index_array.duplicate()
 	sf_arrays[Mesh.ARRAY_CUSTOM0] = mhclo.custom0_array
@@ -25,14 +25,14 @@ static func fit_mesh_arrays(mesh_arrays:Array, helper_vertex_array: PackedVector
 	return mesh_arrays
 
 static func _sort_by_z_depth(clothes_a: HumanizerEquipment, clothes_b: HumanizerEquipment): # from highest to lowest
-	if load(clothes_a.get_type().mhclo_path).z_depth > load(clothes_b.get_type().mhclo_path).z_depth:
+	if HumanizerResourceService.load_resource(clothes_a.get_type().mhclo_path).z_depth > HumanizerResourceService.load_resource(clothes_b.get_type().mhclo_path).z_depth:
 		return true
 	return false
 
 static func show_vertices(equip_list:Dictionary,mesh_arrays:Dictionary):
 	for equip:HumanizerEquipment in equip_list.values():
 		var equip_type :HumanizerEquipmentType = equip.get_type()
-		var mhclo = load(equip_type.mhclo_path)
+		var mhclo = HumanizerResourceService.load_resource(equip_type.mhclo_path)
 		mesh_arrays[equip.type][Mesh.ARRAY_INDEX] = mhclo.index_array.duplicate()
 
 static func hide_vertices(equip_list:Dictionary,mesh_arrays:Dictionary):
@@ -45,7 +45,7 @@ static func hide_vertices(equip_list:Dictionary,mesh_arrays:Dictionary):
 	
 	for equip:HumanizerEquipment in depth_sorted_clothes:
 		var equip_type: HumanizerEquipmentType = equip.get_type()
-		var mhclo : MHCLO = load(equip_type.mhclo_path)
+		var mhclo : MHCLO = HumanizerResourceService.load_resource(equip_type.mhclo_path)
 		var cl_delete_verts_mh = []
 		cl_delete_verts_mh.resize(mhclo.vertex_data.size())
 		cl_delete_verts_mh.fill(false)
@@ -93,10 +93,9 @@ static func hide_faces(surface_arrays:Array,delete_verts:Array):
 	
 	surface_arrays[Mesh.ARRAY_INDEX] = keep_faces
 
-#scripts/mpfb/services/clothesservice.py
-static func interpolate_weights(equip_type:HumanizerEquipmentType, mhclo:MHCLO, rig:HumanizerRig,skeleton_data:Dictionary,mesh_arrays:Array):
-	#"""Try to copy rigging weights from the base mesh to the clothes mesh, hopefully #making the clothes fit the provided rig."""
-	# Create an empty outline with placeholders arrays that will contain lists of
+static func interpolate_weights( mhclo:MHCLO, rig:HumanizerRig,skeleton_data:Dictionary):
+    #"""Try to copy rigging weights from the base mesh to the clothes mesh, hopefully #making the clothes fit the provided rig."""
+    # Create an empty outline with placeholders arrays that will contain lists of
 	# vertices + weights per vertex group
 	var clothes_weights = []
 	for i in mhclo.vertex_data.size():
@@ -162,23 +161,28 @@ static func interpolate_weights(equip_type:HumanizerEquipmentType, mhclo:MHCLO, 
 			bw_pair[1] /= weight_sum
 		while bw_array.size() < 8:
 			bw_array.append([0,0])
-	
-	mesh_arrays[Mesh.ARRAY_BONES] = PackedInt32Array()
-	mesh_arrays[Mesh.ARRAY_WEIGHTS] = PackedFloat32Array()
-	for gd_id in mesh_arrays[Mesh.ARRAY_VERTEX].size():
-		var mh_id = mesh_arrays[Mesh.ARRAY_CUSTOM0][gd_id]
+		while bw_array.size() > 8:
+			var lowest = bw_array[0]
+			for bw_pair in bw_array:
+				if bw_pair[1] < lowest[1]:
+					lowest = bw_pair
+			bw_array.erase(lowest)
+			
+	mhclo.bones[rig.resource_name] = PackedInt32Array()
+	mhclo.weights[rig.resource_name] = PackedFloat32Array()
+	for mh_id in mhclo.custom0_array:
 		for bw_pair in clothes_weights[mh_id]:
-			mesh_arrays[Mesh.ARRAY_BONES].append(bw_pair[0])
-			mesh_arrays[Mesh.ARRAY_WEIGHTS].append(bw_pair[1])
+			mhclo.bones[rig.resource_name].append(bw_pair[0])
+			mhclo.weights[rig.resource_name].append(bw_pair[1])
 
-static func interpolate_rigged_weights(mhclo:MHCLO, rigged_bone_weights:Dictionary,skeleton_data:Dictionary,sf_arrays:Array,rig_name:String):
+static func interpolate_rigged_weights(mhclo:MHCLO, rigged_bone_weights:Dictionary,skeleton_data:Dictionary,rig_name:String):
 	var base_bone_weights = {}
 	base_bone_weights.bones = mhclo.bones[rig_name]
 	base_bone_weights.weights = mhclo.weights[rig_name]
-	sf_arrays[Mesh.ARRAY_BONES] = PackedInt32Array()
-	sf_arrays[Mesh.ARRAY_WEIGHTS] = PackedFloat32Array()
-	for gd_id in sf_arrays[Mesh.ARRAY_VERTEX].size():
-		var mh_id = sf_arrays[Mesh.ARRAY_CUSTOM0][gd_id]
+	mhclo.rigged_bones[rig_name] = PackedInt32Array()
+	mhclo.rigged_weights[rig_name] = PackedFloat32Array()
+	for gd_id in mhclo.custom0_array.size():
+		var mh_id = mhclo.custom0_array[gd_id]
 		var mh_bones = []
 		var mh_weights = []
 		var remainder = 0
@@ -208,5 +212,5 @@ static func interpolate_rigged_weights(mhclo:MHCLO, rigged_bone_weights:Dictiona
 					lowest_id = w
 			mh_bones.remove_at(lowest_id)
 			mh_weights.remove_at(lowest_id)
-		sf_arrays[Mesh.ARRAY_BONES].append_array(mh_bones)
-		sf_arrays[Mesh.ARRAY_WEIGHTS].append_array(mh_weights)
+		mhclo.rigged_bones[rig_name].append_array(mh_bones)
+		mhclo.rigged_weights[rig_name].append_array(mh_weights)

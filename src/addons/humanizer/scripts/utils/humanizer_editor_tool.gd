@@ -78,7 +78,7 @@ var morph_data := {}
 signal done_loading
 
 func _ready() -> void:
-	humanizer.material_updated.connect(on_material_updated)
+	#humanizer.material_updated.connect(on_material_updated)
 	for child in get_children():
 		if child.name.begins_with('Baked-'):
 			baked = true
@@ -89,20 +89,16 @@ func _ready() -> void:
 ## For use in character editor scenes where the character should be 
 ## continuously updated with every change
 
-func on_material_updated(equip):
-	#print("material updated " + equip.type)
-	if has_node(equip.type): #otherwise it will load with the correct texture
-		get_node(equip.type).set_surface_override_material(0,humanizer.materials[equip.type])
-
+#func on_material_updated(equip):
+	##print("material updated " + equip.type)
+	#if has_node(equip.type): #otherwise it will load with the correct texture
+		#var equip_node : HumanizerMeshInstance = get_node(equip.type)
+		#equip_node.set_surface_override_material(0,humanizer.materials[equip.type])
+		#equip_node.material_config = equip.material_config
+		
 func reset():
 	#print("reseting")
-	var new_config = HumanConfig.new()
-	new_config.init_macros()
-	new_config.rig = HumanizerGlobalConfig.config.default_skeleton
-	new_config.add_equipment(HumanizerEquipment.new("DefaultBody"))
-	new_config.add_equipment(HumanizerEquipment.new("RightEyeball-LowPoly"))
-	new_config.add_equipment(HumanizerEquipment.new("LeftEyeBall-LowPoly"))
-	human_config = new_config
+	human_config = HumanConfig.new_default()
 	
 func set_human_config(config: HumanConfig) -> void:
 	human_config = config
@@ -154,7 +150,7 @@ func reset_scene() -> void:
 func load_human() -> void:
 	#print("loading human")
 	baked = false
-	await humanizer.load_config(human_config)
+	humanizer.load_config_async(human_config)
 	reset_scene()
 	_deserialize()
 	notify_property_list_changed()
@@ -180,9 +176,9 @@ func create_human_branch() -> Node3D:
 
 	root_node.name = human_name
 	if _character_script not in ['', null]:
-		root_node.set_script(load(_character_script))
+		root_node.set_script(HumanizerResourceService.load_resource(_character_script))
 	elif script != '':
-		root_node.set_script(load(script))
+		root_node.set_script(HumanizerResourceService.load_resource(script))
 		
 	root_node.collision_layer = _character_layers
 	root_node.collision_mask = _character_mask
@@ -235,14 +231,13 @@ func create_human_branch() -> Node3D:
 		new_coll.owner = root_node
 		new_coll.name = 'CollisionShape3D'
 		root_node.collision_layer = _staticbody_layers
-		#await get_tree().create_timer(1).timeout
 
-	if human_config.components.has(&'main_collider') and not root_node is StaticBody3D:
+	if human_config.components.has(&'main_collider') and main_collider != null and not root_node is StaticBody3D:
 		var coll = main_collider.duplicate(true)
 		root_node.add_child(coll)
 		coll.owner = root_node
 	if human_config.components.has(&'saccades'):
-		var saccades : Node = load("res://addons/humanizer/scenes/subscenes/saccades.tscn").instantiate()
+		var saccades : Node = HumanizerResourceService.load_resource("res://addons/humanizer/scenes/subscenes/saccades.tscn").instantiate()
 		root_node.add_child(saccades)
 		saccades.owner = root_node
 	if has_node('MorphDriver'):
@@ -270,7 +265,8 @@ func save_human_scene() -> void:
 	ResourceSaver.save(human_config, config_path)
 	ResourceSaver.save(scene, save_path.path_join('scene_' + human_name + '.tscn'))
 	print('Saved human to : ' + save_path)
-	HumanizerJobQueue.enqueue({callable=HumanizerMeshService.compress_material,mesh=mi.mesh})
+	HumanizerJobQueue.add_job(HumanizerMeshService.compress_material.bind(mi.mesh))
+	print("tesetasetaset")
 	
 func _add_child_node(node: Node) -> void:
 	add_child(node)
@@ -310,8 +306,12 @@ func _deserialize() -> void:
 
 #### Mesh Management ####
 func add_equipment_type(equip_type:HumanizerEquipmentType)->void:
+	#print("adding equipment " + equip_type.resource_name)
 	var equip := HumanizerEquipment.new(equip_type.resource_name)
 	add_equipment(equip)
+
+func trigger_material_update(equip_type:String):
+	humanizer.update_material(equip_type)
 
 func init_equipment(equip: HumanizerEquipment) -> void:
 	if baked:
@@ -321,6 +321,7 @@ func init_equipment(equip: HumanizerEquipment) -> void:
 	
 	var equip_type = equip.get_type()
 	var mesh_inst = HumanizerMeshInstance.new()
+	mesh_inst.trigger_material_update.connect(humanizer.update_material)
 	mesh_inst.name = equip.type
 	mesh_inst.mesh = humanizer.get_mesh(equip.type)
 	var sf_material :StandardMaterial3D = humanizer.materials[equip.type]
@@ -347,7 +348,7 @@ func add_equipment(equip: HumanizerEquipment) -> void:
 	var equip_type = equip.get_type()
 	for prev_equip in human_config.get_equipment_in_slots(equip_type.slots):
 		remove_equipment(prev_equip)
-	await humanizer.add_equipment(equip)	
+	humanizer.add_equipment(equip)	
 	init_equipment(equip)
 	
 func remove_equipment(equip: HumanizerEquipment) -> void:
@@ -425,8 +426,10 @@ func bake_surface() -> void:
 		bake_mesh_names.append(node.name)
 		if not node.transform == Transform3D.IDENTITY:
 			human_config.transforms[node.name] = Transform3D(node.transform)
-		if node is HumanizerMeshInstance and node.material_config != null:
-			node.material_config.update_material()
+		# if node is HumanizerMeshInstance:
+		# 	var mesh_instance := node as HumanizerMeshInstance
+		# 	if mesh_instance.material_config != null:
+		# 		mesh_instance.material_config.update_material()
 
 	if human_config.components.has(&'size_morphs') or human_config.components.has(&'age_morphs'):
 		
@@ -465,7 +468,7 @@ func bake_surface() -> void:
 	if _new_shapekeys.size() > 0 :
 		var morph_driver : Node
 		if not has_node('MorphDriver'):
-			morph_driver = load("res://addons/humanizer/scenes/subscenes/morph_driver.tscn").instantiate()
+			morph_driver = HumanizerResourceService.load_resource("res://addons/humanizer/scenes/subscenes/morph_driver.tscn").instantiate()
 			morph_driver.meshes = [mi]
 			morph_driver.skeleton = skeleton
 			morph_driver.bone_positions = morph_data.bone_positions
@@ -650,7 +653,7 @@ func _reset_animator() -> void:
 		reset_face_pose()
 
 func reset_face_pose() -> void:
-	var face_poses: AnimationLibrary = load("res://addons/humanizer/data/animations/face_poses.glb")
+	var face_poses: AnimationLibrary = HumanizerResourceService.load_resource("res://addons/humanizer/data/animations/face_poses.glb")
 	for clip: String in face_poses.get_animation_list():
 		animator.set("parameters/" + clip + "/add_amount", 0.)
 
@@ -715,7 +718,7 @@ func _add_saccades() -> void:
 			saccades.human = self
 			saccades.enabled = true
 			return
-		saccades = load("res://addons/humanizer/scenes/subscenes/saccades.tscn").instantiate()
+		saccades = HumanizerResourceService.load_resource("res://addons/humanizer/scenes/subscenes/saccades.tscn").instantiate()
 		saccades.skeleton = skeleton
 		_add_child_node(saccades)
 		move_child(saccades, 0)

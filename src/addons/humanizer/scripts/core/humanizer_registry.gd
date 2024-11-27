@@ -11,10 +11,12 @@ func _init() -> void:
 	load_all()
 
 static func load_all() -> void:
-	_get_rigs()
-	_load_equipment()
-	_get_skin_textures()
-	_get_materials()
+	HumanizerLogger.profile("HumanizerRegistry", func():
+		_get_rigs()
+		_load_equipment()
+		_get_skin_textures()
+		_get_materials()
+	)
 	
 static func _get_materials():
 	for folder in HumanizerGlobalConfig.config.asset_import_paths:
@@ -22,21 +24,19 @@ static func _get_materials():
 		for dir in OSPath.get_dirs(materials_path):
 			var equip_type = dir.get_file()
 			for mat_file in OSPath.get_files(dir):
-				var mat_res = load(mat_file)
-				equipment[equip_type].textures[mat_res.resource_name] = mat_file
-				if mat_file.get_file().get_basename() == "default":
-					equipment[equip_type].default_material = mat_res.resource_name
-				if mat_res is HumanizerMaterial:
-					pass
-	
+				if mat_file.get_extension() == "res":
+					var mat_res = HumanizerResourceService.load_resource(mat_file)
+					if mat_res is HumanizerMaterial or mat_res is StandardMaterial3D:
+						equipment[equip_type].textures[mat_res.resource_name] = mat_file
+						if mat_file.get_file().get_basename() == "default":
+							equipment[equip_type].default_material = mat_res.resource_name
 
 static func add_equipment_type(equip:HumanizerEquipmentType):
 	#print('Registering equipment ' + equip.resource_name)
 	if equipment.has(equip.resource_name):
-		equipment[equip.resource_name]=[]
-		#equipment.erase(equip.resource_name)
+		equipment.erase(equip.resource_name)
 	equipment[equip.resource_name] = equip
-	
+
 static func filter_equipment(filter: Dictionary) -> Array[HumanizerEquipmentType]:
 	var filtered: Array[HumanizerEquipmentType]
 	for equip in equipment.values():
@@ -87,9 +87,7 @@ static func _get_skin_textures() -> void:
 static func _load_equipment() -> void:
 	equipment={}
 	for path in HumanizerGlobalConfig.config.asset_import_paths:
-		for dir in OSPath.get_dirs(path.path_join('body_parts')):
-			_scan_dir(dir)
-		for dir in OSPath.get_dirs(path.path_join('clothes')):
+		for dir in OSPath.get_dirs(path.path_join('equipment')):
 			_scan_dir(dir)
 
 static func _scan_dir(path: String) -> void:
@@ -102,4 +100,4 @@ static func _scan_dir(path: String) -> void:
 		var suffix: String = file.get_file().rsplit('.', true, 1)[0].split('_')[-1]
 		if suffix in ['material', 'mhclo', 'mesh']:
 			continue
-		add_equipment_type(load(file))
+		add_equipment_type(HumanizerResourceService.load_resource(file))

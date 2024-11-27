@@ -2,7 +2,7 @@
 class_name ClothesInspector
 extends ScrollContainer
 
-@export var category = ""
+@export var category : int
 
 static var visible_setting := false
 
@@ -21,7 +21,7 @@ func _ready() -> void:
 	visibility_changed.connect(_set_visibility)
 	build_grid()
 	await get_tree().process_frame
-	for slot in HumanizerGlobalConfig.config.get(category+"_slots"):
+	for slot in HumanizerGlobalConfig.config.equipment_slots[category].get_slots():
 		asset_option_buttons[slot] = get_node('%' + slot + 'OptionButton')
 		material_option_buttons[slot] = get_node('%' + slot + 'TextureOptionButton')
 		
@@ -35,12 +35,14 @@ func _ready() -> void:
 		materials.item_selected.connect(_material_selected.bind(slot))
 		
 		options.add_item('None')
-		for asset in HumanizerRegistry.equipment.values():
-			if category=="clothing" and slot+"Clothes" in asset.slots:
-				options.add_item(asset.resource_name)
-			elif slot in asset.slots:
-				options.add_item(asset.resource_name)
-	
+		for asset in HumanizerRegistry.filter_equipment({'slot'=slot}):
+			var display_name = asset.display_name
+			if display_name == "":
+				display_name = asset.resource_name
+			var idx = options.item_count
+			options.add_item(display_name)
+			options.set_item_metadata(idx,asset.resource_name)
+			
 	if config != null:
 		fill_table(config)
 
@@ -52,9 +54,11 @@ func build_grid() -> void:
 	var grid = find_child('GridContainer')
 	for child in grid.get_children():
 		grid.remove_child(child)
-	for slot in HumanizerGlobalConfig.config.get(category+"_slots"):
+		child.queue_free()
+	for slot_label in HumanizerGlobalConfig.config.equipment_slots[category].slots:
+		var slot = slot_label + HumanizerGlobalConfig.config.equipment_slots[category].suffix
 		var label = Label.new()
-		label.text = slot
+		label.text = slot_label
 		grid.add_child(label)
 		grid.add_child(VSeparator.new())
 		label = Label.new()
@@ -78,19 +82,15 @@ func build_grid() -> void:
 		child.owner = self
 		
 func fill_table(config: HumanConfig) -> void:
-	for slot in HumanizerGlobalConfig.config.get(category+"_slots"):
-		var clothes_slot
-		if category == "clothing":
-			clothes_slot = slot+"Clothes"
-		else:
-			clothes_slot = slot
-		var clothes = config.get_equipment_in_slot(clothes_slot)
+	#print("filling table")
+	for slot in HumanizerGlobalConfig.config.equipment_slots[category].get_slots():
+		var clothes = config.get_equipment_in_slot(slot)
 		if clothes != null:
 			var options = asset_option_buttons[slot] as OptionButton
 			var materials = material_option_buttons[slot] as OptionButton 
-			for item in options.item_count:
-				if clothes.get_type().resource_name == options.get_item_text(item):
-					options.selected = item
+			for item_idx in options.item_count:
+				if clothes.get_type().resource_name == options.get_item_metadata(item_idx):
+					options.selected = item_idx
 					var mat: int = 0
 					for texture in clothes.get_type().textures:
 						materials.add_item(texture)
@@ -139,6 +139,8 @@ func _item_selected(index: int, slot: String):
 		clear_clothes(slot)
 		return
 	
+	var string_id = options.get_item_metadata(index)
+	
 	## Find other slots with same item (same name)
 	var slots: Array[String] = []
 	var selected = asset_option_buttons[slot].selected
@@ -159,14 +161,15 @@ func _item_selected(index: int, slot: String):
 	for sl in slots:
 		var materials: OptionButton = material_option_buttons[sl]
 		materials.clear()
-		for mat in HumanizerRegistry.equipment[name].textures:
+		for mat in HumanizerRegistry.equipment[string_id].textures:
 			materials.add_item(mat.get_file().replace('.tres', ''))
 	
 	## Emit signals and set to default material
-	if config != null and not name in config.equipment:
-		var clothes: HumanizerEquipmentType = HumanizerRegistry.equipment[name]
+	if config != null and not string_id in config.equipment:
+		var clothes: HumanizerEquipmentType = HumanizerRegistry.equipment[string_id]
 		for sl in slots:
 			last_equipped[sl] = clothes
+		#print("clothes changed " + string_id)
 		clothes_changed.emit(clothes)
 		var textures = material_option_buttons[slot]
 		material_set.emit(name, textures.get_item_text(textures.selected))

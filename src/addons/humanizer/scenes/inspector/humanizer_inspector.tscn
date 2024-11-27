@@ -21,7 +21,7 @@ func set_options():
 	
 func _load_preset(idx) -> void:
 	print('loading HumanConfig preset : ' + get_item_metadata(idx))
-	human.human_config = load(get_item_metadata(idx))
+	human.human_config = HumanizerResourceService.load_resource(get_item_metadata(idx))
 "
 
 [sub_resource type="GDScript" id="GDScript_5ptqy"]
@@ -293,7 +293,7 @@ visible = false
 layout_mode = 2
 vertical_scroll_mode = 0
 script = ExtResource("3_wse4b")
-category = "body_part"
+category = "0"
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/BodyPartsContainer"]
 layout_mode = 2
@@ -317,7 +317,7 @@ visible = false
 layout_mode = 2
 vertical_scroll_mode = 0
 script = ExtResource("3_wse4b")
-category = "clothing"
+category = "1"
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/ClothesContainer"]
 layout_mode = 2

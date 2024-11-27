@@ -50,6 +50,15 @@ signal equipment_removed(equip:HumanizerEquipment)
 			_handle_color_overrides(equip)
 		notify_property_list_changed()
 
+static func new_default():
+	var new_config = HumanConfig.new()
+	new_config.init_macros()
+	new_config.rig = HumanizerGlobalConfig.config.default_skeleton
+	new_config.add_equipment(HumanizerEquipment.new("DefaultBody"))
+	new_config.add_equipment(HumanizerEquipment.new("RightEye-LowPolyEyeball"))
+	new_config.add_equipment(HumanizerEquipment.new("LeftEye-LowPolyEyeball"))
+	return new_config
+	
 func init_macros():
 	var default_macros = HumanizerMacroService.get_default_macros()
 	var macros = {}
@@ -74,7 +83,7 @@ func _handle_color_overrides(equip:HumanizerEquipment):
 	elif equip_type.in_slot(["LeftEyebrow","RightEyebrow","Eyebrows"]):
 		equip.material_config.overlays[0].color = eyebrow_color
 
-func set_equipment_material(equip,material):
+func set_equipment_material(equip:HumanizerEquipment,material):
 	equip.set_material(material)
 	_handle_color_overrides(equip)
 
