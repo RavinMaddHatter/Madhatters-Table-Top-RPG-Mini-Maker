@@ -379,5 +379,4 @@ func _on_export_started():
 func _on_export_completed(_obj_file):
 	$progressContainer.hide()
 func _on_export_progress(_surf_idx, _progress_value):
-	print(_progress_value)
 	$progressContainer/ProgressBar.value=_progress_value * 100

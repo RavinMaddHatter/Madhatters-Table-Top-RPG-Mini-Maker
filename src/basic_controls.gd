@@ -22,8 +22,17 @@ signal position_macro_set
 @export var head_rotate: HSlider
 @export var head_pitch: HSlider
 @export var head_roll: HSlider
+@export var right_hip_lift: HSlider
+@export var right_hip_twist: HSlider
+@export var right_hip_spread: HSlider
+@export var back_twist: HSlider
+@export var back_lean: HSlider
+@export var back_curve: HSlider
 
 func left_hand(value):
+	#The following values were manually evaluated. The finger is a 1 DoF item so each finger has
+	#an open and close position. unforunately the fingers are not alinged with sensible bend directions
+	#in this skeleton.
 	const leftClosed={	"LeftIndexProximal":Vector3(5,48,50),
 						"LeftIndexIntermediate":Vector3(33, 68, 50),
 						"LeftIndexDistal":Vector3(-5,56,60),
@@ -41,32 +50,12 @@ func left_hand(value):
 		var bone_id = skeleton.find_bone(key)
 		var bone_rotation= Quaternion.from_euler(start_pose.lerp(leftClosed[key],value)*TAU/360)
 		skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
-	emit_signal("position_macro_set")
-func left_thumb_close(value):
-	const thumb_start ={"LeftThumbMetacarpal":Vector3(-35.5,89.9,0),
-						"LeftThumbDistal":Vector3(0,0,0),
-						"LeftThumbProximal":Vector3(0,0,0)}
-	const thumb_fist = {"LeftThumbMetacarpal":Vector3(-35.5,89.9,0),
-						"LeftThumbDistal":Vector3(0,60,45),
-						"LeftThumbProximal":Vector3(0,50,0)}
-	for key in thumb_fist.keys():
-		var bone_id = skeleton.find_bone(key)
-		var bone_rotation= Quaternion.from_euler(thumb_start[key].lerp(thumb_fist[key],value)*TAU/360)
-		skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
-	emit_signal("position_macro_set")
-func right_thumb_close(value):
-	const thumb_start ={"RightThumbMetacarpal":Vector3(-35.5,-89.9,0),
-						"RightThumbDistal":Vector3(0,0,0),
-						"RightThumbProximal":Vector3(0,0,0)}
-	const thumb_fist = {"RightThumbMetacarpal":Vector3(-35,-90,0),
-						"RightThumbDistal":Vector3(0,-60,45),
-						"RightThumbProximal":Vector3(0,-60,0)}
-	for key in thumb_fist.keys():
-		var bone_id = skeleton.find_bone(key)
-		var bone_rotation= Quaternion.from_euler(thumb_start[key].lerp(thumb_fist[key],value)*TAU/360)
-		skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
+	#this is emitted to set the detailed poses.
 	emit_signal("position_macro_set")
 func right_hand(value):
+	#The following values were manually evaluated. The finger is a 1 DoF item so each finger has
+	#an open and close position. unforunately the fingers are not alinged with sensible bend directions
+	#in this skeleton.
 	const rightClosed={	"RightIndexProximal":Vector3(-5,-48,-50),
 						"RightIndexIntermediate":Vector3(55, -45, -45),
 						"RightIndexDistal":Vector3(0,-45,-45),
@@ -84,95 +73,101 @@ func right_hand(value):
 		var bone_id = skeleton.find_bone(key)
 		var bone_rotation= Quaternion.from_euler(start_pose.lerp(rightClosed[key],value)*TAU/360)
 		skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
-	#emit_signal("position_macro_set")
+	#this is emitted to set the detailed poses.
+	emit_signal("position_macro_set")
+func left_thumb_close(value):
+	##The thum has more than 1 degree of freedom. however for simplicity, this is 
+	#moving along 1 path. This will now work for eveyr aspect, but for now it is decent
+	const thumb_start ={"LeftThumbMetacarpal":Vector3(-35.5,89.9,0),
+						"LeftThumbDistal":Vector3(0,0,0),
+						"LeftThumbProximal":Vector3(0,0,0)}
+	const thumb_fist = {"LeftThumbMetacarpal":Vector3(-35.5,89.9,0),
+						"LeftThumbDistal":Vector3(0,60,45),
+						"LeftThumbProximal":Vector3(0,50,0)}
+	for key in thumb_fist.keys():
+		var bone_id = skeleton.find_bone(key)
+		var bone_rotation= Quaternion.from_euler(thumb_start[key].lerp(thumb_fist[key],value)*TAU/360)
+		skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
+	#this is emitted to set the detailed poses.
+	emit_signal("position_macro_set")
+func right_thumb_close(value):
+	##The thum has more than 1 degree of freedom. however for simplicity, this is 
+	#moving along 1 path. This will now work for eveyr aspect, but for now it is decent
+	const thumb_start ={"RightThumbMetacarpal":Vector3(-35.5,-89.9,0),
+						"RightThumbDistal":Vector3(0,0,0),
+						"RightThumbProximal":Vector3(0,0,0)}
+	const thumb_fist = {"RightThumbMetacarpal":Vector3(-35,-90,0),
+						"RightThumbDistal":Vector3(0,-60,45),
+						"RightThumbProximal":Vector3(0,-60,0)}
+	for key in thumb_fist.keys():
+		var bone_id = skeleton.find_bone(key)
+		var bone_rotation= Quaternion.from_euler(thumb_start[key].lerp(thumb_fist[key],value)*TAU/360)
+		skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
+	emit_signal("position_macro_set")
+
 func bend_right_knee(value):
+	#The Knee is a single degree of freedom joint, the start and stop are locked and we simply lerp 
 	const knee_default =Vector3(0,180,0)
 	const knee_bent =Vector3(150,190,-3)
 	var bone_id = skeleton.find_bone("RightLowerLeg")
 	var bone_rotation= Quaternion.from_euler(knee_default.lerp(knee_bent,value)*TAU/360)
 	skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
+	#this is emitted to set the detailed poses.
 	emit_signal("position_macro_set")
 
 func bend_left_knee(value):
+	#The Knee is a single degree of freedom joint, the start and stop are locked and we simply lerp 
 	const knee_default =Vector3(0,180,0)
 	const knee_bent =Vector3(150,170,3)
 	var bone_rotation= Quaternion.from_euler(knee_default.lerp(knee_bent,value)*TAU/360)
 	var bone_id = skeleton.find_bone("LeftLowerLeg")
 	skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
+	#this is emitted to set the detailed poses.
 	emit_signal("position_macro_set")
 
-func spread_right_leg(value):
+func right_hip(_value):
+	#the hip is a 3 DoF joint. To prevent unrecoverable changes, all transforms are 
+	#applied in a consistent order.
 	var bone_id = skeleton.find_bone("RightUpperLeg")
-	var min_pos = skeleton.get_bone_pose_rotation(bone_id).get_euler()
-	var max_pos = skeleton.get_bone_pose_rotation(bone_id).get_euler()
-	min_pos.z=190*TAU/360
-	max_pos.z=56*TAU/360
-	var bone_rotation= Quaternion.from_euler(min_pos.lerp(max_pos,value))
-	skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
+	var bone_rot = Vector3()
+	bone_rot.x=lerp(80*TAU/360,-125*TAU/360,right_hip_lift.value)
+	bone_rot.y=lerp(45*TAU/360,-45*TAU/360,right_hip_twist.value)
+	bone_rot.z=lerp(190*TAU/360,56*TAU/360,right_hip_spread.value)
+	skeleton.set_bone_pose_rotation(bone_id,bone_rot)
+	#this is emitted to set the detailed poses.
 	emit_signal("position_macro_set")
-
-func spread_left_leg(value):
+func left_hip(_value):
+	#the hip is a 3 DoF joint. To prevent unrecoverable changes, all transforms are 
+	#applied in a consistent order.
 	var bone_id = skeleton.find_bone("LeftUpperLeg")
-	var min_pos = skeleton.get_bone_pose_rotation(bone_id).get_euler()
-	var max_pos = skeleton.get_bone_pose_rotation(bone_id).get_euler()
-	min_pos.z=170*TAU/360
-	max_pos.z=300*TAU/360
-	var bone_rotation= Quaternion.from_euler(min_pos.lerp(max_pos,value))
-	skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
+	var bone_rot = Vector3()
+	bone_rot.x=lerp(80*TAU/360,-125*TAU/360,right_hip_lift.value)
+	bone_rot.y=lerp(-45*TAU/360,45*TAU/360,right_hip_twist.value)
+	bone_rot.z=lerp(170*TAU/360,300*TAU/360,right_hip_spread.value)
+	skeleton.set_bone_pose_rotation(bone_id,bone_rot)
+	#this is emitted to set the detailed poses.
 	emit_signal("position_macro_set")
 
-func kick_right_leg(value):
-	var bone_id = skeleton.find_bone("RightUpperLeg")
-	var min_pos = skeleton.get_bone_pose_rotation(bone_id).get_euler()
-	var max_pos = skeleton.get_bone_pose_rotation(bone_id).get_euler()
-	min_pos.x=80*TAU/360
-	max_pos.x=-125*TAU/360
-	var bone_rotation= Quaternion.from_euler(min_pos.lerp(max_pos,value))
-	skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
-	emit_signal("position_macro_set")
-
-func kick_left_leg(value):
-	var bone_id = skeleton.find_bone("LeftUpperLeg")
-	var min_pos = skeleton.get_bone_pose_rotation(bone_id).get_euler()
-	var max_pos = skeleton.get_bone_pose_rotation(bone_id).get_euler()
-	min_pos.x=80*TAU/360
-	max_pos.x=-125*TAU/360
-	var bone_rotation= Quaternion.from_euler(min_pos.lerp(max_pos,value))
-	skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
-	emit_signal("position_macro_set")
-
-func twist_right_leg(value):
-	var bone_id = skeleton.find_bone("RightUpperLeg")
-	var min_pos = skeleton.get_bone_pose_rotation(bone_id).get_euler()
-	var max_pos = skeleton.get_bone_pose_rotation(bone_id).get_euler()
-	min_pos.y=45*TAU/360
-	max_pos.y=-45*TAU/360
-	var bone_rotation= Quaternion.from_euler(min_pos.lerp(max_pos,value))
-	skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
-	emit_signal("position_macro_set")
-func twist_left_leg(value):
-	var bone_id = skeleton.find_bone("LeftUpperLeg")
-	var min_pos = skeleton.get_bone_pose_rotation(bone_id).get_euler()
-	var max_pos = skeleton.get_bone_pose_rotation(bone_id).get_euler()
-	min_pos.y=-45*TAU/360
-	max_pos.y=45*TAU/360
-	var bone_rotation= Quaternion.from_euler(min_pos.lerp(max_pos,value))
-	skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
-	emit_signal("position_macro_set")
 func left_elbow(value):
+	#the elbow is a 1 DoF joint, simple lerp is applied
 	const straight = Vector3(-20,-50,0)
 	const bent = Vector3(80,-200,0)
 	var bone_id = skeleton.find_bone("LeftLowerArm")
 	var bone_rotation= Quaternion.from_euler(straight.lerp(bent,value)*TAU/360)
 	skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
 	emit_signal("position_macro_set")
+	
 func right_elbow(value):
+	#the elbow is a 1 DoF joint, simple lerp is applied
 	const straight = Vector3(-20,50,0)
 	const bent = Vector3(80,200,0)
 	var bone_id = skeleton.find_bone("RightLowerArm")
 	var bone_rotation= Quaternion.from_euler(straight.lerp(bent,value)*TAU/360)
 	skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
+	
 func left_wrist(_value):
+	#the wrist is an incredibly complex joint. constraining movement broke my brain,
+	#i gave up and just expose some reaonsbale limits 
 	var bone_id = skeleton.find_bone("LeftHand")
 	var left_wrist_pose=Vector3()
 	left_wrist_pose.x=lerp(-71*TAU/360,137*TAU/360,left_wrist_ud.value)
@@ -182,6 +177,8 @@ func left_wrist(_value):
 	skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
 	emit_signal("position_macro_set")
 func right_wrist(_value):
+	#the wrist is an incredibly complex joint. constraining movement broke my brain,
+	#i gave up and just expose some reaonsbale limits 
 	var bone_id = skeleton.find_bone("RightHand")
 	var right_wrist_pose=Vector3()
 	right_wrist_pose.x=lerp(-71*TAU/360,137*TAU/360,right_wrist_ud.value)
@@ -190,41 +187,28 @@ func right_wrist(_value):
 	var bone_rotation = Quaternion.from_euler(right_wrist_pose)
 	skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
 	emit_signal("position_macro_set")
+func back(_value):
+	#the back is a 3 dof joint set that move together. For that reason, all joints are 
+	#computed in unison and moved directly. To prevent unrecoverable changes the order
+	#is computed the same way each time.
+	var chest_id = skeleton.find_bone("Chest")
+	var upper_chest_id = skeleton.find_bone("UpperChest")
+	var chest_rot=Vector3()
+	var upper_chest_rot=Vector3()
+	#cacluating twist
+	chest_rot.y = lerp(-25*TAU/360,25*TAU/360,back_twist.value)
+	upper_chest_rot.y = lerp(-25*TAU/360,25*TAU/360,back_twist.value)
+	#calculating lean
+	chest_rot.z = lerp(-25*TAU/360,25*TAU/360,back_lean.value)
+	upper_chest_rot.z = lerp(-25*TAU/360,25*TAU/360,back_lean.value)
+	#calculating curve
+	chest_rot.z = lerp(-22*TAU/360,22*TAU/360,back_curve.value)
+	upper_chest_rot.z = lerp(-35*TAU/360,35*TAU/360,back_curve.value)
+	skeleton.set_bone_pose_rotation(chest_id,chest_rot)
+	skeleton.set_bone_pose_rotation(upper_chest_id,upper_chest_rot)
+	emit_signal("position_macro_set")
 
-func curve_back(value):
-	var straight ={"Chest":-25,
-					"UpperChest":-25,
-					"Neck":-25,
-					"Head":-25}
-	var curved = {	"Chest":22,
-					"UpperChest":35,
-					"Neck":30,
-					"Head":22}
-	for key in straight.keys():
-		var bone_id = skeleton.find_bone(key)
-		var min_pos = skeleton.get_bone_pose_rotation(bone_id).get_euler()
-		var max_pos = skeleton.get_bone_pose_rotation(bone_id).get_euler()
-		min_pos.x=straight[key]*TAU/360
-		max_pos.x=curved[key]*TAU/360
-		var bone_rotation= Quaternion.from_euler(min_pos.lerp(max_pos,value))
-		skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
-	emit_signal("position_macro_set")
-func back_twist(value):
-	var left ={"Spine":-25,
-					"Chest":-25,
-					"UpperChest":-25}
-	var right = {	"Spine":25,
-					"Chest":25,
-					"UpperChest":25}
-	for key in left.keys():
-		var bone_id = skeleton.find_bone(key)
-		var min_pos = skeleton.get_bone_pose_rotation(bone_id).get_euler()
-		var max_pos = skeleton.get_bone_pose_rotation(bone_id).get_euler()
-		min_pos.y=left[key]*TAU/360
-		max_pos.y=right[key]*TAU/360
-		var bone_rotation= Quaternion.from_euler(min_pos.lerp(max_pos,value))
-		skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
-	emit_signal("position_macro_set")
+
 func left_sholder(_value):
 	#This function is setup to make sensible repeatable poses. Euler angles can get really messy with application order
 	var sholder_id = skeleton.find_bone("LeftShoulder")
@@ -252,6 +236,8 @@ func right_sholder(_value):
 	armRotation.y=lerp( 90*TAU/360,270*TAU/360,right_sholder_swing.value)
 	skeleton.set_bone_pose_rotation(arm_id,Quaternion.from_euler(armRotation))
 func head(_value):
+	#the head possion is controled by a 2 3 dof joints. To make sure the head 
+	#doesnt go into an unrecoverable position, the 3 movements are caculated in order.
 	var neck_id = skeleton.find_bone("Neck")
 	var neck_rot = skeleton.get_bone_pose_rotation(neck_id).get_euler()
 	neck_rot.x = lerp(-30*TAU/360,35*TAU/360,head_pitch.value)
@@ -264,19 +250,3 @@ func head(_value):
 	armRotation.y=lerp( -45*TAU/360,45*TAU/360,head_rotate.value)
 	armRotation.z=lerp( -30*TAU/360,30*TAU/360,head_roll.value)
 	skeleton.set_bone_pose_rotation(arm_id,Quaternion.from_euler(armRotation))
-func back_lean(value):
-	var left ={"Spine":-25,
-					"Chest":-25,
-					"UpperChest":-25}
-	var right = {	"Spine":25,
-					"Chest":25,
-					"UpperChest":25}
-	for key in left.keys():
-		var bone_id = skeleton.find_bone(key)
-		var min_pos = skeleton.get_bone_pose_rotation(bone_id).get_euler()
-		var max_pos = skeleton.get_bone_pose_rotation(bone_id).get_euler()
-		min_pos.z=left[key]*TAU/360
-		max_pos.z=right[key]*TAU/360
-		var bone_rotation= Quaternion.from_euler(min_pos.lerp(max_pos,value))
-		skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
-	emit_signal("position_macro_set")

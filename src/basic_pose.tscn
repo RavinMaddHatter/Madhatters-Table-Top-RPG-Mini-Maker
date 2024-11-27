@@ -12,29 +12,35 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_2n86l")
-left_wrist_ud = NodePath("Menu/LeftArm/HBoxContainer2/L_Wristud")
-left_wrist_io = NodePath("Menu/LeftArm/HBoxContainer3/L_Wristio")
-left_wrist_tw = NodePath("Menu/LeftArm/HBoxContainer4/L_Wristtw")
-right_wrist_ud = NodePath("Menu/RightArm/HBoxContainer2/R_Wristud")
-right_wrist_io = NodePath("Menu/RightArm/HBoxContainer3/R_Wristio")
-right_wrist_tw = NodePath("Menu/RightArm/HBoxContainer4/R_Wristtw")
-left_sholder_swing = NodePath("Menu/LeftArm/HBoxContainer6/sholderSwing")
-left_sholder_lift = NodePath("Menu/LeftArm/HBoxContainer5/sholderLift")
-left_sholder_shrug = NodePath("Menu/LeftArm/HBoxContainer7/sholderShrug")
-left_sholder_curl = NodePath("Menu/LeftArm/HBoxContainer8/sholderFront")
-right_sholder_swing = NodePath("Menu/RightArm/HBoxContainer6/sholderSwing")
-right_sholder_lift = NodePath("Menu/RightArm/HBoxContainer5/sholderLift")
-right_sholder_shrug = NodePath("Menu/RightArm/HBoxContainer7/sholderShrug")
-right_sholder_curl = NodePath("Menu/RightArm/HBoxContainer8/sholderFront")
+left_wrist_ud = NodePath("Menu/LeftArm/wristA/L_WristA")
+left_wrist_io = NodePath("Menu/LeftArm/wristB/L_WristB")
+left_wrist_tw = NodePath("Menu/LeftArm/wristC/L_WristC")
+right_wrist_ud = NodePath("Menu/RightArm/wristA/R_WristA")
+right_wrist_io = NodePath("Menu/RightArm/wristB/R_WristB")
+right_wrist_tw = NodePath("Menu/RightArm/wristC/R_WristC")
+left_sholder_swing = NodePath("Menu/LeftArm/armSwing/swing2")
+left_sholder_lift = NodePath("Menu/LeftArm/armLift/Lift2")
+left_sholder_shrug = NodePath("Menu/LeftArm/sholderShrug/sholderShrug")
+left_sholder_curl = NodePath("Menu/LeftArm/sholderCurle/sholderFront")
+right_sholder_swing = NodePath("Menu/RightArm/armSwign/swing2")
+right_sholder_lift = NodePath("Menu/RightArm/armLift/Lift2")
+right_sholder_shrug = NodePath("Menu/RightArm/shrug/sholderShrug")
+right_sholder_curl = NodePath("Menu/RightArm/curl/sholderCurl")
 head_rotate = NodePath("Menu/Head/rotation/Rotate")
-head_pitch = NodePath("Menu/Head/up/Rotate")
-head_roll = NodePath("Menu/Head/side/Rotate")
+head_pitch = NodePath("Menu/Head/upanddown/UpAndDown")
+head_roll = NodePath("Menu/Head/sidetoside/sideToSide")
 
 [node name="Menu" type="VBoxContainer" parent="."]
 layout_mode = 2
 
 [node name="Head" type="VBoxContainer" parent="Menu"]
 layout_mode = 2
+
+[node name="headLb" type="Label" parent="Menu/Head"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_8y4b7")
+theme_override_font_sizes/font_size = 20
+text = "Torso"
 
 [node name="rotation" type="HBoxContainer" parent="Menu/Head"]
 layout_mode = 2
@@ -50,28 +56,28 @@ max_value = 1.0
 step = 0.01
 value = 0.5
 
-[node name="side" type="HBoxContainer" parent="Menu/Head"]
+[node name="sidetoside" type="HBoxContainer" parent="Menu/Head"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Menu/Head/side"]
+[node name="Label" type="Label" parent="Menu/Head/sidetoside"]
 layout_mode = 2
 text = "Side to side"
 
-[node name="Rotate" type="HSlider" parent="Menu/Head/side"]
+[node name="sideToSide" type="HSlider" parent="Menu/Head/sidetoside"]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
 value = 0.5
 
-[node name="up" type="HBoxContainer" parent="Menu/Head"]
+[node name="upanddown" type="HBoxContainer" parent="Menu/Head"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Menu/Head/up"]
+[node name="Label" type="Label" parent="Menu/Head/upanddown"]
 layout_mode = 2
 text = "up/down"
 
-[node name="Rotate" type="HSlider" parent="Menu/Head/up"]
+[node name="UpAndDown" type="HSlider" parent="Menu/Head/upanddown"]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
@@ -81,20 +87,20 @@ value = 0.5
 [node name="Chest" type="VBoxContainer" parent="Menu"]
 layout_mode = 2
 
-[node name="LeftHandLb" type="Label" parent="Menu/Chest"]
+[node name="chestLb" type="Label" parent="Menu/Chest"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_8y4b7")
 theme_override_font_sizes/font_size = 20
 text = "Torso"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Menu/Chest"]
+[node name="curveSpine" type="HBoxContainer" parent="Menu/Chest"]
 layout_mode = 2
 
-[node name="Curve" type="Label" parent="Menu/Chest/HBoxContainer"]
+[node name="Curve" type="Label" parent="Menu/Chest/curveSpine"]
 layout_mode = 2
 text = "Curve"
 
-[node name="Back curve" type="HSlider" parent="Menu/Chest/HBoxContainer"]
+[node name="Back curve" type="HSlider" parent="Menu/Chest/curveSpine"]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
@@ -138,152 +144,117 @@ theme_override_fonts/font = ExtResource("2_8y4b7")
 theme_override_font_sizes/font_size = 20
 text = "Left Arm"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Menu/LeftArm"]
+[node name="sholderShrug" type="HBoxContainer" parent="Menu/LeftArm"]
 layout_mode = 2
 
-[node name="Elbow" type="Label" parent="Menu/LeftArm/HBoxContainer"]
-layout_mode = 2
-text = "Elbow"
-
-[node name="Elbow2" type="HSlider" parent="Menu/LeftArm/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-max_value = 1.0
-step = 0.01
-value = 0.1
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="Menu/LeftArm"]
-layout_mode = 2
-
-[node name="wrist" type="Label" parent="Menu/LeftArm/HBoxContainer2"]
-layout_mode = 2
-text = "Wrist A"
-
-[node name="L_Wristud" type="HSlider" parent="Menu/LeftArm/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-max_value = 1.0
-step = 0.01
-value = 0.33
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="Menu/LeftArm"]
-layout_mode = 2
-
-[node name="wrist" type="Label" parent="Menu/LeftArm/HBoxContainer3"]
-layout_mode = 2
-text = "Wrist B"
-
-[node name="L_Wristio" type="HSlider" parent="Menu/LeftArm/HBoxContainer3"]
-layout_mode = 2
-size_flags_horizontal = 3
-max_value = 1.0
-step = 0.01
-value = 0.5
-
-[node name="HBoxContainer4" type="HBoxContainer" parent="Menu/LeftArm"]
-layout_mode = 2
-
-[node name="wrist" type="Label" parent="Menu/LeftArm/HBoxContainer4"]
-layout_mode = 2
-text = "Wrist C"
-
-[node name="L_Wristtw" type="HSlider" parent="Menu/LeftArm/HBoxContainer4"]
-layout_mode = 2
-size_flags_horizontal = 3
-max_value = 1.0
-step = 0.01
-value = 0.6
-
-[node name="HBoxContainer5" type="HBoxContainer" parent="Menu/LeftArm"]
-layout_mode = 2
-
-[node name="sholder" type="Label" parent="Menu/LeftArm/HBoxContainer5"]
-layout_mode = 2
-text = "Sholder Lift"
-
-[node name="sholderLift" type="HSlider" parent="Menu/LeftArm/HBoxContainer5"]
-layout_mode = 2
-size_flags_horizontal = 3
-max_value = 1.0
-step = 0.01
-value = 0.47
-
-[node name="HBoxContainer6" type="HBoxContainer" parent="Menu/LeftArm"]
-layout_mode = 2
-
-[node name="sholder" type="Label" parent="Menu/LeftArm/HBoxContainer6"]
-layout_mode = 2
-text = "Sholder swing"
-
-[node name="sholderSwing" type="HSlider" parent="Menu/LeftArm/HBoxContainer6"]
-layout_mode = 2
-size_flags_horizontal = 3
-max_value = 1.0
-step = 0.01
-value = 0.5
-
-[node name="HBoxContainer7" type="HBoxContainer" parent="Menu/LeftArm"]
-layout_mode = 2
-
-[node name="sholder" type="Label" parent="Menu/LeftArm/HBoxContainer7"]
+[node name="sholder" type="Label" parent="Menu/LeftArm/sholderShrug"]
 layout_mode = 2
 text = "Sholder shrug"
 
-[node name="sholderShrug" type="HSlider" parent="Menu/LeftArm/HBoxContainer7"]
+[node name="sholderShrug" type="HSlider" parent="Menu/LeftArm/sholderShrug"]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
 value = 0.17
 
-[node name="HBoxContainer8" type="HBoxContainer" parent="Menu/LeftArm"]
+[node name="sholderCurle" type="HBoxContainer" parent="Menu/LeftArm"]
 layout_mode = 2
 
-[node name="sholder" type="Label" parent="Menu/LeftArm/HBoxContainer8"]
+[node name="sholder" type="Label" parent="Menu/LeftArm/sholderCurle"]
 layout_mode = 2
 text = "Sholder curl"
 
-[node name="sholderFront" type="HSlider" parent="Menu/LeftArm/HBoxContainer8"]
+[node name="sholderFront" type="HSlider" parent="Menu/LeftArm/sholderCurle"]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
 value = 0.47
 
-[node name="LeftHand" type="VBoxContainer" parent="Menu"]
+[node name="armLift" type="HBoxContainer" parent="Menu/LeftArm"]
 layout_mode = 2
 
-[node name="LeftHandLb" type="Label" parent="Menu/LeftHand"]
+[node name="Lift" type="Label" parent="Menu/LeftArm/armLift"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_8y4b7")
-theme_override_font_sizes/font_size = 20
-text = "Left Hand"
+text = "Arm Lift"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Menu/LeftHand"]
-layout_mode = 2
-
-[node name="Fist" type="Label" parent="Menu/LeftHand/HBoxContainer"]
-layout_mode = 2
-text = "fingers"
-
-[node name="LeftFistSlider" type="HSlider" parent="Menu/LeftHand/HBoxContainer"]
+[node name="Lift2" type="HSlider" parent="Menu/LeftArm/armLift"]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
+value = 0.47
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Menu/LeftHand"]
+[node name="armSwing" type="HBoxContainer" parent="Menu/LeftArm"]
 layout_mode = 2
 
-[node name="Fist" type="Label" parent="Menu/LeftHand/HBoxContainer2"]
+[node name="swing" type="Label" parent="Menu/LeftArm/armSwing"]
 layout_mode = 2
-text = "Thumb"
+text = "Arm Swing"
 
-[node name="thumb" type="HSlider" parent="Menu/LeftHand/HBoxContainer2"]
+[node name="swing2" type="HSlider" parent="Menu/LeftArm/armSwing"]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
+value = 0.5
+
+[node name="elbow" type="HBoxContainer" parent="Menu/LeftArm"]
+layout_mode = 2
+
+[node name="Elbow" type="Label" parent="Menu/LeftArm/elbow"]
+layout_mode = 2
+text = "Elbow"
+
+[node name="Elbow2" type="HSlider" parent="Menu/LeftArm/elbow"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.1
+
+[node name="wristA" type="HBoxContainer" parent="Menu/LeftArm"]
+layout_mode = 2
+
+[node name="wrist" type="Label" parent="Menu/LeftArm/wristA"]
+layout_mode = 2
+text = "Wrist A"
+
+[node name="L_WristA" type="HSlider" parent="Menu/LeftArm/wristA"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.33
+
+[node name="wristB" type="HBoxContainer" parent="Menu/LeftArm"]
+layout_mode = 2
+
+[node name="wrist" type="Label" parent="Menu/LeftArm/wristB"]
+layout_mode = 2
+text = "Wrist B"
+
+[node name="L_WristB" type="HSlider" parent="Menu/LeftArm/wristB"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="wristC" type="HBoxContainer" parent="Menu/LeftArm"]
+layout_mode = 2
+
+[node name="wrist" type="Label" parent="Menu/LeftArm/wristC"]
+layout_mode = 2
+text = "Wrist C"
+
+[node name="L_WristC" type="HSlider" parent="Menu/LeftArm/wristC"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.6
 
 [node name="RightArm" type="VBoxContainer" parent="Menu"]
 layout_mode = 2
@@ -294,117 +265,152 @@ theme_override_fonts/font = ExtResource("2_8y4b7")
 theme_override_font_sizes/font_size = 20
 text = "Right Arm"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Menu/RightArm"]
+[node name="shrug" type="HBoxContainer" parent="Menu/RightArm"]
 layout_mode = 2
 
-[node name="Elbow" type="Label" parent="Menu/RightArm/HBoxContainer"]
-layout_mode = 2
-text = "Elbow"
-
-[node name="Elbow2" type="HSlider" parent="Menu/RightArm/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-max_value = 1.0
-step = 0.01
-value = 0.1
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="Menu/RightArm"]
-layout_mode = 2
-
-[node name="wrist" type="Label" parent="Menu/RightArm/HBoxContainer2"]
-layout_mode = 2
-text = "Wrist A"
-
-[node name="R_Wristud" type="HSlider" parent="Menu/RightArm/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-max_value = 1.0
-step = 0.01
-value = 0.33
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="Menu/RightArm"]
-layout_mode = 2
-
-[node name="wrist" type="Label" parent="Menu/RightArm/HBoxContainer3"]
-layout_mode = 2
-text = "Wrist B"
-
-[node name="R_Wristio" type="HSlider" parent="Menu/RightArm/HBoxContainer3"]
-layout_mode = 2
-size_flags_horizontal = 3
-max_value = 1.0
-step = 0.01
-value = 0.5
-
-[node name="HBoxContainer4" type="HBoxContainer" parent="Menu/RightArm"]
-layout_mode = 2
-
-[node name="wrist" type="Label" parent="Menu/RightArm/HBoxContainer4"]
-layout_mode = 2
-text = "Wrist C"
-
-[node name="R_Wristtw" type="HSlider" parent="Menu/RightArm/HBoxContainer4"]
-layout_mode = 2
-size_flags_horizontal = 3
-max_value = 1.0
-step = 0.01
-value = 0.61
-
-[node name="HBoxContainer5" type="HBoxContainer" parent="Menu/RightArm"]
-layout_mode = 2
-
-[node name="sholder" type="Label" parent="Menu/RightArm/HBoxContainer5"]
-layout_mode = 2
-text = "Sholder Lift"
-
-[node name="sholderLift" type="HSlider" parent="Menu/RightArm/HBoxContainer5"]
-layout_mode = 2
-size_flags_horizontal = 3
-max_value = 1.0
-step = 0.01
-value = 0.47
-
-[node name="HBoxContainer6" type="HBoxContainer" parent="Menu/RightArm"]
-layout_mode = 2
-
-[node name="sholder" type="Label" parent="Menu/RightArm/HBoxContainer6"]
-layout_mode = 2
-text = "Sholder swing"
-
-[node name="sholderSwing" type="HSlider" parent="Menu/RightArm/HBoxContainer6"]
-layout_mode = 2
-size_flags_horizontal = 3
-max_value = 1.0
-step = 0.01
-value = 0.5
-
-[node name="HBoxContainer7" type="HBoxContainer" parent="Menu/RightArm"]
-layout_mode = 2
-
-[node name="sholder" type="Label" parent="Menu/RightArm/HBoxContainer7"]
+[node name="sholder" type="Label" parent="Menu/RightArm/shrug"]
 layout_mode = 2
 text = "Sholder shrug"
 
-[node name="sholderShrug" type="HSlider" parent="Menu/RightArm/HBoxContainer7"]
+[node name="sholderShrug" type="HSlider" parent="Menu/RightArm/shrug"]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
 value = 0.17
 
-[node name="HBoxContainer8" type="HBoxContainer" parent="Menu/RightArm"]
+[node name="curl" type="HBoxContainer" parent="Menu/RightArm"]
 layout_mode = 2
 
-[node name="sholder" type="Label" parent="Menu/RightArm/HBoxContainer8"]
+[node name="sholder" type="Label" parent="Menu/RightArm/curl"]
 layout_mode = 2
 text = "Sholder curl"
 
-[node name="sholderFront" type="HSlider" parent="Menu/RightArm/HBoxContainer8"]
+[node name="sholderCurl" type="HSlider" parent="Menu/RightArm/curl"]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
 value = 0.47
+
+[node name="armLift" type="HBoxContainer" parent="Menu/RightArm"]
+layout_mode = 2
+
+[node name="Lift" type="Label" parent="Menu/RightArm/armLift"]
+layout_mode = 2
+text = "Arm Lift"
+
+[node name="Lift2" type="HSlider" parent="Menu/RightArm/armLift"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.47
+
+[node name="armSwign" type="HBoxContainer" parent="Menu/RightArm"]
+layout_mode = 2
+
+[node name="swing" type="Label" parent="Menu/RightArm/armSwign"]
+layout_mode = 2
+text = "Arm Swing"
+
+[node name="swing2" type="HSlider" parent="Menu/RightArm/armSwign"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="Elbow" type="HBoxContainer" parent="Menu/RightArm"]
+layout_mode = 2
+
+[node name="Elbow" type="Label" parent="Menu/RightArm/Elbow"]
+layout_mode = 2
+text = "Elbow"
+
+[node name="Elbow2" type="HSlider" parent="Menu/RightArm/Elbow"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.1
+
+[node name="wristA" type="HBoxContainer" parent="Menu/RightArm"]
+layout_mode = 2
+
+[node name="wrist" type="Label" parent="Menu/RightArm/wristA"]
+layout_mode = 2
+text = "Wrist A"
+
+[node name="R_WristA" type="HSlider" parent="Menu/RightArm/wristA"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.33
+
+[node name="wristB" type="HBoxContainer" parent="Menu/RightArm"]
+layout_mode = 2
+
+[node name="wristB" type="Label" parent="Menu/RightArm/wristB"]
+layout_mode = 2
+text = "Wrist B"
+
+[node name="R_WristB" type="HSlider" parent="Menu/RightArm/wristB"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="wristC" type="HBoxContainer" parent="Menu/RightArm"]
+layout_mode = 2
+
+[node name="wrist" type="Label" parent="Menu/RightArm/wristC"]
+layout_mode = 2
+text = "Wrist C"
+
+[node name="R_WristC" type="HSlider" parent="Menu/RightArm/wristC"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 0.61
+
+[node name="LeftHand" type="VBoxContainer" parent="Menu"]
+layout_mode = 2
+
+[node name="LeftHandLb" type="Label" parent="Menu/LeftHand"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_8y4b7")
+theme_override_font_sizes/font_size = 20
+text = "Left Hand"
+
+[node name="fingers" type="HBoxContainer" parent="Menu/LeftHand"]
+layout_mode = 2
+
+[node name="Fist" type="Label" parent="Menu/LeftHand/fingers"]
+layout_mode = 2
+text = "fingers"
+
+[node name="LeftFistSlider" type="HSlider" parent="Menu/LeftHand/fingers"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+
+[node name="thumb" type="HBoxContainer" parent="Menu/LeftHand"]
+layout_mode = 2
+
+[node name="Fist" type="Label" parent="Menu/LeftHand/thumb"]
+layout_mode = 2
+text = "Thumb"
+
+[node name="thumb" type="HSlider" parent="Menu/LeftHand/thumb"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
 
 [node name="Right Hand" type="VBoxContainer" parent="Menu"]
 layout_mode = 2
@@ -415,27 +421,27 @@ theme_override_fonts/font = ExtResource("2_8y4b7")
 theme_override_font_sizes/font_size = 20
 text = "Right Hand"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Menu/Right Hand"]
+[node name="fingers" type="HBoxContainer" parent="Menu/Right Hand"]
 layout_mode = 2
 
-[node name="Fist" type="Label" parent="Menu/Right Hand/HBoxContainer"]
+[node name="Fist" type="Label" parent="Menu/Right Hand/fingers"]
 layout_mode = 2
 text = "Fist"
 
-[node name="RightFistSlider" type="HSlider" parent="Menu/Right Hand/HBoxContainer"]
+[node name="RightFistSlider" type="HSlider" parent="Menu/Right Hand/fingers"]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Menu/Right Hand"]
+[node name="thumb" type="HBoxContainer" parent="Menu/Right Hand"]
 layout_mode = 2
 
-[node name="Fist" type="Label" parent="Menu/Right Hand/HBoxContainer2"]
+[node name="thumb2" type="Label" parent="Menu/Right Hand/thumb"]
 layout_mode = 2
 text = "Thumb"
 
-[node name="thumb" type="HSlider" parent="Menu/Right Hand/HBoxContainer2"]
+[node name="thumb" type="HSlider" parent="Menu/Right Hand/thumb"]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
@@ -450,19 +456,6 @@ theme_override_fonts/font = ExtResource("2_8y4b7")
 theme_override_font_sizes/font_size = 20
 text = "Left Leg"
 
-[node name="kneeHb" type="HBoxContainer" parent="Menu/LeftLeg"]
-layout_mode = 2
-
-[node name="Knee" type="Label" parent="Menu/LeftLeg/kneeHb"]
-layout_mode = 2
-text = "Knee"
-
-[node name="KneeSlider" type="HSlider" parent="Menu/LeftLeg/kneeHb"]
-layout_mode = 2
-size_flags_horizontal = 3
-max_value = 1.0
-step = 0.01
-
 [node name="SpreadHB" type="HBoxContainer" parent="Menu/LeftLeg"]
 layout_mode = 2
 
@@ -471,19 +464,6 @@ layout_mode = 2
 text = "Spread"
 
 [node name="SpreadSlider" type="HSlider" parent="Menu/LeftLeg/SpreadHB"]
-layout_mode = 2
-size_flags_horizontal = 3
-max_value = 1.0
-step = 0.01
-
-[node name="KickHB" type="HBoxContainer" parent="Menu/LeftLeg"]
-layout_mode = 2
-
-[node name="KickLB" type="Label" parent="Menu/LeftLeg/KickHB"]
-layout_mode = 2
-text = "Kick"
-
-[node name="kickSlider" type="HSlider" parent="Menu/LeftLeg/KickHB"]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
@@ -502,6 +482,32 @@ size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
 
+[node name="KickHB" type="HBoxContainer" parent="Menu/LeftLeg"]
+layout_mode = 2
+
+[node name="KickLB" type="Label" parent="Menu/LeftLeg/KickHB"]
+layout_mode = 2
+text = "Kick"
+
+[node name="kickSlider" type="HSlider" parent="Menu/LeftLeg/KickHB"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+
+[node name="kneeHb" type="HBoxContainer" parent="Menu/LeftLeg"]
+layout_mode = 2
+
+[node name="Knee" type="Label" parent="Menu/LeftLeg/kneeHb"]
+layout_mode = 2
+text = "Knee"
+
+[node name="KneeSlider" type="HSlider" parent="Menu/LeftLeg/kneeHb"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+
 [node name="RightLeg" type="VBoxContainer" parent="Menu"]
 layout_mode = 2
 
@@ -510,6 +516,45 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2_8y4b7")
 theme_override_font_sizes/font_size = 20
 text = "Right Leg"
+
+[node name="hipTw" type="HBoxContainer" parent="Menu/RightLeg"]
+layout_mode = 2
+
+[node name="TwistLB" type="Label" parent="Menu/RightLeg/hipTw"]
+layout_mode = 2
+text = "Twist"
+
+[node name="r_hip_twist" type="HSlider" parent="Menu/RightLeg/hipTw"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+
+[node name="hipLift" type="HBoxContainer" parent="Menu/RightLeg"]
+layout_mode = 2
+
+[node name="KickLB" type="Label" parent="Menu/RightLeg/hipLift"]
+layout_mode = 2
+text = "Kick"
+
+[node name="r_hip_kick" type="HSlider" parent="Menu/RightLeg/hipLift"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+
+[node name="HipSpread" type="HBoxContainer" parent="Menu/RightLeg"]
+layout_mode = 2
+
+[node name="HipSpread" type="Label" parent="Menu/RightLeg/HipSpread"]
+layout_mode = 2
+text = "Spread"
+
+[node name="r_hip_spread" type="HSlider" parent="Menu/RightLeg/HipSpread"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
 
 [node name="kneeHb" type="HBoxContainer" parent="Menu/RightLeg"]
 layout_mode = 2
@@ -524,76 +569,36 @@ size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
 
-[node name="SpreadHB" type="HBoxContainer" parent="Menu/RightLeg"]
-layout_mode = 2
-
-[node name="HipSpread" type="Label" parent="Menu/RightLeg/SpreadHB"]
-layout_mode = 2
-text = "Spread"
-
-[node name="SpreadSlider" type="HSlider" parent="Menu/RightLeg/SpreadHB"]
-layout_mode = 2
-size_flags_horizontal = 3
-max_value = 1.0
-step = 0.01
-
-[node name="KickHB" type="HBoxContainer" parent="Menu/RightLeg"]
-layout_mode = 2
-
-[node name="KickLB" type="Label" parent="Menu/RightLeg/KickHB"]
-layout_mode = 2
-text = "Kick"
-
-[node name="kickSlider" type="HSlider" parent="Menu/RightLeg/KickHB"]
-layout_mode = 2
-size_flags_horizontal = 3
-max_value = 1.0
-step = 0.01
-
-[node name="TwistHB" type="HBoxContainer" parent="Menu/RightLeg"]
-layout_mode = 2
-
-[node name="TwistLB" type="Label" parent="Menu/RightLeg/TwistHB"]
-layout_mode = 2
-text = "Twist"
-
-[node name="TwistSlider" type="HSlider" parent="Menu/RightLeg/TwistHB"]
-layout_mode = 2
-size_flags_horizontal = 3
-max_value = 1.0
-step = 0.01
-
 [connection signal="value_changed" from="Menu/Head/rotation/Rotate" to="." method="head"]
-[connection signal="value_changed" from="Menu/Head/side/Rotate" to="." method="head"]
-[connection signal="value_changed" from="Menu/Head/up/Rotate" to="." method="head"]
-[connection signal="value_changed" from="Menu/Chest/HBoxContainer/Back curve" to="." method="curve_back"]
-[connection signal="value_changed" from="Menu/Chest/Twist/Twist2" to="." method="back_twist"]
-[connection signal="value_changed" from="Menu/Chest/Lean/Lean" to="." method="back_lean"]
-[connection signal="value_changed" from="Menu/LeftArm/HBoxContainer/Elbow2" to="." method="left_elbow"]
-[connection signal="value_changed" from="Menu/LeftArm/HBoxContainer2/L_Wristud" to="." method="left_wrist"]
-[connection signal="value_changed" from="Menu/LeftArm/HBoxContainer3/L_Wristio" to="." method="left_wrist"]
-[connection signal="value_changed" from="Menu/LeftArm/HBoxContainer4/L_Wristtw" to="." method="left_wrist"]
-[connection signal="value_changed" from="Menu/LeftArm/HBoxContainer5/sholderLift" to="." method="left_sholder"]
-[connection signal="value_changed" from="Menu/LeftArm/HBoxContainer6/sholderSwing" to="." method="left_sholder"]
-[connection signal="value_changed" from="Menu/LeftArm/HBoxContainer7/sholderShrug" to="." method="left_sholder"]
-[connection signal="value_changed" from="Menu/LeftArm/HBoxContainer8/sholderFront" to="." method="left_sholder"]
-[connection signal="value_changed" from="Menu/LeftHand/HBoxContainer/LeftFistSlider" to="." method="left_hand"]
-[connection signal="value_changed" from="Menu/LeftHand/HBoxContainer2/thumb" to="." method="left_thumb_close"]
-[connection signal="value_changed" from="Menu/RightArm/HBoxContainer/Elbow2" to="." method="right_elbow"]
-[connection signal="value_changed" from="Menu/RightArm/HBoxContainer2/R_Wristud" to="." method="right_wrist"]
-[connection signal="value_changed" from="Menu/RightArm/HBoxContainer3/R_Wristio" to="." method="right_wrist"]
-[connection signal="value_changed" from="Menu/RightArm/HBoxContainer4/R_Wristtw" to="." method="right_wrist"]
-[connection signal="value_changed" from="Menu/RightArm/HBoxContainer5/sholderLift" to="." method="right_sholder"]
-[connection signal="value_changed" from="Menu/RightArm/HBoxContainer6/sholderSwing" to="." method="right_sholder"]
-[connection signal="value_changed" from="Menu/RightArm/HBoxContainer7/sholderShrug" to="." method="right_sholder"]
-[connection signal="value_changed" from="Menu/RightArm/HBoxContainer8/sholderFront" to="." method="right_sholder"]
-[connection signal="value_changed" from="Menu/Right Hand/HBoxContainer/RightFistSlider" to="." method="right_hand"]
-[connection signal="value_changed" from="Menu/Right Hand/HBoxContainer2/thumb" to="." method="right_thumb_close"]
+[connection signal="value_changed" from="Menu/Head/sidetoside/sideToSide" to="." method="head"]
+[connection signal="value_changed" from="Menu/Head/upanddown/UpAndDown" to="." method="head"]
+[connection signal="value_changed" from="Menu/Chest/curveSpine/Back curve" to="." method="back"]
+[connection signal="value_changed" from="Menu/Chest/Twist/Twist2" to="." method="back"]
+[connection signal="value_changed" from="Menu/Chest/Lean/Lean" to="." method="back"]
+[connection signal="value_changed" from="Menu/LeftArm/sholderShrug/sholderShrug" to="." method="left_sholder"]
+[connection signal="value_changed" from="Menu/LeftArm/sholderCurle/sholderFront" to="." method="left_sholder"]
+[connection signal="value_changed" from="Menu/LeftArm/armLift/Lift2" to="." method="left_sholder"]
+[connection signal="value_changed" from="Menu/LeftArm/armSwing/swing2" to="." method="left_sholder"]
+[connection signal="value_changed" from="Menu/LeftArm/elbow/Elbow2" to="." method="left_elbow"]
+[connection signal="value_changed" from="Menu/LeftArm/wristA/L_WristA" to="." method="left_wrist"]
+[connection signal="value_changed" from="Menu/LeftArm/wristB/L_WristB" to="." method="left_wrist"]
+[connection signal="value_changed" from="Menu/LeftArm/wristC/L_WristC" to="." method="left_wrist"]
+[connection signal="value_changed" from="Menu/RightArm/shrug/sholderShrug" to="." method="right_sholder"]
+[connection signal="value_changed" from="Menu/RightArm/curl/sholderCurl" to="." method="right_sholder"]
+[connection signal="value_changed" from="Menu/RightArm/armLift/Lift2" to="." method="right_sholder"]
+[connection signal="value_changed" from="Menu/RightArm/armSwign/swing2" to="." method="right_sholder"]
+[connection signal="value_changed" from="Menu/RightArm/Elbow/Elbow2" to="." method="right_elbow"]
+[connection signal="value_changed" from="Menu/RightArm/wristA/R_WristA" to="." method="right_wrist"]
+[connection signal="value_changed" from="Menu/RightArm/wristB/R_WristB" to="." method="right_wrist"]
+[connection signal="value_changed" from="Menu/RightArm/wristC/R_WristC" to="." method="right_wrist"]
+[connection signal="value_changed" from="Menu/LeftHand/fingers/LeftFistSlider" to="." method="left_hand"]
+[connection signal="value_changed" from="Menu/LeftHand/thumb/thumb" to="." method="left_thumb_close"]
+[connection signal="value_changed" from="Menu/Right Hand/fingers/RightFistSlider" to="." method="right_hand"]
+[connection signal="value_changed" from="Menu/Right Hand/thumb/thumb" to="." method="right_thumb_close"]
+[connection signal="value_changed" from="Menu/LeftLeg/SpreadHB/SpreadSlider" to="." method="left_hip"]
+[connection signal="value_changed" from="Menu/LeftLeg/KickHB/kickSlider" to="." method="left_hip"]
 [connection signal="value_changed" from="Menu/LeftLeg/kneeHb/KneeSlider" to="." method="bend_left_knee"]
-[connection signal="value_changed" from="Menu/LeftLeg/SpreadHB/SpreadSlider" to="." method="spread_left_leg"]
-[connection signal="value_changed" from="Menu/LeftLeg/KickHB/kickSlider" to="." method="kick_left_leg"]
-[connection signal="value_changed" from="Menu/LeftLeg/TwistHB/TwistSlider" to="." method="twist_left_leg"]
+[connection signal="value_changed" from="Menu/RightLeg/hipTw/r_hip_twist" to="." method="right_hip"]
+[connection signal="value_changed" from="Menu/RightLeg/hipLift/r_hip_kick" to="." method="right_hip"]
+[connection signal="value_changed" from="Menu/RightLeg/HipSpread/r_hip_spread" to="." method="right_hip"]
 [connection signal="value_changed" from="Menu/RightLeg/kneeHb/KneeSlider" to="." method="bend_right_knee"]
-[connection signal="value_changed" from="Menu/RightLeg/SpreadHB/SpreadSlider" to="." method="spread_right_leg"]
-[connection signal="value_changed" from="Menu/RightLeg/KickHB/kickSlider" to="." method="kick_right_leg"]
-[connection signal="value_changed" from="Menu/RightLeg/TwistHB/TwistSlider" to="." method="twist_right_leg"]

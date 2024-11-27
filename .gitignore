@@ -26,3 +26,5 @@ src/addons/humanizer/data/assets/clothes/outfits/male_elegantsuit01/toigo_male_e
 /src/addons/humanizer/data/animations
 /src/addons/humanizer/data/animations
 /src/addons/humanizer/data/animations
+/src/addons/humanizer
+*.import
