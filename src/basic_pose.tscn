@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://basic_controls.gd" id="1_2n86l"]
 [ext_resource type="FontVariation" uid="uid://diciev1hwck0j" path="res://assets/Bold_font_variation.tres" id="2_8y4b7"]
 
-[node name="BasicControls" type="MarginContainer" node_paths=PackedStringArray("left_wrist_ud", "left_wrist_io", "left_wrist_tw", "right_wrist_ud", "right_wrist_io", "right_wrist_tw", "left_sholder_swing", "left_sholder_lift", "left_sholder_shrug", "left_sholder_curl", "right_sholder_swing", "right_sholder_lift", "right_sholder_shrug", "right_sholder_curl", "head_rotate", "head_pitch", "head_roll", "right_hip_lift", "right_hip_twist", "right_hip_spread", "left_hip_lift", "left_hip_twist", "left_hip_spread", "back_twist", "back_lean", "back_curve")]
+[node name="BasicControls" type="MarginContainer" node_paths=PackedStringArray("left_wrist_ud", "left_wrist_io", "left_wrist_tw", "right_wrist_ud", "right_wrist_io", "right_wrist_tw", "left_sholder_swing", "left_sholder_lift", "left_sholder_shrug", "left_sholder_curl", "right_sholder_swing", "right_sholder_lift", "right_sholder_shrug", "right_sholder_curl", "head_rotate", "head_pitch", "head_roll", "right_hip_lift", "right_hip_twist", "right_hip_spread", "left_hip_lift", "left_hip_twist", "left_hip_spread", "back_twist", "back_lean", "back_curve", "left_fingers", "right_fingers", "left_thumb", "right_thumb", "left_knee", "right_knee", "xloc_slider", "yloc_slider", "zloc_slider")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -38,9 +38,68 @@ left_hip_spread = NodePath("Menu/LeftLeg/SpreadHB/l_spread")
 back_twist = NodePath("Menu/Chest/Twist/Twist2")
 back_lean = NodePath("Menu/Chest/Lean/Lean")
 back_curve = NodePath("Menu/Chest/curveSpine/Back curve")
+left_fingers = NodePath("Menu/LeftHand/fingers/LeftFistSlider")
+right_fingers = NodePath("Menu/Right Hand/fingers/RightFistSlider")
+left_thumb = NodePath("Menu/LeftHand/thumb/thumb")
+right_thumb = NodePath("Menu/Right Hand/thumb/thumb")
+left_knee = NodePath("Menu/LeftLeg/kneeHb/KneeSlider")
+right_knee = NodePath("Menu/RightLeg/kneeHb/KneeSlider")
+xloc_slider = NodePath("Menu/position/x/xLoc")
+yloc_slider = NodePath("Menu/position/y/xLoc")
+zloc_slider = NodePath("Menu/position/z/xLoc")
 
 [node name="Menu" type="VBoxContainer" parent="."]
 layout_mode = 2
+
+[node name="position" type="VBoxContainer" parent="Menu"]
+layout_mode = 2
+
+[node name="location" type="Label" parent="Menu/position"]
+layout_mode = 2
+text = "Position on base"
+
+[node name="x" type="HBoxContainer" parent="Menu/position"]
+layout_mode = 2
+
+[node name="xlb" type="Label" parent="Menu/position/x"]
+layout_mode = 2
+text = "x"
+
+[node name="xLoc" type="HSlider" parent="Menu/position/x"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -1.0
+max_value = 2.0
+step = 0.01
+
+[node name="y" type="HBoxContainer" parent="Menu/position"]
+layout_mode = 2
+
+[node name="ylb" type="Label" parent="Menu/position/y"]
+layout_mode = 2
+text = "Y"
+
+[node name="xLoc" type="HSlider" parent="Menu/position/y"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -1.0
+max_value = 2.0
+step = 0.01
+value = 1.0
+
+[node name="z" type="HBoxContainer" parent="Menu/position"]
+layout_mode = 2
+
+[node name="zlb" type="Label" parent="Menu/position/z"]
+layout_mode = 2
+text = "Z"
+
+[node name="xLoc" type="HSlider" parent="Menu/position/z"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -1.0
+max_value = 2.0
+step = 0.01
 
 [node name="Head" type="VBoxContainer" parent="Menu"]
 layout_mode = 2
@@ -49,7 +108,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_8y4b7")
 theme_override_font_sizes/font_size = 20
-text = "Torso"
+text = "Head"
 
 [node name="rotation" type="HBoxContainer" parent="Menu/Head"]
 layout_mode = 2
@@ -584,6 +643,9 @@ size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
 
+[connection signal="value_changed" from="Menu/position/x/xLoc" to="." method="locate_model"]
+[connection signal="value_changed" from="Menu/position/y/xLoc" to="." method="locate_model"]
+[connection signal="value_changed" from="Menu/position/z/xLoc" to="." method="locate_model"]
 [connection signal="value_changed" from="Menu/Head/rotation/Rotate" to="." method="head"]
 [connection signal="value_changed" from="Menu/Head/sidetoside/sideToSide" to="." method="head"]
 [connection signal="value_changed" from="Menu/Head/upanddown/UpAndDown" to="." method="head"]

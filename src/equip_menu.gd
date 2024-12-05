@@ -8,6 +8,13 @@ func add_entry(entry):
 func set_slot(slot_name):
 	$Label.text=slot_name
 	slot=slot_name
+func load_equipment(load_name):
+	if load_name !="None":
+		var data = {}
+		data["slot"]=slot
+		cur_equipment=load_name
+		data["item_name"] = cur_equipment
+		change_equipment.emit(data)
 func _on_option_button_item_selected(index: int) -> void:
 	var data = {}
 	data["slot"] = slot

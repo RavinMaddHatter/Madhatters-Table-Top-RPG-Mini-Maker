@@ -16,6 +16,7 @@ var mesh_object:MeshInstance3D
 var maxsize:float
 var skeleton
 
+
 func _ready() -> void:
 	file_dialog.current_dir = "/"
 	file_dialog.use_native_dialog=true
@@ -36,7 +37,13 @@ func set_anchor_point(anchor:BoneAttachment3D):
 
 func _upload_pressed():
 	file_dialog.show()
-
+func load_mesh(loaded_mesh):
+	if loaded_mesh:
+		mesh_object=loaded_mesh
+		var aabb = mesh_object.mesh.get_aabb()
+		maxsize = max(aabb.size.x,aabb.size.y,aabb.size.z) - min(aabb.size.x,aabb.size.y,aabb.size.z)
+		anchor_point.add_child(mesh_object)
+		_change_pose(0)
 func _on_file_dialog_file_selected(file_path: String) -> void:
 	slider_vbox.show()
 	remove_button.show()

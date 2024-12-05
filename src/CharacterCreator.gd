@@ -19,8 +19,12 @@ var shapekey_slider = {}
 var equipment_categories = {}
 var attach_points = {}
 var attach_menu ={}
+var detailed_poses={}
+var bone_categories = {}
 var attachment_points = ["LeftHand","RightHand","Head","RightFoot","LeftFoot","Hips","Chest"]
 var simple_pose
+var start_of_frame = 0
+
 func _ready() -> void:
 	$splits.hide()
 	$FileDialog.current_dir = "/"
@@ -32,11 +36,16 @@ func _ready() -> void:
 	while humanizer.scene_loaded == false:
 		await get_tree().process_frame
 	after_load()
+
 func after_load():
 	make_menu()
 	make_character()
 	$splits.show()
+
 func make_character():
+	humanizer.reset()
+	simple_pose.skeleton=humanizer.skeleton
+	default_settings()
 	humanizer.remove_equipment(HumanizerEquipment.new("DefaultBody","basic_statue"))
 	humanizer.add_equipment(HumanizerEquipment.new("DefaultBody","basic_statue"))
 	humanizer.find_child("AnimationTree").active=false
@@ -46,6 +55,7 @@ func make_character():
 		skelton.add_child(attach_points[slot])
 		attach_points[slot].set_bone_name(slot)
 		attach_menu[slot].set_anchor_point(attach_points[slot])
+
 func make_menu():
 	make_basic_menu()
 	make_detailed_menu()
@@ -90,6 +100,7 @@ func make_detailed_menu():
 			slider.change_shapekeys.connect(_set_shapekey)
 			category_vbox.add_child(slider)
 			shapekey_slider[key_name]=slider
+
 func make_equipment_menu():
 	var pannel = ScrollContainer.new()
 	menu_root.add_child(pannel)
@@ -97,7 +108,6 @@ func make_equipment_menu():
 	var vbox = VBoxContainer.new()
 	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	pannel.add_child(vbox)
-	
 	for point in attachment_points:
 		attach_menu[point] = load("res://attachment.tscn").instantiate()
 		attach_menu[point].set_label(point)
@@ -177,25 +187,26 @@ func make_detailed_pose():
 	pose_tab.size_flags_horizontal=Control.SIZE_FILL
 	pose_tab.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	vbox.add_child(pose_tab)
-	var  categories = {}
-	categories.root = ["Root","Hips"]
-	categories.head = ["Neck","Head"]
-	categories.torso = ["Spine","Chest","UpperChest"]
-	categories.leftArm = ["LeftShoulder","LeftUpperArm","LeftLowerArm","LeftHand"]
-	categories.leftHand = ["LeftIndexProximal","LeftIndexIntermediate","LeftIndexDistal",
+	bone_categories = {}
+	bone_categories.root = ["Root","Hips"]
+	bone_categories.head = ["Neck","Head"]
+	bone_categories.torso = ["Spine","Chest","UpperChest"]
+	bone_categories.leftArm = ["LeftShoulder","LeftUpperArm","LeftLowerArm","LeftHand"]
+	bone_categories.leftHand = ["LeftIndexProximal","LeftIndexIntermediate","LeftIndexDistal",
 							"LeftMiddleProximal","LeftMiddleIntermediate","LeftMiddleDistal",
 							"LeftLittleProximal","LeftLittleIntermediate","LeftLittleDistal",
 							"LeftRingProximal","LeftRingIntermediate","LeftRingDistal",
 							"LeftThumbProximal","LeftThumbMetacarpal","LeftThumbDistal"]
-	categories.rightArm = ["RightShoulder","RightUpperArm","RightLowerArm","RightHand"]
-	categories.rightHand = ["RightIndexProximal","RightIndexIntermediate","RightIndexDistal",
+	bone_categories.rightArm = ["RightShoulder","RightUpperArm","RightLowerArm","RightHand"]
+	bone_categories.rightHand = ["RightIndexProximal","RightIndexIntermediate","RightIndexDistal",
 							"RightMiddleProximal","RightMiddleIntermediate","RightMiddleDistal",
 							"RightLittleProximal","RightLittleIntermediate","RightLittleDistal",
 							"RightRingProximal","RightRingIntermediate","RightRingDistal",
 							"RightThumbProximal","RightThumbMetacarpal","RightThumbDistal"]
-	categories.leftLeg = ["LeftUpperLeg","LeftLowerLeg","LeftFoot"]
-	categories.rightLeg = ["RightUpperLeg","RightLowerLeg","RightFoot"]
-	for categoryName in categories:
+	bone_categories.leftLeg = ["LeftUpperLeg","LeftLowerLeg","LeftFoot"]
+	bone_categories.rightLeg = ["RightUpperLeg","RightLowerLeg","RightFoot"]
+	for categoryName in bone_categories:
+		detailed_poses[categoryName]={}
 		var category_pannel = ScrollContainer.new()
 		var label=Label.new()
 		label.name=categoryName.capitalize()
@@ -207,12 +218,13 @@ func make_detailed_pose():
 		category_vbox.set_custom_minimum_size(Vector2(300,0))
 		category_vbox.size_flags_horizontal=Control.SIZE_FILL
 		category_pannel.add_child(category_vbox)
-		for bone_name in categories[categoryName]:
+		for bone_name in bone_categories[categoryName]:
 			var bone_config = load("res://bone_control.tscn").instantiate()
 			category_vbox.add_child(bone_config)
 			var bone_id = humanizer.skeleton.find_bone(bone_name)
-			bone_config.setup(bone_name,humanizer.skeleton,bone_id)
+			bone_config.setup(bone_name,humanizer,bone_id)
 			simple_pose.position_macro_set.connect(bone_config.set_sliders)
+			detailed_poses[categoryName][bone_name]=bone_config
 		var spacer=Label.new()
 		spacer.name=" "
 		spacer.size_flags_horizontal=Control.SIZE_EXPAND_FILL
@@ -236,10 +248,12 @@ func set_pose(_values:Dictionary):
 
 func _set_shapekey(shapekey_values:Dictionary):
 	humanizer.set_shapekeys(shapekey_values)
-
+func default_settings():
+	simple_pose.set_default()
+	for key_name in shapekey_slider.keys():
+		shapekey_slider[key_name].set_value(0.0)
 func setup_character(shapekeys:Dictionary):
 	humanizer.set_shapekeys(shapekeys)
-	
 
 func _on_rotation_value_changed(value: float) -> void:
 	humanizer.rotation.y=TAU*value/100
@@ -248,7 +262,6 @@ func _on_position_slider_value_changed(value: float) -> void:
 	camera.v_offset=(value*humanizer.humanizer.get_head_height()*1.2)/100-0.1
 	
 func _set_equipment(equipment:Dictionary):
-	## NEEDS SKIN
 	humanizer.remove_equipment_in_slot(equipment["slot"])
 	if equipment["item_name"] !="None":
 		humanizer.add_equipment(HumanizerEquipment.new(equipment["item_name"],"none_diffuse"))
@@ -260,20 +273,19 @@ func _on_zoom_slider_value_changed(value):
 func new_name():
 	nameBox.text = make_name()
 
-
 const values ={"Vowel": ["a","e","i","o","u","y"],
 			"DoubleVowel": ["au", "oa", "ou", "ie", "ae", "eu"],
 			"Consonent":["b", "c", "d", "f", "g", "h", "j", "l", "m", "n", "p", "r", "s", "t", "v", "w", "x", "z" ],
 			"doubeCons" :["mm", "nn", "st", "ch", "ll", "tt", "ss"],
 			"compose":["gu", "cc", "sc", "tr", "fr", "pr", "br", "cr", "ch", "gn", "ix", "an", "do", "ir", "as"]}
-	
+
 const transitions={"initial":["Vowel","Consonent","compose"],
 					"Vowel":["Consonent","doubeCons","compose"],
 					"DoubleVowel":["Consonent","doubeCons","compose"],
 					"Consonent":["Vowel","DoubleVowel"],
 					"doubeCons":["Vowel","DoubleVowel"],
 					"compose":["Vowel"]}
-	
+
 func make_name():
 	var length = rng.randi_range(5, 12)
 	var charname=""
@@ -286,7 +298,7 @@ func make_name():
 		charname += lastLetter
 		index += len(lastLetter)
 	return charname.capitalize()
-		
+
 func _get_letter(state, max_length):
 	var options = transitions[state]
 	var new_state = options[rng.randi_range(0, len(options)-1)]
@@ -294,18 +306,31 @@ func _get_letter(state, max_length):
 		new_state = options[rng.randi_range(0, len(options)-1)]
 	var letter = values[new_state][rng.randi_range(0, len(values[new_state])-1)]
 	return [new_state,letter]
-	
+
 func _on_save_pressed():
 	var dir = DirAccess.open("user://")
 	if not(dir.dir_exists("user://saves")):
 		DirAccess.make_dir_absolute("user://saves")
 	var saveFile = FileAccess.open("user://saves/%s.save" % nameBox.text,FileAccess.WRITE)
-	saveFile.store_var(humanizer.humanizer.human_config.targets)
-	var clothsFile = FileAccess.open("user://saves/%s.clo" % nameBox.text,FileAccess.WRITE)
-	var equip_dict = {}
-	for item in equipment_categories:
-		equip_dict[equipment_categories[item].slot]=equipment_categories[item].cur_equipment
-	clothsFile.store_var(equip_dict)
+	var save_setings={}
+	save_setings["shapekey_slider"]={}
+	save_setings["imported_equipment"]={}
+	save_setings["equipment_categories"]={}
+	save_setings["detailed_poses"]={}
+	save_setings["simple_pose"]={}
+	for key_name in shapekey_slider.keys():
+		save_setings["shapekey_slider"][key_name]=shapekey_slider[key_name].get_value()
+	for point_name in attach_menu.keys():
+		save_setings["imported_equipment"][point_name]=attach_menu[point_name].mesh_object
+	for clothing_slot in equipment_categories.keys():
+		save_setings["equipment_categories"]=equipment_categories[clothing_slot].cur_equipment
+	save_setings["simple_pose"]=simple_pose.get_save()
+	for categoryName in bone_categories:
+		save_setings["detailed_poses"][categoryName]={}
+		for bone_name in bone_categories[categoryName]:
+			save_setings["detailed_poses"][categoryName][bone_name]={}
+			save_setings["detailed_poses"][categoryName][bone_name]=detailed_poses[categoryName][bone_name].get_sliders()
+	saveFile.store_var(save_setings)
 	$Warning.dialog_text="Saving operation for character %s is completed."%nameBox.text
 	$Warning.title="Save Complete"
 	$Warning.initial_position=$Warning.WINDOW_INITIAL_POSITION_CENTER_MAIN_WINDOW_SCREEN
@@ -316,22 +341,59 @@ func _warning(message:String):
 	$Warning.title="WARNING"
 	$Warning.initial_position=$Warning.WINDOW_INITIAL_POSITION_CENTER_MAIN_WINDOW_SCREEN
 	$Warning.show()
+func start_freeze_manager(_type):
+	start_of_frame=Time.get_ticks_msec()
+func freeze_manager(progress_percentage):
+	Time.get_ticks_msec()
+	if Time.get_ticks_msec()-start_of_frame >1000.0/Engine.physics_ticks_per_second :
+		start_of_frame=Time.get_ticks_msec()
+		_on_export_progress(0,progress_percentage)
+		await get_tree().process_frame
 
 func load_character_file(characterName:String):
+	start_freeze_manager("character load")
+	nameBox.text = characterName
 	make_character()
 	var path="user://saves/"+characterName+".save"
 	var file = FileAccess.open(path, FileAccess.READ)
-	var clothesFile = FileAccess.open("user://saves/"+characterName+".clo", FileAccess.READ)
-	var shapekeys = file.get_var()
-	var equip_dict = clothesFile.get_var()
-	if not(equip_dict):
-		equip_dict = {}
-	setup_character(shapekeys)
-	for slot in equip_dict:
-		_set_equipment({"item_name":equip_dict[slot],"slot":slot})
-
+	var save_setings = file.get_var()
+	var progress_percentage = 0
+	var num_sections = 4
+	var step_size=1.0/float(len(shapekey_slider.keys())*num_sections)
+	_on_export_started()
+	for key_name in shapekey_slider.keys():
+		var temp_val = shapekey_slider[key_name].get_value()
+		if temp_val !=save_setings["shapekey_slider"][key_name]:
+			shapekey_slider[key_name].set_value(save_setings["shapekey_slider"][key_name])
+			shapekey_slider[key_name].slider_drag_ended(save_setings["shapekey_slider"][key_name])
+			freeze_manager(progress_percentage)
+		progress_percentage+=step_size
+		_on_export_progress(0,progress_percentage)
+	step_size=1.0/float(len(attach_menu.keys())*num_sections)
+	for point_name in attach_menu.keys():
+		if save_setings["imported_equipment"][point_name]:
+			attach_menu[point_name].load_mesh(save_setings["imported_equipment"][point_name])
+			freeze_manager(progress_percentage)
+		progress_percentage+=step_size
+		_on_export_progress(0,progress_percentage)
+	step_size=1.0/float(len(equipment_categories.keys())*num_sections)
+	for clothing_slot in equipment_categories.keys():
+		if save_setings["equipment_categories"]!="None":
+			equipment_categories[clothing_slot].load_equipment(save_setings["equipment_categories"])
+			freeze_manager(progress_percentage)
+		progress_percentage+=step_size
+		_on_export_progress(0,progress_percentage)
+	simple_pose.set_save(save_setings["simple_pose"])
+	step_size=1.0/float(len(bone_categories.keys())*num_sections)
+	for categoryName in bone_categories:
+		for bone_name in bone_categories[categoryName]:
+			detailed_poses[categoryName][bone_name].set_slider_value(save_setings["detailed_poses"][categoryName][bone_name])
+		progress_percentage+=step_size
+		freeze_manager(progress_percentage)
+	_on_export_completed("")
 func _on_export_pressed():
 	$FileDialog.show()
+
 func scal_pose_equipment(eqipment:MeshInstance3D):
 	var out_mesh= ArrayMesh.new()
 	var mdt = MeshDataTool.new()
@@ -342,6 +404,7 @@ func scal_pose_equipment(eqipment:MeshInstance3D):
 		mdt.set_vertex(i, vertex)
 	mdt.commit_to_surface(out_mesh)
 	return out_mesh
+
 func _on_file_dialog_file_selected(file_path: String) -> void:
 	if len(file_path)>2:
 		var mesh = humanizer.find_child("DefaultBody")
@@ -372,13 +435,15 @@ func _on_file_dialog_file_selected(file_path: String) -> void:
 				if "transform" in baked_pose:
 					tranformer=baked_pose.transform
 				surface_tool.append_from(baked_pose, 0,tranformer)
-		
 		surface_tool.append_from(baseMesh.mesh, 0,baseMesh.transform)
 		var combinedMesh:ArrayMesh=surface_tool.commit()
 		OBJExporter.save_mesh_to_files(combinedMesh, file_path)
+
 func _on_export_started():
 	$progressContainer.show()
+
 func _on_export_completed(_obj_file):
 	$progressContainer.hide()
+
 func _on_export_progress(_surf_idx, _progress_value):
 	$progressContainer/ProgressBar.value=_progress_value * 100

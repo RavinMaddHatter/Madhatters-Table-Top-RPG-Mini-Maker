@@ -22,6 +22,8 @@ func set_line_edit_from_slider_value():
 	
 func set_value(value:int):
 	$Slider.value = value
+func get_value():
+	return $Slider.value
 
 func slider_drag_ended(_value_changed):
 	set_line_edit_from_slider_value()

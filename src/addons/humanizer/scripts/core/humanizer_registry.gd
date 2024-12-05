@@ -30,7 +30,14 @@ static func _get_materials():
 						equipment[equip_type].textures[mat_res.resource_name] = mat_file
 						if mat_file.get_file().get_basename() == "default":
 							equipment[equip_type].default_material = mat_res.resource_name
-
+						#want to merge rigged and unrigged into same equip type, so can just be toggled for cut scenes or whatever
+						#but for now im doing this
+						var rigged_name = equip_type + "_Rigged"
+						if rigged_name in equipment:
+							equipment[rigged_name].textures[mat_res.resource_name] = mat_file
+							if mat_file.get_file().get_basename() == "default":
+								equipment[rigged_name].default_material = mat_res.resource_name
+						
 static func add_equipment_type(equip:HumanizerEquipmentType):
 	#print('Registering equipment ' + equip.resource_name)
 	if equipment.has(equip.resource_name):
@@ -97,7 +104,11 @@ static func _scan_dir(path: String) -> void:
 	for file in contents.files:
 		if file.get_extension() not in ['tres', 'res']: # only use .res  , .tres is renamed to .tres.remap on export (same for .tscn)
 			continue
-		var suffix: String = file.get_file().rsplit('.', true, 1)[0].split('_')[-1]
-		if suffix in ['material', 'mhclo', 'mesh']:
+		var suffix: String = file.get_basename().get_extension()
+		if suffix in ['material', 'mhclo']:
 			continue
-		add_equipment_type(HumanizerResourceService.load_resource(file))
+		var equip = HumanizerResourceService.load_resource(file)
+		if equip is HumanizerEquipmentType:
+			add_equipment_type(equip)
+		else:
+			printerr("unexpected resource type " + file)

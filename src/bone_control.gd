@@ -1,5 +1,5 @@
 extends MarginContainer
-var skeleton:Skeleton3D
+var humanizer:HumanizerEditorTool
 var bone_id:int
 @export var x_slider:HSlider
 @export var y_slider:HSlider
@@ -9,13 +9,13 @@ var bone_id:int
 @export var y_text:LineEdit
 @export var z_text:LineEdit
 var origin
-func setup(bone_name:String,skel,id):
+func setup(bone_name:String,character,id):
 	title.text=bone_name
-	skeleton=skel
+	humanizer=character
 	bone_id=id
 	set_sliders()
 func set_sliders():
-	var pose = skeleton.get_bone_pose(bone_id)
+	var pose = humanizer.skeleton.get_bone_pose(bone_id)
 	origin = pose.origin
 	x_slider.value=pose.basis.get_euler().x
 	y_slider.value=pose.basis.get_euler().y
@@ -26,13 +26,20 @@ func _ready():
 
 func set_bone_pose():
 	var rot_vector = Vector3()
-	rot_vector.x=x_slider.value
+	rot_vector.x = x_slider.value
 	rot_vector.y = y_slider.value
 	rot_vector.z = z_slider.value
 	var bone_rotation= Quaternion.from_euler(rot_vector)
-	skeleton.reset_bone_pose(bone_id)
-	skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
-
+	humanizer.skeleton.reset_bone_pose(bone_id)
+	humanizer.skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
+func get_sliders():
+	return {"x":x_slider.value,
+			"y":y_slider.value,
+			"z":z_slider.value}
+func set_slider_value(values):
+	x_slider.value=values.x
+	y_slider.value=values.y
+	z_slider.value=values.z
 
 func _on_x_slider_value_changed(_value: float) -> void:
 	x_text.text=str(x_slider.value*360/TAU).pad_decimals(1)

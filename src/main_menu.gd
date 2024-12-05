@@ -10,6 +10,7 @@ extends Control
 @export var volumeSlider:Slider
 const SETTINGS_FILE_PATH="user://settings.conf"
 var configFile
+
 func _ready() -> void:
 	var newConfig = ConfigFile.new()
 	var err = newConfig.load(SETTINGS_FILE_PATH)
@@ -22,24 +23,30 @@ func _ready() -> void:
 		mainVolume.play()
 	_on_volume_value_changed(volumeSlider.value)
 	characterCreator.home_button.connect("pressed",_main_menu_show)
+
 func _hide_all():
 	mainMenu.hide()
 	characterCreator.hide()
 	credits.hide()
 	loadMenu.hide()
 	settings.hide()
+
 func _main_menu_show():
 	_hide_all()
 	mainMenu.show()
+
 func _credits_show():
 	_hide_all()
 	credits.show()
+
 func _on_settings_pressed() -> void:
 	_hide_all()
 	settings.show()
+
 func _on_new_character_pressed() -> void:
 	_hide_all()
 	characterCreator.show()
+	characterCreator.default_settings()
 	characterCreator.new_name()
 	characterCreator.make_character()
 
@@ -58,20 +65,20 @@ func _on_show_load_menu():
 			file_name = dir.get_next()
 	_hide_all()
 	loadMenu.show()
+
 func _on_load_character_save():
 	_hide_all()
 	characterCreator.show()
 	var characterName=saveSelect.get_item_text(saveSelect.get_selected_id())
+	characterCreator.default_settings()
 	characterCreator.load_character_file(characterName)
 
-	
 func _on_quit_pressed() -> void:
 	get_tree().quit()
 
 func _on_delete_pressed() -> void:
 	confirm.dialog_text="This will permanantly delete this character, Are you sure?"
 	confirm.show()
-	
 
 func _on_confirm_delete_confirmed() -> void:
 	var characterName=saveSelect.get_item_text(saveSelect.get_selected_id())

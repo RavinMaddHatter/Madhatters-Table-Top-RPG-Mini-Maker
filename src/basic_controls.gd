@@ -31,8 +31,25 @@ signal position_macro_set
 @export var back_twist: HSlider
 @export var back_lean: HSlider
 @export var back_curve: HSlider
+@export var left_fingers:HSlider
+@export var right_fingers:HSlider
+@export var left_thumb:HSlider
+@export var right_thumb:HSlider
+@export var left_knee:HSlider
+@export var right_knee:HSlider
+@export var xloc_slider:HSlider
+@export var yloc_slider:HSlider
+@export var zloc_slider:HSlider
+func locate_model(_value):
+	var bone_id=skeleton.find_bone("Root")
+	var pose = Vector3()
+	pose.x = xloc_slider.value
+	pose.y = yloc_slider.value
+	pose.z = zloc_slider.value
+	skeleton.set_bone_pose_position(bone_id,pose)
+	
 
-func left_hand(value):
+func left_hand(_value):
 	#The following values were manually evaluated. The finger is a 1 DoF item so each finger has
 	#an open and close position. unforunately the fingers are not alinged with sensible bend directions
 	#in this skeleton.
@@ -51,11 +68,11 @@ func left_hand(value):
 	const start_pose=Vector3(0,0,0)
 	for key in leftClosed.keys():
 		var bone_id = skeleton.find_bone(key)
-		var bone_rotation= Quaternion.from_euler(start_pose.lerp(leftClosed[key],value)*TAU/360)
+		var bone_rotation= Quaternion.from_euler(start_pose.lerp(leftClosed[key],left_fingers.value)*TAU/360)
 		skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
 	#this is emitted to set the detailed poses.
 	emit_signal("position_macro_set")
-func right_hand(value):
+func right_hand(_value):
 	#The following values were manually evaluated. The finger is a 1 DoF item so each finger has
 	#an open and close position. unforunately the fingers are not alinged with sensible bend directions
 	#in this skeleton.
@@ -74,11 +91,11 @@ func right_hand(value):
 	const start_pose=Vector3(0,0,0)
 	for key in rightClosed.keys():
 		var bone_id = skeleton.find_bone(key)
-		var bone_rotation= Quaternion.from_euler(start_pose.lerp(rightClosed[key],value)*TAU/360)
+		var bone_rotation= Quaternion.from_euler(start_pose.lerp(rightClosed[key],right_fingers.value)*TAU/360)
 		skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
 	#this is emitted to set the detailed poses.
 	emit_signal("position_macro_set")
-func left_thumb_close(value):
+func left_thumb_close(_value):
 	##The thum has more than 1 degree of freedom. however for simplicity, this is 
 	#moving along 1 path. This will now work for eveyr aspect, but for now it is decent
 	const thumb_start ={"LeftThumbMetacarpal":Vector3(-35.5,89.9,0),
@@ -89,11 +106,11 @@ func left_thumb_close(value):
 						"LeftThumbProximal":Vector3(0,50,0)}
 	for key in thumb_fist.keys():
 		var bone_id = skeleton.find_bone(key)
-		var bone_rotation= Quaternion.from_euler(thumb_start[key].lerp(thumb_fist[key],value)*TAU/360)
+		var bone_rotation= Quaternion.from_euler(thumb_start[key].lerp(thumb_fist[key],left_thumb.value)*TAU/360)
 		skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
 	#this is emitted to set the detailed poses.
 	emit_signal("position_macro_set")
-func right_thumb_close(value):
+func right_thumb_close(_value):
 	##The thum has more than 1 degree of freedom. however for simplicity, this is 
 	#moving along 1 path. This will now work for eveyr aspect, but for now it is decent
 	const thumb_start ={"RightThumbMetacarpal":Vector3(-35.5,-89.9,0),
@@ -104,25 +121,25 @@ func right_thumb_close(value):
 						"RightThumbProximal":Vector3(0,-60,0)}
 	for key in thumb_fist.keys():
 		var bone_id = skeleton.find_bone(key)
-		var bone_rotation= Quaternion.from_euler(thumb_start[key].lerp(thumb_fist[key],value)*TAU/360)
+		var bone_rotation= Quaternion.from_euler(thumb_start[key].lerp(thumb_fist[key],right_thumb.value)*TAU/360)
 		skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
 	emit_signal("position_macro_set")
 
-func bend_right_knee(value):
+func bend_right_knee(_value):
 	#The Knee is a single degree of freedom joint, the start and stop are locked and we simply lerp 
 	const knee_default =Vector3(0,180,0)
 	const knee_bent =Vector3(150,190,-3)
 	var bone_id = skeleton.find_bone("RightLowerLeg")
-	var bone_rotation= Quaternion.from_euler(knee_default.lerp(knee_bent,value)*TAU/360)
+	var bone_rotation= Quaternion.from_euler(knee_default.lerp(knee_bent,right_knee.value)*TAU/360)
 	skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
 	#this is emitted to set the detailed poses.
 	emit_signal("position_macro_set")
 
-func bend_left_knee(value):
+func bend_left_knee(_value):
 	#The Knee is a single degree of freedom joint, the start and stop are locked and we simply lerp 
 	const knee_default =Vector3(0,180,0)
 	const knee_bent =Vector3(150,170,3)
-	var bone_rotation= Quaternion.from_euler(knee_default.lerp(knee_bent,value)*TAU/360)
+	var bone_rotation= Quaternion.from_euler(knee_default.lerp(knee_bent,left_knee.value)*TAU/360)
 	var bone_id = skeleton.find_bone("LeftLowerLeg")
 	skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
 	#this is emitted to set the detailed poses.
@@ -167,6 +184,8 @@ func right_elbow(value):
 	var bone_id = skeleton.find_bone("RightLowerArm")
 	var bone_rotation= Quaternion.from_euler(straight.lerp(bent,value)*TAU/360)
 	skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
+	emit_signal("position_macro_set")
+
 	
 func left_wrist(_value):
 	#the wrist is an incredibly complex joint. constraining movement broke my brain,
@@ -220,11 +239,15 @@ func left_sholder(_value):
 	sholderRotation.y = lerp(-134*TAU/360,-50*TAU/360,left_sholder_curl.value)
 	sholderRotation.z=0
 	skeleton.set_bone_pose_rotation(sholder_id,Quaternion.from_euler(sholderRotation))
+	emit_signal("position_macro_set")
+
 	var arm_id = skeleton.find_bone("LeftUpperArm")
 	var armRotation = skeleton.get_bone_pose_rotation(arm_id).get_euler()
 	armRotation.x=lerp(-70*TAU/360,80*TAU/360,left_sholder_lift.value)
 	armRotation.y=lerp( 90*TAU/360,270*TAU/360,left_sholder_swing.value)
 	skeleton.set_bone_pose_rotation(arm_id,Quaternion.from_euler(armRotation))
+	emit_signal("position_macro_set")
+
 func right_sholder(_value):
 	#This function is setup to make sensible repeatable poses. Euler angles can get really messy with application order
 	var sholder_id = skeleton.find_bone("RightShoulder")
@@ -238,6 +261,8 @@ func right_sholder(_value):
 	armRotation.x=lerp(-70*TAU/360,80*TAU/360,right_sholder_lift.value)
 	armRotation.y=lerp( 90*TAU/360,270*TAU/360,right_sholder_swing.value)
 	skeleton.set_bone_pose_rotation(arm_id,Quaternion.from_euler(armRotation))
+	emit_signal("position_macro_set")
+
 func head(_value):
 	#the head possion is controled by a 2 3 dof joints. To make sure the head 
 	#doesnt go into an unrecoverable position, the 3 movements are caculated in order.
@@ -253,3 +278,118 @@ func head(_value):
 	armRotation.y=lerp( -45*TAU/360,45*TAU/360,head_rotate.value)
 	armRotation.z=lerp( -30*TAU/360,30*TAU/360,head_roll.value)
 	skeleton.set_bone_pose_rotation(arm_id,Quaternion.from_euler(armRotation))
+	emit_signal("position_macro_set")
+
+func ping_poses():
+	emit_signal("position_macro_set")
+func get_save():
+	var values={}
+	values["left_wrist_ud"] = left_wrist_ud.value
+	values["left_wrist_io"] = left_wrist_io.value
+	values["left_wrist_tw"] = left_wrist_tw.value
+	values["right_wrist_ud"] = right_wrist_ud.value
+	values["right_wrist_io"] = right_wrist_io.value
+	values["right_wrist_tw"] = right_wrist_tw.value
+	values["left_sholder_swing"] = left_sholder_swing.value
+	values["left_sholder_lift"] = left_sholder_lift.value
+	values["left_sholder_shrug"] = left_sholder_shrug.value
+	values["left_sholder_curl"] = left_sholder_curl.value
+	values["right_sholder_swing"] = right_sholder_swing.value
+	values["right_sholder_lift"] = right_sholder_lift.value
+	values["right_sholder_shrug"] = right_sholder_shrug.value
+	values["right_sholder_curl"] = right_sholder_curl.value
+	values["head_rotate"] =  head_rotate.value
+	values["head_pitch"] = head_pitch.value
+	values["head_roll"] = head_roll.value
+	values["right_hip_lift"] = right_hip_lift.value
+	values["right_hip_twist"] = right_hip_twist.value
+	values["right_hip_spread"] = right_hip_spread.value
+	values["left_hip_lift"] = left_hip_lift.value
+	values["left_hip_twist"] = left_hip_twist.value
+	values["left_hip_spread"] = left_hip_spread.value
+	values["back_twist"] = back_twist.value
+	values["back_lean"] = back_lean.value
+	values["back_curve"] = back_curve.value
+	values["left_fingers"] = left_fingers.value
+	values["right_fingers"] = right_fingers.value
+	values["left_thumb"] = left_thumb.value
+	values["right_thumb"] = right_thumb.value
+	values["left_knee"] = left_knee.value
+	values["right_knee"] = right_knee.value
+	values["xloc_slider"] = xloc_slider.value
+	values["yloc_slider"] = yloc_slider.value
+	values["zloc_slider"] = zloc_slider.value
+	return values
+
+func set_save(values):
+	left_wrist_ud.value = values["left_wrist_ud"]
+	left_wrist_io.value = values["left_wrist_io"]
+	left_wrist_tw.value = values["left_wrist_tw"]
+	right_wrist_ud.value = values["right_wrist_ud"]
+	right_wrist_io.value = values["right_wrist_io"]
+	right_wrist_tw.value = values["right_wrist_tw"]
+	left_sholder_swing.value = values["left_sholder_swing"]
+	left_sholder_lift.value = values["left_sholder_lift"]
+	left_sholder_shrug.value = values["left_sholder_shrug"]
+	left_sholder_curl.value = values["left_sholder_curl"]
+	right_sholder_swing.value = values["right_sholder_swing"]
+	right_sholder_lift.value = values["right_sholder_lift"]
+	right_sholder_shrug.value = values["right_sholder_shrug"]
+	right_sholder_curl.value = values["right_sholder_curl"]
+	head_rotate.value = values["head_rotate"]
+	head_pitch.value = values["head_pitch"]
+	head_roll.value = values["head_roll"]
+	right_hip_lift.value = values["right_hip_lift"]
+	right_hip_twist.value = values["right_hip_twist"]
+	right_hip_spread.value = values["right_hip_spread"]
+	left_hip_lift.value = values["left_hip_lift"]
+	left_hip_twist.value = values["left_hip_twist"]
+	left_hip_spread.value = values["left_hip_spread"]
+	back_twist.value = values["back_twist"]
+	back_lean.value = values["back_lean"]
+	back_curve.value = values["back_curve"]
+	left_fingers.value = values["left_fingers"]
+	right_fingers.value = values["right_fingers"]
+	left_thumb.value = values["left_thumb"]
+	right_thumb.value = values["right_thumb"]
+	left_knee.value = values["left_knee"]
+	right_knee.value = values["right_knee"]
+	xloc_slider.value = values["xloc_slider"]
+	yloc_slider.value = values["yloc_slider"]
+	zloc_slider.value = values["zloc_slider"]
+func set_default():
+	left_wrist_ud.value = 0.33
+	left_wrist_io.value = 0.5
+	left_wrist_tw.value = 0.6
+	right_wrist_ud.value = 0.33
+	right_wrist_io.value = 0.5
+	right_wrist_tw.value = 0.6
+	left_sholder_swing.value = 0.5
+	left_sholder_lift.value = 0.47
+	left_sholder_shrug.value = 0.17
+	left_sholder_curl.value = 0.47
+	right_sholder_swing.value = 0.5
+	right_sholder_lift.value = 0.47
+	right_sholder_shrug.value = 0.17
+	right_sholder_curl.value = 0.47
+	head_rotate.value = 0.5
+	head_pitch.value = 0.5
+	head_roll.value = 0.5
+	right_hip_lift.value = 0.4
+	right_hip_twist.value = 0.5
+	right_hip_spread.value = 0.05
+	left_hip_lift.value = 0.4
+	left_hip_twist.value = 0.5
+	left_hip_spread.value = 0.05
+	back_twist.value = 0.5
+	back_lean.value = 0.5
+	back_curve.value = 0.5
+	left_fingers.value = 0.0
+	right_fingers.value = 0.0
+	left_thumb.value = 0.0
+	right_thumb.value = 0.0
+	left_knee.value = 0.0
+	right_knee.value = 0.0
+	xloc_slider.value = 0.0
+	yloc_slider.value = 0.0
+	zloc_slider.value = 0.0

@@ -65,7 +65,7 @@ folder_overrides = Array[ExtResource("4_nipot")]([SubResource("Resource_6a2w0"),
 
 [sub_resource type="Resource" id="Resource_lp23c"]
 script = ExtResource("3_k24ro")
-asset_import_paths = Array[String](["res://addons/humanizer/data/assets/"])
+asset_import_paths = Array[String](["res://addons/humanizer/data/assets/", "res://assets/equipment/"])
 human_export_path = "res://data/humans/"
 default_characterbody_script = "res://addons/humanizer/scripts/utils/human_controller.gd"
 default_rigidbody_script = ""
