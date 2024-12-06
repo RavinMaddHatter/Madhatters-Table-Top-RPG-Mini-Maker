@@ -39,11 +39,25 @@ func _upload_pressed():
 	file_dialog.show()
 func load_mesh(loaded_mesh):
 	if loaded_mesh:
-		mesh_object=loaded_mesh
+		mesh_object=MeshInstance3D.new()
+		mesh_object.mesh=loaded_mesh.mesh
+		mesh_object.position=loaded_mesh.position
+		mesh_object.rotation=loaded_mesh.rotation
+		mesh_object.scale=loaded_mesh.scale
+		x_pos_slider.value = mesh_object.position.x
+		y_pos_slider.value = mesh_object.position.y
+		z_pos_slider.value = mesh_object.position.z
+		x_rot_slider.value = mesh_object.rotation.x
+		y_rot_slider.value = mesh_object.rotation.y
+		z_rot_slider.value = mesh_object.rotation.z
+		mesh_object.name = lable.text
 		var aabb = mesh_object.mesh.get_aabb()
 		maxsize = max(aabb.size.x,aabb.size.y,aabb.size.z) - min(aabb.size.x,aabb.size.y,aabb.size.z)
 		anchor_point.add_child(mesh_object)
-		_change_pose(0)
+		slider_vbox.show()
+		remove_button.show()
+		upload_button.hide()
+
 func _on_file_dialog_file_selected(file_path: String) -> void:
 	slider_vbox.show()
 	remove_button.show()

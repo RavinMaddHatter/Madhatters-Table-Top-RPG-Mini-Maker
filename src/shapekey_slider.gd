@@ -20,7 +20,7 @@ func emit_shapekeys():
 func set_line_edit_from_slider_value():
 	$Label_Container/Value_Edit.text = str($Slider.value)
 	
-func set_value(value:int):
+func set_value(value:float):
 	$Slider.value = value
 func get_value():
 	return $Slider.value

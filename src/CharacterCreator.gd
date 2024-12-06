@@ -21,7 +21,7 @@ var attach_points = {}
 var attach_menu ={}
 var detailed_poses={}
 var bone_categories = {}
-var attachment_points = ["LeftHand","RightHand","Head","RightFoot","LeftFoot","Hips","Chest"]
+var attachment_points = ["LeftHand","RightHand","Head","RightFoot","LeftFoot","Hips","Chest","Root"]
 var simple_pose
 var start_of_frame = 0
 
@@ -321,7 +321,7 @@ func _on_save_pressed():
 	for key_name in shapekey_slider.keys():
 		save_setings["shapekey_slider"][key_name]=shapekey_slider[key_name].get_value()
 	for point_name in attach_menu.keys():
-		save_setings["imported_equipment"][point_name]=attach_menu[point_name].mesh_object
+		save_setings["imported_equipment"][point_name]=var_to_bytes_with_objects(attach_menu[point_name].mesh_object)
 	for clothing_slot in equipment_categories.keys():
 		save_setings["equipment_categories"]=equipment_categories[clothing_slot].cur_equipment
 	save_setings["simple_pose"]=simple_pose.get_save()
@@ -330,25 +330,15 @@ func _on_save_pressed():
 		for bone_name in bone_categories[categoryName]:
 			save_setings["detailed_poses"][categoryName][bone_name]={}
 			save_setings["detailed_poses"][categoryName][bone_name]=detailed_poses[categoryName][bone_name].get_sliders()
+	
+	
 	saveFile.store_var(save_setings)
 	$Warning.dialog_text="Saving operation for character %s is completed."%nameBox.text
 	$Warning.title="Save Complete"
 	$Warning.initial_position=$Warning.WINDOW_INITIAL_POSITION_CENTER_MAIN_WINDOW_SCREEN
 	$Warning.show()
 
-func _warning(message:String):
-	$Warning.dialog_text=message#
-	$Warning.title="WARNING"
-	$Warning.initial_position=$Warning.WINDOW_INITIAL_POSITION_CENTER_MAIN_WINDOW_SCREEN
-	$Warning.show()
-func start_freeze_manager(_type):
-	start_of_frame=Time.get_ticks_msec()
-func freeze_manager(progress_percentage):
-	Time.get_ticks_msec()
-	if Time.get_ticks_msec()-start_of_frame >1000.0/Engine.physics_ticks_per_second :
-		start_of_frame=Time.get_ticks_msec()
-		_on_export_progress(0,progress_percentage)
-		await get_tree().process_frame
+
 
 func load_character_file(characterName:String):
 	start_freeze_manager("character load")
@@ -372,7 +362,7 @@ func load_character_file(characterName:String):
 	step_size=1.0/float(len(attach_menu.keys())*num_sections)
 	for point_name in attach_menu.keys():
 		if save_setings["imported_equipment"][point_name]:
-			attach_menu[point_name].load_mesh(save_setings["imported_equipment"][point_name])
+			attach_menu[point_name].load_mesh(bytes_to_var_with_objects(save_setings["imported_equipment"][point_name]))
 			freeze_manager(progress_percentage)
 		progress_percentage+=step_size
 		_on_export_progress(0,progress_percentage)
@@ -391,8 +381,7 @@ func load_character_file(characterName:String):
 		progress_percentage+=step_size
 		freeze_manager(progress_percentage)
 	_on_export_completed("")
-func _on_export_pressed():
-	$FileDialog.show()
+
 
 func scal_pose_equipment(eqipment:MeshInstance3D):
 	var out_mesh= ArrayMesh.new()
@@ -447,3 +436,37 @@ func _on_export_completed(_obj_file):
 
 func _on_export_progress(_surf_idx, _progress_value):
 	$progressContainer/ProgressBar.value=_progress_value * 100
+func _on_export_pressed():
+	$FileDialog.show()
+func _warning(message:String):
+	$Warning.dialog_text=message#
+	$Warning.title="WARNING"
+	$Warning.initial_position=$Warning.WINDOW_INITIAL_POSITION_CENTER_MAIN_WINDOW_SCREEN
+	$Warning.show()
+func start_freeze_manager(_type):
+	start_of_frame=Time.get_ticks_msec()
+func freeze_manager(progress_percentage):
+	Time.get_ticks_msec()
+	if Time.get_ticks_msec()-start_of_frame >1000.0/Engine.physics_ticks_per_second :
+		start_of_frame=Time.get_ticks_msec()
+		_on_export_progress(0,progress_percentage)
+		await get_tree().process_frame
+
+
+func _on_random_pressed() -> void:
+	var macros = HumanizerTargetService.get_shapekey_categories()["Macro"]
+	var racial = HumanizerMacroService.race_options
+	start_freeze_manager("random")
+	var num_keys = len(macros)+len(racial)
+	var progress_percentage = 0
+	for key_name in macros:
+		progress_percentage+=1.0/num_keys
+		freeze_manager(progress_percentage)
+		shapekey_slider[key_name].set_value(randf()*100)
+		shapekey_slider[key_name].emit_shapekeys()
+	for key_name in racial:
+		progress_percentage+=1.0/num_keys
+		freeze_manager(progress_percentage)
+		shapekey_slider[key_name].set_value(randf()*100)
+		shapekey_slider[key_name].emit_shapekeys()
+	_on_export_completed("")

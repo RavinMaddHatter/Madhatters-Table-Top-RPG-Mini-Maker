@@ -36,7 +36,7 @@ collection = NodePath("splits/Right_Side/CharacterView/Viewport/SubViewport/coll
 menu_root = NodePath("splits/options")
 camera = NodePath("splits/Right_Side/CharacterView/Viewport/SubViewport/Camera3D")
 home_button = NodePath("splits/Right_Side/verticalScrolls/Right_Side/Home")
-nameBox = NodePath("splits/Right_Side/CharacterView/HBoxContainer/Center/Name")
+nameBox = NodePath("splits/Right_Side/CharacterView/HBoxContainer/Center/HBoxContainer2/Name")
 baseMesh = NodePath("splits/Right_Side/CharacterView/Viewport/SubViewport/collection/BaseMesh")
 
 [node name="splits" type="HSplitContainer" parent="."]
@@ -67,25 +67,30 @@ size_flags_horizontal = 3
 [node name="HBoxContainer" type="HBoxContainer" parent="splits/Right_Side/CharacterView/HBoxContainer/Center"]
 layout_mode = 2
 
-[node name="Padding" type="Label" parent="splits/Right_Side/CharacterView/HBoxContainer/Center/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="splits/Right_Side/CharacterView/HBoxContainer/Center/HBoxContainer"]
-layout_mode = 2
-text = "Name"
-
-[node name="Padding2" type="Label" parent="splits/Right_Side/CharacterView/HBoxContainer/Center/HBoxContainer"]
+[node name="padding2" type="Label" parent="splits/Right_Side/CharacterView/HBoxContainer/Center/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Random" type="Button" parent="splits/Right_Side/CharacterView/HBoxContainer/Center/HBoxContainer"]
 layout_mode = 2
-text = "Randomize"
+size_flags_horizontal = 4
+text = "Randomize Character"
 
-[node name="Name" type="TextEdit" parent="splits/Right_Side/CharacterView/HBoxContainer/Center"]
+[node name="padding" type="Label" parent="splits/Right_Side/CharacterView/HBoxContainer/Center/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="splits/Right_Side/CharacterView/HBoxContainer/Center"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="splits/Right_Side/CharacterView/HBoxContainer/Center/HBoxContainer2"]
+layout_mode = 2
+text = "Name: "
+
+[node name="Name" type="TextEdit" parent="splits/Right_Side/CharacterView/HBoxContainer/Center/HBoxContainer2"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
+size_flags_horizontal = 3
 placeholder_text = "Name"
 
 [node name="Padding" type="VBoxContainer" parent="splits/Right_Side/CharacterView/HBoxContainer"]
@@ -231,6 +236,7 @@ theme_override_constants/margin_bottom = 30
 layout_mode = 2
 size_flags_vertical = 4
 
+[connection signal="pressed" from="splits/Right_Side/CharacterView/HBoxContainer/Center/HBoxContainer/Random" to="." method="_on_random_pressed"]
 [connection signal="value_changed" from="splits/Right_Side/CharacterView/HBoxContainer2/rotation" to="." method="_on_rotation_value_changed"]
 [connection signal="value_changed" from="splits/Right_Side/verticalScrolls/VBoxContainer/PositionSlider" to="." method="_on_position_slider_value_changed"]
 [connection signal="value_changed" from="splits/Right_Side/verticalScrolls/Right_Side/zoom_slider" to="." method="_on_zoom_slider_value_changed"]
