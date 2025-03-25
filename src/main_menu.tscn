@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://clwxqo42ap5op"]
 
-[ext_resource type="Script" path="res://main_menu.gd" id="1_8a7xe"]
+[ext_resource type="Script" uid="uid://d32fot8kqt3yn" path="res://main_menu.gd" id="1_8a7xe"]
 [ext_resource type="Texture2D" uid="uid://dr50igx46nbot" path="res://assets/Backgrounds/Joseph_Wright_004.jpg" id="1_c3r4i"]
 [ext_resource type="Theme" uid="uid://bwe1owntg1ijf" path="res://RootTheme.tres" id="1_s85bj"]
 [ext_resource type="AudioStream" uid="uid://caa2jqeuefly2" path="res://assets/audio/Careful_palindromes_(disquiet0344).ogg" id="3_vdl6p"]

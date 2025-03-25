@@ -1,15 +1,19 @@
 [gd_scene load_steps=6 format=3 uid="uid://dthel8j2gphl6"]
 
-[ext_resource type="Script" path="res://addons/humanizer/scripts/utils/camera_controls.gd" id="1_pu1mm"]
+[ext_resource type="Script" uid="uid://b17miv6yfsb8d" path="res://addons/humanizer/scripts/utils/camera_controls.gd" id="1_pu1mm"]
 
 [sub_resource type="GDScript" id="GDScript_1i7gn"]
 script/source = "extends Node3D
 
 var humanizer := Humanizer.new()
-var shirt = HumanizerEquipment.new(\"MakeHumanTShirt\")
+var shirt : HumanizerEquipment 
+var suit_top : HumanizerEquipment
 var body_mesh_inst : MeshInstance3D
+var anim_player : AnimationPlayer
 
 func _ready():
+	shirt = HumanizerEquipment.new(\"Shirt-MakeHumanTShirt\")
+	suit_top = HumanizerEquipment.new(\"Shirt-SuitTop\")
 	var config = HumanConfig.new()
 	config.targets['gender'] = 0.0
 	config.targets['age'] = .25
@@ -17,14 +21,14 @@ func _ready():
 	config.eye_color = Color.GREEN
 	config.hair_color = Color.PURPLE
 	config.eyebrow_color = Color(\"550055\")
-	config.rig = HumanizerGlobalConfig.config.default_skeleton
-	config.add_equipment(HumanizerEquipment.new(\"DefaultBody\",\"young_caucasian_female2\"))
-	config.add_equipment(HumanizerEquipment.new(\"SkinnyJeans\"))
+	config.rig = ProjectSettings.get_setting( \"addons/humanizer/default_skeleton\")
+	config.add_equipment(HumanizerEquipment.new(\"Body-Default\",\"young_caucasian_female\"))
+	config.add_equipment(HumanizerEquipment.new(\"Pants-SkinnyJeans\"))
 	config.add_equipment(shirt)
-	config.add_equipment(HumanizerEquipment.new(\"Shoes02\"))
-	config.add_equipment(HumanizerEquipment.new(\"RightEyeball-LowPoly\"))
-	config.add_equipment(HumanizerEquipment.new(\"LeftEyeBall-LowPoly\"))
-	config.add_equipment(HumanizerEquipment.new(\"Bob02\"))
+	config.add_equipment(HumanizerEquipment.new(\"Shoes-02\"))
+	config.add_equipment(HumanizerEquipment.new(\"RightEye-LowPolyEyeball\"))
+	config.add_equipment(HumanizerEquipment.new(\"LeftEye-LowPolyEyeball\"))
+	config.add_equipment(HumanizerEquipment.new(\"Hair-Ponytail01_Rigged\"))
 	config.add_equipment(HumanizerEquipment.new(\"RightEyebrow-002\"))
 	config.add_equipment(HumanizerEquipment.new(\"LeftEyebrow-002\"))
 	config.add_equipment(HumanizerEquipment.new(\"RightEyelash\"))
@@ -35,13 +39,20 @@ func _ready():
 	HumanizerUtils.set_node_owner(char,self)
 	char.camera = $Camera3D
 	body_mesh_inst = char.get_node(\"Avatar\")
-
+	anim_player = char.get_node(\"AnimationTree/AnimationPlayer\")
+	var anim_tree : AnimationTree = char.get_node(\"AnimationTree\")
+	anim_tree.active = false
+	anim_player.play(\"animations/Idle\")
+	
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed(&'ui_accept'):
-		if humanizer.human_config.get_equipment_in_slot(\"TorsoClothes\") == null:
-			humanizer.add_equipment(shirt)
+		var anim_name = Array(anim_player.get_animation_list()).pick_random()		
+		anim_player.play(anim_name)
+				
+		if humanizer.human_config.get_equipment_in_slot(\"torsoclothes\") == shirt:
+			humanizer.add_equipment(suit_top)
 		else:
-			humanizer.remove_equipment(shirt)
+			humanizer.add_equipment(shirt)
 		humanizer.show_clothes_vertices()
 		humanizer.hide_clothes_vertices()
 		body_mesh_inst.mesh = humanizer.get_combined_meshes()

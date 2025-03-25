@@ -1,9 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://boivg2moacq1"]
+[gd_scene load_steps=5 format=3 uid="uid://boivg2moacq1"]
 
-[ext_resource type="Script" path="res://CharacterCreator.gd" id="1_xl482"]
-[ext_resource type="ArrayMesh" uid="uid://fudl6b84hhf5" path="res://assets/simple Base.obj" id="2_uc0kg"]
-[ext_resource type="PackedScene" uid="uid://da831ngvg838b" path="res://addons/humanizer/scenes/authoring.tscn" id="3_ck1e0"]
-[ext_resource type="Material" uid="uid://cjcbkf2xtycd6" path="res://assets/grey_material.tres" id="3_mges2"]
+[ext_resource type="Script" uid="uid://bx205xb6r2jkq" path="res://CharacterCreator.gd" id="1_xl482"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bbutc"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -18,7 +15,7 @@ sky = SubResource("Sky_sm1kj")
 tonemap_mode = 2
 glow_enabled = true
 
-[node name="CharacterCreator" type="MarginContainer" node_paths=PackedStringArray("humanizer", "collection", "menu_root", "camera", "home_button", "nameBox", "baseMesh")]
+[node name="CharacterCreator" type="MarginContainer" node_paths=PackedStringArray("collection", "menu_root", "camera", "home_button", "nameBox", "baseMesh")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -26,12 +23,11 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 40
 script = ExtResource("1_xl482")
-humanizer = NodePath("splits/Right_Side/CharacterView/Viewport/SubViewport/collection/Authoring_Scene")
 collection = NodePath("splits/Right_Side/CharacterView/Viewport/SubViewport/collection")
 menu_root = NodePath("splits/options")
 camera = NodePath("splits/Right_Side/CharacterView/Viewport/SubViewport/Camera3D")
@@ -107,7 +103,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="splits/Right_Side/CharacterView/Viewport"]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(690, 425)
+size = Vector2i(750, 445)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="splits/Right_Side/CharacterView/Viewport/SubViewport"]
@@ -127,11 +123,7 @@ environment = SubResource("Environment_5otv1")
 
 [node name="BaseMesh" type="MeshInstance3D" parent="splits/Right_Side/CharacterView/Viewport/SubViewport/collection"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.021825, 0)
-mesh = ExtResource("2_uc0kg")
 skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("3_mges2")
-
-[node name="Authoring_Scene" parent="splits/Right_Side/CharacterView/Viewport/SubViewport/collection" instance=ExtResource("3_ck1e0")]
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="splits/Right_Side/CharacterView"]
 layout_mode = 2

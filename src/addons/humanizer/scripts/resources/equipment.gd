@@ -18,7 +18,7 @@ func _init(_type=null,_texture_name=null,_material_config=null): # https://docs.
 		if equip_type.default_material == "" or equip_type.default_material == null:
 			#print("no default texture")
 			if equip_type.textures.size() > 0:
-				texture_name = Random.choice(equip_type.textures.keys())
+				texture_name = equip_type.textures.keys().pick_random()
 			else:
 				texture_name = ""
 		else:
@@ -35,25 +35,27 @@ func set_material(material_name:String):
 	var material
 	var mat_path = ""
 	if material_name in equip_type.textures:
-		mat_path = equip_type.textures[material_name]
-		material = HumanizerResourceService.load_resource(mat_path)
+		material = equip_type.textures[material_name].duplicate()
+		#print(material.albedo_texture)
 	else:
 		material = StandardMaterial3D.new()
 		mat_path = ""
 	
 	if material is StandardMaterial3D:
-		material_config.base_material_path = mat_path
+		material_config.base_material_path = type + "/" + material_name
 		material_config.overlays.clear()
-		material_config.add_overlay(HumanizerOverlay.from_material(material))
+		var base_overlay = HumanizerOverlay.from_material(material)
+		material_config.add_overlay(base_overlay)
 	elif material is HumanizerMaterial:
 		material_config.base_material_path = material.base_material_path
 		material_config.overlays.clear()
 		for overlay in material.overlays:
-			material_config.overlays.append(overlay.duplicate())
+			material_config.add_overlay(overlay.duplicate())
 		
 	texture_name = material_name
 		
-func get_type():
+func get_type()->HumanizerEquipmentType:
 	if type in HumanizerRegistry.equipment:
 		return HumanizerRegistry.equipment[type]
 	printerr("Unknown equipment type: " + type)
+	return null

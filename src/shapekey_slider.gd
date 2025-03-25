@@ -1,5 +1,5 @@
 extends VBoxContainer
-class_name Shapekey_Slider
+class_name Shapekey_Slider_2
 
 signal change_shapekeys (values:Dictionary)
 

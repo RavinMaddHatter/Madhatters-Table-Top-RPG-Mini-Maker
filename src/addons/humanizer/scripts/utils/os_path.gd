@@ -1,6 +1,42 @@
 class_name OSPath
 extends RefCounted
 
+static func save_scene_to_file(node:Node,path:String):
+	HumanizerEditorUtils.set_owner_for_children(node)
+	var scene = PackedScene.new()
+	scene.pack(node)
+	ResourceSaver.save(scene,path)
+
+static func is_folder_empty(folder:String):
+	var contents = get_contents(folder)
+	if contents.dirs.size() == 0 and contents.files.size() == 0:
+		return true
+	return false
+	
+static func delete_empty_folders(folder:String):
+	for dir in DirAccess.get_directories_at(folder):
+		delete_empty_folders(folder.path_join(dir))
+	if is_folder_empty(folder):
+		DirAccess.remove_absolute(folder)
+
+static func read_json(file_name:String): #Array or Dictionary
+	var json_as_text = FileAccess.get_file_as_string(file_name)
+	var json_as_dict = JSON.parse_string(json_as_text)
+	return json_as_dict
+	
+static func save_json(file_path, data):
+	#print(file_path)
+	var file = FileAccess.open(file_path, FileAccess.WRITE)
+	file.store_line(JSON.stringify(data))
+
+static func get_files_recursive(path:String):
+	var paths = []
+	#if not DirAccess.dir_exists_absolute(path): #dont do this, it returns false when loaded from zip, but get_files_at still works..
+	for file in DirAccess.get_files_at(path):
+		paths.append(path.path_join(file))
+	for dir in DirAccess.get_directories_at(path):
+		paths.append_array(get_files_recursive(path.path_join(dir)))
+	return paths
 
 static func get_contents(path: String) -> Dictionary:
 	return {'dirs': OSPath.get_dirs(path), 'files': OSPath.get_files(path)}

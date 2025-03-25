@@ -3,7 +3,7 @@
 #to give the illusion of sensiblity. It constrains the poses a bit more than would be 
 #natural. but i am not good with kinimatics. It is just hacks to make it work. 
 extends MarginContainer
-var skeleton : Skeleton3D
+var skeleton 
 signal position_macro_set
 @export var left_wrist_ud: HSlider
 @export var left_wrist_io: HSlider

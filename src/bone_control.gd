@@ -1,5 +1,5 @@
 extends MarginContainer
-var humanizer:HumanizerEditorTool
+var skel:Skeleton3D
 var bone_id:int
 @export var x_slider:HSlider
 @export var y_slider:HSlider
@@ -9,13 +9,13 @@ var bone_id:int
 @export var y_text:LineEdit
 @export var z_text:LineEdit
 var origin
-func setup(bone_name:String,character,id):
+func setup(bone_name:String,skeleton,id):
 	title.text=bone_name
-	humanizer=character
+	skel=skeleton
 	bone_id=id
 	set_sliders()
 func set_sliders():
-	var pose = humanizer.skeleton.get_bone_pose(bone_id)
+	var pose = skel.get_bone_pose(bone_id)
 	origin = pose.origin
 	x_slider.value=pose.basis.get_euler().x
 	y_slider.value=pose.basis.get_euler().y
@@ -30,8 +30,8 @@ func set_bone_pose():
 	rot_vector.y = y_slider.value
 	rot_vector.z = z_slider.value
 	var bone_rotation= Quaternion.from_euler(rot_vector)
-	humanizer.skeleton.reset_bone_pose(bone_id)
-	humanizer.skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
+	skel.reset_bone_pose(bone_id)
+	skel.set_bone_pose_rotation(bone_id,bone_rotation)
 func get_sliders():
 	return {"x":x_slider.value,
 			"y":y_slider.value,

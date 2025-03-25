@@ -3,10 +3,10 @@ extends CharacterBody3D
 @export var camera: Node3D
 @export_range(0.1, 5) var move_speed: float = 2
 @export_range(0, 100) var vertical_impulse: float = 60
+@export var human_config : HumanConfig
 
 @onready var skeleton: Skeleton3D = $GeneralSkeleton
 const GRAVITY: float  = 9.8
-
 
 # Advance expressions
 var moving: bool = false
@@ -36,7 +36,6 @@ func _physics_process(delta):
 	var move_input: Vector2 = Input.get_vector(
 		&'ui_left', &'ui_right', &'ui_down', &'ui_up')
 	moving = move_input.length() > 0.1  # Give a little deadzone
-
 	var movement: Vector3 = move_input.x * cam_right + move_input.y * cam_forward
 	if moving:
 		# IDK why negative signs but it works

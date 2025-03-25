@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bv5k4jons4n5q"]
 
-[ext_resource type="Script" path="res://bone_control.gd" id="1_iy8l2"]
+[ext_resource type="Script" uid="uid://dvnip2mwlmf5k" path="res://bone_control.gd" id="1_iy8l2"]
 
 [node name="BoneControl" type="MarginContainer" node_paths=PackedStringArray("x_slider", "y_slider", "z_slider", "title", "x_text", "y_text", "z_text")]
 anchors_preset = 15

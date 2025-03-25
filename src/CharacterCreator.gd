@@ -1,6 +1,9 @@
 extends MarginContainer
-@export var humanizer:HumanizerEditorTool
+
 @export var collection: Node3D
+var humanizer := Live_Humanizer.new()
+var skeleton
+var character:CharacterBody3D
 @export var menu_root: TabContainer
 @export var camera:Camera3D
 @export var home_button: Button
@@ -24,6 +27,16 @@ var bone_categories = {}
 var attachment_points = ["LeftHand","RightHand","Head","RightFoot","LeftFoot","Hips","Chest","Root"]
 var simple_pose
 var start_of_frame = 0
+func _physics_process(_delta):
+	if humanizer.physics_body.has_node("AnimationTree"):
+		var animator=humanizer.get_animation_tree_node()
+		animator.queue_free()
+	if !character:
+		for N in collection.get_children():
+			if N is CharacterBody3D:
+				character=N
+				character.name="Character"
+				break 
 
 func _ready() -> void:
 	$splits.hide()
@@ -33,26 +46,43 @@ func _ready() -> void:
 	OBJExporter.export_started.connect(_on_export_started)
 	OBJExporter.export_completed.connect(_on_export_completed)
 	OBJExporter.export_progress_updated.connect(_on_export_progress)
-	while humanizer.scene_loaded == false:
-		await get_tree().process_frame
+#	
 	after_load()
 
 func after_load():
-	make_menu()
+	
 	make_character()
+	make_menu()
+	add_attach_points()
 	$splits.show()
 
 func make_character():
-	humanizer.reset()
-	simple_pose.skeleton=humanizer.skeleton
-	default_settings()
-	humanizer.remove_equipment(HumanizerEquipment.new("DefaultBody","basic_statue"))
-	humanizer.add_equipment(HumanizerEquipment.new("DefaultBody","basic_statue"))
-	humanizer.find_child("AnimationTree").active=false
-	var skelton = humanizer.skeleton
+	var config = HumanConfig.new()
+	config.targets['gender'] = 0.0
+	config.init_macros()
+	config.eye_color = Color.GREEN
+	config.hair_color = Color.PURPLE
+	config.eyebrow_color = Color("550055")
+	config.rig = ProjectSettings.get_setting( "addons/humanizer/default_skeleton")
+	var body = HumanizerEquipment.new("DefaultBody","defaultMat")
+	var overlay = HumanizerOverlay.new()
+	#overlay.resource_name = "skin_young"
+	body.material_config.add_overlay(overlay)
+	config.add_equipment(body)
+	humanizer.load_config_async(config)	
+	var temp = collection.find_child("Character")
+	if temp:
+		temp.queue_free()
+	var character = humanizer.get_CharacterBody3D(false)
+	character.name="Character"
+	collection.add_child(character)
+	HumanizerEditorUtils.set_node_owner(character,self)
+	skeleton = humanizer.get_skeleton_node()
+	
+func add_attach_points():
 	for slot in attachment_points:
 		attach_points[slot] = BoneAttachment3D.new()
-		skelton.add_child(attach_points[slot])
+		skeleton.add_child(attach_points[slot])
 		attach_points[slot].set_bone_name(slot)
 		attach_menu[slot].set_anchor_point(attach_points[slot])
 
@@ -172,7 +202,7 @@ func make_pose_menu():
 	var vbox = VBoxContainer.new()
 	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	simple_pose = load("res://basic_pose.tscn").instantiate()
-	simple_pose.skeleton=humanizer.skeleton
+	simple_pose.skeleton = humanizer.get_skeleton_node()
 	pannel.add_child(simple_pose)
 
 func make_detailed_pose():
@@ -221,8 +251,8 @@ func make_detailed_pose():
 		for bone_name in bone_categories[categoryName]:
 			var bone_config = load("res://bone_control.tscn").instantiate()
 			category_vbox.add_child(bone_config)
-			var bone_id = humanizer.skeleton.find_bone(bone_name)
-			bone_config.setup(bone_name,humanizer,bone_id)
+			var bone_id = skeleton.find_bone(bone_name)
+			bone_config.setup(bone_name,skeleton,bone_id)
 			simple_pose.position_macro_set.connect(bone_config.set_sliders)
 			detailed_poses[categoryName][bone_name]=bone_config
 		var spacer=Label.new()
@@ -231,8 +261,8 @@ func make_detailed_pose():
 		category_pannel.add_child(spacer)
 
 func set_pose(_values:Dictionary):
-	var skeleton = humanizer.skeleton
-	var bone_id = skeleton.find_bone(_values.pose)
+	var skel = humanizer.skeleton
+	var bone_id = skel.find_bone(_values.pose)
 	var rotVect = Vector3()
 	match _values["axis"]:
 		"x":
@@ -241,13 +271,13 @@ func set_pose(_values:Dictionary):
 			rotVect.y=1
 		"z":
 			rotVect.z=1
-	var pose = skeleton.get_bone_pose(bone_id)
+	var pose = skel.get_bone_pose(bone_id)
 	pose=pose.rotated_local(rotVect,_values["value"])
-	humanizer.skeleton.set_bone_pose(bone_id,pose)
-	pose = skeleton.get_bone_pose(bone_id)
+	humanizer.skel.set_bone_pose(bone_id,pose)
+	pose = skel.get_bone_pose(bone_id)
 
 func _set_shapekey(shapekey_values:Dictionary):
-	humanizer.set_shapekeys(shapekey_values)
+	humanizer.set_targets(shapekey_values)
 func default_settings():
 	simple_pose.set_default()
 	for key_name in shapekey_slider.keys():
@@ -256,19 +286,22 @@ func setup_character(shapekeys:Dictionary):
 	humanizer.set_shapekeys(shapekeys)
 
 func _on_rotation_value_changed(value: float) -> void:
-	humanizer.rotation.y=TAU*value/100
+	character.rotation.y=TAU*value/100
 
 func _on_position_slider_value_changed(value: float) -> void:
-	camera.v_offset=(value*humanizer.humanizer.get_head_height()*1.2)/100-0.1
+	camera.v_offset=(value*humanizer.get_head_height()*1.2)/100-0.1
 	
 func _set_equipment(equipment:Dictionary):
-	humanizer.remove_equipment_in_slot(equipment["slot"])
+	var old_equip=humanizer.human_config.get_equipment_in_slot(equipment["slot"])
+	if old_equip:
+		humanizer.remove_equipment(old_equip)
 	if equipment["item_name"] !="None":
-		humanizer.add_equipment(HumanizerEquipment.new(equipment["item_name"],"none_diffuse"))
+		humanizer.add_equipment(HumanizerEquipment.new(equipment["item_name"])) 
+		
 
 func _on_zoom_slider_value_changed(value):
 	var invert=1-value
-	zoom_out_size= humanizer.humanizer.get_head_height()*1.2
+	zoom_out_size= humanizer.get_head_height()*1.2
 	camera.size = zoom_out_size*invert
 func new_name():
 	nameBox.text = make_name()
@@ -396,9 +429,9 @@ func scal_pose_equipment(eqipment:MeshInstance3D):
 
 func _on_file_dialog_file_selected(file_path: String) -> void:
 	if len(file_path)>2:
-		var mesh = humanizer.find_child("DefaultBody")
+		var mesh = character.find_child("Avatar")
 		var surface_tool= SurfaceTool.new()
-		for child in humanizer.get_children():
+		for child in character.get_children():
 			if child.get_class() == "Skeleton3D":
 				for bone in child.get_children():
 					for equipMesh in bone.get_children():

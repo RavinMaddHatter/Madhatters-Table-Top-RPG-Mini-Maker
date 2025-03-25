@@ -14,10 +14,7 @@ enum SECTION {header,vertices,delete_vertices}
 @export var mh2gd_index := []
 @export var tags := PackedStringArray()
 @export var z_depth := 0
-@export var rigged_config := []
-#dictionary of rig names and bones/weights arrays
-@export var rigged_bones := {}
-@export var rigged_weights := {}
+
 @export var bones := {}
 @export var weights := {}
 @export var uv_array := PackedVector2Array()
@@ -26,24 +23,27 @@ enum SECTION {header,vertices,delete_vertices}
 
 var obj_file_name: String
 var display_name : String
+var default_material : String
+var mhclo_path : String
 
 func parse_file(filename:String):
+	mhclo_path = filename
 	resource_name = filename.get_basename().get_file()
-	#print(resource_name)
-	var unique_lines = {}
 	var file = FileAccess.open(filename,FileAccess.READ)
 	var current_section = SECTION.header
 	while file.get_position() < file.get_length():
 		var line = file.get_line()
-		if current_section == SECTION.header:
+		if line.begins_with("material "):  #can be above or below the "verts 0"
+			default_material = line.split(" ",false,1)[1]
+		elif current_section == SECTION.header:
 			if line == "verts 0":
 				current_section = SECTION.vertices
-			elif line.begins_with("obj_file "):
-				obj_file_name = line.get_slice(" ",1)
 			elif line.begins_with("name "):
 				#use substring instead of split so there can be additional spaces in name
 				display_name = line.substr(5).strip_edges()
 				#print(display_name)
+			elif line.begins_with("obj_file "):
+				obj_file_name = line.get_slice(" ",1)
 			elif line.begins_with("tag "):
 				tags.append(line.substr(4).strip_edges()) 
 			elif line.begins_with("x_scale "):
@@ -69,9 +69,8 @@ func parse_file(filename:String):
 		elif current_section == SECTION.vertices:
 			if line == "delete_verts":
 				current_section = SECTION.delete_vertices
-			elif not line == "":
+			elif not line == "" and not line.begins_with("#"):
 				if line.strip_edges().get_slice(" ",0).is_valid_int():
-					unique_lines[line] = true
 					var line_array = line.split_floats(" ",false)
 					if line_array.size() == 1:
 						var line_dict = {}
@@ -94,8 +93,7 @@ func parse_file(filename:String):
 					else:
 						printerr(line)
 				else:
-					if not line.begins_with('material'):
-						printerr(line)
+					printerr(line)
 					
 func parse_scale_data(line:String, index:String): #index is x, y, or z
 	var scale_data = line.split_floats(" ",false)

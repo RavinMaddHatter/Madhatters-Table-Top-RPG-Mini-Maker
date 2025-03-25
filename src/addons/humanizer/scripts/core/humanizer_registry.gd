@@ -7,37 +7,31 @@ static var skin_normals := {}
 static var overlays := {}
 static var rigs := {}
 
-func _init() -> void:
-	load_all()
+#func _init() -> void:
+	#load_all()
+	#_get_rigs()
 
 static func load_all() -> void:
 	HumanizerLogger.profile("HumanizerRegistry", func():
 		_get_rigs()
 		_load_equipment()
-		_get_skin_textures()
 		_get_materials()
 	)
 	
 static func _get_materials():
-	for folder in HumanizerGlobalConfig.config.asset_import_paths:
-		var materials_path = folder.path_join('materials')
-		for dir in OSPath.get_dirs(materials_path):
-			var equip_type = dir.get_file()
-			for mat_file in OSPath.get_files(dir):
-				if mat_file.get_extension() == "res":
-					var mat_res = HumanizerResourceService.load_resource(mat_file)
-					if mat_res is HumanizerMaterial or mat_res is StandardMaterial3D:
-						equipment[equip_type].textures[mat_res.resource_name] = mat_file
-						if mat_file.get_file().get_basename() == "default":
-							equipment[equip_type].default_material = mat_res.resource_name
-						#want to merge rigged and unrigged into same equip type, so can just be toggled for cut scenes or whatever
-						#but for now im doing this
-						var rigged_name = equip_type + "_Rigged"
-						if rigged_name in equipment:
-							equipment[rigged_name].textures[mat_res.resource_name] = mat_file
-							if mat_file.get_file().get_basename() == "default":
-								equipment[rigged_name].default_material = mat_res.resource_name
-						
+	for equip_id in equipment:
+		var equip_type = equipment[equip_id]
+		var mats = HumanizerMaterialService.search_for_materials("res://humanizer/material".path_join(equip_id))
+		equip_type.textures = mats.materials
+		equip_type.overlays = mats.overlays	
+	#now populate shared materials
+	for equip_id in equipment:
+		var equip_type = equipment[equip_id]
+		if equip_type.material_override != "":
+			var override_equip = equipment[equip_type.material_override]
+			equip_type.textures = override_equip.textures
+			equip_type.overlays = override_equip.overlays
+		
 static func add_equipment_type(equip:HumanizerEquipmentType):
 	#print('Registering equipment ' + equip.resource_name)
 	if equipment.has(equip.resource_name):
@@ -53,9 +47,13 @@ static func filter_equipment(filter: Dictionary) -> Array[HumanizerEquipmentType
 					filtered.append(equip)
 	return filtered
 
+static func load_animations() -> void:
+	pass
+		
+
 static func _get_rigs() -> void:
 	#  Create and/or cache rig resources
-	for folder in HumanizerGlobalConfig.config.asset_import_paths:
+	for folder in ProjectSettings.get_setting("addons/humanizer/asset_import_paths"):
 		var rig_path = folder.path_join('rigs')
 		for dir in OSPath.get_dirs(rig_path):
 			var name = dir.get_file()
@@ -77,25 +75,11 @@ static func _get_rigs() -> void:
 				elif file.get_extension() == 'res':
 					rigs[name].rigged_mesh_path = file
 
-static func _get_skin_textures() -> void:
-	## load texture paths
-	overlays['skin'] = {}
-	for path in HumanizerGlobalConfig.config.asset_import_paths:
-		for dir in OSPath.get_dirs(path.path_join('skins')):
-			if dir.get_file() == '_overlays':
-				for file in OSPath.get_files(dir):
-					overlays['skin'][file.get_basename()] = file
-			else:
-				continue
-		for fl in OSPath.get_files(path.path_join('skin_normals')):
-			if fl.get_extension() in ['png', 'jpg']:
-				skin_normals[fl.get_file().get_basename()] = fl
-
 static func _load_equipment() -> void:
 	equipment={}
-	for path in HumanizerGlobalConfig.config.asset_import_paths:
-		for dir in OSPath.get_dirs(path.path_join('equipment')):
-			_scan_dir(dir)
+	var equip_folder = "res://humanizer/equipment"
+	for dir in DirAccess.get_directories_at(equip_folder):
+		_scan_dir(equip_folder.path_join(dir))
 
 static func _scan_dir(path: String) -> void:
 	var contents := OSPath.get_contents(path)
@@ -109,6 +93,7 @@ static func _scan_dir(path: String) -> void:
 			continue
 		var equip = HumanizerResourceService.load_resource(file)
 		if equip is HumanizerEquipmentType:
+			equip.path = path
 			add_equipment_type(equip)
 		else:
 			printerr("unexpected resource type " + file)

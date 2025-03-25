@@ -1,53 +1,19 @@
 @tool
 extends EditorPlugin
 
-# The new node type to be added
-const humanizer_node = preload('res://addons/humanizer/scripts/utils/humanizer_editor_tool.gd')
-# Its icon in the scene tree
-const node_icon = preload('res://addons/humanizer/icon.png')
-# Editor inspectors 
-var humanizer_inspector = HumanizerEditorInspectorPlugin.new()
-var asset_import_inspector = AssetImporterInspectorPlugin.new()
-var human_randomizer_inspector = HumanRandomizerInspectorPlugin.new()
-var humanizer_material_inspector = HumanizerMeshInstanceInspectorPlugin.new()
-
-# For mapping tool menu signals
-const menu_ids := {
-	'generate_base_mesh': 1,
-	'read_shapekeys': 2,
-	'rig_config': 4,
-	'image_import_settings': 5,
-	'process_raw_data': 10,
-	'reload_registry': 20,
-	'purge_generated_assets': 29,
-	'asset_importer': 30,
-	'test': 999,
-}
-
 # Thread for background tasks
 var thread := Thread.new()
 
-
 func _enter_tree():
+	init_config()
 	# Load global config singleton
 	add_autoload_singleton('HumanizerGlobal', "res://addons/humanizer/scenes/humanizer_global.tscn")
-	# Add editor inspector plugins
-	add_inspector_plugin(humanizer_inspector)
-	add_inspector_plugin(asset_import_inspector)
-	add_inspector_plugin(human_randomizer_inspector)
-	add_inspector_plugin(humanizer_material_inspector)
-	# Add custom humanizer node
-	add_custom_type('Humanizer', 'Node3D', humanizer_node, node_icon)
 	# Add a submenu to the Project/Tools menu
 	_add_tool_submenu()
-
+	
 func _exit_tree():
 	remove_custom_type('Humanizer')
 	remove_tool_menu_item('Humanizer')
-	remove_inspector_plugin(humanizer_inspector)
-	remove_inspector_plugin(asset_import_inspector)
-	remove_inspector_plugin(human_randomizer_inspector)
-	remove_inspector_plugin(humanizer_material_inspector)
 	remove_autoload_singleton('HumanizerGlobal')
 	if thread.is_started():
 		thread.wait_to_finish()
@@ -55,84 +21,148 @@ func _exit_tree():
 func _add_tool_submenu() -> void:
 	# Should we cache this to clean up signals in _exit_tree?
 	var popup_menu = PopupMenu.new()
-	var preprocessing_popup = PopupMenu.new()
-	var import_assets_popup = PopupMenu.new()
-	
-	preprocessing_popup.name = 'preprocessing_popup'
-	preprocessing_popup.add_item('Generate Base Meshes', menu_ids.generate_base_mesh)
-	preprocessing_popup.add_item('Read ShapeKey files', menu_ids.read_shapekeys)
-	preprocessing_popup.add_item('Set Up Skeleton Configs', menu_ids.rig_config)
-	preprocessing_popup.add_item('Import Images as Uncompressed (Optional)', menu_ids.image_import_settings)
-	
-	popup_menu.add_child(preprocessing_popup)
-	popup_menu.add_submenu_item('Preprocessing Tasks', 'preprocessing_popup')
-	popup_menu.add_item('Run All Preprocessing', menu_ids.process_raw_data)
-	popup_menu.add_item('Purge Generated Asset Resources', menu_ids.purge_generated_assets)
-	popup_menu.add_item('Import All Assets', menu_ids.asset_importer)
-	popup_menu.add_item('Reload Registry', menu_ids.reload_registry)
-	popup_menu.add_item('Run Test Function', menu_ids.test)
-	
+	popup_menu.add_item('Settings')
+	popup_menu.set_item_metadata(popup_menu.item_count-1,_open_settings_popup)
+	popup_menu.id_pressed.connect(_handle_menu_event.bind(popup_menu))
 	add_tool_submenu_item('Humanizer', popup_menu)
-	popup_menu.id_pressed.connect(_handle_menu_event)
-	preprocessing_popup.id_pressed.connect(_handle_menu_event)
 
-func _handle_menu_event(id) -> void:
-	if thread.is_alive():
-		printerr('Thread busy...  Try again after current task completes')
-		return
-	if thread.is_started():
-		thread.wait_to_finish()
-	if id == menu_ids.generate_base_mesh:
-		thread.start(_generate_base_meshes)
-	elif id == menu_ids.read_shapekeys:
-		thread.start(_read_shapekeys)
-	elif id == menu_ids.rig_config:
-		thread.start(_rig_config)
-	elif id == menu_ids.image_import_settings:
-		thread.start(_image_import_settings)
-	elif id == menu_ids.process_raw_data:
-		_process_raw_data()
-	elif id == menu_ids.asset_importer:
-		thread.start(_import_assets)
-	elif id == menu_ids.purge_generated_assets:
-		thread.start(_purge_assets)
-	elif id == menu_ids.reload_registry:
-		HumanizerRegistry.load_all()
-	elif id == menu_ids.test:
-		thread.start(_test)
+func _handle_menu_event(id:int,popup_menu:PopupMenu) -> void:
+	var callable : Callable = popup_menu.get_item_metadata(id)
+	callable.call()
 
 #region Thread Tasks
-func _process_raw_data() -> void:
-	print_debug('Running all preprocessing')
-	for task in [
-		_generate_base_meshes,
-		_read_shapekeys,
-		_rig_config,
-		_image_import_settings
-	]:
-		thread.start(task)
-		while thread.is_alive():
-			await get_tree().create_timer(1).timeout
-		thread.wait_to_finish()
-	
-func _generate_base_meshes() -> void:
-	ReadBaseMesh.new().run()
-	
-func _read_shapekeys() -> void:
-	ShapeKeyReader.new().run()
-	
-func _rig_config() -> void:
-	HumanizerSkeletonConfig.new().run()
+func _open_settings_popup():
+	var popup = load("res://addons/humanizer/scenes/settings_popup.tscn").instantiate()
+	get_editor_interface().popup_dialog(popup)
 
-func _image_import_settings() -> void:
-	HumanizerImageImportSettings.new().run()
-
-func _import_assets() -> void:
-	HumanizerEquipmentImportService.import_all()
-	
-func _purge_assets() -> void:
-	HumanizerAssetImporter.new().run(true)
-	
-func _test() -> void:
-	print(typeof('test'))
 #endregion
+
+func init_config():
+	if not ProjectSettings.has_setting("addons/humanizer/asset_import_paths"):
+		var property_info = {}
+		var slots = {"Body Parts"={"body"="Body","righteye"="Right Eye","lefteye"="Left Eye","righteyebrow"="Right Eyebrow","lefteyebrow"="Left Eyebrow","righteyelash"="Right Eyelash","lefteyelash"="Left Eyelash","hair"="Hair","teeth"="Teeth","tongue"="Tongue",},
+		"Clothing"={"headclothes"="Head","eyesclothes"="Eyes","mouthclothes"="Mouth","handsclothes"="Hands","armsclothes"="Arms","torsoclothes"="Torso","legsclothes"="Legs","feetclothes"="Feet"}}
+		ProjectSettings.set_setting("addons/humanizer/slots", slots)
+		#ProjectSettings.set_initial_value("addons/humanizer/slots",slots)
+		
+		ProjectSettings.clear("addons/humanizer/asset_import_paths")
+		var import_paths:PackedStringArray = ["res://addons/humanizer/data/assets/","res://addons/humanizer_assets/","user://humanizer/","res://humanizer/"]
+		ProjectSettings.set("addons/humanizer/asset_import_paths",import_paths)
+		#var property_info = {
+			#name = "addons/humanizer/asset_import_paths",
+			#type = TYPE_ARRAY,
+			#hint = PROPERTY_HINT_TYPE_STRING,
+			#hint_string = str(TYPE_STRING) + "/" + str(PROPERTY_HINT_GLOBAL_DIR) 
+		#}
+		#ProjectSettings.add_property_info(property_info)
+		##setting initial value makes it not work in game?
+		#ProjectSettings.set_initial_value("addons/humanizer/asset_import_paths",import_paths)
+		
+		var human_export_path: String = 'res://data/humans/'
+		ProjectSettings.set_setting("addons/humanizer/human_export_path", human_export_path)
+		#ProjectSettings.set_initial_value("addons/humanizer/human_export_path", human_export_path)
+		
+		var character_body_script = "res://addons/humanizer/scripts/utils/human_controller.gd"
+		ProjectSettings.set_setting("addons/humanizer/default_characterbody_script",character_body_script)
+		#ProjectSettings.set_initial_value("addons/humanizer/default_characterbody_script",character_body_script)
+		
+		ProjectSettings.set_setting("addons/humanizer/default_rigidbody_script","")
+		ProjectSettings.set_setting("addons/humanizer/default_staticbody_script","")
+		ProjectSettings.set_setting("addons/humanizer/default_area_script","")
+		
+		var default_skeleton = "game_engine-RETARGETED"
+		ProjectSettings.set_setting("addons/humanizer/default_skeleton",default_skeleton)
+		#ProjectSettings.set_initial_value("addons/humanizer/default_skeleton",default_skeleton)
+		
+		var animation_tree = "res://addons/humanizer/data/animations/animation_tree.tscn"
+		ProjectSettings.set_setting("addons/humanizer/default_animation_tree",animation_tree)
+		#ProjectSettings.set_initial_value("addons/humanizer/default_animation_tree",animation_tree)
+		
+		var default_baked_root_node: String = "CharacterBody3D"
+		ProjectSettings.set_setting("addons/humanizer/default_baked_root_node",default_baked_root_node)
+		#ProjectSettings.set_initial_value("addons/humanizer/default_baked_root_node",default_baked_root_node)
+		property_info = {
+			name = "addons/humanizer/default_baked_root_node",
+			type = TYPE_STRING,
+			hint = PROPERTY_HINT_ENUM,
+			hint_string = "CharacterBody3D,RigidBody3D,StaticBody3D,Area3D"
+		}
+		ProjectSettings.add_property_info(property_info)
+		
+		## Default character collider layer
+		var default_character_physics_layers:int = 1 << 1
+		ProjectSettings.set_setting("addons/humanizer/character_physics_layers",default_character_physics_layers)
+		#ProjectSettings.set_initial_value("addons/humanizer/character_physics_layers",default_character_physics_layers)
+		property_info = {
+			name = "addons/humanizer/character_physics_layers",
+			type = TYPE_INT,
+			hint = PROPERTY_HINT_LAYERS_3D_PHYSICS,
+		}
+		ProjectSettings.add_property_info(property_info)
+		
+		## Default character collider mask
+		var default_character_physics_mask : int = 1 | 1 << 1
+		ProjectSettings.set_setting("addons/humanizer/character_physics_mask",default_character_physics_mask)
+		#ProjectSettings.set_initial_value("addons/humanizer/character_physics_mask",default_character_physics_mask)
+		property_info = {
+			name = "addons/humanizer/character_physics_mask",
+			type = TYPE_INT,
+			hint = PROPERTY_HINT_LAYERS_3D_PHYSICS,
+		}
+		ProjectSettings.add_property_info(property_info)
+		## Default static layer for StaticBody3D humans
+		var default_staticbody_physics_layers : int = 1
+		ProjectSettings.set_setting("addons/humanizer/staticbody_physics_layers",default_staticbody_physics_layers)
+		#ProjectSettings.set_initial_value("addons/humanizer/staticbody_physics_layers",default_staticbody_physics_layers)
+		property_info = {
+			name = "addons/humanizer/staticbody_physics_layers",
+			type = TYPE_INT,
+			hint = PROPERTY_HINT_LAYERS_3D_PHYSICS,
+		}
+		ProjectSettings.add_property_info(property_info)
+		
+		## Default ragdoll physics layer
+		var default_physical_bone_layers : int = 1 << 2
+		ProjectSettings.set_setting("addons/humanizer/physical_bone_layers",default_physical_bone_layers)
+		#ProjectSettings.set_initial_value("addons/humanizer/physical_bone_layers",default_physical_bone_layers)
+		property_info = {
+			name = "addons/humanizer/physical_bone_layers",
+			type = TYPE_INT,
+			hint = PROPERTY_HINT_LAYERS_3D_PHYSICS,
+		}
+		ProjectSettings.add_property_info(property_info)
+		
+		## Default ragdoll physics mask
+		var default_physical_bone_mask : int = 1 | 1 << 2
+		ProjectSettings.set_setting("addons/humanizer/physical_bone_mask",default_physical_bone_mask)
+		#ProjectSettings.set_initial_value("addons/humanizer/physical_bone_mask",default_physical_bone_mask)
+		property_info = {
+			name = "addons/humanizer/physical_bone_mask",
+			type = TYPE_INT,
+			hint = PROPERTY_HINT_LAYERS_3D_PHYSICS,
+		}
+		ProjectSettings.add_property_info(property_info)
+		
+		var default_character_render_layers : int = 1
+		ProjectSettings.set_setting("addons/humanizer/character_render_layers",default_character_render_layers)
+		#ProjectSettings.set_initial_value("addons/humanizer/character_render_layers",default_character_render_layers)
+		property_info = {
+			name = "addons/humanizer/character_render_layers",
+			type = TYPE_INT,
+			hint = PROPERTY_HINT_LAYERS_3D_RENDER,
+		}
+		ProjectSettings.add_property_info(property_info)
+		
+		var atlas_resolution: int = 2048
+		ProjectSettings.set_setting("addons/humanizer/atlas_resolution",atlas_resolution)
+		#ProjectSettings.set_initial_value("addons/humanizer/atlas_resolution",atlas_resolution)
+		property_info = {
+			name = "addons/humanizer/atlas_resolution",
+			type = TYPE_INT,
+			hint = PROPERTY_HINT_ENUM,
+			hint_string = "1k:1024,2k:2048,4k:4096"
+		}
+		ProjectSettings.add_property_info(property_info)
+		
+		ProjectSettings.save()
+		#ProjectSettings.save_custom("override.cfg") #works but why does it still save to project.godot as well? 
