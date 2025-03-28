@@ -4,6 +4,7 @@
 #natural. but i am not good with kinimatics. It is just hacks to make it work. 
 extends MarginContainer
 var skeleton 
+var humanizer
 signal position_macro_set
 @export var left_elbow_slider:HSlider
 @export var right_elbow_slider:HSlider
@@ -43,6 +44,7 @@ signal position_macro_set
 @export var yloc_slider:HSlider
 @export var zloc_slider:HSlider
 func locate_model(_value):
+	skeleton=humanizer.get_skeleton_node()
 	var bone_id=skeleton.find_bone("Root")
 	var pose = Vector3()
 	pose.x = xloc_slider.value

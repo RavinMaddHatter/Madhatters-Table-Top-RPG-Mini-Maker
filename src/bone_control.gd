@@ -1,5 +1,6 @@
 extends MarginContainer
 var skel:Skeleton3D
+var humanizer:Live_Humanizer
 var bone_id:int
 @export var x_slider:HSlider
 @export var y_slider:HSlider
@@ -15,6 +16,7 @@ func setup(bone_name:String,skeleton,id):
 	bone_id=id
 	set_sliders()
 func set_sliders():
+	skel=humanizer.get_skeleton_node()
 	var pose = skel.get_bone_pose(bone_id)
 	origin = pose.origin
 	x_slider.value=pose.basis.get_euler().x

@@ -27,25 +27,8 @@ var bone_categories = {}
 var attachment_points = ["LeftHand","RightHand","Head","RightFoot","LeftFoot","Hips","Chest","Root"]
 var simple_pose
 var start_of_frame = 0
-var character_loaded=false
 func _physics_process(_delta):
-	if humanizer.physics_body.has_node("AnimationTree"):
-		var animator=humanizer.get_animation_tree_node()
-		animator.queue_free()
-	if not simple_pose.skeleton:
-		simple_pose.skeleton = humanizer.get_skeleton_node()
-		for categoryName in detailed_poses.keys():
-			for bone_name in detailed_poses[categoryName].keys():
-				detailed_poses[categoryName][bone_name].skel = simple_pose.skeleton
-				detailed_poses[categoryName][bone_name].set_bone_pose()
-		simple_pose.ping_poses()
-		character_loaded=true
-	if !character:
-		for N in collection.get_children():
-			if N is CharacterBody3D:
-				character=N
-				character.name="Character"
-				break 
+	pass
 
 func _ready() -> void:
 	$splits.hide()
@@ -55,19 +38,19 @@ func _ready() -> void:
 	OBJExporter.export_started.connect(_on_export_started)
 	OBJExporter.export_completed.connect(_on_export_completed)
 	OBJExporter.export_progress_updated.connect(_on_export_progress)
-#	
-	after_load()
-
-func after_load():
 	make_basic_menu()
 	make_attachments_menu()
-	make_character()
-	make_menu()
-	add_attach_points()
+	make_pose_menu()
+	make_import_menu()
+	make_detailed_menu()
+	make_detailed_pose()
 	$splits.show()
+	make_character()
 
-func make_character():
-	character_loaded=false
+func make_character(callback=null):
+	for n in collection.get_children():
+		if n.get_class() == "CharacterBody3D":
+			n.queue_free()
 	var config = HumanConfig.new()
 	config.targets['gender'] = 0.0
 	config.init_macros()
@@ -80,15 +63,40 @@ func make_character():
 	equipment_categories["body"].set_selected("DefaultBody")
 	equipment_categories["lefteye"].set_selected("LeftEye")
 	equipment_categories["righteye"].set_selected("RightEye-LowPolyEyeball")
-	humanizer.load_config_async(config)	
-	var temp = collection.find_child("Character")
-	if temp:
-		temp.queue_free()
+	humanizer.load_config_async(config)
 	var character = humanizer.get_CharacterBody3D(false)
 	character.name="Character"
 	collection.add_child(character)
-	HumanizerEditorUtils.set_node_owner(character,self)
+	#HumanizerEditorUtils.set_node_owner(character,self)
+	var loaded =false
+	while not loaded:
+		if humanizer.physics_body:
+			if humanizer.physics_body.has_node("AnimationTree"):
+				humanizer.get_animation_tree_node().queue_free()
+				loaded=true
+		await get_tree().process_frame
+	loaded =false
 	skeleton = humanizer.get_skeleton_node()
+	while not skeleton:
+		skeleton = humanizer.get_skeleton_node()
+		await get_tree().process_frame
+	simple_pose.skeleton = humanizer.get_skeleton_node()
+	for categoryName in detailed_poses.keys():
+		for bone_name in detailed_poses[categoryName].keys():
+			var bone_config = detailed_poses[categoryName][bone_name]
+			var bone_id = skeleton.find_bone(bone_name)
+			bone_config.setup(bone_name,skeleton,bone_id)
+			bone_config.humanizer = humanizer
+	simple_pose.skeleton = humanizer.get_skeleton_node()
+	simple_pose.humanizer = humanizer
+	simple_pose.ping_poses()
+	add_attach_points()
+	
+	
+	if callback:
+		var callable = Callable(self,callback)
+		callable.call()
+	print("ready")
 	
 func add_attach_points():
 	for slot in attachment_points:
@@ -97,11 +105,7 @@ func add_attach_points():
 		attach_points[slot].set_bone_name(slot)
 		attach_menu[slot].set_anchor_point(attach_points[slot])
 
-func make_menu():
-	make_pose_menu()
-	make_import_menu()
-	make_detailed_menu()
-	make_detailed_pose()
+	
 
 func make_detailed_menu():
 	var pannel = ScrollContainer.new()
@@ -211,7 +215,6 @@ func make_pose_menu():
 	var vbox = VBoxContainer.new()
 	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	simple_pose = load("res://basic_pose.tscn").instantiate()
-	simple_pose.skeleton = humanizer.get_skeleton_node()
 	pannel.add_child(simple_pose)
 
 func make_detailed_pose():
@@ -259,11 +262,10 @@ func make_detailed_pose():
 		category_pannel.add_child(category_vbox)
 		for bone_name in bone_categories[categoryName]:
 			var bone_config = load("res://bone_control.tscn").instantiate()
+			bone_config.humanizer = humanizer
 			category_vbox.add_child(bone_config)
-			var bone_id = skeleton.find_bone(bone_name)
-			bone_config.setup(bone_name,skeleton,bone_id)
-			simple_pose.position_macro_set.connect(bone_config.set_sliders)
 			detailed_poses[categoryName][bone_name]=bone_config
+			simple_pose.position_macro_set.connect(bone_config.set_sliders)
 		var spacer=Label.new()
 		spacer.name=" "
 		spacer.size_flags_horizontal=Control.SIZE_EXPAND_FILL
@@ -371,23 +373,20 @@ func _on_save_pressed():
 		save_setings["detailed_poses"][categoryName]={}
 		for bone_name in bone_categories[categoryName]:
 			save_setings["detailed_poses"][categoryName][bone_name]={}
-			save_setings["detailed_poses"][categoryName][bone_name]=detailed_poses[categoryName][bone_name].get_sliders()
-	print(save_setings["equipment_categories"])
-	
+			save_setings["detailed_poses"][categoryName][bone_name]=detailed_poses[categoryName][bone_name].get_sliders()	
 	saveFile.store_var(save_setings)
-	$Warning.dialog_text="Saving operation for character %s is completed."%nameBox.text
-	$Warning.title="Save Complete"
-	$Warning.initial_position=$Warning.WINDOW_INITIAL_POSITION_CENTER_MAIN_WINDOW_SCREEN
-	$Warning.show()
-
+	#$Warning.dialog_text="Saving operation for character %s is completed."%nameBox.text
+	#$Warning.title="Save Complete"
+	#$Warning.initial_position=$Warning.WINDOW_INITIAL_POSITION_CENTER_MAIN_WINDOW_SCREEN
+	#$Warning.show()
 
 
 func load_character_file(characterName:String):
 	start_freeze_manager("character load")
 	nameBox.text = characterName
-	make_character()
-	while character_loaded:
-		await get_tree().process_frame
+	make_character("finish_load")
+func finish_load():
+	var characterName = nameBox.text
 	var path="user://saves/"+characterName+".save"
 	var file = FileAccess.open(path, FileAccess.READ)
 	var save_setings = file.get_var()
@@ -396,7 +395,6 @@ func load_character_file(characterName:String):
 	var num_sections = 4
 	var step_size=1.0/float(len(shapekey_slider.keys())*num_sections)
 	_on_export_started()
-	print(save_setings["equipment_categories"])
 	for clothing_slot in equipment_categories.keys():
 		if save_setings["equipment_categories"][clothing_slot]!="None":
 			equipment_categories[clothing_slot].load_equipment(save_setings["equipment_categories"][clothing_slot])
@@ -443,6 +441,7 @@ func scal_pose_equipment(eqipment:MeshInstance3D):
 	return out_mesh
 
 func _on_file_dialog_file_selected(file_path: String) -> void:
+	_on_save_pressed()
 	if len(file_path)>2:
 		var surface_tool= SurfaceTool.new()
 		for child in character.get_children():
@@ -467,7 +466,8 @@ func _on_file_dialog_file_selected(file_path: String) -> void:
 			elif child.get_class() == "MeshInstance3D":
 				var baked_pose : ArrayMesh
 				if child.name =="Avatar":
-					character = humanizer.get_CharacterBody3D(true)
+					var character = humanizer.get_CharacterBody3D(true)
+					collection.add_child(character)
 					var loaded = false
 					var mesh
 					while not loaded:
@@ -480,6 +480,7 @@ func _on_file_dialog_file_selected(file_path: String) -> void:
 								mesh=c
 						await get_tree().process_frame
 					baked_pose = mesh.bake_mesh_from_current_skeleton_pose()
+					character.queue_free()
 				else:
 					baked_pose = child.bake_mesh_from_current_skeleton_pose()
 				var tranformer=Transform3D()
@@ -489,6 +490,7 @@ func _on_file_dialog_file_selected(file_path: String) -> void:
 		surface_tool.append_from(baseMesh.mesh, 0,baseMesh.transform)
 		var combinedMesh:ArrayMesh=surface_tool.commit()
 		OBJExporter.save_mesh_to_files(combinedMesh, file_path)
+		load_character_file(nameBox.text)
 
 func _on_export_started():
 	$progressContainer.show()
