@@ -108,7 +108,7 @@ func standard_bake_meshes():
 	HumanizerJobQueue.add_job(HumanizerMeshService.compress_material.bind(new_mesh))
 	return new_mesh
 
-func combine_surfaces_to_mesh(surface_names:PackedStringArray,new_mesh:=ArrayMesh.new(),atlas_resolution:int=ProjectSettings.get_setting("atlas_resolution")):
+func combine_surfaces_to_mesh(surface_names:PackedStringArray,new_mesh:=ArrayMesh.new(),atlas_resolution:int=2048):
 	var bake_arrays = []
 	var bake_mats = []
 	for s_name in surface_names:

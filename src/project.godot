@@ -65,9 +65,9 @@ config/icon="res://assets/Hatter_Love.png"
 
 [autoload]
 
-HumanizerGlobal="*res://addons/humanizer/scenes/humanizer_global.tscn"
 OBJExporter="*res://addons/obj_exporter/OBJExporter.tscn"
 HelperFunctions="*res://helper_functions.gd"
+HumanizerGlobal="*res://addons/humanizer/scenes/humanizer_global.tscn"
 
 [editor]
 

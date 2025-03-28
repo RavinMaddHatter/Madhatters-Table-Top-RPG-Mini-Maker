@@ -31,6 +31,11 @@ func _physics_process(_delta):
 	if humanizer.physics_body.has_node("AnimationTree"):
 		var animator=humanizer.get_animation_tree_node()
 		animator.queue_free()
+	if not simple_pose.skeleton:
+		simple_pose.skeleton = humanizer.get_skeleton_node()
+		for categoryName in detailed_poses.keys():
+			for bone_name in detailed_poses[categoryName].keys():
+				detailed_poses[categoryName][bone_name].skel = simple_pose.skeleton
 	if !character:
 		for N in collection.get_children():
 			if N is CharacterBody3D:
@@ -65,11 +70,15 @@ func make_character():
 	config.eyebrow_color = Color("550055")
 	config.rig = ProjectSettings.get_setting( "addons/humanizer/default_skeleton")
 	var body = HumanizerEquipment.new("DefaultBody","defaultMat")
-	var overlay = HumanizerOverlay.new()
+	
+	#var overlay = HumanizerOverlay.new()
 	#overlay.resource_name = "skin_young"
-	body.material_config.add_overlay(overlay)
+	#body.material_config.add_overlay(overlay)
 	config.add_equipment(body)
+	config.add_equipment(HumanizerEquipment.new("RightEye-LowPolyEyeball"))
+	config.add_equipment(HumanizerEquipment.new("LeftEye"))
 	humanizer.load_config_async(config)	
+	
 	var temp = collection.find_child("Character")
 	if temp:
 		temp.queue_free()
@@ -88,10 +97,10 @@ func add_attach_points():
 
 func make_menu():
 	make_basic_menu()
-	make_detailed_menu()
+	make_pose_menu()
 	make_attachments_menu()
 	make_equipment_menu()
-	make_pose_menu()
+	make_detailed_menu()
 	make_detailed_pose()
 
 func make_detailed_menu():
@@ -134,7 +143,7 @@ func make_detailed_menu():
 func make_equipment_menu():
 	var pannel = ScrollContainer.new()
 	menu_root.add_child(pannel)
-	pannel.name = "Equipment"
+	pannel.name = "Import OBJs"
 	var vbox = VBoxContainer.new()
 	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	pannel.add_child(vbox)
@@ -146,7 +155,7 @@ func make_equipment_menu():
 func make_attachments_menu():
 	var pannel = ScrollContainer.new()
 	menu_root.add_child(pannel)
-	pannel.name = "Body Parts/Cloths"
+	pannel.name = "Attachments"
 	var vbox = VBoxContainer.new()
 	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	pannel.add_child(vbox)
@@ -168,7 +177,7 @@ func make_attachments_menu():
 func make_basic_menu():
 	var pannel = ScrollContainer.new()
 	menu_root.add_child(pannel)
-	pannel.name = "Basic Config"
+	pannel.name = "Simple"
 	var vbox = VBoxContainer.new()
 	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	vbox.set_custom_minimum_size(Vector2(300,0))
@@ -198,7 +207,7 @@ func make_basic_menu():
 func make_pose_menu():
 	var pannel = ScrollContainer.new()
 	menu_root.add_child(pannel)
-	pannel.name = "Basic Poses"
+	pannel.name = "Simple Poses"
 	var vbox = VBoxContainer.new()
 	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	simple_pose = load("res://basic_pose.tscn").instantiate()
@@ -429,7 +438,8 @@ func scal_pose_equipment(eqipment:MeshInstance3D):
 
 func _on_file_dialog_file_selected(file_path: String) -> void:
 	if len(file_path)>2:
-		var mesh = character.find_child("Avatar")
+		
+		
 		var surface_tool= SurfaceTool.new()
 		for child in character.get_children():
 			if child.get_class() == "Skeleton3D":
@@ -452,7 +462,22 @@ func _on_file_dialog_file_selected(file_path: String) -> void:
 							surface_tool.append_from(baked_pose, 0,transformer)
 			elif child.get_class() == "MeshInstance3D":
 				var baked_pose : ArrayMesh
-				baked_pose = child.bake_mesh_from_current_skeleton_pose()
+				if child.name =="Avatar":
+					character = humanizer.get_CharacterBody3D(true)
+					var loaded = false
+					var mesh
+					while not loaded:
+						for c in character.get_children():
+							if c.get_class()== "Skeleton3D":
+								for boneId in range(skeleton.get_bone_count()):
+									c.set_bone_pose(boneId,skeleton.get_bone_pose(boneId))
+							if c.name == "Avatar":
+								loaded = true
+								mesh=c
+						await get_tree().process_frame
+					baked_pose = mesh.bake_mesh_from_current_skeleton_pose()
+				else:
+					baked_pose = child.bake_mesh_from_current_skeleton_pose()
 				var tranformer=Transform3D()
 				if "transform" in baked_pose:
 					tranformer=baked_pose.transform

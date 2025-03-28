@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dsrnmyw7n7drw"]
 
-[ext_resource type="Script" uid="uid://18atgrat7ewt" path="res://addons/humanizer/scripts/core/job_queue.gd" id="3_56c55"]
-[ext_resource type="Script" uid="uid://c4uxjgdcb1ix4" path="res://addons/humanizer/scripts/core/humanizer_registry.gd" id="57_651fh"]
+[ext_resource type="Script" uid="uid://c8o8idpgqp2se" path="res://addons/humanizer/scripts/core/job_queue.gd" id="3_56c55"]
+[ext_resource type="Script" uid="uid://g8dip8o2ahbp" path="res://addons/humanizer/scripts/core/humanizer_registry.gd" id="57_651fh"]
 
 [sub_resource type="GDScript" id="GDScript_yaxf4"]
 script/source = "@tool
@@ -10,6 +10,16 @@ extends Node
 
 # called when enters the editor AND when enters the game
 func _ready() -> void:
+	var path = \"res://humanizer\"
+	if not DirAccess.dir_exists_absolute(path):
+		DirAccess.make_dir_absolute(path)
+	if not DirAccess.dir_exists_absolute(path+\"/target\"):
+		DirAccess.make_dir_absolute(path+\"/target\")
+	if not DirAccess.dir_exists_absolute(path+\"/material\"):
+		DirAccess.make_dir_absolute(path+\"/material\")
+	if not DirAccess.dir_exists_absolute(path+\"/equipment\"):
+		DirAccess.make_dir_absolute(path+\"/equipment\")
+		
 	HumanizerRegistry._get_rigs()
 	if Engine.is_editor_hint():
 		pass

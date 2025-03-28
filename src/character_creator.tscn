@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://boivg2moacq1"]
+[gd_scene load_steps=6 format=3 uid="uid://boivg2moacq1"]
 
 [ext_resource type="Script" uid="uid://bx205xb6r2jkq" path="res://CharacterCreator.gd" id="1_xl482"]
+[ext_resource type="ArrayMesh" uid="uid://fudl6b84hhf5" path="res://assets/simple Base.obj" id="2_vcmal"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bbutc"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -123,6 +124,7 @@ environment = SubResource("Environment_5otv1")
 
 [node name="BaseMesh" type="MeshInstance3D" parent="splits/Right_Side/CharacterView/Viewport/SubViewport/collection"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.021825, 0)
+mesh = ExtResource("2_vcmal")
 skeleton = NodePath("../..")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="splits/Right_Side/CharacterView"]
