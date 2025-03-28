@@ -5,6 +5,8 @@
 extends MarginContainer
 var skeleton 
 signal position_macro_set
+@export var left_elbow_slider:HSlider
+@export var right_elbow_slider:HSlider
 @export var left_wrist_ud: HSlider
 @export var left_wrist_io: HSlider
 @export var left_wrist_tw: HSlider
@@ -168,12 +170,12 @@ func left_hip(_value):
 	#this is emitted to set the detailed poses.
 	emit_signal("position_macro_set")
 
-func left_elbow(value):
+func left_elbow(_value):
 	#the elbow is a 1 DoF joint, simple lerp is applied
 	const straight = Vector3(-20,-50,0)
 	const bent = Vector3(80,-200,0)
 	var bone_id = skeleton.find_bone("LeftLowerArm")
-	var bone_rotation= Quaternion.from_euler(straight.lerp(bent,value)*TAU/360)
+	var bone_rotation= Quaternion.from_euler(straight.lerp(bent,left_elbow_slider.value)*TAU/360)
 	skeleton.set_bone_pose_rotation(bone_id, bone_rotation)
 	emit_signal("position_macro_set")
 	
@@ -182,7 +184,7 @@ func right_elbow(value):
 	const straight = Vector3(-20,50,0)
 	const bent = Vector3(80,200,0)
 	var bone_id = skeleton.find_bone("RightLowerArm")
-	var bone_rotation= Quaternion.from_euler(straight.lerp(bent,value)*TAU/360)
+	var bone_rotation= Quaternion.from_euler(straight.lerp(bent,right_elbow_slider.value)*TAU/360)
 	skeleton.set_bone_pose_rotation(bone_id,bone_rotation)
 	emit_signal("position_macro_set")
 
@@ -281,6 +283,24 @@ func head(_value):
 	emit_signal("position_macro_set")
 
 func ping_poses():
+	left_hand(0)
+	right_hand(0)
+	right_elbow(0)
+	right_sholder(0)
+	right_thumb_close(0)
+	right_wrist(0)
+	bend_right_knee(0)
+	right_hip(0)
+	left_elbow(0)
+	left_hand(0)
+	left_hip(0)
+	left_sholder(0)
+	left_thumb_close(0)
+	left_wrist(0)
+	locate_model(0)
+	bend_left_knee(0)
+	back(0)
+	head(0)
 	emit_signal("position_macro_set")
 func get_save():
 	var values={}
@@ -290,6 +310,8 @@ func get_save():
 	values["right_wrist_ud"] = right_wrist_ud.value
 	values["right_wrist_io"] = right_wrist_io.value
 	values["right_wrist_tw"] = right_wrist_tw.value
+	values["left_elbow_slider"] = left_elbow_slider.value
+	values["right_elbow_slider"] = right_elbow_slider.value
 	values["left_sholder_swing"] = left_sholder_swing.value
 	values["left_sholder_lift"] = left_sholder_lift.value
 	values["left_sholder_shrug"] = left_sholder_shrug.value
@@ -328,6 +350,8 @@ func set_save(values):
 	right_wrist_ud.value = values["right_wrist_ud"]
 	right_wrist_io.value = values["right_wrist_io"]
 	right_wrist_tw.value = values["right_wrist_tw"]
+	left_elbow_slider.value = values["left_elbow_slider"] 
+	right_elbow_slider.value = values["right_elbow_slider"]
 	left_sholder_swing.value = values["left_sholder_swing"]
 	left_sholder_lift.value = values["left_sholder_lift"]
 	left_sholder_shrug.value = values["left_sholder_shrug"]
@@ -357,6 +381,8 @@ func set_save(values):
 	xloc_slider.value = values["xloc_slider"]
 	yloc_slider.value = values["yloc_slider"]
 	zloc_slider.value = values["zloc_slider"]
+	ping_poses()
+	
 func set_default():
 	left_wrist_ud.value = 0.33
 	left_wrist_io.value = 0.5

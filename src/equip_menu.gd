@@ -14,7 +14,13 @@ func load_equipment(load_name):
 		data["slot"]=slot
 		cur_equipment=load_name
 		data["item_name"] = cur_equipment
+		set_selected(cur_equipment)
 		change_equipment.emit(data)
+		
+func set_selected(value):
+	for index in range($OptionButton.item_count):
+		if value == $OptionButton.get_item_text(index):
+			$OptionButton.selected = index
 func _on_option_button_item_selected(index: int) -> void:
 	var data = {}
 	data["slot"] = slot

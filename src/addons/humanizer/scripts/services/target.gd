@@ -21,7 +21,6 @@ static func load_data():
 
 static func init_helper_vertex(target_data = null) -> PackedVector3Array:
 	var helper_vertex = basis.duplicate()
-
 	HumanizerLogger.profile("init_helper_vertex", func():
 		if target_data != null:
 			#var hash = hash([data.basis, target_data])

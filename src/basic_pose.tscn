@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://3djui3xwic7k" path="res://basic_controls.gd" id="1_2n86l"]
 [ext_resource type="FontVariation" uid="uid://diciev1hwck0j" path="res://assets/Bold_font_variation.tres" id="2_8y4b7"]
 
-[node name="BasicControls" type="MarginContainer" node_paths=PackedStringArray("left_wrist_ud", "left_wrist_io", "left_wrist_tw", "right_wrist_ud", "right_wrist_io", "right_wrist_tw", "left_sholder_swing", "left_sholder_lift", "left_sholder_shrug", "left_sholder_curl", "right_sholder_swing", "right_sholder_lift", "right_sholder_shrug", "right_sholder_curl", "head_rotate", "head_pitch", "head_roll", "right_hip_lift", "right_hip_twist", "right_hip_spread", "left_hip_lift", "left_hip_twist", "left_hip_spread", "back_twist", "back_lean", "back_curve", "left_fingers", "right_fingers", "left_thumb", "right_thumb", "left_knee", "right_knee", "xloc_slider", "yloc_slider", "zloc_slider")]
+[node name="BasicControls" type="MarginContainer" node_paths=PackedStringArray("left_elbow_slider", "right_elbow_slider", "left_wrist_ud", "left_wrist_io", "left_wrist_tw", "right_wrist_ud", "right_wrist_io", "right_wrist_tw", "left_sholder_swing", "left_sholder_lift", "left_sholder_shrug", "left_sholder_curl", "right_sholder_swing", "right_sholder_lift", "right_sholder_shrug", "right_sholder_curl", "head_rotate", "head_pitch", "head_roll", "right_hip_lift", "right_hip_twist", "right_hip_spread", "left_hip_lift", "left_hip_twist", "left_hip_spread", "back_twist", "back_lean", "back_curve", "left_fingers", "right_fingers", "left_thumb", "right_thumb", "left_knee", "right_knee", "xloc_slider", "yloc_slider", "zloc_slider")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -12,6 +12,8 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_2n86l")
+left_elbow_slider = NodePath("Menu/LeftArm/elbow/Elbow2")
+right_elbow_slider = NodePath("Menu/RightArm/Elbow/Elbow2")
 left_wrist_ud = NodePath("Menu/LeftArm/wristA/L_WristA")
 left_wrist_io = NodePath("Menu/LeftArm/wristB/L_WristB")
 left_wrist_tw = NodePath("Menu/LeftArm/wristC/L_WristC")
