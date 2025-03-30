@@ -25,12 +25,18 @@ humanizer/slots={
 },
 &"Clothing": {
 &"armsclothes": "Arms",
+&"backpack": "Backpack",
+&"belt": "Belt",
 &"eyesclothes": "Eyes",
 &"feetclothes": "Feet",
 &"handsclothes": "Hands",
 &"headclothes": "Head",
+&"lefthand": "Left Hand",
 &"legsclothes": "Legs",
+&"mask": "Mask",
 &"mouthclothes": "Mouth",
+&"righthand": "Right Hand",
+&"tail": "Tail",
 &"torsoclothes": "Torso"
 }
 }
@@ -76,3 +82,7 @@ export/convert_text_resources_to_binary=false
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/humanizer/plugin.cfg", "res://addons/obj_exporter/plugin.cfg")
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://assets/translations/Translations.en.translation")

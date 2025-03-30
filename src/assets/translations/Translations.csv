@@ -1,0 +1,101 @@
+﻿keys,en
+title,MadHatter's TTRPG Mini Maker
+newChar,New Character
+loadChar,Load Character
+settings,Settings
+credits,Credits
+load,Load
+delete,Delete
+back,Back
+volume,Volume:
+home,Home
+LeftHand,Left Hand
+RightHand,Rigth Hand
+Head,Head
+RightFoot,Right Foot
+LeftFoot,Left Foot
+Hips,Hips
+Chest,Chest
+Root,Base
+Details,Details
+ImportOBJ,Import OBJs
+Equip,Equip
+RacialFeatures,Racial Features
+SimplePoses,Simple Poses
+Simple,Simple
+detailedPoses,Detailed Poses
+Neck,Neck
+Spine,Spine
+Chest,Chest
+UpperChest,Upper Chest
+LeftUpperArm,Left Upper Arm
+LeftLowerArm,Left Lower Arm
+LeftHand,Left Hand
+LeftIndexProximal,Left Index Proximal
+LeftIndexIntermediate,Left Index Intermediate
+LeftIndexDistal,Left Index Distal
+LeftMiddleProximal,Left Middle Proximal
+LeftMiddleIntermediate,Left Middle Intermediate
+LeftMiddleDistal,Left Middle Distal
+LeftLittleProximal,Left Little Proximal
+LeftLittleIntermediate,Left Little Intermediate
+LeftLittleDistal,Left Little Distal
+LeftRingProximal,Left Ring Proximal
+LeftRingIntermediate,Left Ring Intermediate
+LeftRingDistal,Left Ring Distal
+LeftThumbProximal,Left Thumb Proximal
+LeftThumbMetacarpal,Left Thumb Metacarpal
+LeftThumbDistal,Left Thumb Distal
+RightShoulder,Right Shoulder
+RightUpperArm,Right Upper Arm
+RightLowerArm,Right Lower Arm
+RightHand,Right Hand
+RightIndexProximal,Right Index Proximal
+RightIndexIntermediate,Right Index Intermediate
+RightIndexDistal,Right Index Distal
+RightMiddleProximal,Right Middle Proximal
+RightMiddleDistal,Right Middle Intermediate
+RightMiddleDistal,Right Middle Distal
+RightLittleProximal,Right Little Proximal
+RightLittleIntermediate,Right Little Intermediate
+RightLittleDistal,Right Little Distal
+RightRingProximal,Right Ring proximal
+RightRingIntermediate,Right Ring Itermediate
+RightRingDistal,Right Ring Distal
+RightThumbProximal,Right Thumb Proximal
+RightThumbMetacarpal,Right Thumb Metacarpal
+RightThumbDistal,Right Thumb Distal
+None,None
+character,Character
+load,Load
+WARNING,WARNING
+positionOnBase,Position on base
+X,X
+Y,Y
+Z,Z
+Rotate,Rotate
+SideToSide,Side To Side
+UpAndDown,Up/Down
+Torso,Torso
+Curve,Curve
+Twist,Twist
+Lean,Lean
+LeftArm,Left Arm
+shoulderShrug,Shoulder Shrug
+shoulderCurl,Shoulder Curl
+armLift,Arm Lift
+armSwing,Arm Swing
+elbow,Elbow
+wristA,Wrist A
+wristB,Wrist B
+wristC,Wrist C
+rightArm,Right Arm
+leftHand,Left Hand
+fingers,Fingers
+thumb,Thumb
+rightHand,Right Hand
+leftLeg,Left Leg
+spread,Spread
+Twist,Twist
+kick,Kick
+knee,Knee

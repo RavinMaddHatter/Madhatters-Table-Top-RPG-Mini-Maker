@@ -41,9 +41,9 @@ back_twist = NodePath("Menu/Chest/Twist/Twist2")
 back_lean = NodePath("Menu/Chest/Lean/Lean")
 back_curve = NodePath("Menu/Chest/curveSpine/Back curve")
 left_fingers = NodePath("Menu/LeftHand/fingers/LeftFistSlider")
-right_fingers = NodePath("Menu/Right Hand/fingers/RightFistSlider")
+right_fingers = NodePath("Menu/RightHand/fingers/RightFistSlider")
 left_thumb = NodePath("Menu/LeftHand/thumb/thumb")
-right_thumb = NodePath("Menu/Right Hand/thumb/thumb")
+right_thumb = NodePath("Menu/RightHand/thumb/thumb")
 left_knee = NodePath("Menu/LeftLeg/kneeHb/KneeSlider")
 right_knee = NodePath("Menu/RightLeg/kneeHb/KneeSlider")
 xloc_slider = NodePath("Menu/position/x/xLoc")
@@ -65,7 +65,7 @@ layout_mode = 2
 
 [node name="xlb" type="Label" parent="Menu/position/x"]
 layout_mode = 2
-text = "x"
+text = "X"
 
 [node name="xLoc" type="HSlider" parent="Menu/position/x"]
 layout_mode = 2
@@ -208,7 +208,7 @@ value = 0.5
 [node name="LeftArm" type="VBoxContainer" parent="Menu"]
 layout_mode = 2
 
-[node name="Arm LB" type="Label" parent="Menu/LeftArm"]
+[node name="ArmLB" type="Label" parent="Menu/LeftArm"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_8y4b7")
 theme_override_font_sizes/font_size = 20
@@ -329,7 +329,7 @@ value = 0.6
 [node name="RightArm" type="VBoxContainer" parent="Menu"]
 layout_mode = 2
 
-[node name="Arm LB" type="Label" parent="Menu/RightArm"]
+[node name="ArmLB" type="Label" parent="Menu/RightArm"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_8y4b7")
 theme_override_font_sizes/font_size = 20
@@ -482,36 +482,36 @@ size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
 
-[node name="Right Hand" type="VBoxContainer" parent="Menu"]
+[node name="RightHand" type="VBoxContainer" parent="Menu"]
 layout_mode = 2
 
-[node name="RightHandLb" type="Label" parent="Menu/Right Hand"]
+[node name="RightHandLb" type="Label" parent="Menu/RightHand"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_8y4b7")
 theme_override_font_sizes/font_size = 20
 text = "Right Hand"
 
-[node name="fingers" type="HBoxContainer" parent="Menu/Right Hand"]
+[node name="fingers" type="HBoxContainer" parent="Menu/RightHand"]
 layout_mode = 2
 
-[node name="Fist" type="Label" parent="Menu/Right Hand/fingers"]
+[node name="Fist" type="Label" parent="Menu/RightHand/fingers"]
 layout_mode = 2
 text = "Fist"
 
-[node name="RightFistSlider" type="HSlider" parent="Menu/Right Hand/fingers"]
+[node name="RightFistSlider" type="HSlider" parent="Menu/RightHand/fingers"]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
 
-[node name="thumb" type="HBoxContainer" parent="Menu/Right Hand"]
+[node name="thumb" type="HBoxContainer" parent="Menu/RightHand"]
 layout_mode = 2
 
-[node name="thumb2" type="Label" parent="Menu/Right Hand/thumb"]
+[node name="thumb2" type="Label" parent="Menu/RightHand/thumb"]
 layout_mode = 2
 text = "Thumb"
 
-[node name="thumb" type="HSlider" parent="Menu/Right Hand/thumb"]
+[node name="thumb" type="HSlider" parent="Menu/RightHand/thumb"]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
@@ -672,8 +672,8 @@ step = 0.01
 [connection signal="value_changed" from="Menu/RightArm/wristC/R_WristC" to="." method="right_wrist"]
 [connection signal="value_changed" from="Menu/LeftHand/fingers/LeftFistSlider" to="." method="left_hand"]
 [connection signal="value_changed" from="Menu/LeftHand/thumb/thumb" to="." method="left_thumb_close"]
-[connection signal="value_changed" from="Menu/Right Hand/fingers/RightFistSlider" to="." method="right_hand"]
-[connection signal="value_changed" from="Menu/Right Hand/thumb/thumb" to="." method="right_thumb_close"]
+[connection signal="value_changed" from="Menu/RightHand/fingers/RightFistSlider" to="." method="right_hand"]
+[connection signal="value_changed" from="Menu/RightHand/thumb/thumb" to="." method="right_thumb_close"]
 [connection signal="value_changed" from="Menu/LeftLeg/SpreadHB/l_spread" to="." method="left_hip"]
 [connection signal="value_changed" from="Menu/LeftLeg/TwistHB/l_twist" to="." method="left_hip"]
 [connection signal="value_changed" from="Menu/LeftLeg/KickHB/l_twist" to="." method="left_hip"]

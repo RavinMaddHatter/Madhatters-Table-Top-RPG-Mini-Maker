@@ -18,7 +18,7 @@ size_flags_vertical = 3
 theme = ExtResource("1_s85bj")
 texture = ExtResource("1_c3r4i")
 script = ExtResource("1_8a7xe")
-mainMenu = NodePath("Main Menu")
+mainMenu = NodePath("MainMenu")
 characterCreator = NodePath("Character Creator")
 credits = NodePath("credits")
 loadMenu = NodePath("CharacterLoad")
@@ -32,7 +32,7 @@ volumeSlider = NodePath("Settings/HBoxContainer/VBoxContainer/ScrollContainer/VB
 stream = ExtResource("3_vdl6p")
 parameters/looping = false
 
-[node name="Main Menu" type="MarginContainer" parent="."]
+[node name="MainMenu" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -44,46 +44,46 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="Structure" type="VBoxContainer" parent="Main Menu"]
+[node name="Structure" type="VBoxContainer" parent="MainMenu"]
 layout_mode = 2
 
-[node name="Spacer" type="VBoxContainer" parent="Main Menu/Structure"]
+[node name="Spacer" type="VBoxContainer" parent="MainMenu/Structure"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="Main Menu/Structure"]
+[node name="Title" type="Label" parent="MainMenu/Structure"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("5_tsxpq")
 theme_override_font_sizes/font_size = 50
 text = "MadHatter's TTRPG Mini Maker"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Main Menu/Structure"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/Structure"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="New Character" type="Button" parent="Main Menu/Structure/VBoxContainer"]
+[node name="NewCharacter" type="Button" parent="MainMenu/Structure/VBoxContainer"]
 layout_mode = 2
 text = "New Character"
 
-[node name="Load Character" type="Button" parent="Main Menu/Structure/VBoxContainer"]
+[node name="LoadCharacter" type="Button" parent="MainMenu/Structure/VBoxContainer"]
 layout_mode = 2
 text = "Load Character"
 
-[node name="Settings" type="Button" parent="Main Menu/Structure/VBoxContainer"]
+[node name="Settings" type="Button" parent="MainMenu/Structure/VBoxContainer"]
 layout_mode = 2
 text = "Settings"
 
-[node name="Credits" type="Button" parent="Main Menu/Structure/VBoxContainer"]
+[node name="Credits" type="Button" parent="MainMenu/Structure/VBoxContainer"]
 layout_mode = 2
 text = "Credits"
 
-[node name="Quit" type="Button" parent="Main Menu/Structure/VBoxContainer"]
+[node name="Quit" type="Button" parent="MainMenu/Structure/VBoxContainer"]
 layout_mode = 2
 text = "Quit"
 
-[node name="Spacer2" type="VBoxContainer" parent="Main Menu/Structure"]
+[node name="Spacer2" type="VBoxContainer" parent="MainMenu/Structure"]
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -430,7 +430,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="New Character" type="Button" parent="CharacterLoad/Structure/VBoxContainer"]
+[node name="NewCharacter" type="Button" parent="CharacterLoad/Structure/VBoxContainer"]
 layout_mode = 2
 text = "New Character"
 
@@ -519,13 +519,13 @@ size_flags_horizontal = 3
 visible = false
 layout_mode = 1
 
-[connection signal="pressed" from="Main Menu/Structure/VBoxContainer/New Character" to="." method="_on_new_character_pressed"]
-[connection signal="pressed" from="Main Menu/Structure/VBoxContainer/Load Character" to="." method="_on_show_load_menu"]
-[connection signal="pressed" from="Main Menu/Structure/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="Main Menu/Structure/VBoxContainer/Credits" to="." method="_credits_show"]
-[connection signal="pressed" from="Main Menu/Structure/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="MainMenu/Structure/VBoxContainer/NewCharacter" to="." method="_on_new_character_pressed"]
+[connection signal="pressed" from="MainMenu/Structure/VBoxContainer/LoadCharacter" to="." method="_on_show_load_menu"]
+[connection signal="pressed" from="MainMenu/Structure/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="MainMenu/Structure/VBoxContainer/Credits" to="." method="_credits_show"]
+[connection signal="pressed" from="MainMenu/Structure/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Button" to="." method="_main_menu_show"]
-[connection signal="pressed" from="CharacterLoad/Structure/VBoxContainer/New Character" to="." method="_on_new_character_pressed"]
+[connection signal="pressed" from="CharacterLoad/Structure/VBoxContainer/NewCharacter" to="." method="_on_new_character_pressed"]
 [connection signal="pressed" from="CharacterLoad/Structure/VBoxContainer/Load" to="." method="_on_load_character_save"]
 [connection signal="pressed" from="CharacterLoad/Structure/VBoxContainer/delete" to="." method="_on_delete_pressed"]
 [connection signal="pressed" from="CharacterLoad/Structure/VBoxContainer/Back" to="." method="_main_menu_show"]

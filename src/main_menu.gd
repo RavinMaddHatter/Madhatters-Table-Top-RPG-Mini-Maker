@@ -23,7 +23,29 @@ func _ready() -> void:
 		mainVolume.play()
 	_on_volume_value_changed(volumeSlider.value)
 	characterCreator.home_button.connect("pressed",_main_menu_show)
-
+	var language = "automatic"
+	# Load here language from the user settings file
+	if language == "automatic":
+		var preferred_language = OS.get_locale_language()
+		TranslationServer.set_locale(preferred_language)
+	else:
+		TranslationServer.set_locale(language)
+	set_lang()
+	characterCreator.set_lang()
+func set_lang():
+	$MainMenu/Structure/Title.text = tr("title")
+	$CharacterLoad/Structure/Label.text = tr("title")
+	$CharacterLoad/Structure/VBoxContainer/NewCharacter.text = tr("newChar")
+	$MainMenu/Structure/VBoxContainer/NewCharacter.text = tr("newChar")
+	$MainMenu/Structure/VBoxContainer/LoadCharacter.text = tr("loadChar")
+	$MainMenu/Structure/VBoxContainer/Settings.text = tr("settings")
+	$MainMenu/Structure/VBoxContainer/Credits.text = tr("credits")
+	$CharacterLoad/Structure/VBoxContainer/Load.text = tr("load")
+	$CharacterLoad/Structure/VBoxContainer/delete.text = tr("delete")
+	$CharacterLoad/Structure/VBoxContainer/Back.text = tr("back")
+	$Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Label.text = tr("settings")
+	$Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Audio.text = tr("volume")
+	$Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Button.text = tr("home")
 func _hide_all():
 	mainMenu.hide()
 	characterCreator.hide()

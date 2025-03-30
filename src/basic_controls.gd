@@ -43,6 +43,8 @@ signal position_macro_set
 @export var xloc_slider:HSlider
 @export var yloc_slider:HSlider
 @export var zloc_slider:HSlider
+func _ready():
+	set_lang()
 func locate_model(_value):
 	skeleton=humanizer.get_skeleton_node()
 	var bone_id=skeleton.find_bone("Root")
@@ -51,6 +53,55 @@ func locate_model(_value):
 	pose.y = yloc_slider.value
 	pose.z = zloc_slider.value
 	skeleton.set_bone_pose_position(bone_id,pose)
+func set_lang():
+	$Menu/position/location.text = tr("positionOnBase")
+	$Menu/position/x/xlb.text = tr("X")
+	$Menu/position/y/ylb.text = tr("Y")
+	$Menu/position/z/zlb.text = tr("Z")
+	$Menu/Head/headLb.text = tr("Head")
+	$Menu/Head/rotation/Label.text = tr("Rotate" )
+	$Menu/Head/sidetoside/Label.text = tr("SideToSide")
+	$Menu/Head/upanddown/Label.text = tr("UpAndDown")
+	$Menu/Chest/chestLb.text = tr("Torso")
+	$Menu/Chest/curveSpine/Curve.text = tr("Curve")
+	$Menu/Chest/Twist/Twist.text = tr("Twist")
+	$Menu/Chest/Lean/Lean2.text = tr("Lean")
+	$Menu/LeftArm/ArmLB.text = tr("LeftArm")
+	$Menu/LeftArm/sholderShrug/sholder.text = tr("shoulderShrug")
+	$Menu/LeftArm/sholderCurle/sholder.text = tr("shoulderCurl")
+	$Menu/LeftArm/armLift/Lift.text = tr("armLift") 
+	$Menu/LeftArm/armSwing/swing.text = tr("armSwing")
+	$Menu/LeftArm/elbow/Elbow.text = tr("elbow")
+	$Menu/LeftArm/wristA/wrist.text = tr("wristA")
+	$Menu/LeftArm/wristB/wrist.text = tr("wristB")
+	$Menu/LeftArm/wristC/wrist.text = tr("wristC")
+	$Menu/RightArm/ArmLB.text = tr("rightArm")
+	$Menu/RightArm/shrug/sholder.text = tr("shoulderShrug")
+	$Menu/RightArm/curl/sholder.text = tr("shoulderCurl")
+	$Menu/RightArm/armLift/Lift.text = tr("armLift" )
+	$Menu/RightArm/armSwign/swing.text = tr("armSwing")
+	$Menu/RightArm/Elbow/Elbow.text = tr("elbow")
+	$Menu/RightArm/wristA/wrist.text = tr("wristA")
+	$Menu/RightArm/wristB/wristB.text = tr("wristB")
+	$Menu/RightArm/wristC/wrist.text = tr("wristC")
+	$Menu/LeftHand/LeftHandLb.text = tr("leftHand")
+	$Menu/LeftHand/fingers/Fist.text = tr("fingers")
+	$Menu/LeftHand/thumb/Fist.text = tr("thumb")
+	$Menu/RightHand/RightHandLb.text = tr("rightHand")
+	$Menu/RightHand/fingers/Fist.text = tr("fingers")
+	$Menu/RightHand/thumb/thumb2.text = tr("thumb")
+	$Menu/LeftLeg/LegLb.text = tr("leftLeg")
+	$Menu/LeftLeg/SpreadHB/HipSpread.text = tr("spread")
+	$Menu/LeftLeg/TwistHB/TwistLB.text = tr("twist")
+	$Menu/LeftLeg/KickHB/KickLB.text = tr("kick")
+	$Menu/LeftLeg/kneeHb/Knee.text = tr("knee")
+	$Menu/RightLeg/LegLb.text = tr("leftLeg")
+	$Menu/RightLeg/HipSpread/HipSpread.text = tr("spread")
+	$Menu/RightLeg/hipTw/TwistLB.text = tr("twist")
+	$Menu/RightLeg/hipLift/KickLB.text = tr("kick")
+	$Menu/RightLeg/kneeHb/Knee.text = tr("knee")
+	
+	
 	
 
 func left_hand(_value):

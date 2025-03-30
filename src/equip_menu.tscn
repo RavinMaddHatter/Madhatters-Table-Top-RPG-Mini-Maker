@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cm0wp0dvmqufp"]
 
-[ext_resource type="Script" path="res://equip_menu.gd" id="1_mv0qk"]
+[ext_resource type="Script" uid="uid://drooq1cap2bxm" path="res://equip_menu.gd" id="1_mv0qk"]
 
 [node name="equip_menu" type="HBoxContainer"]
 custom_minimum_size = Vector2(300, 0)
@@ -16,6 +16,7 @@ size_flags_vertical = 0
 script = ExtResource("1_mv0qk")
 
 [node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 text = "test text"

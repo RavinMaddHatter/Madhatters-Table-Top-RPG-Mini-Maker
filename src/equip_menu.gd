@@ -6,7 +6,12 @@ func add_entry(entry):
 	$OptionButton.add_item(entry)
 
 func set_slot(slot_name):
-	$Label.text=slot_name
+	var slot_categories = ProjectSettings.get_setting("addons/humanizer/slots")
+	var common_name= ""
+	for type in slot_categories.keys():
+		if slot_name in slot_categories[type]:
+			common_name=slot_categories[type][slot_name]
+	$Label.text=common_name
 	slot=slot_name
 func load_equipment(load_name):
 	if load_name !="None":
