@@ -10,11 +10,21 @@ var bone_id:int
 @export var y_text:LineEdit
 @export var z_text:LineEdit
 var origin
-func setup(bone_name:String,skeleton,id):
-	title.text=bone_name
+var bone_name="None"
+func setup(bone_handle:String,skeleton,id):
+	bone_name = bone_handle
+	set_lang()
 	skel=skeleton
 	bone_id=id
 	set_sliders()
+func set_lang():
+	title.text=tr(bone_name)
+	$VBoxContainer/Sliders/Labels/xLabel.text = tr("X") + " " + tr("rotation
+")
+	$VBoxContainer/Sliders/Labelsy/yLabel.text = tr("Y") + " " + tr("rotation
+")
+	$VBoxContainer/Sliders/Labels2/zLabel.text = tr("Z") + " " + tr("rotation
+")
 func set_sliders():
 	skel=humanizer.get_skeleton_node()
 	var pose = skel.get_bone_pose(bone_id)
@@ -22,9 +32,6 @@ func set_sliders():
 	x_slider.value=pose.basis.get_euler().x
 	y_slider.value=pose.basis.get_euler().y
 	z_slider.value=pose.basis.get_euler().z
-
-func _ready():
-	pass
 
 func set_bone_pose():
 	var rot_vector = Vector3()

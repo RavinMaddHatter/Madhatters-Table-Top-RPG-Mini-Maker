@@ -16,7 +16,7 @@ sky = SubResource("Sky_sm1kj")
 tonemap_mode = 2
 glow_enabled = true
 
-[node name="CharacterCreator" type="MarginContainer" node_paths=PackedStringArray("collection", "menu_root", "camera", "home_button", "nameBox", "baseMesh")]
+[node name="CharacterCreator" type="MarginContainer" node_paths=PackedStringArray("collection", "menu_root", "camera", "home_button", "nameBox", "baseMesh", "progress")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -35,6 +35,7 @@ camera = NodePath("splits/Right_Side/CharacterView/Viewport/SubViewport/Camera3D
 home_button = NodePath("splits/Right_Side/verticalScrolls/Right_Side/Home")
 nameBox = NodePath("splits/Right_Side/CharacterView/HBoxContainer/Center/HBoxContainer2/Name")
 baseMesh = NodePath("splits/Right_Side/CharacterView/Viewport/SubViewport/collection/BaseMesh")
+progress = NodePath("progressContainer/ProgressBar")
 
 [node name="splits" type="HSplitContainer" parent="."]
 layout_mode = 2

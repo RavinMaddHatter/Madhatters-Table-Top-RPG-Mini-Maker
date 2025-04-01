@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dfe585ase8xvp"]
 
-[ext_resource type="Script" path="res://attachment.gd" id="1_m5ecp"]
+[ext_resource type="Script" uid="uid://cn2bxnbc7mdas" path="res://attachment.gd" id="1_m5ecp"]
 
 [node name="attachment" type="VBoxContainer" node_paths=PackedStringArray("lable", "upload_button", "remove_button", "x_pos_slider", "y_pos_slider", "z_pos_slider", "x_rot_slider", "y_rot_slider", "z_rot_slider", "scale_slider", "slider_vbox", "file_dialog")]
 custom_minimum_size = Vector2(300, 0)

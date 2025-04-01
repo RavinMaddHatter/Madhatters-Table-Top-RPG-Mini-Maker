@@ -85,4 +85,4 @@ enabled=PackedStringArray("res://addons/humanizer/plugin.cfg", "res://addons/obj
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://assets/translations/Translations.en.translation")
+locale/translations=PackedStringArray("res://assets/translations/Translations.en.translation", "res://assets/translations/BaseTargets.en.translation", "res://assets/translations/BaseTargets.test.translation", "res://assets/translations/Translations.test.translation")

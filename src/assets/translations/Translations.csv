@@ -1,101 +1,127 @@
-﻿keys,en
-title,MadHatter's TTRPG Mini Maker
-newChar,New Character
-loadChar,Load Character
-settings,Settings
-credits,Credits
-load,Load
-delete,Delete
-back,Back
-volume,Volume:
-home,Home
-LeftHand,Left Hand
-RightHand,Rigth Hand
-Head,Head
-RightFoot,Right Foot
-LeftFoot,Left Foot
-Hips,Hips
-Chest,Chest
-Root,Base
-Details,Details
-ImportOBJ,Import OBJs
-Equip,Equip
-RacialFeatures,Racial Features
-SimplePoses,Simple Poses
-Simple,Simple
-detailedPoses,Detailed Poses
-Neck,Neck
-Spine,Spine
-Chest,Chest
-UpperChest,Upper Chest
-LeftUpperArm,Left Upper Arm
-LeftLowerArm,Left Lower Arm
-LeftHand,Left Hand
-LeftIndexProximal,Left Index Proximal
-LeftIndexIntermediate,Left Index Intermediate
-LeftIndexDistal,Left Index Distal
-LeftMiddleProximal,Left Middle Proximal
-LeftMiddleIntermediate,Left Middle Intermediate
-LeftMiddleDistal,Left Middle Distal
-LeftLittleProximal,Left Little Proximal
-LeftLittleIntermediate,Left Little Intermediate
-LeftLittleDistal,Left Little Distal
-LeftRingProximal,Left Ring Proximal
-LeftRingIntermediate,Left Ring Intermediate
-LeftRingDistal,Left Ring Distal
-LeftThumbProximal,Left Thumb Proximal
-LeftThumbMetacarpal,Left Thumb Metacarpal
-LeftThumbDistal,Left Thumb Distal
-RightShoulder,Right Shoulder
-RightUpperArm,Right Upper Arm
-RightLowerArm,Right Lower Arm
-RightHand,Right Hand
-RightIndexProximal,Right Index Proximal
-RightIndexIntermediate,Right Index Intermediate
-RightIndexDistal,Right Index Distal
-RightMiddleProximal,Right Middle Proximal
-RightMiddleDistal,Right Middle Intermediate
-RightMiddleDistal,Right Middle Distal
-RightLittleProximal,Right Little Proximal
-RightLittleIntermediate,Right Little Intermediate
-RightLittleDistal,Right Little Distal
-RightRingProximal,Right Ring proximal
-RightRingIntermediate,Right Ring Itermediate
-RightRingDistal,Right Ring Distal
-RightThumbProximal,Right Thumb Proximal
-RightThumbMetacarpal,Right Thumb Metacarpal
-RightThumbDistal,Right Thumb Distal
-None,None
-character,Character
-load,Load
-WARNING,WARNING
-positionOnBase,Position on base
-X,X
-Y,Y
-Z,Z
-Rotate,Rotate
-SideToSide,Side To Side
-UpAndDown,Up/Down
-Torso,Torso
-Curve,Curve
-Twist,Twist
-Lean,Lean
-LeftArm,Left Arm
-shoulderShrug,Shoulder Shrug
-shoulderCurl,Shoulder Curl
-armLift,Arm Lift
-armSwing,Arm Swing
-elbow,Elbow
-wristA,Wrist A
-wristB,Wrist B
-wristC,Wrist C
-rightArm,Right Arm
-leftHand,Left Hand
-fingers,Fingers
-thumb,Thumb
-rightHand,Right Hand
-leftLeg,Left Leg
-spread,Spread
-Twist,Twist
-kick,Kick
-knee,Knee
+﻿keys,en,test
+title,MadHatter's TTRPG Mini Maker,test
+newChar,New Character,test
+loadChar,Load Character,test
+settings,Settings,test
+credits,Credits,test
+load,Load,test
+delete,Delete,test
+back,Back,test
+volume,Volume:,test
+home,Home,test
+LeftHand,Left Hand,test
+RightHand,Rigth Hand,test
+Head,Head,test
+RightFoot,Right Foot,test
+LeftFoot,Left Foot,test
+Hips,Hips,test
+Chest,Chest,test
+Root,Base,test
+Details,Details,test
+ImportOBJ,Import OBJs,test
+uploadOBJ,Upload OBJ,test
+removeOBJ,Remove OBJ,test
+Equip,Equip,test
+RacialFeatures,Racial Features,test
+SimplePoses,Simple Poses,test
+Simple,Simple,test
+detailedPoses,Detailed Poses,test
+Neck,Neck,test
+Spine,Spine,test
+Chest,Chest,test
+body,Body,test
+Body,Body,test
+Eyes,Eyes,test
+Mouth,Mouth,test
+hair,Hair,test
+Nose,Nose,test
+Ears,Ears,test
+Face,Face,test
+Arms,Arms,test
+Legs,Legs,test
+Custom,Custom,test
+Misc,Misc,test
+Breasts,Breasts,test
+headclothes,Hats,test
+lefteye,Left Eye,test
+righteye,Right Eye,test
+torsoclothes,Shirt,test
+legsclothes,Pants,test
+feetclothes,Shoes,test
+UpperChest,Upper Chest,test
+LeftUpperArm,Left Upper Arm,test
+LeftLowerArm,Left Lower Arm,test
+LeftHand,Left Hand,test
+LeftIndexProximal,Left Index Proximal,test
+LeftIndexIntermediate,Left Index Intermediate,test
+LeftIndexDistal,Left Index Distal,test
+LeftMiddleProximal,Left Middle Proximal,test
+LeftMiddleIntermediate,Left Middle Intermediate,test
+LeftMiddleDistal,Left Middle Distal,test
+LeftLittleProximal,Left Little Proximal,test
+LeftLittleIntermediate,Left Little Intermediate,test
+LeftLittleDistal,Left Little Distal,test
+LeftRingProximal,Left Ring Proximal,test
+LeftRingIntermediate,Left Ring Intermediate,test
+LeftRingDistal,Left Ring Distal,test
+LeftThumbProximal,Left Thumb Proximal,test
+LeftThumbMetacarpal,Left Thumb Metacarpal,test
+LeftThumbDistal,Left Thumb Distal,test
+RightShoulder,Right Shoulder,test
+RightUpperArm,Right Upper Arm,test
+RightLowerArm,Right Lower Arm,test
+RightHand,Right Hand,test
+RightIndexProximal,Right Index Proximal,test
+RightIndexIntermediate,Right Index Intermediate,test
+RightIndexDistal,Right Index Distal,test
+RightMiddleProximal,Right Middle Proximal,test
+RightMiddleDistal,Right Middle Intermediate,test
+RightMiddleDistal,Right Middle Distal,test
+RightLittleProximal,Right Little Proximal,test
+RightLittleIntermediate,Right Little Intermediate,test
+RightLittleDistal,Right Little Distal,test
+RightRingProximal,Right Ring proximal,test
+RightRingIntermediate,Right Ring Itermediate,test
+RightRingDistal,Right Ring Distal,test
+RightThumbProximal,Right Thumb Proximal,test
+RightThumbMetacarpal,Right Thumb Metacarpal,test
+RightThumbDistal,Right Thumb Distal,test
+None,None,test
+character,Character,test
+load,Load,test
+WARNING,WARNING,test
+positionOnBase,Position on base,test
+X,X,test
+Y,Y,test
+Z,Z,test
+Rotate,Rotate,test
+SideToSide,Side To Side,test
+UpAndDown,Up/Down,test
+Torso,Torso,test
+Curve,Curve,test
+Twist,Twist,test
+twist,Twist,test
+Lean,Lean,test
+LeftArm,Left Arm,test
+shoulderShrug,Shoulder Shrug,test
+shoulderCurl,Shoulder Curl,test
+armLift,Arm Lift,test
+armSwing,Arm Swing,test
+elbow,Elbow,test
+wristA,Wrist A,test
+wristB,Wrist B,test
+wristC,Wrist C,test
+rightArm,Right Arm,test
+leftHand,Left Hand,test
+fingers,Fingers,test
+thumb,Thumb,test
+rightHand,Right Hand,test
+leftLeg,Left Leg,test
+spread,Spread,test
+Twist,Twist,test
+kick,Kick,test
+knee,Knee,test
+rotation,Rotation,test
+language,Language,test
+quit,Quit,test
+racial_features,Racial Features,test

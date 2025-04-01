@@ -11,9 +11,10 @@ var previous=50
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Label_Container/Label.text = label_name
+	set_lang()
 	set_line_edit_from_slider_value()
-
+func set_lang():
+	$Label_Container/Label.text = tr(label_name)
 func emit_shapekeys():
 	var data = {}
 	data["pose"]=pose

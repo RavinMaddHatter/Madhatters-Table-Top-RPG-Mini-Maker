@@ -31,7 +31,7 @@ layout_mode = 2
 [node name="Labels" type="HBoxContainer" parent="VBoxContainer/Sliders"]
 layout_mode = 2
 
-[node name="x Label" type="Label" parent="VBoxContainer/Sliders/Labels"]
+[node name="xLabel" type="Label" parent="VBoxContainer/Sliders/Labels"]
 layout_mode = 2
 text = "X Rotation
 "
@@ -52,7 +52,7 @@ value = -0.28
 [node name="Labelsy" type="HBoxContainer" parent="VBoxContainer/Sliders"]
 layout_mode = 2
 
-[node name="y Label" type="Label" parent="VBoxContainer/Sliders/Labelsy"]
+[node name="yLabel" type="Label" parent="VBoxContainer/Sliders/Labelsy"]
 layout_mode = 2
 text = "Y Rotation
 "
@@ -73,7 +73,7 @@ value = -0.28
 [node name="Labels2" type="HBoxContainer" parent="VBoxContainer/Sliders"]
 layout_mode = 2
 
-[node name="x Label" type="Label" parent="VBoxContainer/Sliders/Labels2"]
+[node name="zLabel" type="Label" parent="VBoxContainer/Sliders/Labels2"]
 layout_mode = 2
 text = "Z Rotation
 "

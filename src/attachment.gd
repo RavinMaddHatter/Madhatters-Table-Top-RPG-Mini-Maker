@@ -15,8 +15,12 @@ var anchor_point:BoneAttachment3D
 var mesh_object:MeshInstance3D
 var maxsize:float
 var skeleton
+var label
 
-
+func set_lang():
+	lable.text = tr(label)
+	upload_button.text=tr("uploadOBJ")
+	remove_button.text=tr("removeOBJ")
 func _ready() -> void:
 	file_dialog.current_dir = "/"
 	file_dialog.use_native_dialog=true
@@ -30,7 +34,8 @@ func _ready() -> void:
 	z_rot_slider.value_changed.connect(_change_pose)
 	scale_slider.value_changed.connect(_change_pose)
 func set_label(text):
-	lable.text = text
+	label=text
+	set_lang()
 	
 func set_anchor_point(anchor:BoneAttachment3D):
 	anchor_point = anchor

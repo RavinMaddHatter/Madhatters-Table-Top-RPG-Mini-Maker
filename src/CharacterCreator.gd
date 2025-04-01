@@ -44,10 +44,22 @@ func _ready() -> void:
 	make_detailed_menu()
 	make_detailed_pose()
 	$splits.show()
-	make_character()
+	make_character("set_lang")
 func set_lang():
 	if simple_pose:
 		simple_pose.set_lang()
+	for categoryName in bone_categories.keys():
+		for bone_name in bone_categories[categoryName]:
+			detailed_poses[categoryName][bone_name].set_lang()
+	var shapekeys = HumanizerTargetService.get_shapekey_categories()
+	for categoryName in shapekeys:
+		var category_options = shapekeys[categoryName]
+		for key_name in category_options:
+			shapekey_slider[key_name].label_name = tr(key_name)
+	for point in attachment_points:
+		attach_menu[point].set_lang()
+	for cat in equipment_categories.keys():
+		equipment_categories[cat].set_lang()
 func make_character(callback=null):
 	var printed = false
 	for n in collection.get_children():
@@ -81,6 +93,13 @@ func make_character(callback=null):
 	while not skeleton:
 		skeleton = humanizer.get_skeleton_node()
 		await get_tree().process_frame
+	add_attach_points()
+	fix_poses()
+	if callback:
+		var callable = Callable(self,callback)
+		callable.call()
+func fix_poses():
+	skeleton=humanizer.get_skeleton()
 	simple_pose.skeleton = humanizer.get_skeleton_node()
 	for categoryName in detailed_poses.keys():
 		for bone_name in detailed_poses[categoryName].keys():
@@ -91,10 +110,10 @@ func make_character(callback=null):
 	simple_pose.skeleton = humanizer.get_skeleton_node()
 	simple_pose.humanizer = humanizer
 	simple_pose.ping_poses()
-	add_attach_points()
-	if callback:
-		var callable = Callable(self,callback)
-		callable.call()
+	
+func reset_attach_points():
+	for slot in attachment_points:
+		skeleton.add_child(attach_points[slot])
 	
 func add_attach_points():
 	for slot in attachment_points:
@@ -121,11 +140,11 @@ func make_detailed_menu():
 	for categoryName in shapekeys:
 		var category_pannel = ScrollContainer.new()
 		var label=Label.new()
-		label.name=categoryName.capitalize()
+		label.name=tr(categoryName)
 		label.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 		category_pannel.add_child(label)
 		details_tab.add_child(category_pannel)
-		category_pannel.name=categoryName
+		category_pannel.name=tr(categoryName)
 		var category_vbox = VBoxContainer.new()
 		category_vbox.set_custom_minimum_size(Vector2(300,0))
 		category_vbox.size_flags_horizontal=Control.SIZE_FILL
@@ -133,7 +152,7 @@ func make_detailed_menu():
 		var category_options = shapekeys[categoryName]
 		for key_name in category_options:
 			var slider = load("res://shapekey_slider.tscn").instantiate()
-			slider.label_name = key_name
+			slider.label_name = tr(key_name)
 			slider.shapekeys = [key_name]
 			slider.set_value(50)
 			slider.change_shapekeys.connect(_set_shapekey)
@@ -143,9 +162,10 @@ func make_detailed_menu():
 func make_import_menu():
 	var pannel = ScrollContainer.new()
 	menu_root.add_child(pannel)
-	pannel.name = "Import OBJs"
+	pannel.name = tr("ImportOBJ")
 	var vbox = VBoxContainer.new()
 	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
+	vbox.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 	pannel.add_child(vbox)
 	for point in attachment_points:
 		attach_menu[point] = load("res://attachment.tscn").instantiate()
@@ -155,9 +175,10 @@ func make_import_menu():
 func make_attachments_menu():
 	var pannel = ScrollContainer.new()
 	menu_root.add_child(pannel)
-	pannel.name = "Equip"
+	pannel.name = tr("Equip")
 	var vbox = VBoxContainer.new()
 	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
+	vbox.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 	pannel.add_child(vbox)
 	equipment_categories = {}
 	
@@ -181,24 +202,25 @@ func make_basic_menu():
 	pannel.name = "Simple"
 	var vbox = VBoxContainer.new()
 	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
+	vbox.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 	vbox.set_custom_minimum_size(Vector2(300,0))
 	pannel.add_child(vbox)
 	var macros = HumanizerTargetService.get_shapekey_categories()["Macro"]
 	var racial = HumanizerMacroService.race_options
 	for key_name in macros:
 		var slider = load("res://shapekey_slider.tscn").instantiate()
-		slider.label_name = key_name
+		slider.label_name = tr(key_name)
 		slider.shapekeys = [key_name]
 		slider.set_value(50)
 		slider.change_shapekeys.connect(_set_shapekey)
 		vbox.add_child(slider)
 		shapekey_slider[key_name]=slider
 	var label = Label.new()
-	label.text = "--Racial Features--"
+	label.text = "--"+tr("racial_features")+"--"
 	vbox.add_child(label)
 	for key_name in racial:
 		var slider = load("res://shapekey_slider.tscn").instantiate()
-		slider.label_name = key_name
+		slider.label_name = tr(key_name)
 		slider.shapekeys = key_name
 		slider.set_value(50)
 		slider.change_shapekeys.connect(_set_shapekey)
@@ -208,9 +230,10 @@ func make_basic_menu():
 func make_pose_menu():
 	var pannel = ScrollContainer.new()
 	menu_root.add_child(pannel)
-	pannel.name = "Simple Poses"
+	pannel.name = tr("SimplePoses")
 	var vbox = VBoxContainer.new()
 	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
+	vbox.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 	simple_pose = load("res://basic_pose.tscn").instantiate()
 	simple_pose.set_lang()
 	pannel.add_child(simple_pose)
@@ -221,6 +244,7 @@ func make_detailed_pose():
 	pannel.name = "Detailed Poses"
 	var vbox = VBoxContainer.new()
 	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
+	vbox.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 	pannel.add_child(vbox)
 	var pose_tab = TabContainer.new()
 	pose_tab.set_custom_minimum_size(Vector2(300,0))
@@ -249,11 +273,11 @@ func make_detailed_pose():
 		detailed_poses[categoryName]={}
 		var category_pannel = ScrollContainer.new()
 		var label=Label.new()
-		label.name=categoryName.capitalize()
+		label.name=tr(categoryName)
 		label.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 		category_pannel.add_child(label)
 		pose_tab.add_child(category_pannel)
-		category_pannel.name=categoryName
+		category_pannel.name=tr(categoryName)
 		var category_vbox = VBoxContainer.new()
 		category_vbox.set_custom_minimum_size(Vector2(300,0))
 		category_vbox.size_flags_horizontal=Control.SIZE_FILL
@@ -287,6 +311,9 @@ func set_pose(_values:Dictionary):
 
 func _set_shapekey(shapekey_values:Dictionary):
 	humanizer.set_targets(shapekey_values)
+	fix_poses()
+	reset_attach_points()
+	simple_pose.ping_poses()
 func default_settings():
 	simple_pose.set_default()
 	for key_name in shapekey_slider.keys():

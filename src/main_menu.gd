@@ -8,6 +8,7 @@ extends Control
 @export var settings: MarginContainer
 @export var mainVolume : AudioStreamPlayer
 @export var volumeSlider:Slider
+@export var langSetting:OptionButton
 const SETTINGS_FILE_PATH="user://settings.conf"
 var configFile
 
@@ -16,6 +17,7 @@ func _ready() -> void:
 	var err = newConfig.load(SETTINGS_FILE_PATH)
 	if err != OK: 
 		newConfig.set_value("VOLUME","SLIDER_VALUE",0)
+		newConfig.set_value("LANG","LANG","automatic")
 		newConfig.save(SETTINGS_FILE_PATH)
 	configFile = newConfig.load(SETTINGS_FILE_PATH)
 	volumeSlider.value = newConfig.get_value("VOLUME","SLIDER_VALUE")
@@ -23,15 +25,22 @@ func _ready() -> void:
 		mainVolume.play()
 	_on_volume_value_changed(volumeSlider.value)
 	characterCreator.home_button.connect("pressed",_main_menu_show)
-	var language = "automatic"
-	# Load here language from the user settings file
-	if language == "automatic":
+	var language = newConfig.get_value("LANG","LANG")
+	langSetting.add_item("automatic",0)
+	var langs = TranslationServer.get_loaded_locales()
+	for lang in langs:
+		langSetting.add_item(TranslationServer.get_language_name(lang)+"-"+lang)
+		if lang == language:
+			langSetting.select(langSetting.item_count-1)
+	if language == "automatic" or not language:
 		var preferred_language = OS.get_locale_language()
 		TranslationServer.set_locale(preferred_language)
 	else:
 		TranslationServer.set_locale(language)
+	
+	
 	set_lang()
-	characterCreator.set_lang()
+
 func set_lang():
 	$MainMenu/Structure/Title.text = tr("title")
 	$CharacterLoad/Structure/Label.text = tr("title")
@@ -45,7 +54,11 @@ func set_lang():
 	$CharacterLoad/Structure/VBoxContainer/Back.text = tr("back")
 	$Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Label.text = tr("settings")
 	$Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Audio.text = tr("volume")
-	$Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Button.text = tr("home")
+	$Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/HomeButton.text = tr("home")
+	$Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Language/Language.text = tr("language")
+	$MainMenu/Structure/VBoxContainer/Quit.text = tr("quit")
+	characterCreator.set_lang()
+	
 func _hide_all():
 	mainMenu.hide()
 	characterCreator.hide()
@@ -120,3 +133,14 @@ func _on_volume_value_changed(value: float) -> void:
 	newConfig.set_value("VOLUME","SLIDER_VALUE",value)
 	newConfig.save(SETTINGS_FILE_PATH)
 	mainVolume.volume_db=value
+
+
+func _on_lang_setting_item_selected(index: int) -> void:
+	var value = langSetting.get_item_text(index).split("-")[-1]
+	var newConfig = ConfigFile.new()
+	newConfig.load(SETTINGS_FILE_PATH)
+	newConfig.set_value("LANG","LANG",value)
+	newConfig.save(SETTINGS_FILE_PATH)
+	TranslationServer.set_locale(value)
+	set_lang()
+	

@@ -7,7 +7,7 @@
 [ext_resource type="FontFile" uid="uid://bo4amvjvj1bkm" path="res://assets/Fonts/Avara.ttf" id="5_tsxpq"]
 [ext_resource type="PackedScene" uid="uid://boivg2moacq1" path="res://character_creator.tscn" id="6_pkq7a"]
 
-[node name="Root" type="TextureRect" node_paths=PackedStringArray("mainMenu", "characterCreator", "credits", "loadMenu", "saveSelect", "confirm", "settings", "mainVolume", "volumeSlider")]
+[node name="Root" type="TextureRect" node_paths=PackedStringArray("mainMenu", "characterCreator", "credits", "loadMenu", "saveSelect", "confirm", "settings", "mainVolume", "volumeSlider", "langSetting")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -27,6 +27,7 @@ confirm = NodePath("CharacterLoad/Structure/VBoxContainer/confirmDelete")
 settings = NodePath("Settings")
 mainVolume = NodePath("Music")
 volumeSlider = NodePath("Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume")
+langSetting = NodePath("Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Language/langSetting")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_vdl6p")
@@ -502,10 +503,22 @@ text = "Volume:"
 
 [node name="Volume" type="HSlider" parent="Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 2
 min_value = -30.0
 max_value = 10.0
 
-[node name="Button" type="Button" parent="Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Language" type="HBoxContainer" parent="Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Language" type="Label" parent="Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Language"]
+layout_mode = 2
+text = "language"
+
+[node name="langSetting" type="OptionButton" parent="Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Language"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="HomeButton" type="Button" parent="Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -531,4 +544,5 @@ layout_mode = 1
 [connection signal="pressed" from="CharacterLoad/Structure/VBoxContainer/Back" to="." method="_main_menu_show"]
 [connection signal="confirmed" from="CharacterLoad/Structure/VBoxContainer/confirmDelete" to="." method="_on_confirm_delete_confirmed"]
 [connection signal="value_changed" from="Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume" to="." method="_on_volume_value_changed"]
-[connection signal="pressed" from="Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Button" to="." method="_main_menu_show"]
+[connection signal="item_selected" from="Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Language/langSetting" to="." method="_on_lang_setting_item_selected"]
+[connection signal="pressed" from="Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/HomeButton" to="." method="_main_menu_show"]
