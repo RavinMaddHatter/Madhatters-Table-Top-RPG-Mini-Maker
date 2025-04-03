@@ -75,6 +75,10 @@ OBJExporter="*res://addons/obj_exporter/OBJExporter.tscn"
 HelperFunctions="*res://helper_functions.gd"
 HumanizerGlobal="*res://addons/humanizer/scenes/humanizer_global.tscn"
 
+[display]
+
+window/stretch/aspect="expand"
+
 [editor]
 
 export/convert_text_resources_to_binary=false

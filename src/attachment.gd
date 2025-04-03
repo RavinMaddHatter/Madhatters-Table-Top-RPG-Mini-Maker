@@ -44,24 +44,25 @@ func _upload_pressed():
 	file_dialog.show()
 func load_mesh(loaded_mesh):
 	if loaded_mesh:
+		x_pos_slider.value = loaded_mesh.position.x
+		y_pos_slider.value = loaded_mesh.position.y
+		z_pos_slider.value = loaded_mesh.position.z
+		x_rot_slider.value = loaded_mesh.rotation.x
+		y_rot_slider.value = loaded_mesh.rotation.y
+		z_rot_slider.value = loaded_mesh.rotation.z
+		var aabb = loaded_mesh.mesh.get_aabb()
+		maxsize = max(aabb.size.x,aabb.size.y,aabb.size.z) - min(aabb.size.x,aabb.size.y,aabb.size.z)
+		scale_slider.value = loaded_mesh.scale.x*maxsize
 		mesh_object=MeshInstance3D.new()
 		mesh_object.mesh=loaded_mesh.mesh
 		mesh_object.position=loaded_mesh.position
 		mesh_object.rotation=loaded_mesh.rotation
-		mesh_object.scale=loaded_mesh.scale
-		x_pos_slider.value = mesh_object.position.x
-		y_pos_slider.value = mesh_object.position.y
-		z_pos_slider.value = mesh_object.position.z
-		x_rot_slider.value = mesh_object.rotation.x
-		y_rot_slider.value = mesh_object.rotation.y
-		z_rot_slider.value = mesh_object.rotation.z
 		mesh_object.name = lable.text
-		var aabb = mesh_object.mesh.get_aabb()
-		maxsize = max(aabb.size.x,aabb.size.y,aabb.size.z) - min(aabb.size.x,aabb.size.y,aabb.size.z)
 		anchor_point.add_child(mesh_object)
 		slider_vbox.show()
 		remove_button.show()
 		upload_button.hide()
+		_change_pose(0)
 
 func _on_file_dialog_file_selected(file_path: String) -> void:
 	slider_vbox.show()
@@ -80,13 +81,15 @@ func _remove_pressed():
 	slider_vbox.hide()
 	remove_button.hide()
 	upload_button.show()
-	mesh_object.queue_free()
+	if mesh_object:
+		mesh_object.queue_free()
 
 func _change_pose(_value):
-	mesh_object.position.x=x_pos_slider.value
-	mesh_object.position.y=y_pos_slider.value
-	mesh_object.position.z=z_pos_slider.value
-	mesh_object.rotation.x=x_rot_slider.value
-	mesh_object.rotation.y=y_rot_slider.value
-	mesh_object.rotation.z=z_rot_slider.value
-	mesh_object.scale=Vector3(scale_slider.value/maxsize, scale_slider.value/maxsize, scale_slider.value/maxsize)
+	if mesh_object:
+		mesh_object.position.x=x_pos_slider.value
+		mesh_object.position.y=y_pos_slider.value
+		mesh_object.position.z=z_pos_slider.value
+		mesh_object.rotation.x=x_rot_slider.value
+		mesh_object.rotation.y=y_rot_slider.value
+		mesh_object.rotation.z=z_rot_slider.value
+		mesh_object.scale=Vector3(scale_slider.value/maxsize, scale_slider.value/maxsize, scale_slider.value/maxsize)

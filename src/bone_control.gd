@@ -11,6 +11,7 @@ var bone_id:int
 @export var z_text:LineEdit
 var origin
 var bone_name="None"
+	
 func setup(bone_handle:String,skeleton,id):
 	bone_name = bone_handle
 	set_lang()
@@ -32,7 +33,11 @@ func set_sliders():
 	x_slider.value=pose.basis.get_euler().x
 	y_slider.value=pose.basis.get_euler().y
 	z_slider.value=pose.basis.get_euler().z
-
+func load_value(values):
+	x_slider.value = values["x"]
+	y_slider.value = values["y"]
+	z_slider.value = values["z"]
+	set_bone_pose()
 func set_bone_pose():
 	var rot_vector = Vector3()
 	rot_vector.x = x_slider.value

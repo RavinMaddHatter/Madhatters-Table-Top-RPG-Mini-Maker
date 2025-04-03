@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://86qvikra3il8"]
 
-[ext_resource type="Script" path="res://pose_slider.gd" id="1_57plt"]
+[ext_resource type="Script" uid="uid://cdshdpj74etnb" path="res://pose_slider.gd" id="1_57plt"]
 
 [node name="Pose_slider" type="VBoxContainer"]
 anchors_preset = 10

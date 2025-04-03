@@ -21,7 +21,7 @@ var zoom_mid_offset = 0
 var shapekey_slider = {}
 var equipment_categories = {}
 var attach_points = {}
-var attach_menu ={}
+var attach_menu = {}
 var detailed_poses={}
 var bone_categories = {}
 var attachment_points = ["LeftHand","RightHand","Head","RightFoot","LeftFoot","Hips","Chest","Root"]
@@ -64,6 +64,11 @@ func make_character(callback=null):
 	var printed = false
 	for n in collection.get_children():
 		if n.get_class() == "CharacterBody3D":
+			for slot in attachment_points:
+				var parent = attach_points[slot].get_parent()
+				for mesh in attach_points[slot].get_children():
+					mesh.queue_free()
+				parent.remove_child(attach_points[slot])
 			n.queue_free()
 	var config = HumanConfig.new()
 	config.targets['gender'] = 0.0
@@ -95,6 +100,7 @@ func make_character(callback=null):
 		await get_tree().process_frame
 	add_attach_points()
 	fix_poses()
+	reset_menues()
 	if callback:
 		var callable = Callable(self,callback)
 		callable.call()
@@ -110,17 +116,34 @@ func fix_poses():
 	simple_pose.skeleton = humanizer.get_skeleton_node()
 	simple_pose.humanizer = humanizer
 	simple_pose.ping_poses()
-	
+func reset_menues():
+	for slot in attachment_points:
+		attach_menu[slot]._remove_pressed()
+	simple_pose.set_default()
+	for cat in equipment_categories.keys():
+		equipment_categories[cat].set_selected("None")
+	equipment_categories["body"].set_selected("DefaultBody")
+	equipment_categories["lefteye"].set_selected("LeftEye")
+	equipment_categories["righteye"].set_selected("RightEye-LowPolyEyeball")
+	for key_name in shapekey_slider.keys():
+		shapekey_slider[key_name].reset()
+	for categoryName in detailed_poses:
+		for bone_name in detailed_poses[categoryName]:
+			detailed_poses[categoryName][bone_name].set_sliders()
 func reset_attach_points():
 	for slot in attachment_points:
 		skeleton.add_child(attach_points[slot])
 	
 func add_attach_points():
-	for slot in attachment_points:
-		attach_points[slot] = BoneAttachment3D.new()
-		skeleton.add_child(attach_points[slot])
-		attach_points[slot].set_bone_name(slot)
-		attach_menu[slot].set_anchor_point(attach_points[slot])
+	if len(attach_points.keys())<1:
+		attach_points = {}
+		for slot in attachment_points:
+			attach_points[slot] = BoneAttachment3D.new()
+			skeleton.add_child(attach_points[slot])
+			attach_points[slot].set_bone_name(slot)
+			attach_menu[slot].set_anchor_point(attach_points[slot])
+	else:
+		reset_attach_points()
 
 func make_detailed_menu():
 	var pannel = ScrollContainer.new()
@@ -195,7 +218,7 @@ func make_attachments_menu():
 				else:
 					equipment_categories[cat].cur_equipment="DefaultBody"
 			equipment_categories[cat].add_entry(item)
-
+	
 func make_basic_menu():
 	var pannel = ScrollContainer.new()
 	menu_root.add_child(pannel)
@@ -384,6 +407,7 @@ func _on_save_pressed():
 	var save_setings={}
 	save_setings["shapekey_slider"]={}
 	save_setings["imported_equipment"]={}
+	save_setings["imported_equipment_settings"]={}
 	save_setings["equipment_categories"]={}
 	save_setings["detailed_poses"]={}
 	save_setings["simple_pose"]={}
@@ -403,18 +427,19 @@ func _on_save_pressed():
 
 
 func load_character_file(characterName:String):
-	start_freeze_manager("character load")
 	nameBox.text = characterName
 	make_character("finish_load")
 func finish_load():
+	start_freeze_manager("character load")
+	await get_tree().process_frame
 	var characterName = nameBox.text
 	var path="user://saves/"+characterName+".save"
 	var file = FileAccess.open(path, FileAccess.READ)
 	var save_setings = file.get_var()
 	var progress_percentage = 0
-	
 	var num_sections = 4
 	var step_size=1.0/float(len(shapekey_slider.keys())*num_sections)
+	await get_tree().process_frame
 	_on_export_started()
 	for clothing_slot in equipment_categories.keys():
 		if save_setings["equipment_categories"][clothing_slot]!="None":
@@ -431,22 +456,22 @@ func finish_load():
 		progress_percentage+=step_size
 		_on_export_progress(0,progress_percentage)
 	step_size=1.0/float(len(attach_menu.keys())*num_sections)
+	for categoryName in save_setings["detailed_poses"].keys():
+		for bone_name in save_setings["detailed_poses"][categoryName].keys():
+			await get_tree().process_frame
+			save_setings["detailed_poses"][categoryName][bone_name]=detailed_poses[categoryName][bone_name].get_sliders()
 	for point_name in attach_menu.keys():
 		if save_setings["imported_equipment"][point_name]:
 			attach_menu[point_name].load_mesh(bytes_to_var_with_objects(save_setings["imported_equipment"][point_name]))
 			freeze_manager(progress_percentage)
+			await get_tree().process_frame
 		progress_percentage+=step_size
 		_on_export_progress(0,progress_percentage)
 	step_size=1.0/float(len(equipment_categories.keys())*num_sections)
-
-	
 	simple_pose.set_save(save_setings["simple_pose"])
-	step_size=1.0/float(len(bone_categories.keys())*num_sections)
-	for categoryName in bone_categories:
-		for bone_name in bone_categories[categoryName]:
-			detailed_poses[categoryName][bone_name].set_slider_value(save_setings["detailed_poses"][categoryName][bone_name])
-		progress_percentage+=step_size
-		freeze_manager(progress_percentage)
+	await get_tree().process_frame
+	simple_pose.ping_poses()
+	await get_tree().process_frame
 	_on_export_completed("")
 
 

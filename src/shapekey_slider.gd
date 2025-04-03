@@ -5,12 +5,16 @@ signal change_shapekeys (values:Dictionary)
 
 var label_name : String
 var shapekeys = [] #for lefts and rights
+var changed = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Label_Container/Label.text = label_name.capitalize()
 	set_line_edit_from_slider_value()
-
+func reset():
+	$Slider.value=0.0
+	$Label_Container/Value_Edit.text="0.0"
+	changed = false
 func emit_shapekeys():
 	var data = {}
 	for shapekey_name in shapekeys:
@@ -19,9 +23,11 @@ func emit_shapekeys():
 
 func set_line_edit_from_slider_value():
 	$Label_Container/Value_Edit.text = str($Slider.value)
+	changed = true
 	
 func set_value(value:float):
 	$Slider.value = value
+	changed = true
 func get_value():
 	return $Slider.value
 
