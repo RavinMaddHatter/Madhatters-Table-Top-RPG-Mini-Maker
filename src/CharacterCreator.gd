@@ -28,6 +28,8 @@ var attachment_points = ["LeftHand","RightHand","Head","RightFoot","LeftFoot","H
 var simple_pose
 var start_of_frame = 0
 var printed = false
+var detailed_poses_pannel
+var detailed_shapekey_pannel
 
 func _ready() -> void:
 	$splits.hide()
@@ -37,7 +39,9 @@ func _ready() -> void:
 	OBJExporter.export_started.connect(_on_export_started)
 	OBJExporter.export_completed.connect(_on_export_completed)
 	OBJExporter.export_progress_updated.connect(_on_export_progress)
+	make_animals_menu()
 	make_basic_menu()
+	
 	make_attachments_menu()
 	make_pose_menu()
 	make_import_menu()
@@ -45,6 +49,13 @@ func _ready() -> void:
 	make_detailed_pose()
 	$splits.show()
 	make_character("set_lang")
+func set_menue_visibility(detailed_shapekeys,detailed_pose_menues):
+	menu_root.remove_child(detailed_poses_pannel)
+	menu_root.remove_child(detailed_shapekey_pannel)
+	if detailed_pose_menues:
+		menu_root.add_child(detailed_poses_pannel)
+	if detailed_shapekeys:
+		menu_root.add_child(detailed_shapekey_pannel)
 func set_lang():
 	if simple_pose:
 		simple_pose.set_lang()
@@ -68,7 +79,8 @@ func make_character(callback=null):
 				var parent = attach_points[slot].get_parent()
 				for mesh in attach_points[slot].get_children():
 					mesh.queue_free()
-				parent.remove_child(attach_points[slot])
+				if parent:
+					parent.remove_child(attach_points[slot])
 			n.queue_free()
 	var config = HumanConfig.new()
 	config.targets['gender'] = 0.0
@@ -130,24 +142,11 @@ func reset_menues():
 	for categoryName in detailed_poses:
 		for bone_name in detailed_poses[categoryName]:
 			detailed_poses[categoryName][bone_name].set_sliders()
-func reset_attach_points():
-	for slot in attachment_points:
-		skeleton.add_child(attach_points[slot])
-	
-func add_attach_points():
-	if len(attach_points.keys())<1:
-		attach_points = {}
-		for slot in attachment_points:
-			attach_points[slot] = BoneAttachment3D.new()
-			skeleton.add_child(attach_points[slot])
-			attach_points[slot].set_bone_name(slot)
-			attach_menu[slot].set_anchor_point(attach_points[slot])
-	else:
-		reset_attach_points()
 
 func make_detailed_menu():
 	var pannel = ScrollContainer.new()
 	menu_root.add_child(pannel)
+	detailed_shapekey_pannel = pannel
 	pannel.name = "Details"
 	var vbox = VBoxContainer.new()
 	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
@@ -160,6 +159,7 @@ func make_detailed_menu():
 	var shapekeys = HumanizerTargetService.get_shapekey_categories()
 	shapekeys.erase("Macro")
 	shapekeys.erase("Race")
+	shapekeys.erase("Custom")
 	for categoryName in shapekeys:
 		var category_pannel = ScrollContainer.new()
 		var label=Label.new()
@@ -182,6 +182,20 @@ func make_detailed_menu():
 			category_vbox.add_child(slider)
 			shapekey_slider[key_name]=slider
 
+func add_attach_points():
+	if len(attach_points.keys())==0:
+		## this is for startup
+		for slot in attachment_points:
+			attach_points[slot] = BoneAttachment3D.new()
+			skeleton.add_child(attach_points[slot])
+			attach_points[slot].set_bone_name(slot)
+	else:
+		## This is for every reload.
+		for slot in attach_menu.keys():
+			attach_menu[slot].set_anchor_point(attach_points[slot])
+			if not attach_points[slot].get_parent():
+				skeleton.add_child(attach_points[slot])
+	
 func make_import_menu():
 	var pannel = ScrollContainer.new()
 	menu_root.add_child(pannel)
@@ -204,7 +218,6 @@ func make_attachments_menu():
 	vbox.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 	pannel.add_child(vbox)
 	equipment_categories = {}
-	
 	for item in HumanizerRegistry.equipment:
 		var slots = HumanizerRegistry.equipment[item].slots
 		for cat in slots:
@@ -218,11 +231,54 @@ func make_attachments_menu():
 				else:
 					equipment_categories[cat].cur_equipment="DefaultBody"
 			equipment_categories[cat].add_entry(item)
-	
+func make_animals_menu():
+	var pannel = ScrollContainer.new()
+	menu_root.add_child(pannel)
+	pannel.name = tr("Features")
+	var vbox = VBoxContainer.new()
+	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
+	vbox.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	vbox.set_custom_minimum_size(Vector2(300,0))
+	pannel.add_child(vbox)
+	var shapekeys = HumanizerTargetService.get_shapekey_categories()
+	var custom = shapekeys["Custom"]
+	var animal_tab = TabContainer.new()
+	animal_tab.set_custom_minimum_size(Vector2(300,0))
+	animal_tab.size_flags_horizontal=Control.SIZE_FILL
+	animal_tab.size_flags_vertical=Control.SIZE_EXPAND_FILL
+	vbox.add_child(animal_tab)
+	var category_pannel = ScrollContainer.new()
+	category_pannel.name =tr("bodyshape")
+	var animal_categories = {"body":VBoxContainer.new()}
+	animal_tab.add_child(category_pannel)
+	category_pannel.add_child(animal_categories["body"])
+	for key_name in custom:
+		var slider_name = key_name.split("-")[1]
+		var animal_category="body"
+		if len(key_name.split("-"))>2:
+			animal_category = key_name.split("-")[-1]
+		if not animal_category in animal_categories.keys():
+			category_pannel=ScrollContainer.new()
+			category_pannel.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+			category_pannel.size_flags_vertical=Control.SIZE_EXPAND_FILL
+			animal_tab.add_child(category_pannel)
+			category_pannel.name=tr(animal_category)
+			animal_categories[animal_category] = VBoxContainer.new()
+			animal_categories[animal_category].size_flags_horizontal=Control.SIZE_EXPAND_FILL
+			animal_categories[animal_category].size_flags_vertical=Control.SIZE_EXPAND_FILL
+			category_pannel.add_child(animal_categories[animal_category])
+		var slider = load("res://shapekey_slider.tscn").instantiate()
+		slider.label_name = tr(slider_name)
+		slider.shapekeys = [key_name]
+		slider.set_value(50)
+		slider.change_shapekeys.connect(_set_shapekey)
+		animal_categories[animal_category].add_child(slider)
+		shapekey_slider[key_name]=slider
+		pass
 func make_basic_menu():
 	var pannel = ScrollContainer.new()
 	menu_root.add_child(pannel)
-	pannel.name = "Simple"
+	pannel.name = tr("Traits")
 	var vbox = VBoxContainer.new()
 	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	vbox.size_flags_horizontal=Control.SIZE_EXPAND_FILL
@@ -264,6 +320,7 @@ func make_pose_menu():
 func make_detailed_pose():
 	var pannel = ScrollContainer.new()
 	menu_root.add_child(pannel)
+	detailed_poses_pannel = pannel
 	pannel.name = "Detailed Poses"
 	var vbox = VBoxContainer.new()
 	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
@@ -335,7 +392,7 @@ func set_pose(_values:Dictionary):
 func _set_shapekey(shapekey_values:Dictionary):
 	humanizer.set_targets(shapekey_values)
 	fix_poses()
-	reset_attach_points()
+	add_attach_points()
 	simple_pose.ping_poses()
 func default_settings():
 	simple_pose.set_default()
@@ -503,30 +560,36 @@ func _on_file_dialog_file_selected(file_path: String) -> void:
 							x.x=1
 							y.y=1
 							z.z=1
-							transformer=transformer.rotated(x,equipMesh.rotation.x)
-							transformer=transformer.rotated(y,equipMesh.rotation.y)
-							transformer=transformer.rotated(z,equipMesh.rotation.z)
+							#transformer=transformer.rotated(x,equipMesh.rotation.x)
+							#transformer=transformer.rotated(y,equipMesh.rotation.y)
+							#transformer=transformer.rotated(z,equipMesh.rotation.z)
 							transformer=transformer.translated(equipMesh.position)
 							transformer=equipMesh.get_parent().transform*transformer
 							surface_tool.append_from(baked_pose, 0,transformer)
 			elif child.get_class() == "MeshInstance3D":
 				var baked_pose : ArrayMesh
 				if child.name =="Avatar":
-					var character = humanizer.get_CharacterBody3D(true)
-					collection.add_child(character)
-					var loaded = false
+					#var test_character = humanizer.get_CharacterBody3D(true)
+					#collection.add_child(test_character)
+					#var loaded = false
+					#var mesh
+					#var bones_set = false
+					#while not loaded:
+						#for c in test_character.get_children():
+							#if c.get_class()== "Skeleton3D":
+								#bones_set=true
+								#for boneId in range(skeleton.get_bone_count()):
+									#c.set_bone_pose(boneId,skeleton.get_bone_pose(boneId))
+							#if c.name == "Avatar":
+								#loaded = true and bones_set
+								#mesh=c
+						#await get_tree().process_frame
 					var mesh
-					while not loaded:
-						for c in character.get_children():
-							if c.get_class()== "Skeleton3D":
-								for boneId in range(skeleton.get_bone_count()):
-									c.set_bone_pose(boneId,skeleton.get_bone_pose(boneId))
-							if c.name == "Avatar":
-								loaded = true
-								mesh=c
-						await get_tree().process_frame
+					for c in character.get_children():
+						if c.name == "Avatar":
+							mesh=c
 					baked_pose = mesh.bake_mesh_from_current_skeleton_pose()
-					character.queue_free()
+					#test_character.queue_free()
 				else:
 					baked_pose = child.bake_mesh_from_current_skeleton_pose()
 				var tranformer=Transform3D()

@@ -9,8 +9,31 @@ extends Control
 @export var mainVolume : AudioStreamPlayer
 @export var volumeSlider:Slider
 @export var langSetting:OptionButton
+@export var mainTitleLB:Label
+@export var loadTitleLB:Label
+@export var newCharacterLB:Button
+@export var mainNewCharacterBT:Button
+@export var mainLoadCharacterBT:Button
+@export var mainSettingsBT:Button
+@export var mainCreditsBT:Button
+@export var assets_lable:Label
+@export var load_character_load:Button
+@export var load_character_delete:Button
+@export var load_character_back:Button
+@export var load_character_new:Button
+@export var settings_label:Label
+@export var settings_volume_label:Label
+@export var settings_lang_label:Label
+@export var settings_adv_sk_label:Label
+@export var settings_adv_pose_label:Label
+@export var settings_home_button:Button
+@export var quit_button:Button
+@export var EquipmentLB:Label
+@export var equipVB:VBoxContainer
+
 const SETTINGS_FILE_PATH="user://settings.conf"
 var configFile
+var menu_visiblity = {}
 
 func _ready() -> void:
 	var newConfig = ConfigFile.new()
@@ -18,11 +41,15 @@ func _ready() -> void:
 	if err != OK: 
 		newConfig.set_value("VOLUME","SLIDER_VALUE",0)
 		newConfig.set_value("LANG","LANG","automatic")
+		newConfig.set_value("ADVANCED","POSES",false)
+		newConfig.set_value("ADVANCED","SHAPEKEYS",false)
 		newConfig.save(SETTINGS_FILE_PATH)
 	configFile = newConfig.load(SETTINGS_FILE_PATH)
 	volumeSlider.value = newConfig.get_value("VOLUME","SLIDER_VALUE")
 	if volumeSlider.value>-30:
 		mainVolume.play()
+	menu_visiblity["poses"] = newConfig.get_value("ADVANCED","POSES")
+	menu_visiblity["shapekeys"] = newConfig.get_value("ADVANCED","SHAPEKEYS")
 	_on_volume_value_changed(volumeSlider.value)
 	characterCreator.home_button.connect("pressed",_main_menu_show)
 	var language = newConfig.get_value("LANG","LANG")
@@ -37,26 +64,47 @@ func _ready() -> void:
 		TranslationServer.set_locale(preferred_language)
 	else:
 		TranslationServer.set_locale(language)
-	
-	
 	set_lang()
+	load_credits()
 
+func load_credits():
+	var jsonFile=FileAccess.get_file_as_string("C:/Users/camer/OneDrive/Documents/GitHub/Madhatters-Table-Top-RPG-Mini-Maker/src/assets/citations/basepack/equipment.json")
+	var citations_dict = JSON.parse_string(jsonFile)
+	for key in citations_dict.keys():
+		var name=Label.new()
+		name.text=key
+		equipVB.add_child(name)
+		var margin=MarginContainer.new()
+		margin.add_theme_constant_override("margin_left",25)
+		equipVB.add_child(margin)
+		var creator_vbox = VBoxContainer.new()
+		creator_vbox.name = key
+		margin.add_child(creator_vbox)
+		for citation in citations_dict[key]:
+			var entry = Label.new()
+			entry.name = citation
+			entry.text = tr(citation)
+			creator_vbox.add_child(entry)
 func set_lang():
-	$MainMenu/Structure/Title.text = tr("title")
-	$CharacterLoad/Structure/Label.text = tr("title")
-	$CharacterLoad/Structure/VBoxContainer/NewCharacter.text = tr("newChar")
-	$MainMenu/Structure/VBoxContainer/NewCharacter.text = tr("newChar")
-	$MainMenu/Structure/VBoxContainer/LoadCharacter.text = tr("loadChar")
-	$MainMenu/Structure/VBoxContainer/Settings.text = tr("settings")
-	$MainMenu/Structure/VBoxContainer/Credits.text = tr("credits")
-	$CharacterLoad/Structure/VBoxContainer/Load.text = tr("load")
-	$CharacterLoad/Structure/VBoxContainer/delete.text = tr("delete")
-	$CharacterLoad/Structure/VBoxContainer/Back.text = tr("back")
-	$Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Label.text = tr("settings")
-	$Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Audio.text = tr("volume")
-	$Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/HomeButton.text = tr("home")
-	$Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Language/Language.text = tr("language")
-	$MainMenu/Structure/VBoxContainer/Quit.text = tr("quit")
+	mainTitleLB.text = tr("title")
+	loadTitleLB.text = tr("title")
+	newCharacterLB.text = tr("newChar")
+	mainNewCharacterBT.text = tr("newChar")
+	mainLoadCharacterBT.text = tr("loadChar")
+	mainSettingsBT.text = tr("settings")
+	mainCreditsBT.text = tr("credits")
+	load_character_load.text = tr("load")
+	load_character_delete.text = tr("delete")
+	load_character_back.text = tr("back")
+	load_character_new.text = tr("newChar")
+	settings_label.text = tr("settings")
+	settings_volume_label.text = tr("volume")
+	settings_home_button.text = tr("home")
+	settings_lang_label.text = tr("language")
+	settings_adv_sk_label.text = tr("DetailedShapekeys")
+	settings_adv_pose_label.text = tr("DetailedPoses")
+	quit_button.text = tr("quit")
+	assets_lable.text = tr("assets")
 	characterCreator.set_lang()
 	
 func _hide_all():
@@ -81,6 +129,9 @@ func _on_settings_pressed() -> void:
 func _on_new_character_pressed() -> void:
 	_hide_all()
 	characterCreator.show()
+	characterCreator.set_menue_visibility(
+		menu_visiblity["shapekeys"],
+		menu_visiblity["poses"])
 	characterCreator.default_settings()
 	characterCreator.new_name()
 	characterCreator.make_character()
@@ -104,6 +155,9 @@ func _on_show_load_menu():
 func _on_load_character_save():
 	_hide_all()
 	characterCreator.show()
+	characterCreator.set_menue_visibility(
+		menu_visiblity["shapekeys"],
+		menu_visiblity["poses"])
 	var characterName=saveSelect.get_item_text(saveSelect.get_selected_id())
 	characterCreator.default_settings()
 	characterCreator.load_character_file(characterName)
@@ -134,7 +188,6 @@ func _on_volume_value_changed(value: float) -> void:
 	newConfig.save(SETTINGS_FILE_PATH)
 	mainVolume.volume_db=value
 
-
 func _on_lang_setting_item_selected(index: int) -> void:
 	var value = langSetting.get_item_text(index).split("-")[-1]
 	var newConfig = ConfigFile.new()
@@ -143,4 +196,17 @@ func _on_lang_setting_item_selected(index: int) -> void:
 	newConfig.save(SETTINGS_FILE_PATH)
 	TranslationServer.set_locale(value)
 	set_lang()
-	
+
+func _on_adv_sk_box_toggled(toggled_on: bool) -> void:
+	var newConfig = ConfigFile.new()
+	newConfig.load(SETTINGS_FILE_PATH)
+	newConfig.set_value("ADVANCED","SHAPEKEYS",toggled_on)
+	newConfig.save(SETTINGS_FILE_PATH)
+	menu_visiblity["shapekey"] = toggled_on
+
+func _on_adv_pose_box_toggled(toggled_on: bool) -> void:
+	var newConfig = ConfigFile.new()
+	newConfig.load(SETTINGS_FILE_PATH)
+	newConfig.set_value("ADVANCED","POSES",toggled_on)
+	newConfig.save(SETTINGS_FILE_PATH)
+	menu_visiblity["poses"] = toggled_on

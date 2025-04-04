@@ -110,11 +110,12 @@ func get_equipment_in_slots(slot_names:Array):
 func add_equipment(equip:HumanizerEquipment) -> void:
 	#print("Equipping " + equip.type)
 	var equip_type = equip.get_type()
-	for prev_equip in get_equipment_in_slots(equip_type.slots):
-		remove_equipment(prev_equip)
-	equipment[equip.type] = equip
-	_handle_color_overrides(equip)
-	equipment_added.emit(equip)
+	if equip_type:
+		for prev_equip in get_equipment_in_slots(equip_type.slots):
+			remove_equipment(prev_equip)
+		equipment[equip.type] = equip
+		_handle_color_overrides(equip)
+		equipment_added.emit(equip)
 		
 func remove_equipment(equip:HumanizerEquipment):
 	#print("Removing " + equip.resource_name)

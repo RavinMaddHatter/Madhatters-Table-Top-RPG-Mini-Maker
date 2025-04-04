@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://clwxqo42ap5op"]
+[gd_scene load_steps=8 format=3 uid="uid://clwxqo42ap5op"]
 
 [ext_resource type="Script" uid="uid://d32fot8kqt3yn" path="res://main_menu.gd" id="1_8a7xe"]
 [ext_resource type="Texture2D" uid="uid://dr50igx46nbot" path="res://assets/Backgrounds/Joseph_Wright_004.jpg" id="1_c3r4i"]
@@ -7,7 +7,9 @@
 [ext_resource type="FontFile" uid="uid://bo4amvjvj1bkm" path="res://assets/Fonts/Avara.ttf" id="5_tsxpq"]
 [ext_resource type="PackedScene" uid="uid://boivg2moacq1" path="res://character_creator.tscn" id="6_pkq7a"]
 
-[node name="Root" type="TextureRect" node_paths=PackedStringArray("mainMenu", "characterCreator", "credits", "loadMenu", "saveSelect", "confirm", "settings", "mainVolume", "volumeSlider", "langSetting")]
+[sub_resource type="Theme" id="Theme_nlkkf"]
+
+[node name="Root" type="TextureRect" node_paths=PackedStringArray("mainMenu", "characterCreator", "credits", "loadMenu", "saveSelect", "confirm", "settings", "mainVolume", "volumeSlider", "langSetting", "mainTitleLB", "loadTitleLB", "newCharacterLB", "mainNewCharacterBT", "mainLoadCharacterBT", "mainSettingsBT", "mainCreditsBT", "assets_lable", "load_character_load", "load_character_delete", "load_character_back", "load_character_new", "settings_label", "settings_volume_label", "settings_lang_label", "settings_adv_sk_label", "settings_adv_pose_label", "settings_home_button", "quit_button", "EquipmentLB", "equipVB")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -26,8 +28,29 @@ saveSelect = NodePath("CharacterLoad/Structure/VBoxContainer/saves")
 confirm = NodePath("CharacterLoad/Structure/VBoxContainer/confirmDelete")
 settings = NodePath("Settings")
 mainVolume = NodePath("Music")
-volumeSlider = NodePath("Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume")
-langSetting = NodePath("Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Language/langSetting")
+volumeSlider = NodePath("Settings/HBoxContainer/VBoxContainer/ScrollContainer/space/settingsBox/Volume")
+langSetting = NodePath("Settings/HBoxContainer/VBoxContainer/ScrollContainer/space/settingsBox/Language/langSetting")
+mainTitleLB = NodePath("MainMenu/Structure/Title")
+loadTitleLB = NodePath("CharacterLoad/Structure/Label")
+newCharacterLB = NodePath("MainMenu/Structure/VBoxContainer/NewCharacter")
+mainNewCharacterBT = NodePath("MainMenu/Structure/VBoxContainer/NewCharacter")
+mainLoadCharacterBT = NodePath("MainMenu/Structure/VBoxContainer/LoadCharacter")
+mainSettingsBT = NodePath("MainMenu/Structure/VBoxContainer/Settings")
+mainCreditsBT = NodePath("MainMenu/Structure/VBoxContainer/Credits")
+assets_lable = NodePath("credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Assets/assets/assets_label")
+load_character_load = NodePath("CharacterLoad/Structure/VBoxContainer/Load")
+load_character_delete = NodePath("CharacterLoad/Structure/VBoxContainer/delete")
+load_character_back = NodePath("CharacterLoad/Structure/VBoxContainer/Back")
+load_character_new = NodePath("CharacterLoad/Structure/VBoxContainer/NewCharacter")
+settings_label = NodePath("Settings/HBoxContainer/VBoxContainer/ScrollContainer/space/settingsBox/Label")
+settings_volume_label = NodePath("Settings/HBoxContainer/VBoxContainer/ScrollContainer/space/settingsBox/Audio")
+settings_lang_label = NodePath("Settings/HBoxContainer/VBoxContainer/ScrollContainer/space/settingsBox/Language/Language")
+settings_adv_sk_label = NodePath("Settings/HBoxContainer/VBoxContainer/ScrollContainer/space/settingsBox/advancedShapekeys/advSKLB")
+settings_adv_pose_label = NodePath("Settings/HBoxContainer/VBoxContainer/ScrollContainer/space/settingsBox/advancedPoses/advPosLB")
+settings_home_button = NodePath("Settings/HBoxContainer/VBoxContainer/ScrollContainer/space/settingsBox/HomeButton")
+quit_button = NodePath("MainMenu/Structure/VBoxContainer/Quit")
+EquipmentLB = NodePath("credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Assets/assets/equipment/equipmentVB/EquipmentLB")
+equipVB = NodePath("credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Assets/assets/equipment/equipmentVB/equipDump/equipVB")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_vdl6p")
@@ -121,7 +144,7 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Credits" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Credits:"
@@ -144,8 +167,7 @@ uri = "https://github.com/NitroxNova/humanizer"
 
 [node name="NitroxNova" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Humanizer Detailed/VBoxContainer"]
 layout_mode = 2
-text = "NitroxNova
-"
+text = "NitroxNova"
 
 [node name="MarginContainer" type="MarginContainer" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Humanizer Detailed/VBoxContainer"]
 layout_mode = 2
@@ -190,205 +212,68 @@ layout_mode = 2
 text = "Patreon"
 uri = "https://www.patreon.com/makehuman"
 
-[node name="Obj export" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-text = "OBJ Export:"
-
-[node name="Make Human3" type="MarginContainer" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 25
-
-[node name="VBoxContainer" type="VBoxContainer" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human3"]
-layout_mode = 2
-
-[node name="Project Page" type="LinkButton" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human3/VBoxContainer"]
-layout_mode = 2
-text = "Project Page"
-uri = "https://github.com/fbcosentino/godot-objexporter"
-
-[node name="Obj export2" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-text = "Assets:"
-
-[node name="Make Human4" type="MarginContainer" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 25
-
-[node name="VBoxContainer" type="VBoxContainer" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4"]
-layout_mode = 2
-
-[node name="Project Page" type="LinkButton" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "Asset Repository"
-uri = "https://github.com/fbcosentino/godot-objexporter"
-
-[node name="Autors" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "culturalibre"
-
-[node name="Autors2" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "Elvaerwyn"
-
-[node name="Autors3" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "JALdMIC"
-
-[node name="Autors4" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "titleknown"
-
-[node name="Autors5" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "FreezyChan"
-
-[node name="Autors6" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "grinsegold"
-
-[node name="Autors7" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "Mindfront"
-
-[node name="Autors8" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "MargaretToigo"
-
-[node name="Autors9" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "grinsegold"
-
-[node name="Autors10" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "RehmanPolanski"
-
-[node name="Autors11" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "RehmanPolanski"
-
-[node name="Autors12" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "WDG"
-
-[node name="Autors13" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "Mindfront"
-
-[node name="Autors14" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "MargaretToigo"
-
-[node name="Autors15" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "EWS"
-
-[node name="Autors16" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "frankyaye"
-
-[node name="Autors17" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "kwnet_at"
-
-[node name="Autors18" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "spamrakuen"
-
-[node name="Autors19" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "Aethelraed_Unraed"
-
-[node name="Autors20" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "spamrakuen"
-
-[node name="Autors21" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "learning"
-
-[node name="Autors22" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "Aethelraed_Unraed"
-
-[node name="Autors23" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "grinsegold"
-
-[node name="Autors24" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "Joel Palmius"
-
-[node name="Autors25" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "jujube"
-
-[node name="Autors26" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "Cortu"
-
-[node name="Autors27" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "Elvaerwyn"
-
-[node name="Autors28" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "namuhekam"
-
-[node name="Autors29" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "skalldyrssuppe"
-
-[node name="Autors30" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "punkduck"
-
-[node name="Autors31" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "MaciekG"
-
-[node name="Autors33" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "culturalibre"
-
-[node name="Autors34" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "culturalibre"
-
-[node name="Autors35" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "culturalibre"
-
-[node name="Autors36" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Make Human4/VBoxContainer"]
-layout_mode = 2
-text = "culturalibre"
-
 [node name="Sound" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 text = "Audio"
 
-[node name="MarginContainer" type="MarginContainer" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="songs" type="MarginContainer" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/MarginContainer"]
+[node name="songsVB" type="VBoxContainer" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/songs"]
 layout_mode = 2
 
-[node name="Song" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainer2"]
+[node name="Song" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/songs/songsVB"]
 layout_mode = 2
 text = "Careful Palindromes"
 
-[node name="Artist" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainer2"]
+[node name="MarginContainer" type="MarginContainer" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/songs/songsVB"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/songs/songsVB/MarginContainer"]
+layout_mode = 2
+
+[node name="Artist" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/songs/songsVB/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Mesostic"
 
-[node name="License" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainer2"]
+[node name="License" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/songs/songsVB/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Mesostic, CC0, via Wikimedia Commons"
 
-[node name="Project Page" type="LinkButton" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainer2"]
+[node name="Project Page" type="LinkButton" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/songs/songsVB/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Wiki Commons Link"
 uri = "https://commons.wikimedia.org/wiki/File:Careful_palindromes_(disquiet0344).ogg"
+
+[node name="Assets" type="MarginContainer" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="assets" type="VBoxContainer" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Assets"]
+layout_mode = 2
+
+[node name="assets_label" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Assets/assets"]
+layout_mode = 2
+text = "Assets:"
+
+[node name="equipment" type="MarginContainer" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Assets/assets"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+
+[node name="equipmentVB" type="VBoxContainer" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Assets/assets/equipment"]
+layout_mode = 2
+
+[node name="EquipmentLB" type="Label" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Assets/assets/equipment/equipmentVB"]
+layout_mode = 2
+text = "Equipment"
+
+[node name="equipDump" type="MarginContainer" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Assets/assets/equipment/equipmentVB"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+
+[node name="equipVB" type="VBoxContainer" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Assets/assets/equipment/equipmentVB/equipDump"]
+layout_mode = 2
 
 [node name="Button" type="Button" parent="credits/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -488,37 +373,70 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Settings/HBoxContainer/VBoxContainer/ScrollContainer"]
+[node name="space" type="MarginContainer" parent="Settings/HBoxContainer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="Label" type="Label" parent="Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="settingsBox" type="VBoxContainer" parent="Settings/HBoxContainer/VBoxContainer/ScrollContainer/space"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_nlkkf")
+
+[node name="Label" type="Label" parent="Settings/HBoxContainer/VBoxContainer/ScrollContainer/space/settingsBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Settings"
 
-[node name="Audio" type="Label" parent="Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Audio" type="Label" parent="Settings/HBoxContainer/VBoxContainer/ScrollContainer/space/settingsBox"]
 layout_mode = 2
 text = "Volume:"
 
-[node name="Volume" type="HSlider" parent="Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Volume" type="HSlider" parent="Settings/HBoxContainer/VBoxContainer/ScrollContainer/space/settingsBox"]
 layout_mode = 2
 size_flags_vertical = 2
 min_value = -30.0
 max_value = 10.0
 
-[node name="Language" type="HBoxContainer" parent="Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="Language" type="HBoxContainer" parent="Settings/HBoxContainer/VBoxContainer/ScrollContainer/space/settingsBox"]
 layout_mode = 2
 
-[node name="Language" type="Label" parent="Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Language"]
+[node name="Language" type="Label" parent="Settings/HBoxContainer/VBoxContainer/ScrollContainer/space/settingsBox/Language"]
 layout_mode = 2
 text = "language"
 
-[node name="langSetting" type="OptionButton" parent="Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Language"]
+[node name="langSetting" type="OptionButton" parent="Settings/HBoxContainer/VBoxContainer/ScrollContainer/space/settingsBox/Language"]
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="HomeButton" type="Button" parent="Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="advancedPoses" type="HBoxContainer" parent="Settings/HBoxContainer/VBoxContainer/ScrollContainer/space/settingsBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="advPosLB" type="Label" parent="Settings/HBoxContainer/VBoxContainer/ScrollContainer/space/settingsBox/advancedPoses"]
+layout_mode = 2
+text = "Detailed Poses"
+
+[node name="advPoseBox" type="CheckBox" parent="Settings/HBoxContainer/VBoxContainer/ScrollContainer/space/settingsBox/advancedPoses"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="advancedShapekeys" type="HBoxContainer" parent="Settings/HBoxContainer/VBoxContainer/ScrollContainer/space/settingsBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="advSKLB" type="Label" parent="Settings/HBoxContainer/VBoxContainer/ScrollContainer/space/settingsBox/advancedShapekeys"]
+layout_mode = 2
+text = "Detailed Shape Keys"
+
+[node name="advSKBox" type="CheckBox" parent="Settings/HBoxContainer/VBoxContainer/ScrollContainer/space/settingsBox/advancedShapekeys"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="HomeButton" type="Button" parent="Settings/HBoxContainer/VBoxContainer/ScrollContainer/space/settingsBox"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -543,6 +461,8 @@ layout_mode = 1
 [connection signal="pressed" from="CharacterLoad/Structure/VBoxContainer/delete" to="." method="_on_delete_pressed"]
 [connection signal="pressed" from="CharacterLoad/Structure/VBoxContainer/Back" to="." method="_main_menu_show"]
 [connection signal="confirmed" from="CharacterLoad/Structure/VBoxContainer/confirmDelete" to="." method="_on_confirm_delete_confirmed"]
-[connection signal="value_changed" from="Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volume" to="." method="_on_volume_value_changed"]
-[connection signal="item_selected" from="Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/Language/langSetting" to="." method="_on_lang_setting_item_selected"]
-[connection signal="pressed" from="Settings/HBoxContainer/VBoxContainer/ScrollContainer/VBoxContainer/HomeButton" to="." method="_main_menu_show"]
+[connection signal="value_changed" from="Settings/HBoxContainer/VBoxContainer/ScrollContainer/space/settingsBox/Volume" to="." method="_on_volume_value_changed"]
+[connection signal="item_selected" from="Settings/HBoxContainer/VBoxContainer/ScrollContainer/space/settingsBox/Language/langSetting" to="." method="_on_lang_setting_item_selected"]
+[connection signal="toggled" from="Settings/HBoxContainer/VBoxContainer/ScrollContainer/space/settingsBox/advancedPoses/advPoseBox" to="." method="_on_adv_pose_box_toggled"]
+[connection signal="toggled" from="Settings/HBoxContainer/VBoxContainer/ScrollContainer/space/settingsBox/advancedShapekeys/advSKBox" to="." method="_on_adv_sk_box_toggled"]
+[connection signal="pressed" from="Settings/HBoxContainer/VBoxContainer/ScrollContainer/space/settingsBox/HomeButton" to="." method="_main_menu_show"]
