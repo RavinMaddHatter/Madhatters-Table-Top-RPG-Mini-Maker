@@ -10,6 +10,13 @@ var character : CharacterBody3D
 @export var nameBox : TextEdit
 @export var baseMesh : MeshInstance3D
 @export var progress : ProgressBar
+@export var exportButton:Button
+@export var homeButton:Button
+@export var saveButton:Button
+@export var posLabel:Label
+@export var zoomLabel:Label
+@export var randomButton:Button
+@export var nameLabel:Label
 var rng = RandomNumberGenerator.new()
 var camera_zoom = 0
 var zoom_in_offset = 0
@@ -30,6 +37,8 @@ var start_of_frame = 0
 var printed = false
 var detailed_poses_pannel
 var detailed_shapekey_pannel
+var animal_categories={}
+var names_to_translate = []
 
 func _ready() -> void:
 	$splits.hide()
@@ -41,7 +50,6 @@ func _ready() -> void:
 	OBJExporter.export_progress_updated.connect(_on_export_progress)
 	make_animals_menu()
 	make_basic_menu()
-	
 	make_attachments_menu()
 	make_pose_menu()
 	make_import_menu()
@@ -49,6 +57,7 @@ func _ready() -> void:
 	make_detailed_pose()
 	$splits.show()
 	make_character("set_lang")
+
 func set_menue_visibility(detailed_shapekeys,detailed_pose_menues):
 	menu_root.remove_child(detailed_poses_pannel)
 	menu_root.remove_child(detailed_shapekey_pannel)
@@ -56,23 +65,35 @@ func set_menue_visibility(detailed_shapekeys,detailed_pose_menues):
 		menu_root.add_child(detailed_poses_pannel)
 	if detailed_shapekeys:
 		menu_root.add_child(detailed_shapekey_pannel)
+	for item in names_to_translate:
+		if item["target"]:
+			item["target"].name = d.ltr(item["key"])
+		else:
+			print(item["key"])
+
 func set_lang():
 	if simple_pose:
 		simple_pose.set_lang()
 	for categoryName in bone_categories.keys():
 		for bone_name in bone_categories[categoryName]:
 			detailed_poses[categoryName][bone_name].set_lang()
-	var shapekeys = HumanizerTargetService.get_shapekey_categories()
-	for categoryName in shapekeys:
-		var category_options = shapekeys[categoryName]
-		for key_name in category_options:
-			shapekey_slider[key_name].label_name = tr(key_name)
 	for point in attachment_points:
 		attach_menu[point].set_lang()
 	for cat in equipment_categories.keys():
 		equipment_categories[cat].set_lang()
+	for shape in shapekey_slider:
+		shapekey_slider[shape].set_lang()
+	for animal_category in animal_categories.keys():
+		animal_categories[animal_category].name = d.ltr(animal_category)
+	exportButton.text = d.ltr("exportButton")
+	homeButton.text = d.ltr("home")
+	saveButton.text = d.ltr("saveButton")
+	posLabel.text = d.ltr("positionSlider")
+	zoomLabel.text = d.ltr("zoomLabel")
+	randomButton.text = d.ltr("randomCharacter")
+	nameLabel.text = d.ltr("Name")
+		
 func make_character(callback=null):
-	var printed = false
 	for n in collection.get_children():
 		if n.get_class() == "CharacterBody3D":
 			for slot in attachment_points:
@@ -96,7 +117,7 @@ func make_character(callback=null):
 	equipment_categories["righteye"].set_selected("RightEye-LowPolyEyeball")
 	humanizer.load_config_async(config)
 	character = humanizer.get_CharacterBody3D(false)
-	character.name="Character"
+	character.name="Character"# No need to translate this one. it is just for debug
 	collection.add_child(character)
 	var loaded =false
 	while not loaded:
@@ -105,7 +126,7 @@ func make_character(callback=null):
 				humanizer.get_animation_tree_node().queue_free()
 				loaded=true
 		await get_tree().process_frame
-	
+	humanizer.set_vertex_hiding_enabled()
 	skeleton = humanizer.get_skeleton_node()
 	while not skeleton:
 		skeleton = humanizer.get_skeleton_node()
@@ -118,14 +139,14 @@ func make_character(callback=null):
 		callable.call()
 func fix_poses():
 	skeleton=humanizer.get_skeleton()
-	simple_pose.skeleton = humanizer.get_skeleton_node()
+	simple_pose.skeleton = skeleton
 	for categoryName in detailed_poses.keys():
 		for bone_name in detailed_poses[categoryName].keys():
 			var bone_config = detailed_poses[categoryName][bone_name]
 			var bone_id = skeleton.find_bone(bone_name)
 			bone_config.setup(bone_name,skeleton,bone_id)
 			bone_config.humanizer = humanizer
-	simple_pose.skeleton = humanizer.get_skeleton_node()
+	simple_pose.skeleton = skeleton
 	simple_pose.humanizer = humanizer
 	simple_pose.ping_poses()
 func reset_menues():
@@ -148,6 +169,7 @@ func make_detailed_menu():
 	menu_root.add_child(pannel)
 	detailed_shapekey_pannel = pannel
 	pannel.name = "Details"
+	names_to_translate.append({"target":pannel,"key":"Details"})
 	var vbox = VBoxContainer.new()
 	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	pannel.add_child(vbox)
@@ -163,11 +185,13 @@ func make_detailed_menu():
 	for categoryName in shapekeys:
 		var category_pannel = ScrollContainer.new()
 		var label=Label.new()
-		label.name=tr(categoryName)
+		label.name=d.ltr(categoryName)
+		names_to_translate.append({"target":label,"key":categoryName})
 		label.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 		category_pannel.add_child(label)
 		details_tab.add_child(category_pannel)
-		category_pannel.name=tr(categoryName)
+		category_pannel.name=d.ltr(categoryName)
+		names_to_translate.append({"target":category_pannel,"key":categoryName})
 		var category_vbox = VBoxContainer.new()
 		category_vbox.set_custom_minimum_size(Vector2(300,0))
 		category_vbox.size_flags_horizontal=Control.SIZE_FILL
@@ -175,8 +199,9 @@ func make_detailed_menu():
 		var category_options = shapekeys[categoryName]
 		for key_name in category_options:
 			var slider = load("res://shapekey_slider.tscn").instantiate()
-			slider.label_name = tr(key_name)
+			slider.label_name = key_name
 			slider.shapekeys = [key_name]
+			slider.set_lang()
 			slider.set_value(50)
 			slider.change_shapekeys.connect(_set_shapekey)
 			category_vbox.add_child(slider)
@@ -199,7 +224,8 @@ func add_attach_points():
 func make_import_menu():
 	var pannel = ScrollContainer.new()
 	menu_root.add_child(pannel)
-	pannel.name = tr("ImportOBJ")
+	pannel.name = d.ltr("ImportOBJ")
+	names_to_translate.append({"target":pannel,"key":"ImportOBJ"})
 	var vbox = VBoxContainer.new()
 	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	vbox.size_flags_horizontal=Control.SIZE_EXPAND_FILL
@@ -212,7 +238,8 @@ func make_import_menu():
 func make_attachments_menu():
 	var pannel = ScrollContainer.new()
 	menu_root.add_child(pannel)
-	pannel.name = tr("Equip")
+	pannel.name = d.ltr("Equip")
+	names_to_translate.append({"target":pannel,"key":"Equip"})
 	var vbox = VBoxContainer.new()
 	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	vbox.size_flags_horizontal=Control.SIZE_EXPAND_FILL
@@ -234,7 +261,8 @@ func make_attachments_menu():
 func make_animals_menu():
 	var pannel = ScrollContainer.new()
 	menu_root.add_child(pannel)
-	pannel.name = tr("Features")
+	pannel.name = d.ltr("Features")
+	names_to_translate.append({"target":pannel,"key":"Features"})
 	var vbox = VBoxContainer.new()
 	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	vbox.size_flags_horizontal=Control.SIZE_EXPAND_FILL
@@ -248,8 +276,9 @@ func make_animals_menu():
 	animal_tab.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	vbox.add_child(animal_tab)
 	var category_pannel = ScrollContainer.new()
-	category_pannel.name =tr("bodyshape")
-	var animal_categories = {"body":VBoxContainer.new()}
+	category_pannel.name = d.ltr("bodyshape")
+	names_to_translate.append({"target":category_pannel,"key":"bodyshape"})
+	animal_categories = {"body":VBoxContainer.new()}
 	animal_tab.add_child(category_pannel)
 	category_pannel.add_child(animal_categories["body"])
 	for key_name in custom:
@@ -262,14 +291,16 @@ func make_animals_menu():
 			category_pannel.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 			category_pannel.size_flags_vertical=Control.SIZE_EXPAND_FILL
 			animal_tab.add_child(category_pannel)
-			category_pannel.name=tr(animal_category)
+			category_pannel.name = d.ltr(animal_category)
+			names_to_translate.append({"target":category_pannel,"key":animal_category})
 			animal_categories[animal_category] = VBoxContainer.new()
 			animal_categories[animal_category].size_flags_horizontal=Control.SIZE_EXPAND_FILL
 			animal_categories[animal_category].size_flags_vertical=Control.SIZE_EXPAND_FILL
 			category_pannel.add_child(animal_categories[animal_category])
 		var slider = load("res://shapekey_slider.tscn").instantiate()
-		slider.label_name = tr(slider_name)
+		slider.label_name = slider_name
 		slider.shapekeys = [key_name]
+		slider.set_lang()
 		slider.set_value(50)
 		slider.change_shapekeys.connect(_set_shapekey)
 		animal_categories[animal_category].add_child(slider)
@@ -278,7 +309,8 @@ func make_animals_menu():
 func make_basic_menu():
 	var pannel = ScrollContainer.new()
 	menu_root.add_child(pannel)
-	pannel.name = tr("Traits")
+	pannel.name = d.ltr("Traits")
+	names_to_translate.append({"target":pannel,"key":"Traits"})
 	var vbox = VBoxContainer.new()
 	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	vbox.size_flags_horizontal=Control.SIZE_EXPAND_FILL
@@ -288,18 +320,20 @@ func make_basic_menu():
 	var racial = HumanizerMacroService.race_options
 	for key_name in macros:
 		var slider = load("res://shapekey_slider.tscn").instantiate()
-		slider.label_name = tr(key_name)
+		slider.label_name = key_name
 		slider.shapekeys = [key_name]
 		slider.set_value(50)
+		slider.set_lang()
 		slider.change_shapekeys.connect(_set_shapekey)
 		vbox.add_child(slider)
 		shapekey_slider[key_name]=slider
 	var label = Label.new()
-	label.text = "--"+tr("racial_features")+"--"
+	label.text = d.ltr("racial_features")
 	vbox.add_child(label)
 	for key_name in racial:
 		var slider = load("res://shapekey_slider.tscn").instantiate()
-		slider.label_name = tr(key_name)
+		slider.label_name = key_name
+		slider.set_lang()
 		slider.shapekeys = key_name
 		slider.set_value(50)
 		slider.change_shapekeys.connect(_set_shapekey)
@@ -309,7 +343,8 @@ func make_basic_menu():
 func make_pose_menu():
 	var pannel = ScrollContainer.new()
 	menu_root.add_child(pannel)
-	pannel.name = tr("SimplePoses")
+	pannel.name = d.ltr("SimplePoses")
+	names_to_translate.append({"target":pannel,"key":"SimplePoses"})
 	var vbox = VBoxContainer.new()
 	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	vbox.size_flags_horizontal=Control.SIZE_EXPAND_FILL
@@ -321,7 +356,8 @@ func make_detailed_pose():
 	var pannel = ScrollContainer.new()
 	menu_root.add_child(pannel)
 	detailed_poses_pannel = pannel
-	pannel.name = "Detailed Poses"
+	pannel.name = d.ltr("DetailedPoses")
+	names_to_translate.append({"target":pannel,"key":"DetailedPoses"})
 	var vbox = VBoxContainer.new()
 	vbox.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	vbox.size_flags_horizontal=Control.SIZE_EXPAND_FILL
@@ -353,11 +389,13 @@ func make_detailed_pose():
 		detailed_poses[categoryName]={}
 		var category_pannel = ScrollContainer.new()
 		var label=Label.new()
-		label.name=tr(categoryName)
+		label.name = d.ltr(categoryName)
+		names_to_translate.append({"target":label,"key":categoryName})
 		label.size_flags_horizontal=Control.SIZE_EXPAND_FILL
 		category_pannel.add_child(label)
 		pose_tab.add_child(category_pannel)
-		category_pannel.name=tr(categoryName)
+		category_pannel.name = d.ltr(categoryName)
+		names_to_translate.append({"target":category_pannel,"key":categoryName})
 		var category_vbox = VBoxContainer.new()
 		category_vbox.set_custom_minimum_size(Vector2(300,0))
 		category_vbox.size_flags_horizontal=Control.SIZE_FILL
@@ -394,10 +432,7 @@ func _set_shapekey(shapekey_values:Dictionary):
 	fix_poses()
 	add_attach_points()
 	simple_pose.ping_poses()
-func default_settings():
-	simple_pose.set_default()
-	for key_name in shapekey_slider.keys():
-		shapekey_slider[key_name].set_value(0.0)
+
 func setup_character(shapekeys:Dictionary):
 	humanizer.set_shapekeys(shapekeys)
 
@@ -409,11 +444,12 @@ func _on_position_slider_value_changed(value: float) -> void:
 	
 func _set_equipment(equipment:Dictionary):
 	var old_equip=humanizer.human_config.get_equipment_in_slot(equipment["slot"])
+	humanizer.show_clothes_vertices()
+	await get_tree().process_frame
 	if old_equip:
 		humanizer.remove_equipment(old_equip)
 	if equipment["item_name"] !="None":
 		humanizer.add_equipment(HumanizerEquipment.new(equipment["item_name"])) 
-		
 
 func _on_zoom_slider_value_changed(value):
 	var invert=1-value
@@ -485,63 +521,65 @@ func _on_save_pressed():
 
 func load_character_file(characterName:String):
 	nameBox.text = characterName
+	start_freeze_manager("character load")
+	_on_export_started()
+	_on_export_progress(0,0,"making_new_character")
 	make_character("finish_load")
 func finish_load():
-	start_freeze_manager("character load")
-	await get_tree().process_frame
+	var progress_percentage = 0.05
+	var num_sections = 5
+	_on_export_progress(0,progress_percentage,"loading_character_file")
+	freeze_manager(progress_percentage)
 	var characterName = nameBox.text
+	print(characterName)
 	var path="user://saves/"+characterName+".save"
 	var file = FileAccess.open(path, FileAccess.READ)
+	progress_percentage=0.10
+	_on_export_progress(0,progress_percentage,"loading_character_file")
 	var save_setings = file.get_var()
-	var progress_percentage = 0
-	var num_sections = 4
+	progress_percentage=0.15
+	_on_export_progress(0,progress_percentage,"loading_character_file")
 	var step_size=1.0/float(len(shapekey_slider.keys())*num_sections)
 	await get_tree().process_frame
-	_on_export_started()
+	var i = 0
 	for clothing_slot in equipment_categories.keys():
-		if save_setings["equipment_categories"][clothing_slot]!="None":
+		i=i+1
+		if clothing_slot in save_setings["equipment_categories"]:
 			equipment_categories[clothing_slot].load_equipment(save_setings["equipment_categories"][clothing_slot])
-			freeze_manager(progress_percentage)
 		progress_percentage+=step_size
-		_on_export_progress(0,progress_percentage)
+		if i%10==1:
+			await get_tree().process_frame
+			_on_export_progress(0,progress_percentage,"loading_cloths_file")
+	i=0
 	for key_name in shapekey_slider.keys():
 		var temp_val = shapekey_slider[key_name].get_value()
-		if temp_val !=save_setings["shapekey_slider"][key_name]:
-			shapekey_slider[key_name].set_value(save_setings["shapekey_slider"][key_name])
-			shapekey_slider[key_name].slider_drag_ended(save_setings["shapekey_slider"][key_name])
-			freeze_manager(progress_percentage)
+		if key_name in save_setings["shapekey_slider"]:
+			if temp_val !=save_setings["shapekey_slider"][key_name]:
+				shapekey_slider[key_name].set_value(save_setings["shapekey_slider"][key_name])
+				shapekey_slider[key_name].slider_drag_ended(save_setings["shapekey_slider"][key_name])
+				freeze_manager(progress_percentage)
+		i=i+1
+		step_size=1.0/float(len(shapekey_slider.keys())*num_sections)
 		progress_percentage+=step_size
-		_on_export_progress(0,progress_percentage)
-	step_size=1.0/float(len(attach_menu.keys())*num_sections)
+		if i%100==1:
+			_on_export_progress(0,progress_percentage,"setting_character_shapes")
+			await get_tree().process_frame
+	i=0
 	for categoryName in save_setings["detailed_poses"].keys():
 		for bone_name in save_setings["detailed_poses"][categoryName].keys():
 			await get_tree().process_frame
 			save_setings["detailed_poses"][categoryName][bone_name]=detailed_poses[categoryName][bone_name].get_sliders()
+	step_size=1.0/float(len(attach_menu.keys())*num_sections)
 	for point_name in attach_menu.keys():
 		if save_setings["imported_equipment"][point_name]:
 			attach_menu[point_name].load_mesh(bytes_to_var_with_objects(save_setings["imported_equipment"][point_name]))
-			freeze_manager(progress_percentage)
 			await get_tree().process_frame
 		progress_percentage+=step_size
-		_on_export_progress(0,progress_percentage)
-	step_size=1.0/float(len(equipment_categories.keys())*num_sections)
+		_on_export_progress(0,progress_percentage,"importing_equipment")
 	simple_pose.set_save(save_setings["simple_pose"])
 	await get_tree().process_frame
 	simple_pose.ping_poses()
-	await get_tree().process_frame
 	_on_export_completed("")
-
-
-func scal_pose_equipment(eqipment:MeshInstance3D):
-	var out_mesh= ArrayMesh.new()
-	var mdt = MeshDataTool.new()
-	var mesh_scale = eqipment.scale
-	mdt.create_from_surface(eqipment.mesh,0)
-	for i in range(mdt.get_vertex_count()):
-		var vertex = mdt.get_vertex(i)*mesh_scale
-		mdt.set_vertex(i, vertex)
-	mdt.commit_to_surface(out_mesh)
-	return out_mesh
 
 func _on_file_dialog_file_selected(file_path: String) -> void:
 	_on_save_pressed()
@@ -552,50 +590,22 @@ func _on_file_dialog_file_selected(file_path: String) -> void:
 				for bone in child.get_children():
 					for equipMesh in bone.get_children():
 						if equipMesh.get_class() == "MeshInstance3D":
-							var baked_pose = scal_pose_equipment(equipMesh) 
-							var transformer=Transform3D()
-							var x = Vector3()
-							var y = Vector3()
-							var z = Vector3()
-							x.x=1
-							y.y=1
-							z.z=1
-							#transformer=transformer.rotated(x,equipMesh.rotation.x)
-							#transformer=transformer.rotated(y,equipMesh.rotation.y)
-							#transformer=transformer.rotated(z,equipMesh.rotation.z)
-							transformer=transformer.translated(equipMesh.position)
-							transformer=equipMesh.get_parent().transform*transformer
-							surface_tool.append_from(baked_pose, 0,transformer)
+							var transformer=equipMesh.global_transform 
+							for index in range(equipMesh.mesh.get_surface_count()):
+								surface_tool.append_from(equipMesh.mesh, index,transformer)
 			elif child.get_class() == "MeshInstance3D":
 				var baked_pose : ArrayMesh
 				if child.name =="Avatar":
-					#var test_character = humanizer.get_CharacterBody3D(true)
-					#collection.add_child(test_character)
-					#var loaded = false
-					#var mesh
-					#var bones_set = false
-					#while not loaded:
-						#for c in test_character.get_children():
-							#if c.get_class()== "Skeleton3D":
-								#bones_set=true
-								#for boneId in range(skeleton.get_bone_count()):
-									#c.set_bone_pose(boneId,skeleton.get_bone_pose(boneId))
-							#if c.name == "Avatar":
-								#loaded = true and bones_set
-								#mesh=c
-						#await get_tree().process_frame
-					var mesh
+					var mesh 
 					for c in character.get_children():
-						if c.name == "Avatar":
+						if c is MeshInstance3D:
 							mesh=c
 					baked_pose = mesh.bake_mesh_from_current_skeleton_pose()
-					#test_character.queue_free()
-				else:
-					baked_pose = child.bake_mesh_from_current_skeleton_pose()
 				var tranformer=Transform3D()
 				if "transform" in baked_pose:
 					tranformer=baked_pose.transform
-				surface_tool.append_from(baked_pose, 0,tranformer)
+				for index in range(baked_pose.get_surface_count()):
+					surface_tool.append_from(baked_pose, index,tranformer)
 		surface_tool.append_from(baseMesh.mesh, 0,baseMesh.transform)
 		var combinedMesh:ArrayMesh=surface_tool.commit()
 		OBJExporter.save_mesh_to_files(combinedMesh, file_path)
@@ -603,12 +613,14 @@ func _on_file_dialog_file_selected(file_path: String) -> void:
 
 func _on_export_started():
 	$progressContainer.show()
-
+func character_complete():
+	$progressContainer.hide()
 func _on_export_completed(_obj_file):
 	$progressContainer.hide()
 
-func _on_export_progress(_surf_idx, _progress_value):
-	$progressContainer/ProgressBar.value=_progress_value * 100
+func _on_export_progress(_surf_idx, _progress_value,step=""):
+	$progressContainer/vbloading/loadingLabel.text = d.ltr(step)
+	$progressContainer/vbloading/ProgressBar.value=_progress_value * 100
 func _on_export_pressed():
 	$FileDialog.show()
 func _warning(message:String):

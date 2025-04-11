@@ -1,0 +1,62 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjd3foapdo7nn"]
+
+[ext_resource type="Script" uid="uid://cyqwjhwbdl3ca" path="res://mod_manager.gd" id="1_av6jg"]
+[ext_resource type="Theme" uid="uid://v8k76ctme5no" path="res://assets/listBoxButtonTheme.tres" id="2_80kad"]
+
+[node name="modManager" type="VBoxContainer" node_paths=PackedStringArray("sectionTitle", "loadButton", "deleteButton", "modBrowser", "packContainer", "openModFolder", "loadedPacksLable", "instructions", "openFolderButton")]
+size_flags_horizontal = 3
+script = ExtResource("1_av6jg")
+sectionTitle = NodePath("sectionTitle")
+loadButton = NodePath("buttons/load")
+deleteButton = NodePath("")
+toggleTheme = ExtResource("2_80kad")
+modBrowser = NodePath("modBrowser")
+packContainer = NodePath("MarginContainer/packScroll/packContainer")
+openModFolder = NodePath("buttons/OpenFolder")
+loadedPacksLable = NodePath("LoadedPacks")
+instructions = NodePath("instructions")
+openFolderButton = NodePath("buttons/OpenFolder")
+
+[node name="sectionTitle" type="Label" parent="."]
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+
+[node name="instructions" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 2
+text = "User imported packs will be found in your user folder at %APPDATA%\\Godot\\app_userdata\\
+Restart required after loading a pack"
+fit_content = true
+
+[node name="buttons" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="load" type="Button" parent="buttons"]
+layout_mode = 2
+
+[node name="OpenFolder" type="Button" parent="buttons"]
+layout_mode = 2
+text = "Open Folder"
+
+[node name="LoadedPacks" type="Label" parent="."]
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+
+[node name="packScroll" type="ScrollContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="packContainer" type="VBoxContainer" parent="MarginContainer/packScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="modBrowser" type="FileDialog" parent="."]
+auto_translate_mode = 1
+
+[connection signal="pressed" from="buttons/load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="buttons/OpenFolder" to="." method="_on_open_folder_pressed"]
+[connection signal="file_selected" from="modBrowser" to="." method="_on_mod_browser_file_selected"]

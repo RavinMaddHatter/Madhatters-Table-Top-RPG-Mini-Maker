@@ -4,3 +4,10 @@
 
 [resource]
 default_font = ExtResource("1_a1bcu")
+GraphFrameTitleLabel/font_sizes/font_size = 50
+HeaderLarge/font_sizes/font_size = 26
+HeaderMedium/constants/shadow_outline_size = 2
+HeaderMedium/font_sizes/font_size = 22
+HeaderSmall/constants/shadow_outline_size = 2
+HeaderSmall/font_sizes/font_size = 18
+HeaderSmall/fonts/font = ExtResource("1_a1bcu")

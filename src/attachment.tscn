@@ -73,6 +73,9 @@ min_value = -1.0
 max_value = 1.0
 step = 0.01
 
+[node name="FileDialog" type="FileDialog" parent="sliders/HBoxContainer2"]
+auto_translate_mode = 1
+
 [node name="HBoxContainer3" type="HBoxContainer" parent="sliders"]
 layout_mode = 2
 
@@ -150,4 +153,5 @@ value = 0.2
 
 [connection signal="pressed" from="HBoxContainer7/Upload" to="." method="_upload_pressed"]
 [connection signal="pressed" from="HBoxContainer7/Remove" to="." method="_remove_pressed"]
+[connection signal="file_selected" from="sliders/HBoxContainer2/FileDialog" to="." method="_on_file_dialog_file_selected"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]

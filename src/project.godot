@@ -74,6 +74,7 @@ config/icon="res://assets/Hatter_Love.png"
 OBJExporter="*res://addons/obj_exporter/OBJExporter.tscn"
 HelperFunctions="*res://helper_functions.gd"
 HumanizerGlobal="*res://addons/humanizer/scenes/humanizer_global.tscn"
+d="*res://global_debug.gd"
 
 [display]
 
@@ -89,4 +90,4 @@ enabled=PackedStringArray("res://addons/humanizer/plugin.cfg", "res://addons/obj
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://assets/translations/Translations.en.translation", "res://assets/translations/BaseTargets.en.translation", "res://assets/translations/BaseTargets.test.translation", "res://assets/translations/Translations.test.translation")
+locale/translations=PackedStringArray("res://assets/translations/Translations.en.translation", "res://assets/translations/Translations.test.translation")

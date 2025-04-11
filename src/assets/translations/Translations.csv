@@ -9,6 +9,7 @@ delete,Delete,test
 back,Back,test
 volume,Volume:,test
 home,Home,test
+shapekeys,Shape Keys,test
 LeftHand,Left Hand,test
 RightHand,Rigth Hand,test
 Head,Head,test
@@ -28,9 +29,7 @@ Simple,Simple,test
 detailedPoses,Detailed Poses,test
 Neck,Neck,test
 Spine,Spine,test
-Chest,Chest,test
 body,Body,test
-Body,Body,test
 Eyes,Eyes,test
 Mouth,Mouth,test
 hair,Hair,test
@@ -51,7 +50,6 @@ feetclothes,Shoes,test
 UpperChest,Upper Chest,test
 LeftUpperArm,Left Upper Arm,test
 LeftLowerArm,Left Lower Arm,test
-LeftHand,Left Hand,test
 LeftIndexProximal,Left Index Proximal,test
 LeftIndexIntermediate,Left Index Intermediate,test
 LeftIndexDistal,Left Index Distal,test
@@ -70,13 +68,11 @@ LeftThumbDistal,Left Thumb Distal,test
 RightShoulder,Right Shoulder,test
 RightUpperArm,Right Upper Arm,test
 RightLowerArm,Right Lower Arm,test
-RightHand,Right Hand,test
 RightIndexProximal,Right Index Proximal,test
 RightIndexIntermediate,Right Index Intermediate,test
 RightIndexDistal,Right Index Distal,test
 RightMiddleProximal,Right Middle Proximal,test
 RightMiddleDistal,Right Middle Intermediate,test
-RightMiddleDistal,Right Middle Distal,test
 RightLittleProximal,Right Little Proximal,test
 RightLittleIntermediate,Right Little Intermediate,test
 RightLittleDistal,Right Little Distal,test
@@ -88,7 +84,6 @@ RightThumbMetacarpal,Right Thumb Metacarpal,test
 RightThumbDistal,Right Thumb Distal,test
 None,None,test
 character,Character,test
-load,Load,test
 WARNING,WARNING,test
 positionOnBase,Position on base,test
 X,X,test
@@ -100,7 +95,6 @@ UpAndDown,Up/Down,test
 Torso,Torso,test
 Curve,Curve,test
 Twist,Twist,test
-twist,Twist,test
 Lean,Lean,test
 LeftArm,Left Arm,test
 shoulderShrug,Shoulder Shrug,test
@@ -112,16 +106,930 @@ wristA,Wrist A,test
 wristB,Wrist B,test
 wristC,Wrist C,test
 rightArm,Right Arm,test
-leftHand,Left Hand,test
 fingers,Fingers,test
 thumb,Thumb,test
-rightHand,Right Hand,test
 leftLeg,Left Leg,test
 spread,Spread,test
-Twist,Twist,test
 kick,Kick,test
 knee,Knee,test
 rotation,Rotation,test
 language,Language,test
 quit,Quit,test
 racial_features,Racial Features,test
+packSection,User Loaded Content,test
+loadPack,Load Content Pack,test
+explainLoadingMods,User content can be loaded via an externally created Humanizer Asset pack. This will be a Zip pack made with the Humanzier_Import Tool.,test
+explainRemovingMods,"To remove a pack you need to open the user folder, close the game and delete the zip pack related to the mod.",test
+loadedPacksLabel,Loaded Packs,test
+bodyshape,Body Shapes,test
+Anime_Stylized_Enhanced,Anime Body,test
+Canine,Canine Mouth,test
+Wolf,Wolf Shape,test
+anime,Anime,test
+bear,Bear,test
+bear_cartoon,Bear Cartoon,test
+bunny_rabbit,Bunny Ears,test
+bunny_rabbit2,Bunny Ears 2 ,test
+cannine,Dog,test
+carrot,Panda,test
+cat,Cat,test
+cat02,Cat 2,test
+cobra,Cobra,test
+cow,Cow,test
+dog,Dog,test
+donkey,Donkey,test
+donkey2,Donkey 2,test
+feline,Cat,test
+fox_cartoon,Cartoon Fox,test
+feet,Feet,test
+furry,Paws,test
+horse,Horse,test
+lion,Lion,test
+rabbit,Rabbit,test
+rabbit_bunny_hare,Rabbit,test
+shark,Shark,test
+squirrel,Squirrel,test
+tiger,Tiger,test
+Tail,Tail ,test
+Cowbelly,Utters,test
+ear,Ears,test
+Lizzard,Reptile,test
+HarveyHorns,Horns,test
+Harvey_Monkey,Monkey,test
+shoulder,Shoulder,test
+shoulder_pads,Shoulder Pads,test
+Nefertiti,Nefertiti ,test
+Robot,Robot ,test
+star,Star,test
+CONDOR,Condor,test
+Catgirl_ears,Cat Ears,test
+Darkness_Horns,Horns,test
+Doll,Doll ,test
+Mermaid,Mermaid ,test
+frakenstiens,Frankenstine,test
+Traits,Traits,test
+age,Age,test
+gender,Gender,test
+height,Height,test
+weight,Weight,test
+muscle,Muscle,test
+proportions,Proportions,test
+african,African,test
+asian,Asian,test
+caucasian,Cacausian,test
+facialhair,Facial Hair,test
+backpack,Backpack,test
+outertop,Cover Top,test
+gloves,Gloves,test
+mask,Mask,test
+Bodyshapes-elvs-fem-adrenal,Female Adrenal,test
+Bodyshapes-elvs-fem-apple,Female Apple,test
+Bodyshapes-elvs-fem-diamond,Female Diamond,test
+Bodyshapes-elvs-fem-full-hourglass,Female Hourglass,test
+Bodyshapes-elvs-fem-invert-triangle,Female Inverted Triangle,test
+Bodyshapes-elvs-fem-lean-column,Female Lean Column,test
+Bodyshapes-elvs-fem-liver,Female Liver,test
+Bodyshapes-elvs-fem-neat-hourglass,Female Neat Hourglass,test
+Bodyshapes-elvs-fem-ovary,Female Ovary,test
+Bodyshapes-elvs-fem-rectangle,Female Rectangle,test
+Bodyshapes-elvs-fem-thyroid,Female Thyroid,test
+Bodyshapes-elvs-fem-triangle,Female Triangle,test
+Bodyshapes-elvs-man-adrenal,Male Adrenal,test
+Bodyshapes-elvs-man-apple,Male Apple,test
+Bodyshapes-elvs-man-gonadal,Male Gonadal,test
+Bodyshapes-elvs-man-invert-triangle,Male Inverted Triangle,test
+Bodyshapes-elvs-man-lean-column,Male Lean Column,test
+Bodyshapes-elvs-man-liver,Male Liver,test
+Bodyshapes-elvs-man-rectangle,Male Rectangle,test
+Bodyshapes-elvs-man-thyroid,Male Thyroid,test
+Bodyshapes-elvs-man-trapezoid,Male Trapezoid,test
+Bodyshapes-elvs-man-triangle,Male Triangle,test
+Asym-brown-1-l,Asymetric Brown 1 Left,test
+Asym-brown-1-r,Asymetric Brown 1 Right,test
+Asym-brown-2-l,Asymetric Brown 2 Left,test
+Asym-brown-2-r,Asymetric Brown 2 Right,test
+Asym-top-1-l,Asymetric Top 1 Left,test
+Asym-top-1-r,Asymetric Top 1 Right,test
+Asym-top-2-l,Asymetric Top 2 Left,test
+Asym-top-2-r,Asymetric Top 2 Right,test
+Forehead-nubian-decr,Forehead Nubian Decrement,test
+Forehead-nubian-incr,Forehead Nubian Increment,test
+Forehead-scale-vert-decr,Forehead Scale Decrement,test
+Forehead-scale-vert-incr,Forehead Scale Increment,test
+Forehead-temple-decr,Forehead Temple Decrement,test
+Forehead-temple-incr,Forehead Temple Increment,test
+Forehead-trans-backward,Forehead Translation Backwards,test
+Forehead-trans-forward,Forehead Translation Forwards,test
+Head-age-decr,Head Age Decrement,test
+Head-age-incr,Head Age Increment,test
+Head-angle-in,Head Angle In,test
+Head-angle-out,Head Angle Out,test
+Head-back-scale-depth-decr,Head Back Scale Depth Decrement,test
+Head-back-scale-depth-incr,Head Back Scale Depth Increment,test
+Head-diamond,Head Diamond,test
+Head-fat-decr,Head Fat Decrement,test
+Head-fat-incr,Head Fat Increment,test
+Head-invertedtriangular,Head Inverted Triangle,test
+Head-oval,Head Oval,test
+Head-rectangular,Head Rectangular,test
+Head-round,Head Round,test
+Head-scale-depth-decr,Head Scale Depth Decrement,test
+Head-scale-depth-incr,Head Scale Depth Increment,test
+Head-scale-horiz-decr,Head Scale Horizontal Decrement,test
+Head-scale-horiz-incr,Head Scale Horizontal Increment,test
+Head-scale-vert-decr,Head Scale Vertical Decrement,test
+Head-scale-vert-incr,Head Scale Vertical Increment,test
+Head-square,Head Square,test
+Head-trans-backward,Head Translation Backwards,test
+Head-trans-down,Head Translation Down,test
+Head-trans-forward,Head Translation Forward,test
+Head-trans-in,Head Translation Inward,test
+Head-trans-out,Head Translation Outward,test
+Head-trans-up,Head Translation Upward,test
+Head-triangular,Head Triangular,test
+Asym-eye-1-l,Eye Asymetry 1 Left,test
+Asym-eye-1-r,Eye Asymetry 1 Right,test
+Asym-eye-2-l,Eye Asymetry 2 Left,test
+Asym-eye-2-r,Eye Asymetry 2 Right,test
+Asym-eye-3-l,Eye Asymetry 3 Left,test
+Asym-eye-3-r,Eye Asymetry 3 Right,test
+Asym-eye-4-l,Eye Asymetry 4 Left,test
+Asym-eye-4-r,Eye Asymetry 4 Right,test
+Asym-eye-5-l,Eye Asymetry 5 Left,test
+Asym-eye-5-r,Eye Asymetry 5 Right,test
+Asym-eye-6-l,Eye Asymetry 6 Left,test
+Asym-eye-6-r,Eye Asymetry 6 Right,test
+Asym-eye-7-l,Eye Asymetry 7 Left,test
+Asym-eye-7-r,Eye Asymetry 7 Right,test
+Asym-eye-8-l,Eye Asymetry 8 Left,test
+Asym-eye-8-r,Eye Asymetry 8 Right,test
+Eyebrows-angle-down,Eyebrows Angle Down,test
+Eyebrows-angle-up,Eyebrows Angle Up,test
+Eyebrows-trans-backward,Eyebrows Translation Backwards,test
+Eyebrows-trans-down,Eyebrows Translation Down,test
+Eyebrows-trans-forward,Eyebrows Translation Forward,test
+Eyebrows-trans-up,Eyebrows Translation Up,test
+L-eye-bag-decr,Left Eye Bag Decrement,test
+L-eye-bag-incr,Left Eye Bag Increment,test
+L-eye-bag-height-decr,Left Eye Bags Height Decrement,test
+L-eye-bag-height-incr,Right Eye Bags Height Decrement,test
+L-eye-bag-in,Left Eye Bag In,test
+L-eye-bag-out,Left Eye Bag Out,test
+L-eye-corner 1-down,Left Eye Corner 1 Down,test
+L-eye-corner 1-up,Left Eye Corner 1 Up,test
+L-eye-corner 2-down,Left Eye Corner 2 Down,test
+L-eye-corner 2-up,Left Eye Corner 2 Up,test
+L-eye-epicanthus-in,Left Eye Epicanthus In,test
+L-eye-epicanthus-out,Left Eye Epicanthus Out,test
+L-eye-eyefold-angle-down,Left Eyefold Angle Down,test
+L-eye-eyefold-angle-up,Left Eyefold Angle Up,test
+L-eye-eyefold-concave,Left Eyefold Concave,test
+L-eye-eyefold-convex,Left Eyefold Convex,test
+L-eye-eyefold-down,Left Eyefold Down,test
+L-eye-eyefold-up,Left Eyefold Up,test
+L-eye-height 1-decr,Left Eye Height 1 Decrement,test
+L-eye-height 1-incr,Left Eye Height 1 Increment,test
+L-eye-height 2-decr,Left Eye Height 2 Decrement,test
+L-eye-height 2-incr,Left Eye Height 2 Increment,test
+L-eye-height 3-decr,Left Eye Height 3 Decrement,test
+L-eye-height 3-incr,Left Eye Height 3 Increment,test
+L-eye-push 1-in,Left Eye Push 1 In,test
+L-eye-push 1-out,Left Eye Push 1 Out,test
+L-eye-push 2-in,Left Eye Push 2 In,test
+L-eye-push 2-out,Left Eye Push 2 Out,test
+L-eye-scale-decr,Left Eye Scale Decrement,test
+L-eye-scale-incr,Left Eye Scale Increment,test
+L-eye-trans-down,Left Eye Translate Down,test
+L-eye-trans-in,Left Eye Translate In,test
+L-eye-trans-out,Left Eye Translate Out,test
+L-eye-trans-up,Left Eye Translate Up,test
+R-eye-bag-decr,Right Eye Bag Decrement,test
+R-eye-bag-incr,Right Eye Bag Increment,test
+R-eye-bag-height-decr,Right Eye Bags Height Decrement,test
+R-eye-bag-height-incr,Right Eye Bags Height Decrement,test
+R-eye-bag-in,Right Eye Bag In,test
+R-eye-bag-out,Right Eye Bag Out,test
+R-eye-corner 1-down,Right Eye Corner 1 Down,test
+R-eye-corner 1-up,Right Eye Corner 1 Up,test
+R-eye-corner 2-down,Right Eye Corner 2 Down,test
+R-eye-corner 2-up,Right Eye Corner 2 Up,test
+R-eye-epicanthus-in,Right Eye Epicanthus In,test
+R-eye-epicanthus-out,Right Eye Epicanthus Out,test
+R-eye-eyefold-angle-down,Right Eyefold Angle Down,test
+R-eye-eyefold-angle-up,Right Eyefold Angle Up,test
+R-eye-eyefold-concave,Right Eyefold Concave,test
+R-eye-eyefold-convex,Right Eyefold Convex,test
+R-eye-eyefold-down,Right Eyefold Down,test
+R-eye-eyefold-up,Right Eyefold Up,test
+R-eye-height 1-decr,Right Eye Height 1 Decrement,test
+R-eye-height 1-incr,Right Eye Height 1 Increment,test
+R-eye-height 2-decr,Right Eye Height 2 Decrement,test
+R-eye-height 2-incr,Right Eye Height 2 Increment,test
+R-eye-height 3-decr,Right Eye Height 3 Decrement,test
+R-eye-height 3-incr,Right Eye Height 3 Increment,test
+R-eye-push 1-in,Right Eye Push 1 In,test
+R-eye-push 1-out,Right Eye Push 1 Out,test
+R-eye-push 2-in,Right Eye Push 2 In,test
+R-eye-push 2-out,Right Eye Push 2 Out,test
+R-eye-scale-decr,Right Eye Scale Decrement,test
+R-eye-scale-incr,Right Eye Scale Increment,test
+R-eye-trans-down,Right Eye Translate Down,test
+R-eye-trans-in,Right Eye Translate In,test
+R-eye-trans-out,Right Eye Translate Out,test
+R-eye-trans-up,Right Eye Translate Up,test
+Asym-mouth-1-l,Asymetry Mouth 1 Left,test
+Asym-mouth-1-r,Asymetry Mouth 1 Right,test
+Asym-mouth-2-l,Asymetry Mouth 2 Left,test
+Asym-mouth-2-r,Asymetry Mouth 2 Right,test
+Mouth-angles-down,Mouth Angles Down,test
+Mouth-angles-up,Mouth Angles Up,test
+Mouth-cupidsbow-decr,Mouth Cupids Bow Decrement,test
+Mouth-cupidsbow-incr,Mouth Cupids Bow Increment,test
+Mouth-cupidsbow-width-decr,Mouth Cupids Bow Width Decrement,test
+Mouth-cupidsbow-width-incr,Mouth Cupids Bow Width Increment,test
+Mouth-dimples-in,Dimples In,test
+Mouth-dimples-out,Dimples Out,test
+Mouth-laugh-lines-in,Laugh Lines In,test
+Mouth-laugh-lines-out,Laugh Lines Out,test
+Mouth-lowerlip-ext-down,Lower Lip Extend Down,test
+Mouth-lowerlip-ext-up,Lower Lip Extend Up,test
+Mouth-lowerlip-height-decr,Lower Lip Height Decrement,test
+Mouth-lowerlip-height-incr,Lower Lip Height Increment,test
+Mouth-lowerlip-middle-down,Lower Lip Middle Down,test
+Mouth-lowerlip-middle-up,Lower Lip Middle Up,test
+Mouth-lowerlip-volume-decr,Lower Lip Volume Decrement,test
+Mouth-lowerlip-volume-incr,Lower Lip Volume Increment,test
+Mouth-lowerlip-width-decr,Lower Lip Width Decrement,test
+Mouth-lowerlip-width-incr,Lower Lip Width Increment,test
+Mouth-philtrum-volume-decr,Mouth Philtrum Volume Decrement,test
+Mouth-philtrum-volume-incr,Mouth Philtrum Volume Increment,test
+Mouth-scale-depth-decr,Mouth Scale Depth Decrement,test
+Mouth-scale-depth-incr,Mouth Scale Depth Increment,test
+Mouth-scale-horiz-decr,Mouth Scale Horizontal Decrement,test
+Mouth-scale-horiz-incr,Mouth Scale Horizontal Increment,test
+Mouth-scale-vert-decr,Mouth Scale Vertical Decrement,test
+Mouth-scale-vert-incr,Mouth Scale Vertical Increment,test
+Mouth-trans-backward,Mouth Translate Backwards,test
+Mouth-trans-down,Mouth Translate Down,test
+Mouth-trans-forward,Mouth Translate Forward,test
+Mouth-trans-in,Mouth Translate In,test
+Mouth-trans-out,Mouth Translate Out,test
+Mouth-trans-up,Mouth Translate Up,test
+Mouth-upperlip-ext-down,Upper Lip Extend Down,test
+Mouth-upperlip-ext-up,Upper Lip Extend Up,test
+Mouth-upperlip-height-decr,Upper Lip Height Decrement,test
+Mouth-upperlip-height-incr,Upper Lip Height Increment,test
+Mouth-upperlip-middle-down,Upper Lip Middle Down,test
+Mouth-upperlip-middle-up,Upper Lip Middle Up,test
+Mouth-upperlip-volume-decr,Upper Lip Volume Decrement,test
+Mouth-upperlip-volume-incr,Upper Lip Volume Increment,test
+Mouth-upperlip-width-decr,Upper Lip Width Decrement,test
+Mouth-upperlip-width-incr,Upper Lip Width Increment,test
+Asym-nose-1-l,Nose Asymitry 1 Left,test
+Asym-nose-1-r,Nose Asymitry 1 Right,test
+Asym-nose-2-l,Nose Asymitry 2 Left,test
+Asym-nose-2-r,Nose Asymitry 2 Right,test
+Asym-nose-3-l,Nose Asymitry 3 Left,test
+Asym-nose-3-r,Nose Asymitry 3 Right,test
+Asym-nose-4-l,Nose Asymitry 4 Left,test
+Asym-nose-4-r,Nose Asymitry 4 Right,test
+Nose-base-down,Nose Base Down,test
+Nose-base-up,Nose Base Up,test
+Nose-compression-compress,Nose Compression Increment,test
+Nose-compression-uncompress,Nose Compression Decrement,test
+Nose-curve-concave,Nose Curve Concave,test
+Nose-curve-convex,Nose Curve Convex,test
+Nose-flaring-decr,Nose Flare Decrement,test
+Nose-flaring-incr,Nose Flare Increment,test
+Nose-greek-decr,Nose Greek Decrement,test
+Nose-greek-incr,Nose Greek Increment,test
+Nose-hump-decr,Nose Hump Decrement,test
+Nose-hump-incr,Nose Hump Increment,test
+Nose-nostrils-angle-down,Nostrils Angle Down,test
+Nose-nostrils-angle-up,Nostrils Angle Up,test
+Nose-nostrils-width-decr,Nostrils Width Decrement,test
+Nose-nostrils-width-incr,Nostrils Width Increment,test
+Nose-point-down,Nose Point Down,test
+Nose-point-up,Nose Point Up,test
+Nose-point-width-decr,Nose Point Width Decrement,test
+Nose-point-width-incr,Nose Point Width Increment,test
+Nose-scale-depth-decr,Nose Scale Depth Decrement,test
+Nose-scale-depth-incr,Nose Scale Depth Increment,test
+Nose-scale-horiz-decr,Nose Scale Horizontal Decrement,test
+Nose-scale-horiz-incr,Nose Scale Horizontal Increment,test
+Nose-scale-vert-decr,Nose Scale Vertical Decrement,test
+Nose-scale-vert-incr,Nose Scale Vertical Increment,test
+Nose-septumangle-decr,Nose Septum Angle Decrement,test
+Nose-septumangle-incr,Nose Septum Angle Increment,test
+Nose-trans-backward,Nose Translation Backwards,test
+Nose-trans-down,Nose Translation Down,test
+Nose-trans-forward,Nose Translation Forward,test
+Nose-trans-in,Nose Translation In,test
+Nose-trans-out,Nose Translation Out,test
+Nose-trans-up,Nose Translation Up,test
+Nose-volume-decr,Nose Volume Decrement,test
+Nose-volume-incr,Nose Volume Increment,test
+Nose-width 1-decr,Nose Width 1 Decrement,test
+Nose-width 1-incr,Nose Width 1 Increment,test
+Nose-width 2-decr,Nose Width 2 Decrement,test
+Nose-width 2-incr,Nose Width 2 Increment,test
+Nose-width 3-decr,Nose Width 3 Decrement,test
+Nose-width 3-incr,Nose Width 3 Increment,test
+Asym-ear-1-l,Ear Asymetry 1 Left,test
+Asym-ear-1-r,Ear Asymetry 1 Right,test
+Asym-ear-2-l,Ear Asymetry 2 Left,test
+Asym-ear-2-r,Ear Asymetry 2 Right,test
+Asym-ear-3-l,Ear Asymetry 3 Left,test
+Asym-ear-3-r,Ear Asymetry 3 Right,test
+Asym-ear-4-l,Ear Asymetry 4 Left,test
+Asym-ear-4-r,Ear Asymetry 4 Right,test
+L-ear-flap-decr,Left Ear Flap Decrement,test
+L-ear-flap-incr,Left Ear Flap Increment,test
+L-ear-lobe-decr,Left Ear Lobe Decrement,test
+L-ear-lobe-incr,Left Ear Lobe Increment,test
+L-ear-rot-backward,Left Ear Rotation Backward,test
+L-ear-rot-forward,Left Ear Rotation Forward,test
+L-ear-scale-decr,Left Ear Scale Decrement,test
+L-ear-scale-depth-decr,Left Ear Scale Depth Decrement,test
+L-ear-scale-depth-incr,Left Ear Scale Depth Increment,test
+L-ear-scale-incr,Left Ear Scale Increment,test
+L-ear-scale-vert-decr,Left Ear Scale Vertical Decrement,test
+L-ear-scale-vert-incr,Left Ear Scale Vertical Increment,test
+L-ear-shape-pointed,Left Ear Shape Pointed,test
+L-ear-shape-round,Left Ear Shape Round,test
+L-ear-shape-square,Left Ear Shape Square,test
+L-ear-shape-triangle,Left Ear Shape Triangle,test
+L-ear-trans-backward,Left Ear Translation Backwards,test
+L-ear-trans-down,Left Ear Translation down,test
+L-ear-trans-forward,Left Ear Translation Forward,test
+L-ear-trans-up,Left Ear Translation Up,test
+L-ear-wing-decr,Left Ear Wing Decrement,test
+L-ear-wing-incr,Left Ear Wing Increment,test
+R-ear-flap-decr,Right Ear Flap Decrement,test
+R-ear-flap-incr,Right Ear Flap Increment,test
+R-ear-lobe-decr,Right Ear Lobe Decrement,test
+R-ear-lobe-incr,Right Ear Lobe Increment,test
+R-ear-rot-backward,Right Ear Rotation Backward,test
+R-ear-rot-forward,Right Ear Rotation Forward,test
+R-ear-scale-decr,Right Ear Scale Decrement,test
+R-ear-scale-depth-decr,Right Ear Scale Depth Decrement,test
+R-ear-scale-depth-incr,Right Ear Scale Depth Increment,test
+R-ear-scale-incr,Right Ear Scale Increment,test
+R-ear-scale-vert-decr,Right Ear Scale Vertical Decrement,test
+R-ear-scale-vert-incr,Right Ear Scale Vertical Increment,test
+R-ear-shape-pointed,Right Ear Shape Pointed,test
+R-ear-shape-round,Right Ear Shape Round,test
+R-ear-shape-square,Right Ear Shape Square,test
+R-ear-shape-triangle,Right Ear Shape Triangle,test
+R-ear-trans-backward,Right Ear Translation Backwards,test
+R-ear-trans-down,Right Ear Translation down,test
+R-ear-trans-forward,Right Ear Translation Forward,test
+R-ear-trans-up,Right Ear Translation Up,test
+R-ear-wing-decr,Right Ear Wing Decrement,test
+R-ear-wing-incr,Right Ear Wing Increment,test
+Asym-cheek-1-l,Cheek Asymetry 1 Left,test
+Asym-cheek-1-r,Cheek Asymetry 1 Right,test
+Asym-cheek-2-l,Cheek Asymetry 2 Left,test
+Asym-cheek-2-r,Cheek Asymetry 2 Right,test
+Asym-jaw-1-l,Jaw Asymetry 1 Left,test
+Asym-jaw-1-r,Jaw Asymetry 1 Right,test
+Asym-jaw-2-l,Jaw Asymetry 2 Left,test
+Asym-jaw-2-r,Jaw Asymetry 2 Right,test
+Asym-jaw-3-l,Jaw Asymetry 3 Left,test
+Asym-jaw-3-r,Jaw Asymetry 3 Right,test
+Asym-temple-1-l,Temple Asymetry 1 Left,test
+Asym-temple-1-r,Temple Asymetry 1 Right,test
+Asym-temple-2-l,Temple Asymetry 2 Left,test
+Asym-temple-2-r,Temple Asymetry 2 Right,test
+L-cheek-bones-decr,Left Cheek Bones Decrement,test
+L-cheek-bones-incr,Left Cheek Bones Increment,test
+L-cheek-inner-decr,Left Cheek Inner Decrement,test
+L-cheek-inner-incr,Left Cheek Inner Increment,test
+L-cheek-trans-down,Left Cheek Translate Down,test
+L-cheek-trans-up,Left Cheek Translate Up,test
+L-cheek-volume-decr,Left Cheek Volume Decrement,test
+L-cheek-volume-incr,Left Cheek Volume Increment,test
+R-cheek-bones-decr,Right Cheek Bones Decrement,test
+R-cheek-bones-incr,Right Cheek Bones Increment,test
+R-cheek-inner-decr,Right Cheek Inner Decrement,test
+R-cheek-inner-incr,Right Cheek Inner Increment,test
+R-cheek-trans-down,Right Cheek Translate Down,test
+R-cheek-trans-up,Right Cheek Translate Up,test
+R-cheek-volume-decr,Right Cheek Volume Decrement,test
+R-cheek-volume-incr,Right Cheek Volume Increment,test
+Chin-bones-decr,Chin Bone Decrement,test
+Chin-bones-incr,Chin Bones Increment,test
+Chin-cleft-decr,Chin Cleft Decrement,test
+Chin-cleft-incr,Chin Cleft Increment,test
+Chin-height-decr,Chin Height Decrement,test
+Chin-height-incr,Chin Height Decrement,test
+Chin-jaw-drop-decr,Chin Jaw Drop Decrement,test
+Chin-jaw-drop-incr,Chin Jaw Drop Increment,test
+Chin-prognathism-decr,Chin Prognathism Decrement,test
+Chin-prognathism-incr,Chin Prognathism Increment,test
+Chin-prominent-decr,Chin Prominent Decrement,test
+Chin-prominent-incr,Chin Prominent Increment,test
+Chin-triangle,Chin Triangle,test
+Chin-width-decr,Chin Width Decrement,test
+Chin-width-incr,Chin Width Increment,test
+Measure-neck-circ-decr,Neck Circular Decrement,test
+Measure-neck-circ-incr,Neck Circular Increment,test
+Measure-neck-height-decr,Neck Height Decrement,test
+Measure-neck-height-incr,Neck Height Increment,test
+Neck-back-scale-depth-decr,Neck Back Scale Depth Decrement,test
+Neck-back-scale-depth-incr,Neck Back Scale Depth Increment,test
+Neck-double-decr,Double Neck Decrement,test
+Neck-double-incr,Double Neck Increment,test
+Neck-scale-depth-decr,Neck Scale Depth Decrement,test
+Neck-scale-depth-incr,Neck Scale Depth Increment,test
+Neck-scale-horiz-decr,Neck Scale Horizontal Decrement,test
+Neck-scale-horiz-incr,Neck Scale Horizontal Increment,test
+Neck-scale-vert-decr,Neck Scale Vertical Decrement,test
+Neck-scale-vert-incr,Neck Scale Vertical Increment,test
+Neck-trans-backward,Neck Translate Backwards,test
+Neck-trans-down,Neck Translate Down,test
+Neck-trans-forward,Neck Translate Forward,test
+Neck-trans-in,Neck Translate In,test
+Neck-trans-out,Neck Translate Out,test
+Neck-trans-up,Neck Translate Up,test
+Measure-frontchest-dist-decr,Chest Front Distance Decrement,test
+Measure-frontchest-dist-incr,Chest Front Distance Increment,test
+Measure-shoulder-dist-decr,Chest Shoulder Distance Decrement,test
+Measure-shoulder-dist-incr,Chest Shoulder Distance Increment,test
+Torso-muscle-dorsi-decr,Torso Muscle Dorsi Decrement,test
+Torso-muscle-dorsi-incr,Torso Muscle Dorsi Increment,test
+Torso-muscle-pectoral-decr,Pectroal Muscle Decrement,test
+Pectroal Muscle Decrement,Pectroal Muscle Increment,test
+Torso-scale-depth-decr,Torso Scale Depth Decrement,test
+Torso-scale-depth-incr,Torso Scale Depth Increment,test
+Torso-scale-horiz-decr,Torso Scale Horizontal Decrement,test
+Torso-scale-horiz-incr,Torso Scale Horizontal Increment,test
+Torso-scale-vert-decr,Torso Scale Vertical Decrement,test
+Torso-scale-vert-incr,Torso Scale Vertical Increment,test
+Torso-trans-backward,Torso Translation Backward,test
+Torso-trans-down,Torso Translation Down,test
+Torso-trans-forward,Torso Translation Forward,test
+Torso-trans-in,Torso Translation In,test
+Torso-trans-out,Torso Translation Out,test
+Torso-trans-up,Torso Translation Up,test
+Torso-vshape-decr,Torso V shape Decrement,test
+Torso-vshape-incr,Torso V shape Increment,test
+Asymm-breast-1-l,Breast Asymetry 1 Left,test
+Asymm-breast-1-r,Breast Asymetry 1 Right,test
+Breast-dist-decr,Breast Distance Decrement,test
+Breast-dist-incr,Breast Distance Increment,test
+Breast-point-decr,Breast Point Decrement,test
+Breast-point-incr,Breast Point Increment,test
+Breast-trans-down,Breast Translation Down,test
+Breast-trans-up,Breast Translation Up,test
+Breast-volume-vert-down,Breast Volume Vertical Down,test
+Breast-volume-vert-up,Breast Volume Vertical Up,test
+Nipple-point-decr,Nipple Point Decrement,test
+Nipple-point-incr,Nipple Point Increment,test
+Nipple-size-decr,Nipple Size Decrement,test
+Nipple-size-incr,Nipple Size Increment,test
+Measure-bust-circ-decr,Bust Circular Decrement,test
+Measure-bust-circ-incr,Bust Circular Increment,test
+Measure-underbust-circ-decr,Under Bust Circular Decrement,test
+Measure-underbust-circ-incr,Under Bust Circular Increment,test
+Cupsize,Cupsize,test
+Firmness,Firmness,test
+Asymm-trunk-1-l,Trunk Asymetric 1 Left,test
+Asymm-trunk-1-r,Trunk Asymetric 1 Right,test
+Hip-scale-depth-decr,Hip Scale Depth Decrement,test
+Hip-scale-depth-incr,Hip Scale Depth Increment,test
+Hip-scale-horiz-decr,Hip Scale Horizontal Decrement,test
+Hip-scale-horiz-incr,Hip Scale Horizontal Increment,test
+Hip-scale-vert-decr,Hip Scale Vertical Decrement,test
+Hip-scale-vert-incr,Hip Scale Vertical Increment,test
+Hip-trans-backward,Hip Translation Backwards,test
+Hip-trans-down,Hip Translation Down,test
+Hip-trans-forward,Hip Translation Forward,test
+Hip-trans-in,Hip Translation In,test
+Hip-trans-out,Hip Translation Out,test
+Hip-trans-up,Hip Translation Up,test
+Hip-waist-down,Waist Down,test
+Hip-waist-up,Waist Up,test
+Measure-hips-circ-decr,Hip Circle Decrement,test
+Measure-hips-circ-incr,Hip Circle Increment,test
+Measure-napetowaist-dist-decr,Nape to Waist Distance Decrement,test
+Measure-napetowaist-dist-incr,Nape to Waist Distance Increment,test
+Measure-waist-circ-decr,Waist Circle Decrement,test
+Measure-waist-circ-incr,Waist Circle Increment,test
+Measure-waisttohip-dist-decr,Waist to Hip Distance Decrement,test
+Measure-waisttohip-dist-incr,Waist to Hip Distance Increment,test
+Bulge-decr,Bulge Decrement,test
+Bulge-incr,Bulge Increment,test
+Pelvis-tone-decr,Pelvis Tone Decrement,test
+Pelvis-tone-incr,Pelvis Tone Increment,test
+Stomach-navel-down,Stomach Navel Down,test
+Stomach-navel-up,Stomach Navel Up,test
+Stomach-navel-in,Stomach Navel In,test
+Stomach-navel-out,Stomach Navel Out,test
+Stomach-pregnant-decr,Pregnant Decrement,test
+Stomach-pregnant-incr,Pregnant Increment,test
+Stomach-tone-decr,Stomach Tone Decrement,test
+Stomach-tone-incr,Stomach Tone Increment,test
+L-hand-fingers-diameter-decr,Left Finger Diameter Decrement,test
+L-hand-fingers-diameter-incr,Left Finger Diameter Increment,test
+L-hand-fingers-distance-decr,Left Finger Gap Decrement,test
+L-hand-fingers-distance-incr,Left Finger Gap Increment,test
+L-hand-fingers-length-decr,Left Finger Length Decrement,test
+L-hand-fingers-length-incr,Left Finger Length Increment,test
+L-hand-scale-decr,Left Hand Scale Decrement,test
+L-hand-scale-incr,Left Hand Scale Increment,test
+L-hand-trans-in,Left Hand Translate In,test
+L-hand-trans-out,Left Hand Translate Out,test
+L-lowerarm-fat-decr,Left Lower Arm Fat Decrement,test
+L-lowerarm-fat-incr,Left Lower Arm Fat Increment,test
+L-lowerarm-muscle-decr,Left Lower Arm Muscle Decrement,test
+L-lowerarm-muscle-incr,Left Lower Arm Muscle Increment,test
+L-lowerarm-scale-depth-decr,Left Lower Arm Scale Depth Decrement,test
+L-lowerarm-scale-depth-incr,Left Lower Arm Scale Depth Increment,test
+L-lowerarm-scale-horiz-decr,Left Lower Arm Scale Horizontal Decrement,test
+L-lowerarm-scale-horiz-incr,Left Lower Arm Scale Horizontal Increment,test
+L-lowerarm-scale-vert-decr,Left Lower Arm Scale Vertical Decrement,test
+L-lowerarm-scale-vert-incr,Left Lower Arm Scale Vertical Increment,test
+L-upperarm-fat-decr,Left Upper Arm Fat Decrement,test
+L-upperarm-fat-incr,Left Upper Arm Fat Increment,test
+L-upperarm-muscle-decr,Left Upper Arm Muscle Decrement,test
+L-upperarm-muscle-incr,Left Upper Arm Muscle Increment,test
+L-upperarm-scale-depth-decr,Left Upper Arm Scale Depth Decrement,test
+L-upperarm-scale-depth-incr,Left Upper Arm Scale Depth Increment,test
+L-upperarm-scale-horiz-decr,Left Upper Arm Scale Horizontal Decrement,test
+L-upperarm-scale-horiz-incr,Left Upper Arm Scale Horizontal Increment,test
+L-upperarm-scale-vert-decr,Left Upper Arm Scale Vertical Decrement,test
+L-upperarm-scale-vert-incr,Left Upper Arm Scale Vertical Increment,test
+L-upperarm-shoulder-muscle-decr,Left Upper Arm Shoulder Muscle Decrement,test
+L-upperarm-shoulder-muscle-incr,Left Upper Arm Shoulder Muscle Increment,test
+R-hand-fingers-diameter-decr,Right Finger Diameter Decrement,test
+R-hand-fingers-diameter-incr,Right Finger Diameter Increment,test
+R-hand-fingers-distance-decr,Right Finger Gap Decrement,test
+R-hand-fingers-distance-incr,Right Finger Gap Increment,test
+R-hand-fingers-length-decr,Right Finger Length Decrement,test
+R-hand-fingers-length-incr,Right Finger Length Increment,test
+R-hand-scale-decr,Right Hand Scale Decrement,test
+R-hand-scale-incr,Right Hand Scale Increment,test
+R-hand-trans-in,Right Hand Translate In,test
+R-hand-trans-out,Right Hand Translate Out,test
+R-lowerarm-fat-decr,Right Lower Arm Fat Decrement,test
+R-lowerarm-fat-incr,Right Lower Arm Fat Increment,test
+R-lowerarm-muscle-decr,Right Lower Arm Muscle Decrement,test
+R-lowerarm-muscle-incr,Right Lower Arm Muscle Increment,test
+R-lowerarm-scale-depth-decr,Right Lower Arm Scale Depth Decrement,test
+R-lowerarm-scale-depth-incr,Right Lower Arm Scale Depth Increment,test
+R-lowerarm-scale-horiz-decr,Right Lower Arm Scale Horizontal Decrement,test
+R-lowerarm-scale-horiz-incr,Right Lower Arm Scale Horizontal Increment,test
+R-lowerarm-scale-vert-decr,Right Lower Arm Scale Vertical Decrement,test
+R-lowerarm-scale-vert-incr,Right Lower Arm Scale Vertical Increment,test
+R-upperarm-fat-decr,Right Upper Arm Fat Decrement,test
+R-upperarm-fat-incr,Right Upper Arm Fat Increment,test
+R-upperarm-muscle-decr,Right Upper Arm Muscle Decrement,test
+R-upperarm-muscle-incr,Right Upper Arm Muscle Increment,test
+R-upperarm-scale-depth-decr,Right Upper Arm Scale Depth Decrement,test
+R-upperarm-scale-depth-incr,Right Upper Arm Scale Depth Increment,test
+R-upperarm-scale-horiz-decr,Right Upper Arm Scale Horizontal Decrement,test
+R-upperarm-scale-horiz-incr,Right Upper Arm Scale Horizontal Increment,test
+R-upperarm-scale-vert-decr,Right Upper Arm Scale Vertical Decrement,test
+R-upperarm-scale-vert-incr,Right Upper Arm Scale Vertical Increment,test
+R-upperarm-shoulder-muscle-decr,Right Upper Arm Shoulder Muscle Decrement,test
+R-upperarm-shoulder-muscle-incr,Right Upper Arm Shoulder Muscle Increment,test
+Measure-lowerarm-length-decr,Lower Arm Length Decrement,test
+Measure-lowerarm-length-incr,Lower Arm Length Increment,test
+Measure-upperarm-circ-decr,Upper Arm Circle Decrement,test
+Measure-upperarm-circ-incr,Upper Arm Circle Increment,test
+Measure-upperarm-length-decr,Upper Arm Length Decrement,test
+Measure-upperarm-length-incr,Upper Arm Length Increment,test
+Measure-wrist-circ-decr,Writst Circle Decrement,test
+Measure-wrist-circ-incr,Writst Circle Increment,test
+L-foot-scale-decr,Left Foot Scale Decrement,test
+L-foot-scale-incr,Left Foot Scale Increment,test
+L-foot-scale-depth-decr,Left Foot Depth Decrement,test
+L-foot-scale-depth-incr,Left Foot Depth Increment,test
+L-foot-scale-horiz-decr,Left Foot Scale Horizontal Decrement,test
+L-foot-scale-horiz-incr,Left Foot Scale Horizontal Increment,test
+L-foot-scale-vert-decr,Left Foot Scale Vertical Decrement,test
+L-foot-scale-vert-incr,Left Foot Scale Vertical Increment,test
+L-foot-trans-backward,Left Foot Translate Backward,test
+L-foot-trans-forward,Left Foot Translate Forward,test
+L-foot-trans-down,Left Foot Translate Down,test
+L-foot-trans-in,Left Foot Translate In,test
+L-foot-trans-out,Left Foot Translate Out,test
+L-foot-trans-up,Left Foot Translate Up,test
+L-leg-valgus-decr,Left Leg Valgus Decrement,test
+L-leg-valgus-incr,Left Leg Valgus Increment,test
+L-lowerleg-fat-decr,Left Lower Leg Fat Decrement,test
+L-lowerleg-fat-incr,Left Lower Leg Fat Increment,test
+L-lowerleg-muscle-decr,Left Lower Leg Muscle Decrement,test
+L-lowerleg-muscle-incr,Left Lower Leg Muscle Increment,test
+L-lowerleg-scale-depth-decr,Left Lower Leg Scale Depth Decrement,test
+L-lowerleg-scale-depth-incr,Left Lower Leg Scale Depth Increment,test
+L-lowerleg-scale-horiz-decr,Left Lower Leg Scale Horizontal Decrement,test
+L-lowerleg-scale-horiz-incr,Left Lower Leg Scale Horizontal Increment,test
+L-lowerleg-scale-vert-decr,Left Lower Leg Scale Vertical Decrement,test
+L-lowerleg-scale-vert-incr,Left Lower Leg Scale Vertical Increment,test
+L-upperleg-fat-decr,Left Upper Leg Fat Decrement,test
+L-upperleg-fat-incr,Left Upper Leg Fat Increment,test
+L-upperleg-muscle-decr,Left Upper Leg Muscle Decrement,test
+L-upperleg-muscle-incr,Left Upper Leg Muscle Increment,test
+L-upperleg-scale-depth-decr,Left Upper Leg Scale Depth Decrement,test
+L-upperleg-scale-depth-incr,Left Upper Leg Scale Depth Increment,test
+L-upperleg-scale-horiz-decr,Left Upper Leg Scale Horizontal Decrement,test
+L-upperleg-scale-horiz-incr,Left Upper Leg Scale Horizontal Increment,test
+L-upperleg-scale-vert-decr,Left Upper Leg Scale Vertical Decrement,test
+L-upperleg-scale-vert-incr,Left Upper Leg Scale Vertical Increment,test
+Lowerlegs-height-decr,Lower Legs Height Decrement,test
+Lowerlegs-height-incr,Lower Legs Height Increment,test
+R-foot-scale-decr,Right Foot Scale Decrement,test
+R-foot-scale-incr,Right Foot Scale Increment,test
+R-foot-scale-depth-decr,Right Foot Depth Decrement,test
+R-foot-scale-depth-incr,Right Foot Depth Increment,test
+R-foot-scale-horiz-decr,Right Foot Scale Horizontal Decrement,test
+R-foot-scale-horiz-incr,Right Foot Scale Horizontal Increment,test
+R-foot-scale-vert-decr,Right Foot Scale Vertical Decrement,test
+R-foot-scale-vert-incr,Right Foot Scale Vertical Increment,test
+R-foot-trans-backward,Right Foot Translate Backward,test
+R-foot-trans-forward,Right Foot Translate Forward,test
+R-foot-trans-down,Right Foot Translate Down,test
+R-foot-trans-in,Right Foot Translate In,test
+R-foot-trans-out,Right Foot Translate Out,test
+R-foot-trans-up,Right Foot Translate Up,test
+R-leg-valgus-decr,Right Leg Valgus Decrement,test
+R-leg-valgus-incr,Right Leg Valgus Increment,test
+R-lowerleg-fat-decr,Right Lower Leg Fat Decrement,test
+R-lowerleg-fat-incr,Right Lower Leg Fat Increment,test
+R-lowerleg-muscle-decr,Right Lower Leg Muscle Decrement,test
+R-lowerleg-muscle-incr,Right Lower Leg Muscle Increment,test
+R-lowerleg-scale-depth-decr,Right Lower Leg Scale Depth Decrement,test
+R-lowerleg-scale-depth-incr,Right Lower Leg Scale Depth Increment,test
+R-lowerleg-scale-horiz-decr,Right Lower Leg Scale Horizontal Decrement,test
+R-lowerleg-scale-horiz-incr,Right Lower Leg Scale Horizontal Increment,test
+R-lowerleg-scale-vert-decr,Right Lower Leg Scale Vertical Decrement,test
+R-lowerleg-scale-vert-incr,Right Lower Leg Scale Vertical Increment,test
+R-upperleg-fat-decr,Right Upper Leg Fat Decrement,test
+R-upperleg-fat-incr,Right Upper Leg Fat Increment,test
+R-upperleg-muscle-decr,Right Upper Leg Muscle Decrement,test
+R-upperleg-muscle-incr,Right Upper Leg Muscle Increment,test
+R-upperleg-scale-depth-decr,Right Upper Leg Scale Depth Decrement,test
+R-upperleg-scale-depth-incr,Right Upper Leg Scale Depth Increment,test
+R-upperleg-scale-horiz-decr,Right Upper Leg Scale Horizontal Decrement,test
+R-upperleg-scale-horiz-incr,Right Upper Leg Scale Horizontal Increment,test
+R-upperleg-scale-vert-decr,Right Upper Leg Scale Vertical Decrement,test
+R-upperleg-scale-vert-incr,Right Upper Leg Scale Vertical Increment,test
+Upperlegs-height-decr,Upper Leg Height Decrement,test
+Upperlegs-height-incr,Upper Leg Height Increment,test
+Buttocks-volume-decr,Buttocks Volume Decrement,test
+Buttocks-volume-incr,Buttocks Volume Increment,test
+Measure-ankle-circ-decr,Ankle Circle Decrement,test
+Ankle Circle Decrement,Ankle Circle Increment,test
+Measure-calf-circ-decr,Calf Circle Decrement,test
+Measure-calf-circ-incr,Calf Circle Increment,test
+Measure-knee-circ-decr,Knee Circle Decrement,test
+Measure-knee-circ-incr,Knee Circle Increment,test
+Measure-lowerleg-height-decr,Lower Leg Height Decrement,test
+Measure-lowerleg-height-incr,Lower Leg Height Increment,test
+Measure-thigh-circ-decr,Thigh Circle Decrement,test
+Measure-thigh-circ-incr,Thigh Circle Increment,test
+Measure-upperleg-height-decr,Upper Leg Heigh Decrement,test
+Measure-upperleg-height-incr,Upper Leg Heigh Increment,test
+Features,Features,test
+elvs_conehead1,Cone Head,test
+l-eye-corner1-down,Eye Corner Down,test
+l-eye-corner1-up,Eye Corner Up,test
+l-eye-corner2-down,Eye Corner Down,test
+l-eye-corner2-up,Eye Corner Up,test
+l-eye-height1-decr,Eye Height Decr,test
+l-eye-height1-incr,Eye Height Incr,test
+l-eye-height2-decr,Eye Height Decr,test
+l-eye-height2-incr,Eye Height Incr,test
+l-eye-height3-decr,Eye Height Decr,test
+l-eye-height3-incr,Eye Height Incr,test
+l-eye-push1-in,Eye Push In,test
+l-eye-push1-out,Eye Push Out,test
+l-eye-push2-in,Eye Push In,test
+l-eye-push2-out,Eye Push Out,test
+r-eye-corner1-down,Eye Corner Down,test
+r-eye-corner1-up,Eye Corner Up,test
+r-eye-corner2-down,Eye Corner Down,test
+r-eye-corner2-up,Eye Corner Up,test
+r-eye-height1-decr,Eye Height Decr,test
+r-eye-height1-incr,Eye Height Incr,test
+r-eye-height2-decr,Eye Height Decr,test
+r-eye-height2-incr,Eye Height Incr,test
+r-eye-height3-decr,Eye Height Decr,test
+r-eye-height3-incr,Eye Height Incr,test
+r-eye-push1-in,Eye Push In,test
+r-eye-push1-out,Eye Push Out,test
+r-eye-push2-in,Eye Push In,test
+r-eye-push2-out,Eye Push Out,test
+nose-width1-decr,Width Decr,test
+nose-width1-incr,Width Incr,test
+nose-width2-decr,Width Decr,test
+nose-width2-incr,Width Incr,test
+nose-width3-decr,Width Decr,test
+nose-width3-incr,Width Incr,test
+elastic neck,Elastic Neck,test
+torso-muscle-pectoral-incr,Muscle Pectoralumfrance,test
+elastic hip,Elastic Hip,test
+measure-ankle-circ-incr,Ankle Circumfrance,test
+elastic legs,Elastic Legs,test
+Werewolf_Legs,Werewolf Legs,test
+heels,Heels,test
+lizzard-tail,Lizzard Tail,test
+rightLeg,Right Leg,test
+DetailedShapekeys,Detailed Shape Keys,test
+assets,Assets,test
+custom-lion,Lion,test
+custom-rabbit-body,Rabit Body,test
+custom-rabbit-head,Rabbit Head,test
+custom-rabbit_bunny_hare-head,Bunny Head,test
+custom-shark-head,Shark Head,test
+custom-squirrel-head,Squirrel Head,test
+custom-tiger-head,Tiger Head,test
+custom-tiger-legs,Tiger Legs,test
+custom-Cow-Tail,Cow Tail,test
+custom-Cowbelly-torso,Utters,test
+custom-Lizzard-ear,Lizzard Ears,test
+custom-HarveyHorns-head,Horns,test
+custom-Harvey_Monkey-head,Monkey,test
+custom-shoulder_pads-shoulder,Sholder Pads,test
+custom-Nefertiti-head,Nefertiti,test
+custom-Robot,Robot,test
+custom-star-head,Star Head,test
+custom-CONDOR-head,Condor Face,test
+custom-Catgirl_ears-head,Catgirl Ears,test
+custom-Darkness_Horns-head,Horns,test
+custom-Doll-body,Doll,test
+custom-Mermaid-body,Mermaid,test
+custom-frakenstiens-head,Frankenstine,test
+bionic_arm_left,Bionic Left Arm,test
+Bionic_arm_right,Bionic Right Arm,test
+Braciers,Braciers,test
+Armored Boots,Armored Boots,test
+beard_and_mustache,Bearks and Mustache,test
+chinstrap,Chinstrap,test
+Moustache,Moustache,test
+faun_beard,Faun Beard,test
+hair_01,Hair_01,test
+Hair_03,Hair_03,test
+hair_04,Hair_04,test
+hair_06,Hair_06,test
+hair_07,Hair_07,test
+hair_08,Hair_08,test
+LowSplitPony,Low Split Pony,test
+male_hair_05,Hair_05,test
+minotaur_horns,Minotaur Horns,test
+Volume Hair,Volume Hair,test
+faun_horns,Faun Horns,test
+centar,Centar,test
+faun_legs,Faun Legs,test
+spider_legs,Spider Legs,test
+extra_arms,Extra Arms,test
+Jade Mask,Jade Mask,test
+devil woman horns,Devil Horns,test
+Houndoom horns,Houndoom horns,test
+jade_hair,Jade Hair,test
+toriel Cloth,Toriel Cloth,test
+furryfoot,Paw Foot,test
+tails,Tails,test
+scruffy_beard,Scruffy Beard,test
+AfroPonytail,Afro Ponyt Tail,test
+asian_bob,Asian Bob,test
+blunt_bob,Blunt Bob,test
+bob_with_bangs,Bob with Bangs,test
+curled_bob,Curled Bob,test
+inverted_bob,Inverted Bob,test
+bob_hair,Bob Hair,test
+double_braid,Double Braid,test
+french_braid,French Braid,test
+unkept_french_braid,Unkept French Braid,test
+Chainmail,Chainmail,test
+chainmail gloves,Chainmail Gloves,test
+chainmail cover,Chainmail Cover,test
+Fairy Costume,Fairy Costume,test
+cartoon_pony,Cartoon Pony,test
+comb_over,Comb Over,test
+cornrows,Cornrows,test
+hippi_hair,Hippi Hair,test
+long_braid,Long Braid,test
+long_hair,Long Hair,test
+male_hair_back,Mail Hair,test
+reverse_french_braid,Reverse French Braid,test
+short_female_hair,Short Female Hair,test
+side_short_hair,Side-part Short hair,test
+wavey_bob,Wavey Bob,test
+curly_hair,Curly Hair,test
+female_hair_01,Hair_01,test
+hair_bun,Hair Bun,test
+Viking Tunic,Viking Tunic,test
+MessyBun,Messy Bun,test
+gaunlet,Gaunlet,test
+Greves,Greves,test
+Spartan Chest,Spartan Chest,test
+Leather Armor,Leather Armor,test
+Cow-Tail,Cow Tail,test
+Cowbelly-torso,Cowbelly Cowbelly-torso,test
+Lizzard-ear,Lizzard Lizzard-ear,test
+HarveyHorns-head,Harveyhorns Head,test
+Harvey_Monkey-head,Harvey _Monk -Head,test
+shoulder_pads-shoulder,Shoulder Pads,test
+Anime_Stylized_Enhanced-body,Anime _Styl D_Enhanced-Body,test
+elf_series_ears,Elf Ears,test
+Nefertiti-head,Nefertiti Nefertiti-head,test
+anime-head,Anime Head,test
+bear-head,Bear Head,test
+bear_cartoon-head,Cartoon Bear Head,test
+bunny_rabbit-ears,Bunny Ears,test
+bunny_rabbit2-ears,Rabbit Ears,test
+Canine-mouth,Canine Mouth,test
+cannine-ears,Cannine Ears,test
+carrot-head,Carrot Head,test
+cat-head,Cat Head,test
+cat02-head,Cat Head,test
+cobra-head,Cobra Head,test
+cow-head,Cow Head,test
+dog-arms,Dog Arms,test
+dog-head,Dog Head,test
+donkey-head,Donkey Head,test
+donkey2-head,Donkey Head,test
+feline-ears,Feline Ears,test
+feline-mouth,Feline Mouth,test
+fox_cartoon-head,Cartoon Fox Head,test
+furry-feet,Furry Feet,test
+lion-head,Lion Head,test
+rabbit-body,Rabbit Body,test
+rabbit-head,Rabbit Head,test
+rabbit_bunny_hare-head,Bunny Head,test
+shark-head,Shark Head,test
+squirrel-head,Squirrel Head,test
+tiger-head,Tiger Head,test
+tiger-legs,Tiger Legs,test
+Wolf-head,Wolf Head,test
+star-head,Star Head,test
+heels-angle,Heels Angle,test
+heels-corrective-height,Heels Correction,test
+heels-depth-incr,Hee size increase,test
+heels-depth-size-incr,Heel Depth size increase,test
+heels-foot-arch,Foot Arche,test
+heels-toebox,Heels Toebox,test
+cartoon_head,Cartoon Head,test
+Catgirl_ears-head,Catgirl Catgirl_ears-head,test
+CONDOR-head,Condor-Head,test
+Darkness_Horns-head,Darkness _Horn S-Head,test
+Doll-body,Doll Doll-body,test
+frakenstiens-head,Frakenstiens Head,test
+Mermaid-body,Mermaid Mermaid-body,test
+custom-Anime_Stylized_Enhanced-body,Anime Body,test
+custom-Canine-mouth,Canine Mouth,test
+custom-Wolf-head,Wolf head,test
+custom-anime-head,Anime Head,test
+custom-bear-head,Bear Head,test
+custom-bear_cartoon-head,Cartoon Bear Head,test
+custom-bunny_rabbit-ears,Bunny Ears,test
+custom-bunny_rabbit2-ears,Rabbit Ears,test
+custom-cannine-ears,Canine Ears,test
+custom-carrot-head,Panda Head,test
+custom-cat-head,Cat Head,test
+custom-cat02-head,Cat Head,test
+custom-cobra-head,Cobra Head,test
+custom-cow-head,Cow Head,test
+custom-cow,Cow,test
+custom-dog-arms,Dog Arms,test
+custom-dog-head,Dog Head,test
+custom-dog,Dog,test
+custom-donkey-head,Donkey Head,test
+custom-donkey,Donkey,test
+custom-donkey2-head,Doneky Head,test
+custom-feline-ears,Feline Ears,test
+custom-feline-mouth,Feline Mouth,test
+custom-fox_cartoon-head,Cartoon Fox Head,test
+custom-furry-feet,Paw Foot,test
+custom-horse,Horse,test
+custom-lion-head,Lion Head,test
+DetailedPoses,Detailed Poses,test
+mouth,Mouth,test
+head,Head,test
+ears,Ears,test
+arms,Arms,test
+legs,Legs,test
+torso,Torso,test
+mouth,Mouth,test
+leftHand,Left Hand,test
+rightHand,Right Hand,test
+rotation,Rotation,test
+leftArm,Left Arm,test
+LeftShoulder,Left Shoulder,test
+leftHand,Left Hand,test
+rightHand,Right Hand,test
+rightMiddleIntermediate,Right Middle Intermediate,test
+LeftUpperLeg,Left Upper Leg,test
+LeftLowerLeg,Left Lower Leg,test
+RightUpperLeg,Right Upper Leg,test
+RightLowerLeg,Right Lower Leg,test
+exportButton,Export,test
+positionSlider,Position,test
+zoomLabel,Zoom,test
+randomCharacter,Randomize Character,test
+Name,Name,test
+saveButton,Save,test
+openFolder,Open Folder,test

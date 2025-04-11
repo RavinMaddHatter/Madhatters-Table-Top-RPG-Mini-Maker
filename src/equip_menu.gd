@@ -5,7 +5,7 @@ var cur_equipment = "None"
 func add_entry(entry):
 	$OptionButton.add_item(entry)
 func set_lang():
-	$Label.text=tr(slot)
+	$Label.text = d.ltr(slot)
 func set_slot(slot_name):
 	slot=slot_name
 	set_lang()

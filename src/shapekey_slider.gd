@@ -9,8 +9,11 @@ var changed = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Label_Container/Label.text = label_name.capitalize()
+	set_lang()
 	set_line_edit_from_slider_value()
+	
+func set_lang():
+	$Label_Container/Label.text=d.ltr(label_name)
 func reset():
 	$Slider.value=0.0
 	$Label_Container/Value_Edit.text="0.0"

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://3djui3xwic7k" path="res://basic_controls.gd" id="1_2n86l"]
 [ext_resource type="FontVariation" uid="uid://diciev1hwck0j" path="res://assets/Bold_font_variation.tres" id="2_8y4b7"]
 
-[node name="BasicControls" type="MarginContainer" node_paths=PackedStringArray("left_elbow_slider", "right_elbow_slider", "left_wrist_ud", "left_wrist_io", "left_wrist_tw", "right_wrist_ud", "right_wrist_io", "right_wrist_tw", "left_sholder_swing", "left_sholder_lift", "left_sholder_shrug", "left_sholder_curl", "right_sholder_swing", "right_sholder_lift", "right_sholder_shrug", "right_sholder_curl", "head_rotate", "head_pitch", "head_roll", "right_hip_lift", "right_hip_twist", "right_hip_spread", "left_hip_lift", "left_hip_twist", "left_hip_spread", "back_twist", "back_lean", "back_curve", "left_fingers", "right_fingers", "left_thumb", "right_thumb", "left_knee", "right_knee", "xloc_slider", "yloc_slider", "zloc_slider")]
+[node name="BasicControls" type="MarginContainer" node_paths=PackedStringArray("left_elbow_slider", "right_elbow_slider", "left_wrist_ud", "left_wrist_io", "left_wrist_tw", "right_wrist_ud", "right_wrist_io", "right_wrist_tw", "left_sholder_swing", "left_sholder_lift", "left_sholder_shrug", "left_sholder_curl", "right_sholder_swing", "right_sholder_lift", "right_sholder_shrug", "right_sholder_curl", "head_rotate", "head_pitch", "head_roll", "right_hip_lift", "right_hip_twist", "right_hip_spread", "left_hip_lift", "left_hip_twist", "left_hip_spread", "back_twist", "back_lean", "back_curve", "left_fingers", "right_fingers", "left_thumb", "right_thumb", "left_knee", "right_knee", "xloc_slider", "yloc_slider", "zloc_slider", "xrot_root", "yrot_root", "zrot_root")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -49,6 +49,9 @@ right_knee = NodePath("Menu/RightLeg/kneeHb/KneeSlider")
 xloc_slider = NodePath("Menu/position/x/xLoc")
 yloc_slider = NodePath("Menu/position/y/xLoc")
 zloc_slider = NodePath("Menu/position/z/xLoc")
+xrot_root = NodePath("Menu/position/xrot/xrot_root")
+yrot_root = NodePath("Menu/position/yrot/yrot_root")
+zrot_root = NodePath("Menu/position/zrot/zrot_root")
 
 [node name="Menu" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -91,6 +94,7 @@ value = 1.0
 
 [node name="z" type="HBoxContainer" parent="Menu/position"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="zlb" type="Label" parent="Menu/position/z"]
 layout_mode = 2
@@ -102,6 +106,47 @@ size_flags_horizontal = 3
 min_value = -1.0
 max_value = 2.0
 step = 0.01
+
+[node name="rotation" type="Label" parent="Menu/position"]
+layout_mode = 2
+
+[node name="xrot" type="HBoxContainer" parent="Menu/position"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="xrotlb" type="Label" parent="Menu/position/xrot"]
+layout_mode = 2
+
+[node name="xrot_root" type="HSlider" parent="Menu/position/xrot"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -360.0
+max_value = 360.0
+
+[node name="yrot" type="HBoxContainer" parent="Menu/position"]
+layout_mode = 2
+
+[node name="yrotlb" type="Label" parent="Menu/position/yrot"]
+layout_mode = 2
+
+[node name="yrot_root" type="HSlider" parent="Menu/position/yrot"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -360.0
+max_value = 360.0
+
+[node name="zrot" type="HBoxContainer" parent="Menu/position"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="zrotlb" type="Label" parent="Menu/position/zrot"]
+layout_mode = 2
+
+[node name="zrot_root" type="HSlider" parent="Menu/position/zrot"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -360.0
+max_value = 360.0
 
 [node name="Head" type="VBoxContainer" parent="Menu"]
 layout_mode = 2
@@ -648,6 +693,9 @@ step = 0.01
 [connection signal="value_changed" from="Menu/position/x/xLoc" to="." method="locate_model"]
 [connection signal="value_changed" from="Menu/position/y/xLoc" to="." method="locate_model"]
 [connection signal="value_changed" from="Menu/position/z/xLoc" to="." method="locate_model"]
+[connection signal="value_changed" from="Menu/position/xrot/xrot_root" to="." method="locate_model"]
+[connection signal="value_changed" from="Menu/position/yrot/yrot_root" to="." method="locate_model"]
+[connection signal="value_changed" from="Menu/position/zrot/zrot_root" to="." method="_on_zrot_root_value_changed"]
 [connection signal="value_changed" from="Menu/Head/rotation/Rotate" to="." method="head"]
 [connection signal="value_changed" from="Menu/Head/sidetoside/sideToSide" to="." method="head"]
 [connection signal="value_changed" from="Menu/Head/upanddown/UpAndDown" to="." method="head"]

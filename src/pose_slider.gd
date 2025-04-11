@@ -14,7 +14,7 @@ func _ready():
 	set_lang()
 	set_line_edit_from_slider_value()
 func set_lang():
-	$Label_Container/Label.text = tr(label_name)
+	$Label_Container/Label.text = d.ltr(label_name)
 func emit_shapekeys():
 	var data = {}
 	data["pose"]=pose

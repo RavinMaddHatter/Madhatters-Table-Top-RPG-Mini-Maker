@@ -30,6 +30,9 @@ extends Control
 @export var quit_button:Button
 @export var EquipmentLB:Label
 @export var equipVB:VBoxContainer
+@export var targVB:VBoxContainer
+@export var targLB:Label
+@export var modManager:VBoxContainer
 
 const SETTINGS_FILE_PATH="user://settings.conf"
 var configFile
@@ -68,12 +71,12 @@ func _ready() -> void:
 	load_credits()
 
 func load_credits():
-	var jsonFile=FileAccess.get_file_as_string("C:/Users/camer/OneDrive/Documents/GitHub/Madhatters-Table-Top-RPG-Mini-Maker/src/assets/citations/basepack/equipment.json")
+	var jsonFile=FileAccess.get_file_as_string("res://assets/citations/basepack/equipment.json")
 	var citations_dict = JSON.parse_string(jsonFile)
 	for key in citations_dict.keys():
-		var name=Label.new()
-		name.text=key
-		equipVB.add_child(name)
+		var author=Label.new()
+		author.text=key
+		equipVB.add_child(author)
 		var margin=MarginContainer.new()
 		margin.add_theme_constant_override("margin_left",25)
 		equipVB.add_child(margin)
@@ -83,30 +86,51 @@ func load_credits():
 		for citation in citations_dict[key]:
 			var entry = Label.new()
 			entry.name = citation
-			entry.text = tr(citation)
+			entry.text = d.ltr(citation)
 			creator_vbox.add_child(entry)
-func set_lang():
-	mainTitleLB.text = tr("title")
-	loadTitleLB.text = tr("title")
-	newCharacterLB.text = tr("newChar")
-	mainNewCharacterBT.text = tr("newChar")
-	mainLoadCharacterBT.text = tr("loadChar")
-	mainSettingsBT.text = tr("settings")
-	mainCreditsBT.text = tr("credits")
-	load_character_load.text = tr("load")
-	load_character_delete.text = tr("delete")
-	load_character_back.text = tr("back")
-	load_character_new.text = tr("newChar")
-	settings_label.text = tr("settings")
-	settings_volume_label.text = tr("volume")
-	settings_home_button.text = tr("home")
-	settings_lang_label.text = tr("language")
-	settings_adv_sk_label.text = tr("DetailedShapekeys")
-	settings_adv_pose_label.text = tr("DetailedPoses")
-	quit_button.text = tr("quit")
-	assets_lable.text = tr("assets")
-	characterCreator.set_lang()
+	jsonFile=FileAccess.get_file_as_string("res://assets/citations/basepack/targets.json")
+	citations_dict = JSON.parse_string(jsonFile)
+	for key in citations_dict.keys():
+		var author=Label.new()
+		author.text=key
+		targVB.add_child(author)
+		var margin=MarginContainer.new()
+		margin.add_theme_constant_override("margin_left",25)
+		targVB.add_child(margin)
+		var creator_vbox = VBoxContainer.new()
+		creator_vbox.name = key
+		margin.add_child(creator_vbox)
+		for citation in citations_dict[key]:
+			var entry = Label.new()
+			entry.name = citation
+			entry.text = d.ltr(citation)
+			creator_vbox.add_child(entry)
 	
+func set_lang():
+	mainTitleLB.text = d.ltr("title")
+	loadTitleLB.text = d.ltr("title")
+	newCharacterLB.text = d.ltr("newChar")
+	mainNewCharacterBT.text = d.ltr("newChar")
+	mainLoadCharacterBT.text = d.ltr("loadChar")
+	mainSettingsBT.text = d.ltr("settings")
+	mainCreditsBT.text = d.ltr("credits")
+	load_character_load.text = d.ltr("load")
+	load_character_delete.text = d.ltr("delete")
+	load_character_back.text = d.ltr("back")
+	load_character_new.text = d.ltr("newChar")
+	settings_label.text = d.ltr("settings")
+	settings_volume_label.text = d.ltr("volume")
+	settings_home_button.text = d.ltr("home")
+	settings_lang_label.text = d.ltr("language")
+	settings_adv_sk_label.text = d.ltr("DetailedShapekeys")
+	settings_adv_pose_label.text = d.ltr("DetailedPoses")
+	quit_button.text = d.ltr("quit")
+	assets_lable.text = d.ltr("assets")
+	targLB.text = d.ltr("shapekeys")
+	characterCreator.set_lang()
+	modManager.set_lang()
+	for key in d.keys:
+		print(key)
 func _hide_all():
 	mainMenu.hide()
 	characterCreator.hide()
@@ -132,9 +156,8 @@ func _on_new_character_pressed() -> void:
 	characterCreator.set_menue_visibility(
 		menu_visiblity["shapekeys"],
 		menu_visiblity["poses"])
-	characterCreator.default_settings()
 	characterCreator.new_name()
-	characterCreator.make_character()
+	characterCreator.make_character("character_complete")
 
 func _on_show_load_menu():
 	saveSelect.clear()
@@ -153,14 +176,13 @@ func _on_show_load_menu():
 	loadMenu.show()
 
 func _on_load_character_save():
+	var characterName=saveSelect.get_item_text(saveSelect.get_selected_id())
+	characterCreator.load_character_file(characterName)
 	_hide_all()
 	characterCreator.show()
 	characterCreator.set_menue_visibility(
 		menu_visiblity["shapekeys"],
 		menu_visiblity["poses"])
-	var characterName=saveSelect.get_item_text(saveSelect.get_selected_id())
-	characterCreator.default_settings()
-	characterCreator.load_character_file(characterName)
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()

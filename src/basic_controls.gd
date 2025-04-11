@@ -43,6 +43,9 @@ signal position_macro_set
 @export var xloc_slider:HSlider
 @export var yloc_slider:HSlider
 @export var zloc_slider:HSlider
+@export var xrot_root:HSlider
+@export var yrot_root:HSlider
+@export var zrot_root:HSlider
 func _ready():
 	set_lang()
 func locate_model(_value):
@@ -53,56 +56,60 @@ func locate_model(_value):
 	pose.y = yloc_slider.value
 	pose.z = zloc_slider.value
 	skeleton.set_bone_pose_position(bone_id,pose)
+	var angle = Vector3(xrot_root.value*TAU/360,yrot_root.value*TAU/360,zrot_root.value*TAU/360)
+	var root_rotation = Quaternion.from_euler(angle)
+	skeleton.set_bone_pose_rotation(bone_id,root_rotation)
 func set_lang():
-	$Menu/position/location.text = tr("positionOnBase")
-	$Menu/position/x/xlb.text = tr("X")
-	$Menu/position/y/ylb.text = tr("Y")
-	$Menu/position/z/zlb.text = tr("Z")
-	$Menu/Head/headLb.text = tr("Head")
-	$Menu/Head/rotation/Label.text = tr("Rotate" )
-	$Menu/Head/sidetoside/Label.text = tr("SideToSide")
-	$Menu/Head/upanddown/Label.text = tr("UpAndDown")
-	$Menu/Chest/chestLb.text = tr("Torso")
-	$Menu/Chest/curveSpine/Curve.text = tr("Curve")
-	$Menu/Chest/Twist/Twist.text = tr("Twist")
-	$Menu/Chest/Lean/Lean2.text = tr("Lean")
-	$Menu/LeftArm/ArmLB.text = tr("LeftArm")
-	$Menu/LeftArm/sholderShrug/sholder.text = tr("shoulderShrug")
-	$Menu/LeftArm/sholderCurle/sholder.text = tr("shoulderCurl")
-	$Menu/LeftArm/armLift/Lift.text = tr("armLift") 
-	$Menu/LeftArm/armSwing/swing.text = tr("armSwing")
-	$Menu/LeftArm/elbow/Elbow.text = tr("elbow")
-	$Menu/LeftArm/wristA/wrist.text = tr("wristA")
-	$Menu/LeftArm/wristB/wrist.text = tr("wristB")
-	$Menu/LeftArm/wristC/wrist.text = tr("wristC")
-	$Menu/RightArm/ArmLB.text = tr("rightArm")
-	$Menu/RightArm/shrug/sholder.text = tr("shoulderShrug")
-	$Menu/RightArm/curl/sholder.text = tr("shoulderCurl")
-	$Menu/RightArm/armLift/Lift.text = tr("armLift" )
-	$Menu/RightArm/armSwign/swing.text = tr("armSwing")
-	$Menu/RightArm/Elbow/Elbow.text = tr("elbow")
-	$Menu/RightArm/wristA/wrist.text = tr("wristA")
-	$Menu/RightArm/wristB/wristB.text = tr("wristB")
-	$Menu/RightArm/wristC/wrist.text = tr("wristC")
-	$Menu/LeftHand/LeftHandLb.text = tr("leftHand")
-	$Menu/LeftHand/fingers/Fist.text = tr("fingers")
-	$Menu/LeftHand/thumb/Fist.text = tr("thumb")
-	$Menu/RightHand/RightHandLb.text = tr("rightHand")
-	$Menu/RightHand/fingers/Fist.text = tr("fingers")
-	$Menu/RightHand/thumb/thumb2.text = tr("thumb")
-	$Menu/LeftLeg/LegLb.text = tr("leftLeg")
-	$Menu/LeftLeg/SpreadHB/HipSpread.text = tr("spread")
-	$Menu/LeftLeg/TwistHB/TwistLB.text = tr("twist")
-	$Menu/LeftLeg/KickHB/KickLB.text = tr("kick")
-	$Menu/LeftLeg/kneeHb/Knee.text = tr("knee")
-	$Menu/RightLeg/LegLb.text = tr("leftLeg")
-	$Menu/RightLeg/HipSpread/HipSpread.text = tr("spread")
-	$Menu/RightLeg/hipTw/TwistLB.text = tr("twist")
-	$Menu/RightLeg/hipLift/KickLB.text = tr("kick")
-	$Menu/RightLeg/kneeHb/Knee.text = tr("knee")
-	
-	
-	
+	$Menu/position/location.text = d.ltr("positionOnBase")
+	$Menu/position/x/xlb.text = d.ltr("X")
+	$Menu/position/y/ylb.text = d.ltr("Y")
+	$Menu/position/z/zlb.text = d.ltr("Z")
+	$Menu/Head/headLb.text = d.ltr("Head")
+	$Menu/Head/rotation/Label.text = d.ltr("Rotate" )
+	$Menu/Head/sidetoside/Label.text = d.ltr("SideToSide")
+	$Menu/Head/upanddown/Label.text = d.ltr("UpAndDown")
+	$Menu/Chest/chestLb.text = d.ltr("Torso")
+	$Menu/Chest/curveSpine/Curve.text = d.ltr("Curve")
+	$Menu/Chest/Twist/Twist.text = d.ltr("Twist")
+	$Menu/Chest/Lean/Lean2.text = d.ltr("Lean")
+	$Menu/LeftArm/ArmLB.text = d.ltr("LeftArm")
+	$Menu/LeftArm/sholderShrug/sholder.text = d.ltr("shoulderShrug")
+	$Menu/LeftArm/sholderCurle/sholder.text = d.ltr("shoulderCurl")
+	$Menu/LeftArm/armLift/Lift.text = d.ltr("armLift") 
+	$Menu/LeftArm/armSwing/swing.text = d.ltr("armSwing")
+	$Menu/LeftArm/elbow/Elbow.text = d.ltr("elbow")
+	$Menu/LeftArm/wristA/wrist.text = d.ltr("wristA")
+	$Menu/LeftArm/wristB/wrist.text = d.ltr("wristB")
+	$Menu/LeftArm/wristC/wrist.text = d.ltr("wristC")
+	$Menu/RightArm/ArmLB.text = d.ltr("rightArm")
+	$Menu/RightArm/shrug/sholder.text = d.ltr("shoulderShrug")
+	$Menu/RightArm/curl/sholder.text = d.ltr("shoulderCurl")
+	$Menu/RightArm/armLift/Lift.text = d.ltr("armLift" )
+	$Menu/RightArm/armSwign/swing.text = d.ltr("armSwing")
+	$Menu/RightArm/Elbow/Elbow.text = d.ltr("elbow")
+	$Menu/RightArm/wristA/wrist.text = d.ltr("wristA")
+	$Menu/RightArm/wristB/wristB.text = d.ltr("wristB")
+	$Menu/RightArm/wristC/wrist.text = d.ltr("wristC")
+	$Menu/LeftHand/LeftHandLb.text = d.ltr("leftHand")
+	$Menu/LeftHand/fingers/Fist.text = d.ltr("fingers")
+	$Menu/LeftHand/thumb/Fist.text = d.ltr("thumb")
+	$Menu/RightHand/RightHandLb.text = d.ltr("rightHand")
+	$Menu/RightHand/fingers/Fist.text = d.ltr("fingers")
+	$Menu/RightHand/thumb/thumb2.text = d.ltr("thumb")
+	$Menu/LeftLeg/LegLb.text = d.ltr("leftLeg")
+	$Menu/LeftLeg/SpreadHB/HipSpread.text = d.ltr("spread")
+	$Menu/LeftLeg/TwistHB/TwistLB.text = d.ltr("twist")
+	$Menu/LeftLeg/KickHB/KickLB.text = d.ltr("kick")
+	$Menu/LeftLeg/kneeHb/Knee.text = d.ltr("knee")
+	$Menu/RightLeg/LegLb.text = d.ltr("leftLeg")
+	$Menu/RightLeg/HipSpread/HipSpread.text = d.ltr("spread")
+	$Menu/RightLeg/hipTw/TwistLB.text = d.ltr("twist")
+	$Menu/RightLeg/hipLift/KickLB.text = d.ltr("kick")
+	$Menu/RightLeg/kneeHb/Knee.text = d.ltr("knee")
+	$Menu/position/rotation.text = d.ltr("Rotate" )
+	$Menu/position/xrot/xrotlb.text = d.ltr("X")
+	$Menu/position/yrot/yrotlb.text = d.ltr("Y")
+	$Menu/position/zrot/zrotlb.text = d.ltr("Z")
 
 func left_hand(_value):
 	#The following values were manually evaluated. The finger is a 1 DoF item so each finger has
@@ -394,6 +401,9 @@ func get_save():
 	values["xloc_slider"] = xloc_slider.value
 	values["yloc_slider"] = yloc_slider.value
 	values["zloc_slider"] = zloc_slider.value
+	values["xrot_root"] = xrot_root.value
+	values["yrot_root"] = yrot_root.value
+	values["zrot_root"] = zrot_root.value
 	return values
 
 func set_save(values):
@@ -434,6 +444,10 @@ func set_save(values):
 	xloc_slider.value = values["xloc_slider"]
 	yloc_slider.value = values["yloc_slider"]
 	zloc_slider.value = values["zloc_slider"]
+	if "xrot_root" in values:
+		xrot_root.value = values["xrot_root"] 
+		yrot_root.value = values["yrot_root"]
+		zrot_root.value = values["zrot_root"] 
 	ping_poses()
 	
 func set_default():
@@ -472,3 +486,7 @@ func set_default():
 	xloc_slider.value = 0.0
 	yloc_slider.value = 0.0
 	zloc_slider.value = 0.0
+
+
+func _on_zrot_root_value_changed(_value: float) -> void:
+	pass # Replace with function body.
