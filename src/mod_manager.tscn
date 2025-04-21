@@ -3,12 +3,11 @@
 [ext_resource type="Script" uid="uid://cyqwjhwbdl3ca" path="res://mod_manager.gd" id="1_av6jg"]
 [ext_resource type="Theme" uid="uid://v8k76ctme5no" path="res://assets/listBoxButtonTheme.tres" id="2_80kad"]
 
-[node name="modManager" type="VBoxContainer" node_paths=PackedStringArray("sectionTitle", "loadButton", "deleteButton", "modBrowser", "packContainer", "openModFolder", "loadedPacksLable", "instructions", "openFolderButton")]
+[node name="modManager" type="VBoxContainer" node_paths=PackedStringArray("sectionTitle", "loadButton", "modBrowser", "packContainer", "openModFolder", "loadedPacksLable", "instructions", "openFolderButton")]
 size_flags_horizontal = 3
 script = ExtResource("1_av6jg")
 sectionTitle = NodePath("sectionTitle")
 loadButton = NodePath("buttons/load")
-deleteButton = NodePath("")
 toggleTheme = ExtResource("2_80kad")
 modBrowser = NodePath("modBrowser")
 packContainer = NodePath("MarginContainer/packScroll/packContainer")
